@@ -7,35 +7,89 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Share+Tech+Mono&display=swap');
+        
         body { font-family: 'Inter', sans-serif; }
         .udo-blue { color: #003366; }
         .udo-bg-blue { background-color: #003366; }
         .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        
+        /* Pantalla Futurista */
+        .crt-screen {
+            background: #021a02;
+            border: 4px solid #1a3a1a;
+            box-shadow: inset 0 0 20px #00ff0033, 0 0 10px #00ff0022;
+            position: relative;
+            overflow: hidden;
+        }
+        .crt-screen::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 2;
+            background-size: 100% 3px, 3px 100%;
+            pointer-events: none;
+        }
+        .matrix-text {
+            font-family: 'Share Tech Mono', monospace;
+            color: #00ff41;
+            text-shadow: 0 0 8px #00ff41aa;
+            line-height: 1.4;
+        }
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            position: absolute;
+            top: 0;
+            animation: scanline 6s linear infinite;
+            z-index: 3;
+        }
+        @keyframes scanline {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
     </style>
 </head>
 <body class="bg-slate-100 min-h-screen flex items-center justify-center p-4">
 
     <div class="max-w-md w-full glass-card rounded-3xl shadow-2xl border border-slate-200 overflow-hidden">
-        <!-- Header del Reproductor -->
+        <!-- Header -->
         <div class="udo-bg-blue p-6 text-white text-center">
-            <div class="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4 border-2 border-white/20">
-                <i class="fas fa-headphones-alt text-3xl"></i>
+            <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3 border-2 border-white/20">
+                <i class="fas fa-university text-2xl"></i>
             </div>
-            <h1 class="text-xl font-bold">Boletín de Bienvenida</h1>
-            <p class="text-xs opacity-70 uppercase tracking-widest mt-1">Inglés I - UDO Nueva Esparta</p>
+            <h1 class="text-xl font-bold">Boletín Informativo</h1>
+            <p class="text-xs opacity-70 uppercase tracking-widest mt-1">Inglés I - Ciencias Administrativas</p>
+        </div>
+
+        <!-- Pantalla de Subtítulos -->
+        <div class="px-6 pt-6">
+            <div class="crt-screen rounded-xl p-4 h-32 flex items-center justify-center text-center relative">
+                <div class="scanline"></div>
+                <p id="caption-text" class="matrix-text text-sm md:text-base italic">
+                    SISTEMA LISTO... <br> PRESIONE PLAY PARA INICIAR
+                </p>
+                <div class="absolute top-2 right-3 flex gap-1">
+                    <div class="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse"></div>
+                    <span class="text-[8px] text-green-900 font-bold uppercase tracking-tighter">Live Text</span>
+                </div>
+            </div>
         </div>
 
         <!-- Controles de Audio -->
         <div class="p-8">
             <div id="status" class="text-center mb-6">
-                <p class="text-sm font-medium text-slate-500" id="status-text">Listo para reproducir</p>
+                <p class="text-sm font-medium text-slate-500" id="status-text">Voz de Dipper configurada</p>
             </div>
 
             <div class="flex flex-col items-center gap-6">
                 <!-- Botón Principal -->
-                <button id="playBtn" class="w-20 h-20 udo-bg-blue rounded-full text-white text-2xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg disabled:opacity-50">
+                <button id="playBtn" class="w-20 h-20 udo-bg-blue rounded-full text-white text-2xl flex items-center justify-center hover:scale-105 transition-transform shadow-lg disabled:opacity-50 relative group">
                     <i class="fas fa-play ml-1" id="playIcon"></i>
+                    <div class="absolute -inset-1 bg-blue-400 rounded-full blur opacity-20 group-hover:opacity-40 transition"></div>
                 </button>
 
                 <!-- Barra de Progreso -->
@@ -44,39 +98,26 @@
                 </div>
 
                 <div class="flex justify-between w-full text-[10px] font-bold text-slate-400 uppercase">
-                    <span>Voz: Dipper</span>
-                    <span>Perfil: Académico</span>
+                    <span>UDO Nueva Esparta</span>
+                    <span>Modo Lectura Activo</span>
                 </div>
             </div>
 
             <!-- Información Adicional -->
             <div class="mt-8 pt-6 border-t border-slate-100">
-                <h2 class="text-xs font-bold text-slate-400 uppercase mb-4 text-center">Resumen del Boletín</h2>
                 <div class="space-y-3">
                     <div class="flex items-center gap-3 text-sm text-slate-600">
                         <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center udo-blue shrink-0">
-                            <i class="fas fa-tools text-xs"></i>
+                            <i class="fas fa-info-circle text-xs"></i>
                         </div>
-                        <span>Materiales de clase obligatorios.</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-sm text-slate-600">
-                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center udo-blue shrink-0">
-                            <i class="fas fa-phone-alt text-xs"></i>
-                        </div>
-                        <span>Contacto Centro de Copiado: Prof. Carmen.</span>
-                    </div>
-                    <div class="flex items-center gap-3 text-sm text-slate-600">
-                        <div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center udo-blue shrink-0">
-                            <i class="fas fa-exclamation-triangle text-xs text-orange-500"></i>
-                        </div>
-                        <span>Regla de las 72 horas para exámenes.</span>
+                        <span class="text-xs">Este audio contiene información vital sobre evaluaciones y materiales.</span>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="bg-slate-50 p-4 text-center border-t border-slate-100">
-            <p class="text-[10px] text-slate-400">Cátedra del Prof. Oney Clavijo</p>
+            <p class="text-[10px] text-slate-400">Prof. Oney Clavijo - Semestre 2024</p>
         </div>
     </div>
 
@@ -86,37 +127,51 @@
         const playIcon = document.getElementById('playIcon');
         const statusText = document.getElementById('status-text');
         const progressBar = document.getElementById('progress');
+        const captionText = document.getElementById('caption-text');
 
         let audioContext;
+        let captionsInterval;
+
+        // Estructura de subtítulos sincronizada (Tiempos aproximados)
+        const captions = [
+            { time: 0, text: "Iniciando Boletín de Bienvenida..." },
+            { time: 3, text: "Bienvenidos a la aventura de Inglés 1." },
+            { time: 7, text: "En Contaduría y Administración, el inglés es fundamental." },
+            { time: 12, text: "Interpretaremos textos comerciales, financieros y contables." },
+            { time: 18, text: "Materiales necesarios: Diccionario, engrapadora y cuaderno." },
+            { time: 24, text: "Recuerde sus lápices, creyones y las guías impresas." },
+            { time: 30, text: "Evaluaciones: Centro de copiado en Cursos Básicos." },
+            { time: 35, text: "Contacto Prof. Carmen: +58 412 5454921." },
+            { time: 41, text: "¡OJO! Pida sus exámenes 72 horas antes." },
+            { time: 47, text: "El incumplimiento causa la pérdida del examen." },
+            { time: 53, text: "Usamos este centro por su calidad y seguridad." },
+            { time: 58, text: "Vestimenta: No se permite ropa reveladora ni gorras." },
+            { time: 64, text: "Estudie, asista a clases y consulte sus dudas." },
+            { time: 70, text: "¡Mucho éxito en este semestre!" }
+        ];
 
         const textToSpeak = `
-            Voz clara, masculina y profesional.
             Boletín de Bienvenida al curso de Inglés 1 para Ciencias Administrativas de la UDO Nueva Esparta.
             ¡Bienvenidos a la emocionante aventura del Inglés 1! En la Carrera de Contaduría y Administración, el dominio de los textos en inglés es una herramienta fundamental para desenvolverse en un mundo globalizado. Por ello, la asignatura Inglés 1 se enfoca en la interpretación de textos en inglés de carácter comercial, financiero y contable.
             
             Materiales necesarios para sus actividades en el salón de clase: 
-            Un diccionario Inglés-Español-Inglés.
-            Una engrapadora miniatura o normal.
-            Un cuaderno para sus apuntes.
-            Lápices de grafito, 3 creyones de colores diferentes y bolígrafos negro y azul.
-            Y las guías impresas del curso disponibles en Google Drive y el Centro de Copiado.
+            Un diccionario Inglés-Español-Inglés, una engrapadora, un cuaderno, lápices, 3 creyones y las guías impresas del curso.
             
-            Información sobre la Reproducción de Evaluaciones: El centro de copiado oficial está en el edificio de Cursos Básicos. El contacto es +58 412 5454921, Profesora Carmen. Anótelo y escríbale si requiere copias y no está en la universidad.
-            Atención: La reproducción de los exámenes debe solicitarse al menos 72 horas antes de la prueba. El incumplimiento de esto podría causar la pérdida de la evaluación sin derecho a reclamo.
+            Sobre evaluaciones: El centro de copiado oficial está en Cursos Básicos. El contacto es Profesora Carmen, al cero cuatro doce, cinco cuatro cinco, cuatro nueve dos uno.
+            Atención: La reproducción de los exámenes debe solicitarse 72 horas antes. El incumplimiento causará la pérdida de la evaluación sin derecho a reclamo.
             
-            ¿Por qué este centro de copiado? Porque ofrece la calidad, seguridad y responsabilidad necesaria para sus exámenes desde hace años.
-            
-            Sobre la vestimenta permitida: La UDO no permite ropa indecente en sus aulas. No se permiten tops con huecos, prendas reveladoras, franelillas, shorts, gorras ni piercings en clase.
-            
-            Para obtener los mejores resultados: Estudie, asista a clases, revise el Plan de Clases periódicamente y consulte al profesor en caso de dudas. ¡Mucho éxito!
+            ¿Por qué este centro de copiado? Porque ofrece calidad, seguridad y responsabilidad.
+            Sobre la vestimenta: La UDO no permite ropa reveladora, franelillas, shorts, gorras ni piercings en clase.
+            Para obtener resultados: Estudie, asista a clases y consulte al profesor. ¡Mucho éxito!
         `;
 
         async function generateAudio() {
             playBtn.disabled = true;
-            statusText.innerText = "Generando audio con voz Dipper...";
+            statusText.innerText = "Sincronizando sistema...";
+            captionText.innerText = "> ACCEDIENDO A SERVIDORES...";
             
             const payload = {
-                contents: [{ parts: [{ text: `Say in a natural, clear male voice: ${textToSpeak}` }] }],
+                contents: [{ parts: [{ text: `Say in a professional, clear, and slightly deep male voice: ${textToSpeak}` }] }],
                 generationConfig: {
                     responseModalities: ["AUDIO"],
                     speechConfig: {
@@ -155,7 +210,8 @@
                 }
             }
             
-            statusText.innerText = "Error. Intente nuevamente.";
+            statusText.innerText = "Error de conexión.";
+            captionText.innerText = "> ERROR: FALLO DE SEÑAL";
             playBtn.disabled = false;
         }
 
@@ -177,33 +233,43 @@
             
             source.onended = () => {
                 playIcon.className = "fas fa-play ml-1";
-                statusText.innerText = "Reproducción finalizada";
+                statusText.innerText = "Fin de transmisión";
+                captionText.innerText = "SISTEMA LISTO... \n PRESIONE PLAY PARA INICIAR";
                 playBtn.disabled = false;
                 progressBar.style.width = "0%";
+                clearInterval(captionsInterval);
             };
 
             source.start();
             playIcon.className = "fas fa-stop";
-            statusText.innerText = "Reproduciendo con Dipper...";
+            statusText.innerText = "Transmisión en curso...";
             
             const duration = buffer.duration;
             let start = Date.now();
-            const timer = setInterval(() => {
+            
+            captionsInterval = setInterval(() => {
                 let elapsed = (Date.now() - start) / 1000;
                 let percent = (elapsed / duration) * 100;
-                if (percent >= 100) {
-                    clearInterval(timer);
-                    percent = 100;
-                }
+                
+                // Actualizar Barra
+                if (percent >= 100) percent = 100;
                 progressBar.style.width = percent + "%";
+
+                // Actualizar Subtítulos
+                const currentCaption = [...captions].reverse().find(c => elapsed >= c.time);
+                if (currentCaption) {
+                    captionText.innerText = `> ${currentCaption.text.toUpperCase()}`;
+                }
             }, 100);
         }
 
         playBtn.addEventListener('click', () => {
             if (audioContext && audioContext.state === 'running') {
                 audioContext.close();
+                clearInterval(captionsInterval);
                 playIcon.className = "fas fa-play ml-1";
-                statusText.innerText = "Audio pausado";
+                statusText.innerText = "Transmisión pausada";
+                captionText.innerText = "> PAUSA: ESPERANDO ÓRDENES";
                 playBtn.disabled = false;
             } else {
                 generateAudio();
