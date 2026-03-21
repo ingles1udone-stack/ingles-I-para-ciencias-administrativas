@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL UDO-OS v1.0 - Reglamento</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+        :root {
+            --fallout-green: #18fa78;
+            --fallout-bg: #0b110b;
+            --fallout-low: #064d26;
+        }
+
+        body {
+            background-color: var(--fallout-bg);
+            color: var(--fallout-green);
+            font-family: 'VT323', monospace;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        /* Efecto CRT Scanline */
+        .crt-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            ), linear-gradient(
+                90deg, 
+                rgba(255, 0, 0, 0.06), 
+                rgba(0, 255, 0, 0.02), 
+                rgba(0, 0, 255, 0.06)
+            );
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+            z-index: 50;
+        }
+
+        .crt-glow {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            box-shadow: inset 0 0 100px rgba(24, 250, 120, 0.1);
+            pointer-events: none;
+            z-index: 40;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.98; }
+            50% { opacity: 1; }
+            100% { opacity: 0.99; }
+        }
+
+        .terminal-screen {
+            height: 100vh;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            border: 20px solid #1a1a1a;
+            box-sizing: border-box;
+            background: radial-gradient(circle, #0e1e0e 0%, #000 100%);
+        }
+
+        #text-content {
+            font-size: 1.6rem;
+            line-height: 1.2;
+            white-space: pre-wrap;
+            flex-grow: 1;
+            text-shadow: 0 0 8px var(--fallout-green);
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 12px;
+            height: 24px;
+            background-color: var(--fallout-green);
+            animation: blink 0.8s infinite;
+            vertical-align: middle;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .btn-back {
+            border: 2px solid var(--fallout-green);
+            padding: 5px 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--fallout-green);
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .btn-back:hover {
+            background-color: var(--fallout-green);
+            color: var(--fallout-bg);
+            box-shadow: 0 0 15px var(--fallout-green);
+        }
+
+        .footer-info {
+            border-top: 2px solid var(--fallout-green);
+            padding-top: 1rem;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            z-index: 60;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(24, 250, 120, 0.05) 50%, rgba(0,0,0,0) 100%);
+            opacity: 0.1;
+            position: absolute;
+            bottom: 100%;
+            animation: scanline 8s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes scanline {
+            0% { bottom: 100%; }
+            100% { bottom: -100px; }
+        }
+    </style>
+</head>
+<body onclick="nextStep()">
+
+    <div class="crt-overlay"></div>
+    <div class="crt-glow"></div>
+    <div class="scanline"></div>
+
+    <div class="terminal-screen">
+        <div class="flex justify-between items-start">
+            <div>
+                <a href="index.html" class="btn-back"> < VOLVER </a>
+                <div class="mb-4">
+                    UNIVERSIDAD DE ORIENTE - SISTEMA OPERATIVO DE EVALUACIÓN<br>
+                    REGLAMENTO ACADÉMICO v.2026<br>
+                    ------------------------------------------------------
+                </div>
+            </div>
+            <div class="text-right">
+                USR: ESTUDIANTE_UDO<br>
+                LOC: NÚCLEO NUEVA ESPARTA
+            </div>
+        </div>
+
+        <div id="text-content"></div>
+        <div id="footer" class="footer-info">
+            <div id="status">ESTADO: CARGANDO DATOS...</div>
+            <div>CLICK PARA CONTINUAR ></div>
+        </div>
+    </div>
+
+    <script>
+        const sections = [
+            `NORMAS DE EVALUACIÓN: DEFINICIÓN
+
+ES EL CONJUNTO DE NORMAS QUE PERMITEN EVALUAR EL RENDIMIENTO ACADÉMICO DE LOS ESTUDIANTES DE LA UNIVERSIDAD DE ORIENTE.
+
+ESCALA DE EVALUACIÓN:
+LA ESCALA VA DE CERO (0) A DIEZ (10) PUNTOS CON UN MÍNIMO APROBATORIO DE CINCO (5) PUNTOS.
+
+LA EVALUACIÓN:
+SE ESTABLECE CON UN MÍNIMO DE DOS (2) EVALUACIONES PARCIALES Y UN EXAMEN FINAL PARA CADA SEMESTRE.`,
+
+            `EL SISTEMA DE EVALUACIÓN CONTEMPLA:
+
+A) EXÁMENES PARCIALES: MÍNIMO DOS (02) POR SEMESTRE. EL 50% CONFORMA LA NOTA PREVIA.
+
+B) EVALUACIONES PRÁCTICAS: EL 20% SE ACUMULA PARA LA NOTA PREVIA.
+
+C) LA NOTA PREVIA (70%): SE OBTIENE SUMANDO EL 50% Y EL 20% DE LOS LITERALES ANTERIORES.`,
+
+            `NORMAS PARCIALES SOBRE EVALUACIONES:
+
+PRIMERO: NOTA PREVIA MENOR A 2.00 PUNTOS PIERDE DERECHO A EXAMEN FINAL Y REPARACIÓN.
+
+SEGUNDO: NOTA PREVIA IGUAL O MAYOR A 3.50 PUNTOS TIENE DERECHO A EXAMEN FINAL.
+
+TERCERO: NOTA PREVIA ENTRE 2.00 Y 3.49 PUNTOS TIENE DERECHO A EXAMEN DE REPARACIÓN.`,
+
+            `SÉPTIMO: LA INASISTENCIA AL VEINTICINCO POR CIENTO (25%) DE LAS CLASES CAUSA LA PÉRDIDA DEL CURSO POR INASISTENCIA, SIN DERECHO A FINAL NI REPARACIÓN.
+
+DÉCIMO SEGUNDO: EL ESTUDIANTE QUE NO APROBASE POR DOS PERÍODOS LECTIVOS SUCESIVOS, DEBERÁ CURSARLA DE NUEVO.`,
+
+            `CASOS ESPECIALES (INTERRUPCIONES):
+
+PRIMERO: MÍNIMO DE CUATRO (4) EVALUACIONES QUE SUMARÁN EL 100%. MÍNIMO APROBATORIO: 4.50 PUNTOS ACUMULADOS.
+
+SEGUNDO: EXAMEN DE REPARACIÓN PARA QUIENES TENGAN ENTRE 2.00 Y 4.49 PUNTOS.
+
+TERCERO: NO SE REALIZARÁ EXAMEN FINAL.`
+        ];
+
+        let currentSection = 0;
+        let currentChar = 0;
+        let isTyping = false;
+        const speed = 25; // Velocidad de escritura en ms
+        const textElement = document.getElementById('text-content');
+        const statusElement = document.getElementById('status');
+
+        function typeText() {
+            if (currentChar < sections[currentSection].length) {
+                isTyping = true;
+                textElement.innerHTML = sections[currentSection].substring(0, currentChar + 1) + '<span class="cursor"></span>';
+                currentChar++;
+                setTimeout(typeText, speed);
+            } else {
+                isTyping = false;
+                statusElement.innerText = `ESTADO: SECCIÓN ${currentSection + 1} LISTA`;
+            }
+        }
+
+        function nextStep() {
+            if (isTyping) {
+                // Saltar animación si está escribiendo
+                currentChar = sections[currentSection].length;
+                return;
+            }
+
+            if (currentSection < sections.length - 1) {
+                currentSection++;
+                currentChar = 0;
+                textElement.innerHTML = '';
+                statusElement.innerText = "ESTADO: ACCEDIENDO A SECTOR " + (currentSection + 1) + "...";
+                setTimeout(typeText, 500);
+            } else {
+                // Reiniciar o finalizar
+                currentSection = 0;
+                currentChar = 0;
+                textElement.innerHTML = '';
+                statusElement.innerText = "ESTADO: REINICIANDO REGISTROS...";
+                setTimeout(typeText, 500);
+            }
+        }
+
+        // Iniciar primer texto
+        window.onload = () => {
+            setTimeout(typeText, 1000);
+        };
+    </script>
+</body>
+</html>
