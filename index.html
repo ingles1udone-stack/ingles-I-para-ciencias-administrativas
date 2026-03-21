@@ -52,6 +52,7 @@
             <div class="flex gap-4 text-xs md:text-sm font-semibold">
                 <a href="#horario" class="hover:text-blue-600">Horario</a>
                 <a href="#bitacora" class="hover:text-blue-600">Bitácora</a>
+                <a href="#cronograma" class="hover:text-blue-600">Ruta</a>
                 <a href="#unidades" class="hover:text-blue-600">Materiales</a>
             </div>
         </div>
@@ -126,7 +127,7 @@
                     </div>
                 </div>
 
-                <!-- Estudiantes Regulares (Corregido) -->
+                <!-- Estudiantes Regulares -->
                 <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-200 card-hover bg-blue-50/50">
                     <h3 class="font-bold text-indigo-700 mb-4 border-b border-indigo-100 pb-2 flex items-center">
                         <i class="fas fa-user-graduate mr-2"></i> Est. Regulares
@@ -174,34 +175,67 @@
             </div>
         </section>
 
-        <!-- Ruta del Semestre (Explicación visual) -->
+        <!-- Ruta del Semestre (Detallada según Lesson Plan) -->
         <section id="cronograma" class="mb-16">
-            <h2 class="text-2xl font-bold udo-blue mb-8 flex items-center gap-2">
-                <i class="fas fa-map-marked-alt text-blue-500"></i> Ruta del Semestre
+            <h2 class="text-3xl font-bold udo-blue mb-10 text-center">
+                <i class="fas fa-map-marked-alt mr-3 text-blue-500"></i>Ruta del Aprendizaje
             </h2>
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100 space-y-10 border-l-2 ml-4">
-                <div class="relative pl-8">
-                    <div class="timeline-dot"></div>
-                    <p class="text-xs font-bold text-blue-500 uppercase">Fase 1: Preparación</p>
-                    <h4 class="font-bold">Unidades I y II + Glosario</h4>
-                    <p class="text-sm text-slate-500">Aprendemos a "escanear" textos y entregamos los primeros términos.</p>
+            <div class="relative max-w-4xl mx-auto border-l-4 border-blue-100 ml-6 md:ml-auto">
+                
+                <!-- Inicio -->
+                <div class="mb-10 ml-8 relative">
+                    <div class="absolute -left-12 mt-1 bg-white border-4 border-blue-600 w-8 h-8 rounded-full flex items-center justify-center">
+                        <i class="fas fa-flag-checkered text-[10px] text-blue-600"></i>
+                    </div>
+                    <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Clases 1 - 2</span>
+                    <h3 class="text-xl font-bold mt-2">Inducción y Estrategias Iniciales</h3>
+                    <p class="text-slate-600 text-sm mt-1">Bienvenida, manejo de Drive, entrega de Glosario Inicial y Micro-conferencia de la Unidad I.</p>
                 </div>
-                <div class="relative pl-8">
-                    <div class="timeline-dot bg-red-500"></div>
-                    <p class="text-xs font-bold text-red-500 uppercase">Hito: Evaluación Parcial</p>
-                    <h4 class="font-bold">Quick Test I</h4>
-                    <p class="text-sm text-slate-500">Primera prueba de fuego sobre los temas vistos.</p>
+
+                <!-- Primer Hito -->
+                <div class="mb-10 ml-8 relative">
+                    <div class="absolute -left-12 mt-1 bg-yellow-400 border-4 border-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-star text-[10px] text-white"></i>
+                    </div>
+                    <span class="bg-yellow-500 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Clases 3 - 6</span>
+                    <h3 class="text-xl font-bold mt-2">Fundamentos y Quick Test I</h3>
+                    <p class="text-slate-600 text-sm mt-1">Morfología, Partes del Discurso y primer <strong>My Literary Challenge (MLC 1)</strong>.</p>
                 </div>
-                <div class="relative pl-8">
-                    <div class="timeline-dot bg-indigo-600"></div>
-                    <p class="text-xs font-bold text-indigo-600 uppercase">Cierre: Consolidación</p>
-                    <h4 class="font-bold text-slate-800">Examen Final (30%)</h4>
-                    <p class="text-sm text-slate-500">Aplicación de todas las estrategias en un texto complejo.</p>
+
+                <!-- Mitad de Camino -->
+                <div class="mb-10 ml-8 relative">
+                    <div class="absolute -left-12 mt-1 bg-indigo-500 border-4 border-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-link text-[10px] text-white"></i>
+                    </div>
+                    <span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Clases 7 - 11</span>
+                    <h3 class="text-xl font-bold mt-2">Gramática Técnica y Quick Test II</h3>
+                    <p class="text-slate-600 text-sm mt-1">Pronombres y Conectores. Profundización en textos financieros complejos y <strong>MLC 2</strong>.</p>
                 </div>
+
+                <!-- Recta Final -->
+                <div class="mb-10 ml-8 relative">
+                    <div class="absolute -left-12 mt-1 bg-teal-500 border-4 border-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-eye text-[10px] text-white"></i>
+                    </div>
+                    <span class="bg-teal-600 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Clases 12 - 16</span>
+                    <h3 class="text-xl font-bold mt-2">Análisis Crítico y Quick Test III</h3>
+                    <p class="text-slate-600 text-sm mt-1">Formato de textos, Ideas Principales y Mapas de Ideas. Desarrollo de <strong>MLC 3</strong>.</p>
+                </div>
+
+                <!-- El Final -->
+                <div class="ml-8 relative">
+                    <div class="absolute -left-12 mt-1 bg-red-600 border-4 border-white w-8 h-8 rounded-full flex items-center justify-center shadow-md">
+                        <i class="fas fa-trophy text-[10px] text-white"></i>
+                    </div>
+                    <span class="bg-red-600 text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter">Final</span>
+                    <h3 class="text-xl font-bold mt-2">Gran Cierre: Examen Final (30%)</h3>
+                    <p class="text-slate-600 text-sm mt-1">Integración total de estrategias de lectura aplicadas a un caso de estudio administrativo real.</p>
+                </div>
+
             </div>
         </section>
 
-        <!-- Materiales (Link Corregido) -->
+        <!-- Materiales -->
         <section id="unidades" class="mb-16">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                 <div class="lg:col-span-1 bg-gradient-to-br from-blue-700 to-indigo-900 text-white p-8 rounded-3xl shadow-xl flex flex-col justify-between">
@@ -233,6 +267,22 @@
                     <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm card-hover text-center">
                         <span class="text-[10px] font-bold text-blue-400">U-4</span>
                         <p class="font-bold text-xs mt-1">Conectores</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm card-hover text-center">
+                        <span class="text-[10px] font-bold text-blue-400">U-5</span>
+                        <p class="font-bold text-xs mt-1">Formatos</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm card-hover text-center">
+                        <span class="text-[10px] font-bold text-blue-400">U-6</span>
+                        <p class="font-bold text-xs mt-1">Ideas</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm card-hover text-center">
+                        <span class="text-[10px] font-bold text-blue-400">U-7</span>
+                        <p class="font-bold text-xs mt-1">Retórica</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm card-hover text-center">
+                        <span class="text-[10px] font-bold text-blue-400">U-8</span>
+                        <p class="font-bold text-xs mt-1">Inferencias</p>
                     </div>
                 </div>
             </div>
