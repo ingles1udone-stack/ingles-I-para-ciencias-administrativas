@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inglés I - Cs. Administrativas | UDO-NE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); }
+        .card-hover:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+        .udo-blue { color: #003366; }
+        .udo-bg-blue { background-color: #003366; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Navegación -->
+    <nav class="sticky top-0 z-50 glass border-b border-gray-200 py-3">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="udo-bg-blue p-2 rounded-lg">
+                    <i class="fas fa-university text-white"></i>
+                </div>
+                <span class="font-bold text-lg udo-blue hidden md:block">Inglés I - UDO NE</span>
+            </div>
+            <div class="flex gap-4 text-sm font-semibold">
+                <a href="#unidades" class="hover:text-blue-600">Unidades</a>
+                <a href="#textos" class="hover:text-blue-600">Textos</a>
+                <a href="#evaluaciones" class="hover:text-blue-600">Evaluaciones</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="udo-bg-blue text-white py-16 px-4">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Interpretación de Textos Administrativos</h1>
+            <p class="text-xl opacity-90 mb-8 max-w-2xl mx-auto">Bienvenido al portal oficial de la asignatura para Contaduría y Administración. Todo lo que necesitas en un solo lugar.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#induccion" class="bg-yellow-500 hover:bg-yellow-600 text-blue-900 px-6 py-3 rounded-full font-bold transition">
+                    <i class="fas fa-rocket mr-2"></i> Comenzar Inducción
+                </a>
+                <a href="#glosario" class="bg-white/10 hover:bg-white/20 border border-white/30 px-6 py-3 rounded-full font-bold transition">
+                    <i class="fas fa-book-open mr-2"></i> Glosario Único
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-12">
+
+        <!-- Sección Logística: Centro de Copiado -->
+        <section id="centro-copiado" class="mb-16 bg-blue-50 border-l-4 border-blue-600 p-6 rounded-r-xl shadow-sm">
+            <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div class="text-3xl text-blue-600"><i class="fas fa-print"></i></div>
+                <div>
+                    <h2 class="text-xl font-bold udo-blue">Logística de Evaluaciones (Centro de Copiado)</h2>
+                    <p class="text-sm md:text-base">Las evaluaciones están disponibles con la <strong>Prof. Carmen (Edif. Cursos Básicos)</strong>. 
+                    <span class="font-semibold italic text-red-600">Debes pagar tus copias al menos 72h antes.</span> El profesor retira el material el día del examen.</p>
+                </div>
+                <a href="https://wa.me/584125454921" target="_blank" class="md:ml-auto bg-green-600 text-white px-4 py-2 rounded-lg font-bold text-sm hover:bg-green-700 transition">
+                    <i class="fab fa-whatsapp mr-2"></i> Contactar Prof. Carmen
+                </a>
+            </div>
+        </section>
+
+        <!-- Unidades y Guías -->
+        <section id="unidades" class="mb-16">
+            <h2 class="text-3xl font-bold udo-blue mb-8 border-b-2 border-yellow-400 inline-block">Guías de Estudio (Unidades 1-8)</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Generación de 8 tarjetas de unidades -->
+                <script>
+                    const unidades = [
+                        "Estrategias de Lectura", "Claves Léxicas", "Pronombres", "Conectores",
+                        "Formato del Texto", "Ideas Principales", "Organización Retórica", "Resumen e Inferencia"
+                    ];
+                    unidades.forEach((u, i) => {
+                        document.write(`
+                            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 card-hover">
+                                <span class="text-xs font-bold text-blue-500 uppercase tracking-widest">Unidad ${i+1}</span>
+                                <h3 class="font-bold text-lg mb-4">${u}</h3>
+                                <a href="#" class="text-sm font-semibold text-gray-600 hover:text-blue-600">
+                                    <i class="fas fa-file-pdf mr-2"></i> Descargar Guía
+                                </a>
+                            </div>
+                        `);
+                    });
+                </script>
+            </div>
+        </section>
+
+        <!-- Secciones de Acción Rápida -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+            <!-- Inducción -->
+            <section id="induccion" class="bg-white p-8 rounded-3xl shadow-lg border-2 border-yellow-400">
+                <h3 class="text-2xl font-bold mb-4 udo-blue">1. Inducción Online</h3>
+                <p class="text-gray-600 mb-6 italic text-sm">"Bienvenidos al curso: Paso a paso para entender la metodología."</p>
+                <a href="#" target="_blank" class="block text-center bg-blue-600 text-white py-3 rounded-xl font-bold hover:bg-blue-700 transition">
+                    Ir al Formulario de Inducción
+                </a>
+            </section>
+
+            <!-- Glosario Académico -->
+            <section id="glosario" class="bg-white p-8 rounded-3xl shadow-lg border-2 border-blue-600">
+                <h3 class="text-2xl font-bold mb-4 udo-blue">2. Glosario Único</h3>
+                <p class="text-gray-600 mb-6 text-sm">Documento vivo con los 200 términos esenciales. Debe ser manuscrito según las normas.</p>
+                <div class="flex gap-2">
+                    <a href="#" class="flex-1 text-center border-2 border-blue-600 text-blue-600 py-3 rounded-xl font-bold hover:bg-blue-50 transition">
+                        Ver Lista
+                    </a>
+                </div>
+            </section>
+
+            <!-- Bitácora -->
+            <section id="bitacora" class="bg-white p-8 rounded-3xl shadow-lg border-2 border-green-500">
+                <h3 class="text-2xl font-bold mb-4 udo-blue">3. La Bitácora</h3>
+                <p class="text-gray-600 mb-6 text-sm">Después de subir tu Micro-conferencia a YouTube, completa aquí tu registro evaluativo.</p>
+                <a href="#" target="_blank" class="block text-center bg-green-600 text-white py-3 rounded-xl font-bold hover:bg-green-700 transition">
+                    Registrar en Bitácora
+                </a>
+            </section>
+        </div>
+
+        <!-- Banco de Textos Académicos -->
+        <section id="textos" class="mb-16">
+            <h2 class="text-3xl font-bold udo-blue mb-4">Banco de Textos Académicos</h2>
+            <p class="text-gray-600 mb-8 italic">Interpretación de materiales reales de Management y Contabilidad (16 textos en total).</p>
+            <div class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                <div class="grid grid-cols-1 md:grid-cols-2">
+                    <div class="p-8 bg-gray-50 border-r border-gray-100">
+                        <h4 class="font-bold text-lg mb-4 udo-blue"><i class="fas fa-bookmark mr-2 text-yellow-500"></i> Texto Destacado 1</h4>
+                        <p class="font-medium text-gray-800 mb-2 italic">Navigating the Financial World: Accounting vs. Financial Management</p>
+                        <p class="text-sm text-gray-500 mb-4">Comparativa técnica entre el registro histórico y la ciencia estratégica del dinero.</p>
+                        <a href="#" class="text-blue-600 font-bold text-sm hover:underline">Abrir lectura →</a>
+                    </div>
+                    <div class="p-8">
+                        <h4 class="font-bold text-lg mb-4 udo-blue">Listado de Práctica</h4>
+                        <ul class="space-y-3 text-sm">
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Texto 2: The Role of Ethics in Auditing</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500"></i> Texto 3: Understanding Liquidity Ratios</li>
+                            <li class="flex items-center gap-2"><i class="fas fa-check-circle text-green-500 text-opacity-30"></i> 13 textos adicionales disponibles en el Drive del curso...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Evaluaciones Info -->
+        <section id="evaluaciones" class="mb-16 text-center bg-gray-900 text-white py-12 rounded-3xl px-6">
+            <h2 class="text-3xl font-bold mb-6">Tipos de Evaluación</h2>
+            <div class="flex flex-wrap justify-center gap-6">
+                <div class="w-32"><div class="text-3xl mb-2">📄</div><div class="text-xs uppercase font-bold text-gray-400">Quick Test</div></div>
+                <div class="w-32"><div class="text-3xl mb-2">🎓</div><div class="text-xs uppercase font-bold text-gray-400">Master Class</div></div>
+                <div class="w-32"><div class="text-3xl mb-2">🤝</div><div class="text-xs uppercase font-bold text-gray-400">Better Understanding</div></div>
+                <div class="w-32"><div class="text-3xl mb-2">📖</div><div class="text-xs uppercase font-bold text-gray-400">Literary Challenge</div></div>
+                <div class="w-32"><div class="text-3xl mb-2">🎥</div><div class="text-xs uppercase font-bold text-gray-400">Micro-conferencia</div></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-gray-100 py-12 border-t border-gray-200 text-center">
+        <div class="container mx-auto px-4">
+            <p class="font-bold udo-blue mb-2">Universidad de Oriente - Núcleo Nueva Esparta</p>
+            <p class="text-sm text-gray-500 mb-6">Prof. Oney Clavijo | Cátedra de Inglés I para Cs. Administrativas</p>
+            <div class="flex justify-center gap-6 text-gray-400">
+                <a href="#" class="hover:text-blue-600 transition"><i class="fab fa-youtube text-xl"></i></a>
+                <a href="#" class="hover:text-green-600 transition"><i class="fab fa-whatsapp text-xl"></i></a>
+                <a href="#" class="hover:text-blue-900 transition"><i class="fas fa-envelope text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
