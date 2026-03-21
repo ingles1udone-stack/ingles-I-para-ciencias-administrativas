@@ -63,7 +63,7 @@
         <div class="container mx-auto text-center relative z-10">
             <!-- Mascota Amigable -->
             <div class="mascot-container mb-6">
-                <img src="mascot.png" alt="Clase Mascot" class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full border-4 border-white/20 shadow-2xl bg-white/10 p-1">
+                <img src="mascot.png" alt="Clase Mascot" class="w-24 h-24 md:w-32 md:h-32 mx-auto rounded-full border-4 border-white/20 shadow-2xl bg-white/10 p-1" onerror="this.src='https://via.placeholder.com/150?text=Mascot'">
                 <div class="mascot-bubble">
                     ¡Welcome! 👋
                 </div>
@@ -94,34 +94,64 @@
         <!-- Horarios -->
         <section id="horario" class="mb-16">
             <h2 class="text-3xl font-bold udo-blue mb-8 text-center"><i class="fas fa-clock mr-3"></i>Horario de Clases (Aula 36)</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-blue-600 mb-4 border-b pb-2">Contaduría Pública</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Contaduría Pública (Nuevos) -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 card-hover">
+                    <h3 class="font-bold text-blue-600 mb-4 border-b pb-2 flex items-center">
+                        <i class="fas fa-calculator mr-2"></i> Contaduría Pública
+                    </h3>
                     <div class="space-y-4 text-sm">
                         <div class="flex justify-between items-center">
                             <span class="font-semibold uppercase text-slate-500">Sección 1101</span>
                             <div class="text-right">
-                                <p>Lunes: 10:45 AM - 12:15 PM</p>
-                                <p>Viernes: 09:15 AM - 10:45 AM</p>
+                                <p>Lunes: 10:45 - 12:15</p>
+                                <p>Viernes: 09:15 - 10:45</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-blue-600 mb-4 border-b pb-2">Administración</h3>
+
+                <!-- Administración (Nuevos) -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 card-hover">
+                    <h3 class="font-bold text-blue-600 mb-4 border-b pb-2 flex items-center">
+                        <i class="fas fa-briefcase mr-2"></i> Administración
+                    </h3>
                     <div class="space-y-4 text-sm">
                         <div class="flex justify-between items-center border-b border-slate-50 pb-2">
                             <span class="font-semibold uppercase text-slate-500">Sección 1201</span>
                             <div class="text-right">
-                                <p>Miércoles: 10:45 AM - 12:15 PM</p>
-                                <p>Viernes: 07:45 AM - 09:15 AM</p>
+                                <p>Miércoles: 10:45 - 12:15</p>
+                                <p>Viernes: 07:45 - 09:15</p>
                             </div>
                         </div>
                         <div class="flex justify-between items-center">
                             <span class="font-semibold uppercase text-slate-500">Sección 1200</span>
                             <div class="text-right">
-                                <p>Lunes: 09:15 AM - 10:45 AM</p>
-                                <p>Miércoles: 09:15 AM - 10:45 AM</p>
+                                <p>Lunes: 09:15 - 10:45</p>
+                                <p>Miércoles: 09:15 - 10:45</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Estudiantes Regulares -->
+                <div class="bg-white p-6 rounded-3xl shadow-sm border border-blue-200 card-hover bg-blue-50/30">
+                    <h3 class="font-bold text-indigo-700 mb-4 border-b border-indigo-100 pb-2 flex items-center">
+                        <i class="fas fa-user-graduate mr-2"></i> Est. Regulares
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                            <span class="font-semibold uppercase text-slate-500">1120 / 1220</span>
+                            <div class="text-right">
+                                <p>Martes: 07:45 - 09:15</p>
+                                <p>Jueves: 07:45 - 09:15</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-semibold uppercase text-slate-500">1190 / 1290</span>
+                            <div class="text-right">
+                                <p>Martes: 09:15 - 10:45</p>
+                                <p>Jueves: 09:15 - 10:45</p>
                             </div>
                         </div>
                     </div>
