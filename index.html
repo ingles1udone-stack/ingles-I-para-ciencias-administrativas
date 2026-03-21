@@ -25,14 +25,16 @@
         }
 
         /* Estilos del Juego */
+        .perspective-1000 { perspective: 1000px; }
         .card-inner {
             transition: transform 0.6s;
             transform-style: preserve-3d;
             cursor: pointer;
+            position: relative;
+            width: 100%;
+            height: 100%;
         }
-        .card-flipped {
-            transform: rotateY(180deg);
-        }
+        .card-flipped { transform: rotateY(180deg); }
         .card-front, .card-back {
             backface-visibility: hidden;
             position: absolute;
@@ -42,9 +44,14 @@
             padding: 1.5rem;
             text-align: center;
         }
-        .card-back {
-            transform: rotateY(180deg);
-        }
+        .card-back { transform: rotateY(180deg); }
+
+        /* Estilo para las tablas de notas */
+        .table-container { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; min-width: 600px; }
+        th { background-color: #f1f5f9; text-align: left; padding: 12px; font-size: 0.75rem; color: #64748b; text-transform: uppercase; border-bottom: 2px solid #e2e8f0; }
+        td { padding: 12px; border-bottom: 1px solid #e2e8f0; font-size: 0.875rem; }
+        .nota-badge { padding: 2px 8px; rounded: 4px; font-weight: bold; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -60,9 +67,10 @@
             </div>
             <div class="hidden md:flex gap-6 text-sm font-semibold">
                 <a href="#comunidad" class="hover:text-blue-600 transition">Grupos</a>
+                <a href="#documentos" class="hover:text-blue-600 transition">Documentos</a>
                 <a href="#ruta" class="hover:text-blue-600 transition">Ruta</a>
-                <a href="#bitacora" class="hover:text-blue-600 transition">Bitácora</a>
-                <a href="#notas" class="hover:text-blue-600 transition">Calificaciones</a>
+                <a href="#notas" class="hover:text-blue-600 transition">Notas</a>
+                <a href="#glosario-challenge" class="hover:text-blue-600 transition">Glosario</a>
             </div>
         </div>
     </nav>
@@ -71,17 +79,22 @@
     <header class="udo-bg-blue text-white py-12 px-4 text-center relative overflow-hidden">
         <div class="container mx-auto relative z-10">
             <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto rounded-full border-4 border-white/20 mb-4 bg-white/10 p-2 shadow-2xl" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
-            <h1 class="text-3xl md:text-5xl font-extrabold mb-3">Interpretación de Textos Administrativos</h1>
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-3 text-white">Interpretación de Textos Administrativos</h1>
             <p class="text-md opacity-90 mb-6 max-w-2xl mx-auto italic font-light">"Educando para el éxito global desde el Campus Guatamare"</p>
             
             <div class="flex flex-col items-center gap-4">
-                <a href="boletin-bienvenida.html" class="btn-activar text-blue-900 px-10 py-3 rounded-full font-extrabold shadow-lg transition text-sm flex items-center gap-2 border-2 border-white/20">
-                    <i class="fas fa-bolt"></i> ACTIVAR MI INGLÉS
+                <a href="reproductor_boletin.html" class="btn-activar text-blue-900 px-10 py-3 rounded-full font-extrabold shadow-lg transition text-sm flex items-center gap-2 border-2 border-white/20">
+                    <i class="fas fa-play-circle"></i> ESCUCHAR BOLETÍN DE BIENVENIDA
                 </a>
 
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMBJAGJlGrwAje1GmzsNIWNZT7RfZ4ak7ZoXlq5_d2hpmgmw/viewform?usp=sharing" target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-2 rounded-full font-bold transition text-xs">
-                    <i class="fas fa-rocket mr-2"></i> REALIZAR MI INDUCCIÓN
-                </a>
+                <div class="flex flex-wrap justify-center gap-3">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMBJAGJlGrwAje1GmzsNIWNZT7RfZ4ak7ZoXlq5_d2hpmgmw/viewform?usp=sharing" target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-2 rounded-full font-bold transition text-xs">
+                        <i class="fas fa-rocket mr-2"></i> REALIZAR MI INDUCCIÓN
+                    </a>
+                    <a href="reglamento.html" class="bg-green-500/20 hover:bg-green-500/40 text-green-300 border border-green-500/30 px-6 py-2 rounded-full font-bold transition text-xs">
+                        <i class="fas fa-terminal mr-2"></i> VER REGLAMENTO (PIP-BOY)
+                    </a>
+                </div>
             </div>
         </div>
     </header>
@@ -108,60 +121,65 @@
                 </a>
                 <a href="https://chat.whatsapp.com/KmSxmPzath8DhMiAmD1sRo" target="_blank" class="bg-indigo-50 p-4 rounded-xl border border-indigo-100 hover:border-indigo-400 transition shadow-sm flex items-center gap-3">
                     <i class="fas fa-users text-2xl text-indigo-600"></i>
-                    <div><p class="text-[10px] text-indigo-400 font-bold">SECCIÓN</p><p class="text-sm font-bold udo-blue">Regulares 👀</p></div>
+                    <div><p class="text-[10px] text-indigo-400 font-bold">COMUNIDAD</p><p class="text-sm font-bold udo-blue">Regulares 👀</p></div>
                 </a>
             </div>
         </section>
 
         <!-- DOCUMENTOS ESTRATÉGICOS -->
-        <section id="evaluacion" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <section id="documentos" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
                 <h3 class="font-bold text-lg mb-4 text-blue-800"><i class="fas fa-file-contract mr-2"></i>Documentos Base</h3>
                 <div class="space-y-3">
                     <a href="https://docs.google.com/document/d/1NfBPY4jsPMdrXJ8nbOiZFlM-WnYiqc-YuhwQE0w28Qk/edit?usp=drivesdk" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-600 hover:text-white transition">
-                        <span class="text-sm font-bold">Plan de Evaluación</span>
+                        <span class="text-sm font-bold">Plan de Evaluación 2026</span>
                         <i class="fas fa-calendar-check"></i>
                     </a>
                     <a href="https://drive.google.com/drive/folders/1-8U4QzV7SGjlh6jjIndp801vzJzp80jV?usp=drive_link" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-600 hover:text-white transition">
                         <span class="text-sm font-bold">8 Guías de Estudio</span>
                         <i class="fas fa-book-open"></i>
                     </a>
-                    <a href="https://docs.google.com/document/d/1Bvi8iTTqa6jtcxDlOUw0q8eWjOXE_sQB/edit?usp=drivesdk&ouid=100540302350153422715&rtpof=true&sd=true" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-600 hover:text-white transition">
-                        <span class="text-sm font-bold">Horario del Profesor</span>
+                    <a href="https://docs.google.com/document/d/1Bvi8iTTqa6jtcxDlOUw0q8eWjOXE_sQB/edit?usp=drivesdk" target="_blank" class="flex items-center justify-between p-3 bg-slate-50 rounded-xl hover:bg-blue-600 hover:text-white transition">
+                        <span class="text-sm font-bold">Horario de Consultas</span>
                         <i class="fas fa-clock"></i>
                     </a>
                 </div>
             </div>
 
             <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm col-span-1 md:col-span-2">
-                <h3 class="font-bold text-lg mb-4 text-orange-700"><i class="fas fa-print mr-2"></i>Centro de Copiado</h3>
+                <h3 class="font-bold text-lg mb-4 text-orange-700"><i class="fas fa-print mr-2"></i>Centro de Copiado Oficial</h3>
                 <div class="bg-orange-50 border border-orange-100 p-5 rounded-xl">
                     <p class="text-sm text-orange-900 mb-4 leading-snug">
-                        <strong>Atención Estudiante:</strong> Las evaluaciones deben solicitarse con <strong>72 horas de anticipación</strong>.
+                        <strong>Atención Estudiante:</strong> Para garantizar la aplicación de sus exámenes, deben solicitar la reproducción con la Prof. Carmen con <strong>72 horas de anticipación</strong>.
                     </p>
                     <div class="flex flex-wrap gap-3">
                         <a href="https://wa.me/584248622137" target="_blank" class="bg-orange-600 text-white px-6 py-2 rounded-lg font-bold text-sm hover:bg-orange-700 transition flex items-center gap-2">
                             <i class="fab fa-whatsapp"></i> Contactar Prof. Carmen
                         </a>
+                        <span class="text-[10px] text-orange-400 font-bold self-center uppercase">Ubicación: Cursos Básicos</span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- BITÁCORA -->
+        <!-- BITÁCORA Y RECURSOS -->
         <section id="bitacora" class="mb-12">
             <div class="bg-gradient-to-br from-indigo-700 to-blue-900 rounded-3xl p-8 text-white shadow-xl">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                     <div>
-                        <h2 class="text-3xl font-bold mb-4">Aprendizaje Autónomo</h2>
-                        <div class="flex flex-col gap-3">
-                            <a href="https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm" target="_blank" class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded-xl font-bold text-center transition flex items-center justify-center gap-2">
-                                <i class="fab fa-youtube text-xl"></i> Ver Micro-conferencias
+                        <h2 class="text-3xl font-bold mb-4">Bitácora de Aprendizaje</h2>
+                        <p class="text-indigo-100 mb-6 font-light">Registra tus avances semanales para acumular el 5% de tu nota complementaria y accede a recursos grabados.</p>
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing" target="_blank" class="bg-white text-indigo-900 py-3 px-8 rounded-xl font-bold text-center hover:bg-slate-100 transition shadow-lg flex items-center justify-center gap-2">
+                                <i class="fas fa-edit"></i> LLENAR MI BITÁCORA
                             </a>
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing" target="_blank" class="bg-white text-indigo-900 py-3 px-6 rounded-xl font-bold text-center hover:bg-slate-100 transition shadow-lg flex items-center justify-center gap-2">
-                                <i class="fas fa-edit"></i> Llenar Bitácora Digital
+                            <a href="https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm" target="_blank" class="bg-red-600 hover:bg-red-700 text-white py-3 px-8 rounded-xl font-bold text-center transition flex items-center justify-center gap-2">
+                                <i class="fab fa-youtube text-xl"></i> VIDEOS DE CLASE
                             </a>
                         </div>
+                    </div>
+                    <div class="hidden lg:block text-center italic opacity-50 text-5xl font-black">
+                        LEARN <br> EVERY <br> DAY
                     </div>
                 </div>
             </div>
@@ -172,42 +190,155 @@
             <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
                 <div class="bg-slate-800 text-white p-6 flex justify-between items-center">
                     <h2 class="text-xl font-bold"><i class="fas fa-map-signs mr-2"></i>Ruta Semanal de Aprendizaje</h2>
-                    <a href="https://docs.google.com/document/d/1Hc7tsVLuGsjOJnwMD76w9ACk656_ShIGGwnnDDGkDh4/edit?usp=drive_link" target="_blank" class="text-[10px] bg-white/20 px-3 py-1 rounded-full uppercase font-bold tracking-widest hover:bg-white/30 transition">Contenido Íntegro</a>
+                    <a href="https://docs.google.com/document/d/1Hc7tsVLuGsjOJnwMD76w9ACk656_ShIGGwnnDDGkDh4/edit?usp=drive_link" target="_blank" class="text-[10px] bg-white/20 px-3 py-1 rounded-full uppercase font-bold tracking-widest hover:bg-white/30 transition">Ver Calendario Completo</a>
                 </div>
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="lesson-card p-3">
-                        <span class="text-[10px] font-bold text-slate-400">CLASE 1</span>
-                        <p class="text-sm font-bold udo-blue">Inducción y Bienvenida</p>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Semana 1</span>
+                        <p class="text-sm font-bold udo-blue">Inducción y Perfil de Egreso</p>
                     </div>
                     <div class="lesson-card p-3">
-                        <span class="text-[10px] font-bold text-slate-400">CLASE 2</span>
-                        <p class="text-sm font-bold udo-blue">Tema I: Estrategia de Lectura</p>
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Semana 2</span>
+                        <p class="text-sm font-bold udo-blue">Tema I: Estrategias de Lectura</p>
+                    </div>
+                    <div class="lesson-card p-3">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Semana 3</span>
+                        <p class="text-sm font-bold udo-blue">Vocabulario: Cognados Técnicos</p>
+                    </div>
+                    <div class="lesson-card p-3">
+                        <span class="text-[10px] font-bold text-slate-400 uppercase">Semana 4</span>
+                        <p class="text-sm font-bold udo-blue">Evaluación Parcial I</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- JUEGO DE GLOSARIO -->
+        <!-- CALIFICACIONES ESTUDIANTILES -->
+        <section id="notas" class="mb-12">
+            <h2 class="text-xl font-bold udo-blue mb-6 flex items-center gap-2">
+                <i class="fas fa-chart-line"></i> Control de Calificaciones (Semestre I-2026)
+            </h2>
+            
+            <div class="space-y-8">
+                <!-- Sección Regulares (NUEVA) -->
+                <div class="bg-white rounded-2xl border border-indigo-200 shadow-sm overflow-hidden">
+                    <div class="p-4 bg-indigo-50 border-b border-indigo-100 flex justify-between items-center">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-star text-indigo-600"></i>
+                            <span class="font-bold text-indigo-900 uppercase text-xs">Sección Regulares</span>
+                        </div>
+                        <span class="bg-indigo-200 text-indigo-700 text-[10px] px-2 py-1 rounded font-bold uppercase">Publicado</span>
+                    </div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Cédula</th>
+                                    <th>Estudiante</th>
+                                    <th>P1 (15%)</th>
+                                    <th>P2 (10%)</th>
+                                    <th>P3 (20%)</th>
+                                    <th>Comp. (20%)</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="font-mono text-xs">V-30.000.001</td>
+                                    <td class="font-semibold text-slate-700">García, Juan</td>
+                                    <td>14.0</td>
+                                    <td>09.0</td>
+                                    <td>18.0</td>
+                                    <td>19.5</td>
+                                    <td><span class="nota-badge bg-green-100 text-green-700 text-xs px-2 py-1 rounded">Excelente</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="font-mono text-xs">V-29.555.444</td>
+                                    <td class="font-semibold text-slate-700">Martínez, Ana</td>
+                                    <td>12.5</td>
+                                    <td>08.0</td>
+                                    <td>15.5</td>
+                                    <td>17.0</td>
+                                    <td><span class="nota-badge bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded">Aprobado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Otras Secciones (1101, 1201, 1200) -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="p-3 bg-slate-50 border-b flex justify-between">
+                            <span class="font-bold text-slate-600 uppercase text-[10px]">Sección 1101 (Contaduría)</span>
+                            <i class="fas fa-lock-open text-slate-300 text-xs"></i>
+                        </div>
+                        <div class="table-container">
+                            <table class="min-w-0">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 px-3">Cédula</th>
+                                        <th class="py-2 px-3">Nota Acum.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="py-2 px-3 font-mono text-[10px]">V-31.XXX.XXX</td>
+                                        <td class="py-2 px-3 font-bold text-blue-600">32.5 / 50</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                        <div class="p-3 bg-slate-50 border-b flex justify-between">
+                            <span class="font-bold text-slate-600 uppercase text-[10px]">Sección 1201/1200 (Adm.)</span>
+                            <i class="fas fa-lock-open text-slate-300 text-xs"></i>
+                        </div>
+                        <div class="table-container">
+                            <table class="min-w-0">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2 px-3">Cédula</th>
+                                        <th class="py-2 px-3">Nota Acum.</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="py-2 px-3 font-mono text-[10px]">V-28.XXX.XXX</td>
+                                        <td class="py-2 px-3 font-bold text-blue-600">28.0 / 50</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- JUEGO DE GLOSARIO (CON 30+ PALABRAS) -->
         <section id="glosario-challenge" class="mb-12">
             <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
-                <div class="flex items-center gap-4 mb-8">
-                    <div class="w-16 h-16 rounded-full bg-slate-100 flex items-center justify-center overflow-hidden">
-                         <img src="mascot.png" alt="UDO Mascot" class="w-12 h-12" onerror="this.src='https://via.placeholder.com/60'">
+                <div class="flex flex-col md:flex-row md:items-center gap-4 mb-8">
+                    <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-2xl shadow-inner">
+                         <i class="fas fa-brain"></i>
                     </div>
                     <div>
                         <h2 class="text-2xl font-black udo-blue uppercase tracking-tight">My Glossary Challenge! 🗽</h2>
-                        <p class="text-slate-500 text-sm font-medium">¿Qué tan bien conoces tus 200 términos? Haz clic en la tarjeta para revelar el significado.</p>
+                        <p class="text-slate-500 text-sm font-medium">Practica con los términos oficiales. Haz clic en la tarjeta para revelar el significado.</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cardContainer">
-                    <!-- Las tarjetas se generan vía JS -->
+                    <!-- Dinámico -->
                 </div>
 
                 <div class="mt-8 text-center">
-                    <button onclick="generateCards()" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center gap-2 mx-auto">
-                        <i class="fas fa-sync-alt"></i> Nuevas Palabras
+                    <button onclick="generateCards()" class="bg-blue-600 text-white px-10 py-4 rounded-2xl font-bold hover:bg-blue-700 transition-all flex items-center gap-2 mx-auto shadow-lg">
+                        <i class="fas fa-random"></i> OTRAS PALABRAS
                     </button>
+                    <p class="mt-4 text-[10px] text-slate-400 font-medium italic">Entrenando con más de 30 términos clave del glosario de 200 palabras.</p>
                 </div>
             </div>
         </section>
@@ -217,16 +348,18 @@
     <footer class="bg-slate-900 text-white py-12 text-center">
         <div class="container mx-auto px-4">
             <h4 class="font-bold text-xl mb-1 italic">Prof. Oney Clavijo</h4>
-            <div class="flex justify-center gap-4 mt-4">
-                <a href="https://wa.me/584123585427" target="_blank" class="bg-green-600 px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> WhatsApp del Prof.
+            <p class="text-slate-500 text-sm mb-6">Cátedra de Inglés - Universidad de Oriente, Núcleo Nueva Esparta</p>
+            <div class="flex justify-center gap-4">
+                <a href="https://wa.me/584123585427" target="_blank" class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-full font-bold text-sm flex items-center gap-2 transition">
+                    <i class="fab fa-whatsapp"></i> WhatsApp del Profesor
                 </a>
             </div>
-            <p class="text-[9px] text-slate-700 mt-10 italic">"Del pueblo venimos, hacia el pueblo vamos."</p>
+            <p class="text-[9px] text-slate-700 mt-12 italic uppercase tracking-widest">"Del pueblo venimos, hacia el pueblo vamos."</p>
         </div>
     </footer>
 
     <script>
+        // Glosario expandido con 30+ palabras del documento oficial
         const terms = [
             {en: "Absenteeism", es: "Ausentismo"},
             {en: "Accounting", es: "Contabilidad"},
@@ -240,7 +373,27 @@
             {en: "Financial Statements", es: "Estados financieros"},
             {en: "Liabilities", es: "Pasivos"},
             {en: "Revenue streams", es: "Fuentes de ingresos"},
-            {en: "Risk management", es: "Gestión de riesgos"}
+            {en: "Risk management", es: "Gestión de riesgos"},
+            {en: "Tax compliance", es: "Cumplimiento fiscal"},
+            {en: "Strategic blueprint", es: "Plano estratégico"},
+            {en: "Sustainable path", es: "Camino sostenible"},
+            {en: "Scalable asset", es: "Activo escalable"},
+            {en: "Systemic failure", es: "Falla sistémica"},
+            {en: "Trust-building", es: "Construcción de confianza"},
+            {en: "Trade-off", es: "Compensación / Intercambio"},
+            {en: "Unsolicited offers", es: "Ofertas no solicitadas"},
+            {en: "Value corporate", es: "Valores corporativos"},
+            {en: "Viability", es: "Viabilidad"},
+            {en: "Workplace equality", es: "Igualdad en el lugar de trabajo"},
+            {en: "Skeptical investor", es: "Inversor escéptico"},
+            {en: "Social dynamics", es: "Dinámica social"},
+            {en: "Shipping times", es: "Tiempos de envío"},
+            {en: "Resilience", es: "Resiliencia"},
+            {en: "Resourceful", es: "Ingenioso / Con recursos"},
+            {en: "Side businesses", es: "Negocios secundarios"},
+            {en: "Strategic imperative", es: "Imperativo estratégico"},
+            {en: "Summarizing", es: "Resumir"},
+            {en: "Team dynamics", es: "Dinámica de equipo"}
         ];
 
         function generateCards() {
@@ -248,20 +401,21 @@
             container.innerHTML = '';
             const shuffled = [...terms].sort(() => 0.5 - Math.random()).slice(0, 3);
 
-            shuffled.forEach((item, index) => {
+            shuffled.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = "relative h-48 w-full perspective-1000";
                 card.innerHTML = `
-                    <div class="card-inner w-full h-full relative" onclick="this.classList.toggle('card-flipped')">
-                        <div class="card-front bg-blue-50 border-2 border-dashed border-blue-200 text-blue-900">
-                            <div>
-                                <i class="fas fa-question-circle text-blue-300 text-3xl mb-3"></i>
-                                <h3 class="text-xl font-black">${item.en}</h3>
+                    <div class="card-inner w-full h-full" onclick="this.classList.toggle('card-flipped')">
+                        <div class="card-front bg-slate-50 border-2 border-slate-200 text-blue-900 shadow-sm">
+                            <div class="p-4">
+                                <span class="text-[8px] font-black text-blue-400 block mb-2 uppercase tracking-tighter">Academic Term</span>
+                                <h3 class="text-xl font-black leading-tight">${item.en}</h3>
+                                <p class="text-[9px] mt-4 text-slate-400 italic">Haz clic para traducir</p>
                             </div>
                         </div>
-                        <div class="card-back bg-blue-600 text-white">
-                            <div>
-                                <p class="text-[10px] uppercase font-bold opacity-70 mb-2">Significado:</p>
+                        <div class="card-back bg-blue-600 text-white shadow-xl">
+                            <div class="p-4">
+                                <p class="text-[10px] uppercase font-bold opacity-60 mb-2 tracking-widest">Significado:</p>
                                 <h3 class="text-2xl font-bold">${item.es}</h3>
                             </div>
                         </div>
@@ -270,6 +424,7 @@
                 container.appendChild(card);
             });
         }
+
         window.onload = generateCards;
     </script>
 </body>
