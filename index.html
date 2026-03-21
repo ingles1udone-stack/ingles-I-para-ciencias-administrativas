@@ -14,7 +14,6 @@
         .lesson-card { border-left: 4px solid #003366; transition: all 0.2s; }
         .lesson-card:hover { background-color: #f8fafc; transform: translateX(5px); }
         
-        /* Estilo para el botón nuevo solicitado */
         .btn-activar {
             background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
             transition: all 0.3s ease;
@@ -40,8 +39,8 @@
             <div class="hidden md:flex gap-6 text-sm font-semibold">
                 <a href="#comunidad" class="hover:text-blue-600 transition">Grupos</a>
                 <a href="#ruta" class="hover:text-blue-600 transition">Ruta</a>
-                <a href="#evaluacion" class="hover:text-blue-600 transition">Evaluación</a>
                 <a href="#bitacora" class="hover:text-blue-600 transition">Bitácora</a>
+                <a href="#notas" class="hover:text-blue-600 transition">Calificaciones</a>
             </div>
         </div>
     </nav>
@@ -54,12 +53,10 @@
             <p class="text-md opacity-90 mb-6 max-w-2xl mx-auto italic font-light">"Educando para el éxito global desde el Campus Guatamare"</p>
             
             <div class="flex flex-col items-center gap-4">
-                <!-- NUEVO BOTÓN ACTUALIZADO CON TU ARCHIVO LOCAL -->
                 <a href="boletin-bienvenida.html" class="btn-activar text-blue-900 px-10 py-3 rounded-full font-extrabold shadow-lg transition text-sm flex items-center gap-2 border-2 border-white/20">
                     <i class="fas fa-bolt"></i> ACTIVAR MI INGLÉS
                 </a>
 
-                <!-- Botón Original de Inducción -->
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMBJAGJlGrwAje1GmzsNIWNZT7RfZ4ak7ZoXlq5_d2hpmgmw/viewform?usp=sharing" target="_blank" class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-2 rounded-full font-bold transition text-xs">
                     <i class="fas fa-rocket mr-2"></i> REALIZAR MI INDUCCIÓN
                 </a>
@@ -132,31 +129,6 @@
             </div>
         </section>
 
-        <!-- CALIFICACIONES -->
-        <section id="notas" class="mb-12">
-            <h2 class="text-xl font-bold udo-blue mb-6 flex items-center gap-2">
-                <i class="fas fa-clipboard-list"></i> Calificaciones por Sección
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <a href="https://docs.google.com/spreadsheets/d/1GH1G5xo69L0-hUg0Uo0sZnO_sR4q3kGRoAOSwG7B7Bk/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center">
-                    <span class="font-bold text-sm">Sección 1101</span>
-                    <i class="fas fa-external-link-alt text-green-600"></i>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1IIlq2bmvyVagpqmtG9R0H6PR_Qza0w29zDqo1Ixpl_E/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center">
-                    <span class="font-bold text-sm">Sección 1201</span>
-                    <i class="fas fa-external-link-alt text-green-600"></i>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1qH5J5Caruo1dwSQ-0DCx_-CTyzhs38yn5Fh3DWysGyI/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center">
-                    <span class="font-bold text-sm">Sección 1200</span>
-                    <i class="fas fa-external-link-alt text-green-600"></i>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1LwC_hJEUaAi0qAyNHQOwh46mrJ2fuNdAlelwtp4Ap90/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center">
-                    <span class="font-bold text-sm">Sección REGULARES</span>
-                    <i class="fas fa-external-link-alt text-green-600"></i>
-                </a>
-            </div>
-        </section>
-
         <!-- MICRO-CONFERENCIAS Y BITÁCORA -->
         <section id="bitacora" class="mb-12">
             <div class="bg-gradient-to-br from-indigo-700 to-blue-900 rounded-3xl p-8 text-white shadow-xl">
@@ -185,10 +157,6 @@
                             <a href="https://docs.google.com/document/d/1KcpUJxHMVH1OIsdgKix67oO0W0p96wQCeINnV-C1ij4/edit?usp=drivesdk" target="_blank" class="flex items-center gap-3 p-3 bg-white/5 hover:bg-white/20 rounded-lg transition border border-transparent hover:border-white/30">
                                 <i class="fas fa-video"></i>
                                 <span class="text-sm font-medium">Guía Paso a Paso: Crear tu Video</span>
-                            </a>
-                            <a href="https://docs.google.com/spreadsheets/d/1WRuK9WRLpAekuZhc3j-wEQ960_Od0fx-e6CFFepBlfE/edit?usp=drive_link" target="_blank" class="flex items-center gap-3 p-3 bg-orange-500 hover:bg-orange-600 rounded-lg transition shadow-md">
-                                <i class="fas fa-user-clock"></i>
-                                <span class="text-sm font-bold">Verificar mis Inasistencias</span>
                             </a>
                         </div>
                     </div>
@@ -243,6 +211,51 @@
                         <span class="text-[10px] font-bold text-slate-400">CLASE 8</span>
                         <p class="text-sm font-bold udo-blue">Tema III: Pronombres (Profundización)</p>
                         <p class="text-[11px] text-slate-600">Taller: Better Understanding 3.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CALIFICACIONES Y ASISTENCIAS (RESTABLECIDO BOTÓN REGULARES) -->
+        <section id="notas" class="mb-12">
+            <h2 class="text-xl font-bold udo-blue mb-6 flex items-center gap-2">
+                <i class="fas fa-clipboard-list"></i> Calificaciones por Sección
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+                <a href="https://docs.google.com/spreadsheets/d/1GH1G5xo69L0-hUg0Uo0sZnO_sR4q3kGRoAOSwG7B7Bk/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center shadow-sm">
+                    <span class="font-bold text-sm">Sección 1101 (Cont)</span>
+                    <i class="fas fa-external-link-alt text-green-600"></i>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1IIlq2bmvyVagpqmtG9R0H6PR_Qza0w29zDqo1Ixpl_E/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center shadow-sm">
+                    <span class="font-bold text-sm">Sección 1201 (Adm)</span>
+                    <i class="fas fa-external-link-alt text-green-600"></i>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1qH5J5Caruo1dwSQ-0DCx_-CTyzhs38yn5Fh3DWysGyI/edit?usp=drive_link" target="_blank" class="p-4 bg-white border border-slate-200 rounded-xl hover:bg-green-50 hover:border-green-400 transition flex justify-between items-center shadow-sm">
+                    <span class="font-bold text-sm">Sección 1200 (Adm)</span>
+                    <i class="fas fa-external-link-alt text-green-600"></i>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1f-rG2B9N8Wq3O376ZzM7hPsc9pP_9R2p0f5_fL4-4D4/edit?usp=sharing" target="_blank" class="p-4 bg-indigo-50 border border-indigo-200 rounded-xl hover:bg-indigo-100 hover:border-indigo-400 transition flex justify-between items-center shadow-sm">
+                    <span class="font-bold text-sm">Sección Regulares</span>
+                    <i class="fas fa-external-link-alt text-indigo-600"></i>
+                </a>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+                <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex-1">
+                        <h3 class="font-bold text-lg text-slate-800 mb-1">Control de Inasistencias</h3>
+                        <p class="text-red-600 text-xs font-bold italic mb-4">
+                            <i class="fas fa-exclamation-triangle mr-1"></i> El 25% de las inasistencias acumuladas causa la pérdida de la asignatura.
+                        </p>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://docs.google.com/spreadsheets/d/1WRuK9WRLpAekuZhc3j-wEQ960_Od0fx-e6CFFepBlfE/edit?usp=drive_link" target="_blank" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition shadow-md flex items-center gap-2 text-sm font-bold">
+                                <i class="fas fa-user-clock"></i> Verificar mis Inasistencias
+                            </a>
+                            <a href="reglamento.html" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-6 py-2 rounded-lg transition border border-slate-300 flex items-center gap-2 text-sm font-bold">
+                                <i class="fas fa-gavel"></i> Consulta el reglamento de la UDO
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
