@@ -23,6 +23,28 @@
             transform: scale(1.02);
             box-shadow: 0 6px 20px rgba(245, 158, 11, 0.4);
         }
+
+        /* Estilos del Juego */
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        .card-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            text-align: center;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -216,7 +238,7 @@
             </div>
         </section>
 
-        <!-- CALIFICACIONES Y ASISTENCIAS (RESTABLECIDO BOTÓN REGULARES) -->
+        <!-- CALIFICACIONES Y ASISTENCIAS -->
         <section id="notas" class="mb-12">
             <h2 class="text-xl font-bold udo-blue mb-6 flex items-center gap-2">
                 <i class="fas fa-clipboard-list"></i> Calificaciones por Sección
@@ -261,6 +283,29 @@
             </div>
         </section>
 
+        <!-- JUEGO DE GLOSARIO CON MASCOTA -->
+        <section id="glosario-challenge" class="mb-12">
+            <div class="bg-white rounded-3xl p-8 border border-slate-200 shadow-sm">
+                <div class="flex items-center gap-4 mb-8">
+                    <img src="mascot.png" alt="UDO Mascot" class="w-16 h-16 rounded-full bg-slate-100" onerror="this.src='https://via.placeholder.com/60'">
+                    <div>
+                        <h2 class="text-2xl font-black udo-blue uppercase tracking-tight">UDO Mascot's Glossary Challenge! 🗽</h2>
+                        <p class="text-slate-500 text-sm font-medium">¿Qué tan bien conoces tus 200 términos? Haz clic en la tarjeta para revelar el significado.</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cardContainer">
+                    <!-- Las tarjetas se generan vía JS -->
+                </div>
+
+                <div class="mt-8 text-center">
+                    <button onclick="generateCards()" class="bg-blue-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-700 transition-all flex items-center gap-2 mx-auto">
+                        <i class="fas fa-sync-alt"></i> Nuevas Palabras
+                    </button>
+                </div>
+            </div>
+        </section>
+
     </main>
 
     <footer class="bg-slate-900 text-white py-12 text-center">
@@ -279,5 +324,67 @@
         </div>
     </footer>
 
+    <script>
+        const terms = [
+            {en: "Absenteeism", es: "Ausentismo"},
+            {en: "Accounting", es: "Contabilidad"},
+            {en: "Assets", es: "Activos"},
+            {en: "Automation", es: "Automatización"},
+            {en: "Balance Sheet", es: "Balance General"},
+            {en: "Bookkeeping", es: "Teneduría de libros"},
+            {en: "Budget adherence", es: "Cumplimiento del presupuesto"},
+            {en: "Burnout", es: "Agotamiento extremo / Síndrome de estar quemado"},
+            {en: "Cash Flow Statement", es: "Estado de flujo de efectivo"},
+            {en: "Compliance", es: "Cumplimiento normativo"},
+            {en: "Discrepancies", es: "Discrepancias / Diferencias"},
+            {en: "Equity", es: "Patrimonio / Capital propio"},
+            {en: "Emergency fund", es: "Fondo de emergencia"},
+            {en: "Financial Statements", es: "Estados financieros"},
+            {en: "Incentives", es: "Incentivos"},
+            {en: "Income Statement", es: "Estado de resultados"},
+            {en: "Liabilities", es: "Pasivos"},
+            {en: "Mentorship", es: "Mentoría"},
+            {en: "Passive income", es: "Ingreso pasivo"},
+            {en: "Revenue streams", es: "Fuentes de ingresos"},
+            {en: "Risk management", es: "Gestión de riesgos"},
+            {en: "Startup culture", es: "Cultura de emprendimiento"},
+            {en: "Sustainable practice", es: "Práctica sostenible"},
+            {en: "Technical skills", es: "Habilidades técnicas"},
+            {en: "Visibility", es: "Visibilidad"}
+        ];
+
+        function generateCards() {
+            const container = document.getElementById('cardContainer');
+            container.innerHTML = '';
+            
+            // Mezclar y tomar 3 palabras al azar
+            const shuffled = [...terms].sort(() => 0.5 - Math.random()).slice(0, 3);
+
+            shuffled.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = "relative h-48 w-full perspective-1000";
+                card.innerHTML = `
+                    <div class="card-inner w-full h-full relative" onclick="this.classList.toggle('card-flipped')">
+                        <div class="card-front bg-blue-50 border-2 border-dashed border-blue-200 text-blue-900">
+                            <div>
+                                <i class="fas fa-question-circle text-blue-300 text-3xl mb-3"></i>
+                                <h3 class="text-xl font-black">${item.en}</h3>
+                                <p class="text-[10px] font-bold mt-2 uppercase tracking-widest text-blue-400">Término ${index + 1}</p>
+                            </div>
+                        </div>
+                        <div class="card-back bg-blue-600 text-white">
+                            <div>
+                                <p class="text-[10px] uppercase font-bold opacity-70 mb-2">Significado:</p>
+                                <h3 class="text-2xl font-bold">${item.es}</h3>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        window.onload = generateCards;
+    </script>
 </body>
 </html>
