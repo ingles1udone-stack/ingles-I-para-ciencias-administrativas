@@ -82,6 +82,7 @@
             line-height: 1.6;
             font-size: 1.25rem;
             text-shadow: 0 0 5px var(--pip-green);
+            white-space: pre-wrap;
         }
 
         .blinking-cursor {
@@ -105,6 +106,10 @@
             transition: all 0.2s;
             background: transparent;
             color: var(--pip-green);
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn-retro:hover {
@@ -119,6 +124,8 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9rem;
+            border-top: 1px solid var(--pip-green-dim);
+            padding-top: 1rem;
         }
 
         .click-hint {
@@ -153,19 +160,24 @@
             <div id="output" class="text-block">
                 <!-- El texto se inyecta aquí -->
             </div>
-            <div id="click-prompt" class="mt-8 text-center hidden click-hint">
+            <div id="click-prompt" class="mt-8 text-center hidden click-hint text-xl">
                 [ CLICK PARA CONTINUAR ]
             </div>
         </div>
 
         <!-- Navegación Inferior -->
         <div class="footer-nav">
-            <button onclick="window.location.reload()" class="btn-retro">
-                <i class="fas fa-undo mr-2"></i>REINICIAR
-            </button>
+            <div class="flex gap-4">
+                <button onclick="window.history.back()" class="btn-retro">
+                    <i class="fas fa-arrow-left"></i> REGRESAR
+                </button>
+                <button onclick="window.location.reload()" class="btn-retro">
+                    <i class="fas fa-undo"></i> REINICIAR
+                </button>
+            </div>
             <div class="flex items-center gap-4">
                 <span id="page-indicator">CARGANDO...</span>
-                <span class="opacity-50">HP [||||||||||] 100%</span>
+                <span class="hidden md:inline opacity-50">RADS [0.00/s]</span>
             </div>
         </div>
     </div>
@@ -174,7 +186,7 @@
         const fullText = [
             "INICIANDO PROTOCOLO DE BIENVENIDA...\n\n¡Saludos, estudiante! Bienvenido a la asignatura INGLÉS I para Ciencias Administrativas. Has ingresado a un entorno donde el inglés no es solo un idioma, sino tu principal herramienta de análisis financiero y comercial.",
             "MATERIALES REQUERIDOS (NO NEGOCIABLES):\n\n1. Diccionario Inglés-Español (Uso obligatorio en aula).\n2. Engrapadora (Tus documentos deben estar unidos).\n3. Cuaderno de notas y guías impresas.\n4. Kit de escritura (Bolígrafos, lápiz y 3 colores para diagramación).",
-            "SISTEMA DE EVALUACIONES:\n\nEl material oficial está en el Centro de Copiado (Cursos Básicos). Contacto: Prof. Carmen (+58 412 5454921).\n\nADVERTENCIA: Debes solicitar tus exámenes con 72 HORAS de antelación. La falta de previsión resultará en la pérdida de la evaluación.",
+            "SISTEMA DE EVALUACIONES:\n\nEl material oficial está en el Centro de Copiado (Cursos Básicos). \nCONTACTO: Prof. Carmen (+58 424 8622137).\n\nADVERTENCIA: Debes solicitar tus exámenes con 72 HORAS de antelación. La falta de previsión resultará en la pérdida de la evaluación.",
             "NORMAS DE CONVIVENCIA (DECORO UDISTA):\n\nEl campus requiere vestimenta adecuada. Prohibido el uso de:\n- Gorras o prendas que cubran el rostro en clase.\n- Ropa reveladora, shorts o franelillas.\n- Piercings visibles.",
             "RECOMENDACIONES PARA EL ÉXITO:\n\n- Estudia el Plan de Clases semanalmente.\n- La asistencia es la clave de la comprensión.\n- No temas preguntar al docente.\n\nTERMINANDO TRANSMISIÓN... ¡ÉXITO EN EL SEMESTRE!"
         ];
@@ -193,7 +205,7 @@
                 const char = fullText[currentPage].charAt(charIndex);
                 outputElement.innerHTML = fullText[currentPage].substring(0, charIndex + 1) + '<span class="blinking-cursor"></span>';
                 charIndex++;
-                setTimeout(typeText, 25); // Velocidad de escritura
+                setTimeout(typeText, 25);
             } else {
                 isTyping = false;
                 outputElement.innerHTML = fullText[currentPage] + '<span class="blinking-cursor"></span>';
@@ -208,7 +220,6 @@
 
         clickArea.addEventListener('click', () => {
             if (isTyping) {
-                // Saltar animación si está escribiendo
                 charIndex = fullText[currentPage].length;
             } else {
                 if (currentPage < fullText.length - 1) {
@@ -222,10 +233,9 @@
         });
 
         function updatePageIndicator() {
-            pageIndicator.innerText = `PÁGINA ${currentPage + 1} / ${fullText.length}`;
+            pageIndicator.innerText = `ARCHIVO: ${currentPage + 1} / ${fullText.length}`;
         }
 
-        // Fecha actual estilo terminal
         function updateDate() {
             const now = new Date();
             const options = { year: 'numeric', month: 'short', day: 'numeric' };
