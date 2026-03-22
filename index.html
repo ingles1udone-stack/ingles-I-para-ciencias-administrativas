@@ -43,6 +43,23 @@
             100% { bottom: -100%; }
         }
 
+        /* Efecto de parpadeo de terminal para la imagen (mascota) */
+        @keyframes terminalBlink {
+            0%, 100% {
+                box-shadow: 0 0 15px #3df33d, 0 0 5px #3df33d;
+                border-color: #3df33d;
+                opacity: 1;
+            }
+            50% {
+                box-shadow: 0 0 2px #1a4d1a, 0 0 0px #3df33d;
+                border-color: #1a4d1a;
+                opacity: 0.75;
+            }
+        }
+        .terminal-blink {
+            animation: terminalBlink 0.9s step-end infinite;
+        }
+
         .terminal-border {
             border: 2px solid var(--term-green);
             box-shadow: 0 0 10px var(--term-dim);
@@ -138,7 +155,7 @@
     <!-- Header / Hero -->
     <header class="terminal-border p-8 mb-10 text-center relative overflow-hidden bg-black/40">
         <div class="container mx-auto relative z-10">
-            <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto border-2 border-[#3df33d] mb-4 bg-black p-2 shadow-[0_0_15px_#3df33d] object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-500" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
+            <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto border-2 border-[#3df33d] mb-4 bg-black p-2 shadow-[0_0_15px_#3df33d] object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-500 terminal-blink" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
             <h1 class="text-3xl md:text-5xl font-bold mb-3 glow-text uppercase">Interpretación de Textos Administrativos</h1>
             <p class="text-sm opacity-80 mb-8 max-w-2xl mx-auto italic">"EDUCANDO PARA EL ÉXITO GLOBAL DESDE EL CAMPUS GUATAMARE"</p>
             
