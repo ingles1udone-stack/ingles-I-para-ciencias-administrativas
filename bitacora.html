@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal de Aprendizaje - Bitácora</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+        :root {
+            --neon-green: #00ff41;
+            --dark-bg: #0a0a0a;
+            --crt-overlay: rgba(18, 16, 16, 0.1);
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Fira Code', monospace;
+            overflow-x: hidden;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* Efecto CRT Scanline */
+        body::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .terminal-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--neon-green);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 5px;
+        }
+
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        /* Botón de Hardware "Bitácora" */
+        .hardware-btn-container {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            opacity: 0;
+            transition: opacity 1s ease-in;
+        }
+
+        .hardware-btn-container.visible {
+            opacity: 1;
+        }
+
+        .bitacora-btn {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            background: #222;
+            border-radius: 50%;
+            border: 8px solid #333;
+            box-shadow: 
+                0 0 0 4px #111,
+                0 15px 30px rgba(0,0,0,0.8),
+                inset 0 2px 5px rgba(255,255,255,0.1);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s active;
+            outline: none;
+        }
+
+        .bitacora-btn::before {
+            content: "";
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background: radial-gradient(circle, #ff3333 0%, #880000 100%);
+            border-radius: 50%;
+            border: 4px solid #400;
+            box-shadow: inset 0 5px 10px rgba(255,255,255,0.3);
+            transition: transform 0.1s;
+        }
+
+        .bitacora-btn:active::before {
+            transform: scale(0.92);
+            background: radial-gradient(circle, #cc0000 0%, #660000 100%);
+        }
+
+        .bitacora-btn span {
+            position: relative;
+            color: white;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            pointer-events: none;
+            font-size: 1.2rem;
+        }
+
+        .btn-label {
+            text-align: center;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #ff3333;
+            text-shadow: 0 0 10px rgba(255,51,51,0.5);
+        }
+
+        /* Botón Regresar */
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 5px 15px;
+            border: 1px solid var(--neon-green);
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: all 0.3s;
+            opacity: 0.7;
+        }
+
+        .back-link:hover {
+            background: var(--neon-green);
+            color: black;
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        #text-content {
+            white-space: pre-wrap;
+            margin-bottom: 50px;
+        }
+
+        .instruction-tap {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            opacity: 0.5;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.8; }
+        }
+
+        .highlight {
+            color: #fff;
+            background: rgba(0, 255, 65, 0.2);
+            padding: 0 4px;
+        }
+    </style>
+</head>
+<body onclick="advanceText()">
+
+    <div class="terminal-container">
+        <div id="text-content"></div>
+        <span id="cursor" class="cursor"></span>
+
+        <div id="action-area" class="hardware-btn-container">
+            <div>
+                <button class="bitacora-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715'">
+                    <span>PUSH</span>
+                </button>
+                <div class="btn-label">BITÁCORA</div>
+            </div>
+        </div>
+
+        <a href="https://ingles1udone-stack.github.io/ingles-I-para-ciencias-administrativas/index.html" class="back-link" id="back-btn" style="display: none;">
+            < [REGRESAR AL MENÚ PRINCIPAL]
+        </a>
+    </div>
+
+    <div class="instruction-tap" id="tap-hint">TOQUE LA PANTALLA PARA CONTINUAR...</div>
+
+    <script>
+        const content = [
+            "> INICIALIZANDO PROTOCOLO DE APRENDIZAJE...\n",
+            "> CARGANDO GUÍA DE BITÁCORA V1.0...\n\n",
+            "¡Hola! No te preocupes si no sabes inglés.\nEste sistema está diseñado para ayudarte a aprender paso a paso.\n\n",
+            "[ ANTES DE EMPEZAR ]\n",
+            "1. Mira el video de la micro-conferencia asignada.\n",
+            "2. Toma apuntes A MANO (Obligatorio).\n",
+            "3. Ten a mano tu 'Compendio de Lecturas'.\n\n",
+            "[ PASO 1: DATOS PERSONALES ]\n",
+            "• Correo: Usa el institucional de la universidad.\n",
+            "• Nombre: Completo y legible.\n",
+            "• Cédula: Solo números (sin puntos ni guiones).\n",
+            "• Sección: Marca tu número (1101, 1200, 1201 o Regulares).\n\n",
+            "[ PASO 2: IDENTIFICA EL VIDEO ]\n",
+            "• Unidad: Selecciona el número correspondiente.\n",
+            "• URL: Pega el enlace directo de YouTube.\n\n",
+            "[ PASO 3: EL CUESTIONARIO (CRÍTICO) ]\n",
+            "• MINUTO EXACTO: Indica tiempo y utilidad.\n",
+            "• MÉTODO FEYNMAN: Explica el tema como si fuera para un amigo.\n",
+            "• EJEMPLO REAL: Copia una oración del compendio y tradúcela.\n",
+            "• ESFUERZO (1-10): Sé honesto sobre el uso del traductor.\n",
+            "• MUDDIEST POINT: ¿Qué fue lo más confuso?\n",
+            "• USO DE IA: Declara si usaste ChatGPT o similar.\n",
+            "• FOTO DE APUNTES: Sube una imagen clara (Máx 1MB).\n\n",
+            "> RECUERDA: Solo un envío por unidad.\n",
+            "> EL PROFESOR PUEDE VALIDAR TUS RESPUESTAS EN CLASE.\n\n",
+            "> SISTEMA LISTO PARA ENVIAR..."
+        ];
+
+        let currentLine = 0;
+        let charIndex = 0;
+        let isTyping = false;
+        const speed = 30; // ms por carácter
+        const textElement = document.getElementById('text-content');
+        const actionArea = document.getElementById('action-area');
+        const backBtn = document.getElementById('back-btn');
+        const tapHint = document.getElementById('tap-hint');
+
+        function typeChar() {
+            if (currentLine < content.length) {
+                if (charIndex < content[currentLine].length) {
+                    textElement.textContent += content[currentLine][charIndex];
+                    charIndex++;
+                    setTimeout(typeChar, speed);
+                } else {
+                    isTyping = false;
+                    currentLine++;
+                    charIndex = 0;
+                    if (currentLine === content.length) {
+                        finishTerminal();
+                    }
+                }
+            }
+        }
+
+        function advanceText() {
+            if (isTyping) return;
+            if (currentLine < content.length) {
+                isTyping = true;
+                typeChar();
+            }
+        }
+
+        function finishTerminal() {
+            actionArea.classList.add('visible');
+            backBtn.style.display = 'inline-block';
+            tapHint.style.display = 'none';
+        }
+
+        // Iniciar primer bloque automáticamente
+        window.onload = () => {
+            advanceText();
+        };
+    </script>
+</body>
+</html>
