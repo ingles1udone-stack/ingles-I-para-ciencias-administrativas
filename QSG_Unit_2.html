@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 2 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 2 - Claves Morfológicas y Contextuales</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Morfología: Definición e Importancia</div>
+    <div class="definition-box">
+        <p><strong>Morfología:</strong> La morfología es el estudio de la estructura interna de las palabras y cómo se forman a partir de unidades más pequeñas llamadas morfemas. En contabilidad/administración, comprender la morfología ayuda a los profesionales a decodificar terminología compleja, interpretar textos financieros y comunicarse de manera efectiva.</p>
+    </div>
+
+    <div class="importance-box">
+        <p><strong>Importancia de la Morfología en Contabilidad/Administración</strong></p>
+        <ul class="bullet-list">
+            <li><strong>Comprensión Profunda del Vocabulario:</strong> Ayuda a desglosar y entender términos especializados.<br>
+                <span class="example">Ejemplo: Comprender "depreciation" analizando su raíz ("depreciate") y sufijo ("-tion").</span></li>
+            <li><strong>Análisis Gramatical Preciso:</strong> Aclara la función de las palabras en las oraciones.<br>
+                <span class="example">Ejemplo: Identificar "calculate" (verb) vs. "calculation" (noun).</span></li>
+            <li><strong>Traducción Precisa:</strong> Asegura la interpretación correcta de términos en contextos multilingües.<br>
+                <span class="example">Ejemplo: Traducir "balance sheet" con precisión en informes financieros no escritos en inglés.</span></li>
+            <li><strong>Interpretación de Textos Especializados:</strong> Facilita la comprensión de documentos técnicos de contabilidad/administración.<br>
+                <span class="example">Ejemplo: Decodificar términos como "amortization" o "accrual" en estados financieros.</span></li>
+        </ul>
+    </div>
+
+    <div class="section-header">Cognados y Falsos Cognados</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>1. Cognados (Cognates)</strong><br>
+            Palabras con orígenes compartidos y significados similares en diferentes idiomas.</p>
+            <span class="example">Ejemplo: "Capital" (inglés) y "capital" (español) se refieren a recursos financieros.</span>
+        </div>
+        <div>
+            <p><strong>2. Falsos Cognados (False Cognates)</strong><br>
+            Palabras que parecen similares pero tienen significados diferentes.</p>
+            <span class="example">Ejemplo: "Actual" (inglés) significa "current" o "real", mientras que "actual" (español) significa "current" o "present".</span>
+        </div>
+    </div>
+    <div class="importance-box">
+        <p><strong>Por qué es Importante Conocer los Falsos Cognados</strong></p>
+        <ul class="bullet-list">
+            <li>Previene la mala interpretación de términos financieros.</li>
+            <li>Garantiza una comunicación precisa en entornos multilingües de contabilidad/administración.</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Claves Léxicas</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>1. Sinónimos (Synonyms)</strong><br>
+            Palabras con significados similares.</p>
+            <span class="example">Ejemplo: "Revenue" e "income" se refieren a ganancias.</span>
+            <p class="mt-2"><strong>Utilidad:</strong> Ayuda a aclarar o reformular términos complejos.</p>
+        </div>
+        <div>
+            <p><strong>2. Antónimos (Antonyms)</strong><br>
+            Palabras con significados opuestos.</p>
+            <span class="example">Ejemplo: "Asset" (algo que se posee) vs. "liability" (algo que se debe).</span>
+            <p class="mt-2"><strong>Utilidad:</strong> Destaca contrastes en el análisis financiero.</p>
+        </div>
+    </div>
+    <div class="importance-box">
+        <p><strong>Utilidad de las Claves Léxicas para la Comprensión de Textos</strong></p>
+        <ul class="bullet-list">
+            <li>Mejora la comprensión de textos financieros al identificar relaciones entre términos.</li>
+            <li>Apoya la interpretación precisa de conceptos de contabilidad/administración.</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Prefijos (Prefixes)</div>
+    <div class="definition-box">
+        <p><strong>Definición:</strong> Los prefijos son partes de palabras que se añaden al principio de una palabra para cambiar su significado.<br>
+        <strong>Cómo los Prefijos Cambian el Significado de una Palabra:</strong> Añaden negación, repetición o significados relacionados con el tiempo.</p>
+    </div>
+    <div>
+        <p><strong>Ejemplos en Contabilidad/Administración:</strong></p>
+        <ul class="bullet-list">
+            <li><strong>Un-:</strong> Negación (ej.: <em>unrealized profit</em>).</li>
+            <li><strong>Re-:</strong> Repetición (ej.: <em>reconcile accounts</em>).</li>
+            <li><strong>Pre-:</strong> Antes (ej.: <em>prepaid expenses</em>).</li>
+            <li><strong>Over-:</strong> Exceso (ej.: <em>overhead costs</em>).</li>
+            <li><strong>Mis-:</strong> Incorrecto (ej.: <em>miscalculation</em>).</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Sufijos (Suffixes)</div>
+    <div class="definition-box">
+        <p><strong>Definición:</strong> Los sufijos son partes de palabras que se añaden al final de una palabra para cambiar su significado o categoría gramatical.<br>
+        <strong>Cómo los Sufijos Cambian el Significado o Categoría de una Palabra:</strong> Transforman verbos en sustantivos, adjetivos en adverbios, etc.</p>
+    </div>
+    <div>
+        <p><strong>Ejemplos en Contabilidad/Administración:</strong></p>
+        <ul class="bullet-list">
+            <li><strong>-ness:</strong> Forma sustantivos (ej.: <em>profitability</em>).</li>
+            <li><strong>-ly:</strong> Forma adverbios (ej.: <em>financially stable</em>).</li>
+            <li><strong>-ment:</strong> Forma sustantivos (ej.: <em>investment</em>).</li>
+            <li><strong>-tion:</strong> Forma sustantivos (ej.: <em>depreciation</em>).</li>
+            <li><strong>-able:</strong> Forma adjetivos (ej.: <em>taxable income</em>).</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Decodificar Términos Complejos:</strong><br>
+            <span class="example">Ejemplo: "Amortization" = "amortize" (verb) + "-tion" (noun suffix). Significado: El proceso de distribuir el costo de un activo intangible a lo largo de su vida útil.</span></li>
+        <li><strong>Comprender Estados Financieros:</strong><br>
+            <span class="example">Ejemplo: "Accrual" = "accrue" (verb) + "-al" (noun suffix). Significado: Reconocimiento de ingresos o gastos antes de que se intercambie efectivo.</span></li>
+        <li><strong>Mejorar la Comunicación:</strong><br>
+            <span class="example">Ejemplo: Usar "reconcile" (verb) vs. "reconciliation" (noun) correctamente en informes.</span></li>
+        <li><strong>Interpretar Textos Regulatorios:</strong><br>
+            <span class="example">Ejemplo: Desglosar "non-compliance" en "non-" (prefijo) + "compliance" (noun) para entender su significado.</span></li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave de la Unidad 2</strong></p>
+        <ul class="bullet-list">
+            <li>La morfología ayuda a desglosar y comprender términos complejos de contabilidad/administración.</li>
+            <li>Los cognados y falsos cognados son esenciales para una comunicación multilingüe precisa.</li>
+            <li>Las claves léxicas (sinónimos y antónimos) mejoran la comprensión de textos financieros.</li>
+            <li>Los prefijos y sufijos modifican significados y categorías gramaticales, ayudando en la interpretación precisa.</li>
+        </ul>
+        <p class="mt-2">Al dominar la morfología, los profesionales de contabilidad/administración pueden mejorar su vocabulario, interpretar textos especializados y comunicar información financiera de manera efectiva.</p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT2_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
