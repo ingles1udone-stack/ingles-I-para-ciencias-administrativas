@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 3 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 3 - Pronombres</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Definición e Importancia</div>
+    <div class="definition-box">
+        <p><strong>Definición de Pronombres</strong><br>
+        Un pronombre es una palabra que reemplaza a un sustantivo o una frase nominal dentro de una oración. Su función principal es evitar repeticiones innecesarias y hacer que el lenguaje sea más fluido y conciso. En contabilidad/administración, los pronombres ayudan a agilizar la comunicación, especialmente al referirse repetidamente a estados financieros, cuentas o entidades.</p>
+    </div>
+
+    <div class="importance-box">
+        <p><strong>Importancia de los Pronombres en Textos de Contabilidad/Administración</strong></p>
+        <ul class="bullet-list">
+            <li><strong>Identificar Referencias:</strong> Saber a qué entidad financiera o cuenta se refiere un pronombre (ej.: "it" se refiere a "accounts receivable").</li>
+            <li><strong>Analizar la Estructura de la Oración:</strong> Reconocer el papel sintáctico de los pronombres en informes o análisis financieros.</li>
+            <li><strong>Evitar Ambigüedad:</strong> Asegurar claridad en la comunicación financiera para prevenir malas interpretaciones (ej.: "they" podría referirse a "shareholders" o "creditors").</li>
+            <li><strong>Traducciones Precisas:</strong> Elegir el pronombre correcto en documentos financieros para mantener la precisión entre idiomas.</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Tipos de Pronombres</div>
+
+    <div class="subheader">1. Pronombres Personales (Personal Pronouns)</div>
+    <ul class="bullet-list">
+        <li><strong>Pronombres Sujeto (Subject Pronouns):</strong> Realizan la acción del verbo.<br>
+            <span class="example">Ejemplo: She prepared the financial statement. ("She" se refiere a la contadora.)</span></li>
+        <li><strong>Pronombres Objeto (Object Pronouns):</strong> Reciben la acción del verbo.<br>
+            <span class="example">Ejemplo: The auditor reviewed them. ("Them" se refiere a los registros financieros.)</span></li>
+    </ul>
+
+    <div class="subheader">2. Pronombres Posesivos (Possessive Pronouns)</div>
+    <ul class="bullet-list">
+        <li><span class="example">Ejemplo: The balance sheet is ours. ("Ours" se refiere al balance general de la empresa.)</span></li>
+        <li><span class="example">Ejemplo: Their revenue increased by 10%. ("Their" se refiere a los competidores.)</span></li>
+    </ul>
+
+    <div class="subheader">3. Pronombres Reflexivos (Reflexive Pronouns)</div>
+    <ul class="bullet-list">
+        <li>Indican que el sujeto realiza y recibe la acción.<br>
+            <span class="example">Ejemplo: The CFO prepared the report herself. (Enfatiza que la CFO lo hizo sola.)</span></li>
+        <li><span class="example">Ejemplo: The company invested itself in new technology. (La empresa actuó sobre sí misma.)</span></li>
+    </ul>
+
+    <div class="subheader">4. Pronombres Demostrativos (Demonstrative Pronouns)</div>
+    <ul class="bullet-list">
+        <li>Señalan elementos o entidades específicas.<br>
+            <span class="example">Ejemplo: This is the profit margin for Q1. ("This" se refiere a una cifra específica.)</span></li>
+        <li><span class="example">Ejemplo: Those are the liabilities we need to address. ("Those" se refiere a pasivos específicos.)</span></li>
+    </ul>
+
+    <div class="subheader">5. Pronombres Indefinidos (Indefinite Pronouns)</div>
+    <ul class="bullet-list">
+        <li>Se refieren a entidades o cantidades no específicas.<br>
+            <span class="example">Ejemplo: Some of the accounts are overdue. ("Some" se refiere a un número no especificado de cuentas.)</span></li>
+        <li><span class="example">Ejemplo: Everyone must comply with the new regulations. ("Everyone" se refiere a todos los empleados.)</span></li>
+    </ul>
+
+    <div class="subheader">6. Pronombres Interrogativos (Interrogative Pronouns)</div>
+    <ul class="bullet-list">
+        <li>Se utilizan para hacer preguntas.<br>
+            <span class="example">Ejemplo: Which financial statement is most important? ("Which" pregunta por un estado específico.)</span></li>
+        <li><span class="example">Ejemplo: Who is responsible for auditing the accounts? ("Who" pregunta por una persona.)</span></li>
+    </ul>
+
+    <div class="subheader">7. Pronombres Relativos (Relative Pronouns)</div>
+    <ul class="bullet-list">
+        <li>Conectan cláusulas con sustantivos.<br>
+            <span class="example">Ejemplo: The auditor, who reviewed the accounts, found discrepancies. ("Who" se refiere al auditor.)</span></li>
+        <li><span class="example">Ejemplo: The report, which was submitted yesterday, needs revisions. ("Which" se refiere al informe.)</span></li>
+    </ul>
+
+    <div class="section-header">Reglas y Usos Específicos</div>
+
+    <div class="subheader">Reglas de Concordancia Sujeto-Verbo en Contextos de Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li>El verbo debe concordar en número y persona con el sujeto.<br>
+            <span class="example">Ejemplo: The company (singular) reports its earnings quarterly.</span><br>
+            <span class="example">Ejemplo: The shareholders (plural) are voting on the proposal.</span></li>
+    </ul>
+
+    <div class="subheader">Uso de Pronombres Posesivos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li>Los pronombres posesivos reemplazan sustantivos para mostrar propiedad.<br>
+            <span class="example">Ejemplo: Their assets exceed ours. ("Their" se refiere a otra empresa, y "ours" a la empresa del hablante.)</span><br>
+            <span class="example">Ejemplo: The decision is yours. ("Yours" se refiere a la decisión del oyente.)</span></li>
+    </ul>
+
+    <div class="subheader">Uso de Pronombres Reflexivos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li>Los pronombres reflexivos enfatizan que el sujeto actúa sobre sí mismo.<br>
+            <span class="example">Ejemplo: The accountant checked himself for errors. (El contador actuó sobre sí mismo.)</span><br>
+            <span class="example">Ejemplo: The company prides itself on transparency. (La empresa actúa sobre sí misma.)</span></li>
+    </ul>
+
+    <div class="subheader">Pronombres Recíprocos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li>Indican acciones mutuas entre dos o más entidades.<br>
+            <span class="example">Ejemplo: The two companies agreed to help each other with audits. ("Each other" se refiere a asistencia mutua.)</span><br>
+            <span class="example">Ejemplo: The team members supported one another during the audit. ("One another" se refiere a apoyo mutuo entre varias personas.)</span></li>
+    </ul>
+
+    <div class="subheader">Diferencias Entre Pronombres Indefinidos y Numerales</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Pronombres Indefinidos:</strong> Expresan cantidades vagas o generales.<br>
+            <span class="example">Ejemplo: All of the accounts were reviewed. ("All" se refiere a un total no especificado.)</span></p>
+        </div>
+        <div>
+            <p><strong>Numerales:</strong> Expresan cantidades específicas.<br>
+            <span class="example">Ejemplo: Three of the accounts were reviewed. ("Three" especifica el número exacto.)</span></p>
+        </div>
+    </div>
+
+    <div class="section-header">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Informes Financieros:</strong> Los pronombres ayudan a evitar repeticiones al referirse a cuentas, entidades o cifras.<br>
+            <span class="example">Ejemplo: It shows a profit increase. ("It" se refiere al estado de resultados.)</span></li>
+        <li><strong>Auditoría:</strong> Los pronombres aclaran quién realizó acciones o quién es responsable.<br>
+            <span class="example">Ejemplo: He signed the audit report. ("He" se refiere al auditor.)</span></li>
+        <li><strong>Comunicación:</strong> Los pronombres hacen que los correos electrónicos y memorandos sean concisos.<br>
+            <span class="example">Ejemplo: We need to finalize our budget. ("We" y "our" se refieren al equipo o empresa.)</span></li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave de la Unidad 3</strong></p>
+        <ul class="bullet-list">
+            <li>Los pronombres son esenciales para una comunicación clara y concisa en contabilidad/administración.</li>
+            <li>Dominar los distintos tipos de pronombres mejora la precisión en informes financieros, auditorías y comunicaciones internas.</li>
+        </ul>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT3_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
