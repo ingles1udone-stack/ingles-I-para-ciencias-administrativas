@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 6 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+        .prof-info {
+            text-align: right;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 6 - Ideas Principales, Ideas Secundarias y Mapas</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+    <div class="prof-info">Lic. Oney Clavijo, Tel: 0412-3585427</div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Ideas Principales vs. Ideas de Apoyo</div>
+    <div class="definition-box">
+        <p><strong>Idea Principal:</strong> El concepto o argumento central de un texto.</p>
+        <span class="example">Ejemplo: "The company's profitability improved due to cost-cutting measures."</span>
+        <p class="mt-2"><strong>Ideas de Apoyo:</strong> Detalles, ejemplos o explicaciones que refuerzan la idea principal.</p>
+        <span class="example">Ejemplo: "Operating expenses decreased by 15%, and revenue increased by 10%."</span>
+    </div>
+
+    <div class="subheader">Ideas Principales Explícitas vs. Implícitas</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>1. Idea Principal Explícita:</strong> Se expresa claramente en el texto.</p>
+            <span class="example">Ejemplo: "The primary reason for the company's success is its innovative marketing strategy."</span>
+        </div>
+        <div>
+            <p><strong>2. Idea Principal Implícita:</strong> No se expresa directamente; se infiere a partir de los detalles.</p>
+            <span class="example">Ejemplo: Un texto que habla de ventas en aumento, expansión de mercados y mayores ganancias implica que la empresa está creciendo con éxito.</span>
+        </div>
+    </div>
+
+    <div class="subheader">Tipos de Ideas de Apoyo en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Detalles de Apoyo:</strong> Datos o hechos específicos. <span class="example">Ejemplo: "Net income rose to $1 million in Q1."</span></li>
+        <li><strong>Explicaciones:</strong> Aclaran o definen conceptos. <span class="example">Ejemplo: "Depreciation is the systematic allocation of an asset's cost over its useful life."</span></li>
+        <li><strong>Ejemplos:</strong> Ilustran la idea principal. <span class="example">Ejemplo: "For instance, the company reduced costs by automating its production line."</span></li>
+        <li><strong>Argumentos:</strong> Proporcionan razones o evidencia. <span class="example">Ejemplo: "The company's liquidity improved because it reduced its debt by 20%."</span></li>
+    </ul>
+
+    <div class="section-header">Creación de Mapas</div>
+    <div class="definition-box">
+        <p>Objetivo: Desarrollar habilidades para crear redes semánticas, mapas mentales, mapas conceptuales, diagramas de Venn y diagramas de espina de pescado (Ishikawa) para interpretar y organizar textos relacionados con contabilidad/administración.</p>
+    </div>
+
+    <div class="subheader">Redes Semánticas</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Diagramas que representan visualmente las relaciones entre conceptos.</li>
+        <li><strong>Componentes:</strong> Nodos (conceptos) y Enlaces (relaciones como "is a", "is part of", "causes").</li>
+        <li><strong>Tipos:</strong> Jerárquicas (de general a específico) y No Jerárquicas (libres).</li>
+        <li><strong>Beneficios:</strong> Comprensión visual, organización lógica, mejora el aprendizaje y retención, estimula creatividad.</li>
+    </ul>
+
+    <div class="subheader">Conceptos</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Ideas abstractas o generales que representan categorías de objetos, eventos o atributos.</li>
+        <li><strong>Tipos:</strong> Concretos (ej.: "cash", "inventory"), Abstractos (ej.: "profitability", "equity"), Generales (ej.: "asset"), Específicos (ej.: "accounts receivable").</li>
+    </ul>
+
+    <div class="subheader">Mapas Mentales</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Diagramas que organizan visualmente ideas alrededor de un concepto central.</li>
+        <li><strong>Características:</strong> Idea Central, Ramas, Palabras Clave, Imágenes, Colores.</li>
+        <li><strong>Usos:</strong> Organizar datos financieros, lluvia de ideas para solucionar problemas contables/administrativos.</li>
+    </ul>
+
+    <div class="subheader">Mapas Conceptuales</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Diagramas que representan relaciones jerárquicas entre conceptos.</li>
+        <li><strong>Características:</strong> Jerarquía, Enlaces con etiquetas que describen relaciones.</li>
+        <li><strong>Usos:</strong> Estructurar conocimiento (ej.: principios contables), visualizar relaciones financieras complejas.</li>
+    </ul>
+
+    <div class="subheader">Diagramas de Venn</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Diagramas que muestran relaciones entre diferentes conjuntos mediante círculos superpuestos.</li>
+        <li><strong>Usos en Contabilidad/Administración:</strong> Comparar conceptos financieros, analizar similitudes/diferencias entre normas contables (IFRS vs. GAAP), visualizar características compartidas de estados financieros.</li>
+        <li><strong>Ejemplo:</strong> Círculo 1: "Assets" (cash, inventory). Círculo 2: "Liabilities" (loans, accounts payable). Superposición: "Current Assets and Liabilities" (accounts receivable vs. accounts payable).</li>
+    </ul>
+
+    <div class="subheader">Diagramas de Espina de Pescado (Ishikawa)</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Diagramas que identifican las causas raíz de un problema categorizando factores potenciales.</li>
+        <li><strong>Características:</strong> Espina central (problema), espinas (categorías), sub-espinas (factores específicos).</li>
+        <li><strong>Usos:</strong> Identificar causas de discrepancias financieras, analizar excesos presupuestarios, solucionar problemas en auditoría.</li>
+        <li><strong>Ejemplo:</strong> Problema: "Decline in Net Profit." Categorías: Personas (falta de capacitación), Procesos (gestión ineficiente de inventario), Herramientas (software obsoleto), Entorno (recesión económica).</li>
+    </ul>
+
+    <div class="subheader">Gráficos de Gantt</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Gráfico de barras horizontal que visualiza cronogramas de proyectos y dependencias de tareas.</li>
+        <li><strong>Características:</strong> Tareas listadas verticalmente, línea de tiempo horizontal, barras de progreso.</li>
+        <li><strong>Usos:</strong> Planificar procesos de auditoría, seguir ciclos de cierre financiero.</li>
+        <li><strong>Ejemplo:</strong> Proyecto: "Annual Financial Audit": Tarea 1: Review internal controls (Week 1-2); Tarea 2: Verify account balances (Week 3-5); Tarea 3: Prepare audit report (Week 6).</li>
+    </ul>
+
+    <div class="section-header">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>1. Redes Semánticas:</strong> Mapear relaciones entre conceptos financieros (ej.: "assets", "liabilities", "equity"). Ejemplo: Crear una red que muestre cómo "revenue" está vinculado a "expenses", "profit" y "taxes".</li>
+        <li><strong>2. Mapas Mentales:</strong> Utilizar para lluvia de ideas sobre problemas contables/administrativos (ej.: reducir costos operativos). Ejemplo: Crear un mapa mental para "cash flow management", con ramas para "inflows", "outflows" y "strategies".</li>
+        <li><strong>3. Mapas Conceptuales:</strong> Estructurar conocimiento de principios contables/administrativos (ej.: contabilidad por partida doble). Ejemplo: Mapear la jerarquía de estados financieros, desde "balance sheet" hasta "income statement" y "cash flow statement".</li>
+        <li><strong>4. Diagramas de Venn:</strong> Comparar métricas financieras (ej.: "gross profit" vs. "net profit"). Ejemplo: Comparar normas "IFRS" y "GAAP", destacando similitudes y diferencias.</li>
+        <li><strong>5. Diagramas de Espina de Pescado:</strong> Analizar causas de problemas financieros (ej.: márgenes de beneficio decrecientes). Ejemplo: Identificar causas raíz de "budget overruns" categorizando factores como "human error", "process inefficiencies" y "external factors".</li>
+    </ul>
+
+    <div class="section-header">Herramientas Metodológicas de Análisis (Anexo)</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>1. Técnica de los 5 Porqués:</strong> Identificar la causa raíz de un problema mediante preguntas consecutivas de "¿por qué?".</p>
+            <span class="example">Ejemplo: Problema → "Producto defectuoso" → Causa raíz → "Priorización incorrecta de recursos".</span>
+        </div>
+        <div>
+            <p><strong>2. Análisis SWOT (FODA):</strong> Evaluar una empresa mediante factores internos (Fortalezas, Debilidades) y externos (Oportunidades, Amenazas).</p>
+        </div>
+    </div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>3. Categorización 6M:</strong> Analizar causas de problemas en procesos (Máquina, Método, Material, Mano de obra, Medio ambiente, Medición).</p>
+        </div>
+        <div>
+            <p><strong>4. Análisis PESTLE:</strong> Evaluar factores macroambientales (Políticos, Económicos, Sociales, Tecnológicos, Legales, Ambientales).</p>
+        </div>
+    </div>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave Finales</strong></p>
+        <ul class="bullet-list">
+            <li>Los textos en contabilidad/administración sirven diversos propósitos, desde informar hasta persuadir.</li>
+            <li>Los párrafos y oraciones son los pilares de una comunicación coherente.</li>
+            <li>Identificar ideas principales y de apoyo es crucial para comprender textos financieros.</li>
+            <li>Las herramientas visuales (mapas, diagramas) mejoran la organización, análisis y presentación de información financiera compleja.</li>
+        </ul>
+        <p class="mt-2">Dominando estos conceptos y herramientas, los profesionales de contabilidad/administración pueden crear, interpretar y comunicar información financiera de manera más efectiva y clara.</p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT6_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>

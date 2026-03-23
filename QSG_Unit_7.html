@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 7 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+        .prof-info {
+            text-align: right;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 7 - Organización Retórica</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+    <div class="prof-info">Lic. Oney Clavijo, Tel: 0412-3585427</div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">¿Qué es la Organización Retórica?</div>
+    <div class="definition-box">
+        <p>La organización retórica se refiere a la estructura y disposición de las ideas dentro de un texto. Es la forma en que el autor organiza la información para transmitir un mensaje de manera efectiva y lograr un propósito comunicativo específico. En contabilidad/administración, esto es crucial para crear informes financieros claros, resúmenes de auditoría y documentos regulatorios.</p>
+    </div>
+
+    <div class="section-header">Tipos de Organización Retórica</div>
+
+    <div class="subheader">1. Narrativa</div>
+    <ul class="bullet-list">
+        <li>Relata una secuencia de eventos en un tiempo y espacio específicos.</li>
+        <li><strong>Ejemplo:</strong> Un estudio de caso sobre la recuperación financiera de una empresa.</li>
+        <li><strong>Características:</strong> Incluye un narrador, personajes, trama, conflicto y resolución. Usa verbos en tiempo pasado y conectores temporales (ej.: "first", "then").</li>
+    </ul>
+
+    <div class="subheader">2. Descriptiva</div>
+    <ul class="bullet-list">
+        <li>Proporciona imágenes detalladas de personas, lugares, objetos o ideas.</li>
+        <li><strong>Ejemplo:</strong> Describir la posición financiera de una empresa en un informe anual.</li>
+        <li><strong>Características:</strong> Usa adjetivos, adverbios y comparaciones. A menudo emplea verbos en presente.</li>
+    </ul>
+
+    <div class="subheader">3. Expositiva</div>
+    <ul class="bullet-list">
+        <li>Explica un tema o concepto de manera clara y objetiva.</li>
+        <li><strong>Ejemplo:</strong> Una guía sobre cómo calcular la depreciación.</li>
+        <li><strong>Características:</strong> Presenta información de manera lógica usando definiciones, ejemplos y explicaciones.</li>
+    </ul>
+
+    <div class="subheader">4. Argumentativa</div>
+    <ul class="bullet-list">
+        <li>Defiende una tesis o punto de vista utilizando argumentos y evidencia.</li>
+        <li><strong>Ejemplo:</strong> Un informe de auditoría que argumenta a favor de controles internos más estrictos.</li>
+        <li><strong>Características:</strong> Incluye una tesis, argumentos de apoyo, contraargumentos y una conclusión. Usa conectores lógicos (ej.: "therefore", "however") y evidencia.</li>
+    </ul>
+
+    <div class="subheader">Tipos de Textos Combinados</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Narrativo-Descriptivo:</strong> Combina narrativa con descripciones detalladas.</p>
+            <span class="example">Ejemplo: Un estudio de caso financiero que narra eventos mientras describe la salud financiera de la empresa.</span>
+        </div>
+        <div>
+            <p><strong>Expositivo-Descriptivo:</strong> Combina explicación con descripción.</p>
+            <span class="example">Ejemplo: Un informe que explica el concepto de "accrual accounting" mientras describe sus componentes.</span>
+        </div>
+    </div>
+
+    <div class="section-header">Textos Argumentativos en Detalle</div>
+    <div class="definition-box">
+        <p><strong>Definición:</strong> Textos que buscan convencer al lector de una idea o posición específica.</p>
+        <p><strong>Características:</strong> Tesis clara, argumentos de apoyo, contraargumentos (opcional), conclusión.</p>
+    </div>
+    <div class="subheader">Tipos de Argumentos</div>
+    <ul class="bullet-list">
+        <li><strong>Autoridad:</strong> Basado en opiniones de expertos. <span class="example">Ejemplo: "According to the FASB, revenue recognition should follow specific guidelines."</span></li>
+        <li><strong>Hecho:</strong> Basado en datos y estadísticas. <span class="example">Ejemplo: "The company's revenue increased by 15% last quarter."</span></li>
+        <li><strong>Ejemplo:</strong> Basado en casos específicos. <span class="example">Ejemplo: "For instance, Company X improved its cash flow by reducing overhead costs."</span></li>
+        <li><strong>Analogía:</strong> Basado en comparaciones. <span class="example">Ejemplo: "Managing a budget is like steering a ship; small adjustments can prevent major disasters."</span></li>
+    </ul>
+    <div class="subheader">Estructura de los Textos Argumentativos</div>
+    <ul class="bullet-list">
+        <li><strong>Introducción:</strong> Presenta la tesis.</li>
+        <li><strong>Desarrollo:</strong> Proporciona argumentos y evidencia.</li>
+        <li><strong>Conclusión:</strong> Resume y refuerza la tesis.</li>
+    </ul>
+    <div class="subheader">Evaluación de Argumentos</div>
+    <ul class="bullet-list">
+        <li>Verificar la validez de los argumentos.</li>
+        <li>Evaluar la relevancia de la evidencia.</li>
+        <li>Identificar falacias lógicas (ej.: generalizaciones apresuradas, falsa causa).</li>
+    </ul>
+
+    <div class="section-header">Artículos Científicos</div>
+    <div class="definition-box">
+        <p><strong>Definición:</strong> Textos especializados que presentan resultados de investigación.</p>
+        <p><strong>Características:</strong> Metodología rigurosa, lenguaje objetivo y técnico, estructura estándar: Introducción, Métodos, Resultados, Discusión, Conclusión.</p>
+        <p><strong>Diferencias con otros Textos Expositivo-Descriptivos:</strong> Enfoque en evidencia empírica y análisis, uso de terminología técnica y tono formal.</p>
+    </div>
+
+    <div class="section-header">Identificación de la Organización Retórica</div>
+    <ul class="bullet-list">
+        <li>Analizar la estructura, propósito y recursos lingüísticos del texto.</li>
+        <li>Buscar elementos clave como tesis, argumentos y conectores lógicos.</li>
+    </ul>
+
+    <div class="section-header">Aplicación de la Organización Retórica a Textos en Inglés</div>
+    <ul class="bullet-list">
+        <li>Comprender la estructura del texto.</li>
+        <li>Identificar ideas principales y de apoyo.</li>
+        <li>Evaluar la efectividad de los argumentos y la evidencia.</li>
+    </ul>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT7_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
