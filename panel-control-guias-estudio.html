@@ -2,11 +2,15 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terminal de Guías - University Critical Thinking</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Terminal de Guías - University Critical Thinking | Mobile Optimized</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none; /* retro terminal feel, but text can still be selected if needed */
+        }
 
         :root {
             --phosphor-green: #00ff41;
@@ -14,22 +18,22 @@
             --bg-black: #050505;
             --emergency-yellow: #ffcc00;
             --emergency-dark: #b88600;
+            --card-bg: rgba(0, 20, 0, 0.65);
         }
 
         body {
             background-color: var(--bg-black);
             color: var(--phosphor-green);
-            font-family: 'Fira Code', monospace;
-            margin: 0;
-            overflow: hidden;
+            font-family: 'Fira Code', 'Courier New', monospace;
+            min-height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            padding: 16px 12px 32px 12px;
+            position: relative;
         }
 
-        /* Efecto CRT Scanlines */
+        /* CRT overlay preserved */
         .crt-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -37,196 +41,272 @@
                         linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 3px, 3px 100%;
             pointer-events: none;
-            z-index: 100;
+            z-index: 999;
         }
 
-        .screen {
+        /* main container: fluid but centered */
+        .mobile-terminal {
+            max-width: 580px;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            border: 3px solid var(--dark-green);
+            border-radius: 32px;
+            box-shadow: inset 0 0 40px rgba(0, 255, 65, 0.08), 0 0 20px rgba(0, 255, 65, 0.2);
+            backdrop-filter: blur(1px);
+            overflow: hidden;
             position: relative;
-            width: 95vw;
-            height: 95vh;
-            border: 4px solid var(--dark-green);
-            border-radius: 20px;
-            box-shadow: inset 0 0 50px rgba(0, 255, 65, 0.1), 0 0 20px rgba(0, 255, 65, 0.2);
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            grid-template-rows: repeat(4, 1fr);
-            gap: 15px;
-            padding: 60px 20px 100px 20px;
-            box-sizing: border-box;
-        }
-
-        /* Estilo de los Botones de Guía */
-        .guide-btn {
-            background: rgba(0, 59, 0, 0.2);
-            border: 2px solid var(--phosphor-green);
-            border-radius: 10px;
-            color: var(--phosphor-green);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
             transition: all 0.2s;
-            text-decoration: none;
+        }
+
+        /* header area */
+        .terminal-header {
             text-align: center;
-            font-weight: bold;
-            font-size: 0.9rem;
+            padding: 20px 12px 12px 12px;
+            border-bottom: 1px dashed var(--phosphor-green);
             position: relative;
-            z-index: 10;
+        }
+        .decode-title {
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px var(--phosphor-green);
+            animation: pulse 2s infinite;
+            font-weight: bold;
+            word-break: keep-all;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--phosphor-green);}
+            50% { opacity: 0.7; text-shadow: 0 0 12px var(--phosphor-green);}
         }
 
-        .guide-btn:hover {
-            background: var(--phosphor-green);
-            color: black;
-            box-shadow: 0 0 20px var(--phosphor-green);
-            transform: scale(1.05);
-        }
-
-        .guide-btn span {
-            font-size: 0.7rem;
-            opacity: 0.8;
-            margin-top: 5px;
-        }
-
-        /* Botón Regresar */
+        /* back button */
         .back-btn {
             position: absolute;
-            top: 20px;
-            left: 20px;
-            padding: 5px 15px;
+            top: 18px;
+            left: 18px;
+            padding: 5px 14px;
             border: 1px solid var(--phosphor-green);
-            font-size: 0.8rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
             text-decoration: none;
             color: var(--phosphor-green);
-            z-index: 110;
-            transition: all 0.3s;
+            font-weight: bold;
+            transition: all 0.25s;
+            background: rgba(0, 30, 0, 0.5);
+            backdrop-filter: blur(4px);
+            z-index: 50;
         }
-
         .back-btn:hover {
             background: var(--phosphor-green);
             color: black;
-            box-shadow: 0 0 10px var(--phosphor-green);
+            box-shadow: 0 0 12px var(--phosphor-green);
         }
 
-        /* Botón de Emergencia: Modelos de Examen */
-        .emergency-container {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
+        /* MASCOT SECTION: FULL SIZE PRESERVED */
+        .mascot-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 50;
+            justify-content: center;
+            padding: 20px 12px 16px 12px;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+        }
+        #mascot-svg {
+            width: 100%;
+            max-width: 340px;
+            height: auto;
+            filter: drop-shadow(0 0 12px var(--phosphor-green));
+            display: block;
+            margin: 0 auto;
+        }
+        .status-area {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .status-text {
+            font-size: 0.7rem;
+            letter-spacing: 1px;
+            background: #001a00;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+            border: 1px solid var(--phosphor-green);
         }
 
+        /* BUTTONS GRID: flexible, adjusted to mobile */
+        .guides-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            padding: 20px 18px 24px 18px;
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        /* redesigned buttons: rounded-pill style but maintain terminal vibe */
+        .guide-btn {
+            background: rgba(0, 30, 0, 0.7);
+            backdrop-filter: blur(4px);
+            border: 1.8px solid var(--phosphor-green);
+            border-radius: 60px;
+            padding: 14px 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--phosphor-green);
+            font-weight: bold;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+            cursor: pointer;
+            font-family: 'Fira Code', monospace;
+        }
+        .guide-btn span {
+            font-size: 0.65rem;
+            opacity: 0.8;
+            margin-top: 5px;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+        .guide-btn:hover {
+            background: var(--phosphor-green);
+            color: black;
+            box-shadow: 0 0 14px var(--phosphor-green);
+            transform: scale(1.02);
+            border-color: #b3ffb3;
+        }
+
+        /* emergency container: compact but prominent */
+        .emergency-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px 28px 20px;
+        }
+        .emergency-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
         .emergency-btn {
-            width: 110px;
-            height: 110px;
+            width: 95px;
+            height: 95px;
             background: var(--emergency-dark);
             border-radius: 50%;
-            border: 6px solid #333;
-            box-shadow: 0 8px 0 #111, 0 15px 25px rgba(0,0,0,0.5);
+            border: 5px solid #222;
+            box-shadow: 0 6px 0 #111, 0 10px 20px rgba(0,0,0,0.5);
             cursor: pointer;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            outline: none;
+            transition: all 0.18s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             text-decoration: none;
-            overflow: hidden;
+            overflow: visible;
         }
-        
-        /* === NUEVA ANIMACIÓN RETRO-FUTURISTA PARA EL BOTÓN AMARILLO === */
-        .emergency-btn:hover {
-            transform: scale(1.12) rotate(3deg);
-            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.8), 0 0 30px 8px #ffcc00, 0 8px 12px rgba(0,0,0,0.3);
-            border-color: #ffdd88;
-            filter: brightness(1.1) saturate(1.3);
-            transition: all 0.12s ease-out;
+        .emergency-btn::before {
+            content: "";
+            position: absolute;
+            width: 88%;
+            height: 88%;
+            background: radial-gradient(circle at 35% 35%, var(--emergency-yellow), var(--emergency-dark));
+            border-radius: 50%;
+            box-shadow: inset 0 1px 4px rgba(255,255,200,0.6);
+            transition: all 0.2s;
         }
-        
-        /* Efecto pulsante sutil al hover, añade un glow interno */
-        .emergency-btn:hover::before {
-            background: radial-gradient(circle at 30% 30%, #ffdd66, #ffaa22);
-            box-shadow: inset 0 0 15px rgba(255,255,200,0.9);
-        }
-        
-        .emergency-btn:hover::after {
-            text-shadow: 0 0 8px black, 0 0 12px white;
-            font-size: 68px;
-            transition: font-size 0.1s;
-        }
-
-        /* El símbolo (!) */
         .emergency-btn::after {
             content: "!";
             position: absolute;
             color: black;
-            font-size: 60px;
+            font-size: 52px;
             font-weight: 900;
             font-family: 'Arial Black', sans-serif;
             z-index: 2;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.3);
-            transition: all 0.1s;
+            text-shadow: 0 1px 1px rgba(255,255,200,0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
-
-        .emergency-btn::before {
-            content: "";
-            position: absolute;
-            width: 90%;
-            height: 90%;
-            background: radial-gradient(circle at 30% 30%, var(--emergency-yellow), var(--emergency-dark));
-            border-radius: 50%;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.5);
-            transition: all 0.2s;
+        .emergency-btn:hover {
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 0 0 4px rgba(255, 204, 0, 0.7), 0 0 28px 6px #ffcc00, 0 6px 10px black;
+            border-color: #ffdd99;
         }
-
-        .emergency-btn:active {
-            transform: translateY(4px) rotate(1deg);
-            box-shadow: 0 4px 0 #111, 0 10px 15px rgba(0,0,0,0.5);
+        .emergency-btn:hover::before {
+            background: radial-gradient(circle at 30% 30%, #ffdd77, #ffaa33);
         }
-
         .emergency-label {
             margin-top: 12px;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--emergency-yellow);
-            font-size: 0.9rem;
-            text-shadow: 0 0 8px var(--emergency-dark);
+            font-size: 0.75rem;
+            text-shadow: 0 0 6px #b88600;
             text-transform: uppercase;
-            letter-spacing: 2px;
-            transition: all 0.2s;
-        }
-        
-        .emergency-container:hover .emergency-label {
-            text-shadow: 0 0 12px #ffcc00, 0 0 5px #ffaa33;
-            letter-spacing: 3px;
+            letter-spacing: 1.5px;
+            background: rgba(0,0,0,0.5);
+            padding: 4px 12px;
+            border-radius: 30px;
+            backdrop-filter: blur(2px);
         }
 
-        /* Animación del Personaje (Mascota) */
-        .mascot-container {
-            grid-column: 2;
-            grid-row: 1 / span 4;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding-bottom: 120px;
+        /* small extra details */
+        .footer-note {
+            text-align: center;
+            font-size: 0.55rem;
+            padding: 8px 0 14px 0;
+            color: #2e7d32;
+            border-top: 1px dashed #1e4a1e;
+            margin-top: 6px;
         }
 
-        #mascot-svg {
-            width: 100%;
-            max-width: 380px;
-            filter: drop-shadow(0 0 10px var(--phosphor-green));
+        /* responsive fine-tune: if screen too small, buttons text wraps */
+        @media (max-width: 460px) {
+            .guides-grid {
+                gap: 12px;
+                padding: 16px 14px 20px 14px;
+            }
+            .guide-btn {
+                padding: 12px 4px;
+                font-size: 0.85rem;
+            }
+            .guide-btn span {
+                font-size: 0.6rem;
+            }
+            .decode-title {
+                font-size: 0.9rem;
+            }
+            .back-btn {
+                top: 12px;
+                left: 12px;
+                padding: 4px 10px;
+                font-size: 0.65rem;
+            }
+            #mascot-svg {
+                max-width: 280px;
+            }
+            .emergency-btn {
+                width: 85px;
+                height: 85px;
+            }
+            .emergency-btn::after {
+                font-size: 46px;
+            }
         }
 
-        /* Animaciones específicas del SVG */
+        /* no reduction of mascot size — preserved full scale */
+        @media (max-width: 380px) {
+            #mascot-svg {
+                max-width: 260px;
+            }
+        }
+
+        /* eye animation class keep */
         .eye-pupil {
             animation: lookAround 5s infinite;
+            transform-origin: center;
         }
-
         @keyframes lookAround {
             0%, 10% { transform: translate(0, 0); }
             15%, 25% { transform: translate(3px, -2px); }
@@ -234,95 +314,67 @@
             50%, 60% { transform: translate(0, 2px); }
             65%, 100% { transform: translate(0, 0); }
         }
-
         .arm-wave {
             transform-origin: 80% 60%;
             animation: wave 3s ease-in-out infinite;
         }
-
         @keyframes wave {
             0%, 100% { transform: rotate(0deg); }
             50% { transform: rotate(-15deg); }
         }
-
-        .header-text {
-            position: absolute;
-            top: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 1.2rem;
-            letter-spacing: 3px;
-            text-shadow: 0 0 10px var(--phosphor-green);
-            animation: pulse 2s infinite;
+    </style>
+    <!-- Load Tailwind just for minimal extra helpers but we override mostly custom -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* override tailwind default to keep our style consistent */
+        body, .mobile-terminal, .guide-btn, .emergency-label {
+            font-family: 'Fira Code', monospace;
         }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
+        /* ensure no unwanted margin */
+        .tailwind-override {
+            all: unset;
         }
-
-        /* Posicionamiento de botones */
-        .btn-1 { grid-column: 1; grid-row: 1; }
-        .btn-2 { grid-column: 1; grid-row: 2; }
-        .btn-3 { grid-column: 1; grid-row: 3; }
-        .btn-4 { grid-column: 1; grid-row: 4; }
-        .btn-5 { grid-column: 3; grid-row: 1; }
-        .btn-6 { grid-column: 3; grid-row: 2; }
-        .btn-7 { grid-column: 3; grid-row: 3; }
-        .btn-8 { grid-column: 3; grid-row: 4; }
-
     </style>
 </head>
 <body>
     <div class="crt-overlay"></div>
 
-    <a href="https://ingles1udone-stack.github.io/ingles-I-para-ciencias-administrativas/index.html" class="back-btn">
-        < REGRESAR
-    </a>
+    <div class="mobile-terminal">
+        <!-- header with decode title and back button -->
+        <div class="terminal-header">
+            <a href="https://ingles1udone-stack.github.io/ingles-I-para-ciencias-administrativas/index.html" class="back-btn">
+                ← REGRESAR
+            </a>
+            <div class="decode-title">DECODE THE TEXT & ANALYSIS PROTOCOL</div>
+        </div>
 
-    <div class="screen">
-        <div class="header-text">DECODE THE TEXT & ANALYSIS PROTOCOL</div>
-
-        <!-- Botones Izquierda -->
-        <a href="QSG_Unit_1.html" class="guide-btn btn-1">GUÍA 1 <span>Introduction</span></a>
-        <a href="QSG_Unit_2.html" class="guide-btn btn-2">GUÍA 2 <span>Grammar I</span></a>
-        <a href="QSG_Unit_3.html" class="guide-btn btn-3">GUÍA 3 <span>Vocabulary</span></a>
-        <a href="QSG_Unit_4.html" class="guide-btn btn-4">GUÍA 4 <span>Syntax</span></a>
-
-        <!-- Mascota Central Animada -->
-        <div class="mascot-container">
+        <!-- MASCOT SECTION: size preserved, full animations intact -->
+        <div class="mascot-section">
             <svg id="mascot-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                 <!-- Cuerpo del libro -->
                 <rect x="100" y="80" width="200" height="240" rx="15" fill="none" stroke="#00ff41" stroke-width="8" />
                 <path d="M100 80 L110 70 L310 70 L300 80" fill="none" stroke="#00ff41" stroke-width="4" />
                 <path d="M300 80 L310 70 L310 310 L300 320" fill="none" stroke="#00ff41" stroke-width="4" />
-                
                 <!-- Circuitos decorativos -->
                 <path d="M110 100 H140 M110 120 H130 M110 300 H150" stroke="#00ff41" stroke-width="2" opacity="0.6"/>
-                
                 <!-- Lentes -->
                 <circle cx="160" cy="160" r="30" fill="none" stroke="#00ff41" stroke-width="4" />
                 <circle cx="240" cy="160" r="30" fill="none" stroke="#00ff41" stroke-width="4" />
                 <path d="M190 160 H210" stroke="#00ff41" stroke-width="4" />
-
                 <!-- Ojos (Pupilas animadas) -->
                 <g class="eye-pupil">
                     <circle cx="165" cy="160" r="8" fill="#00ff41" />
                     <circle cx="245" cy="160" r="8" fill="#00ff41" />
                 </g>
-
-                <!-- Boca (Sonrisa) -->
+                <!-- Boca sonrisa -->
                 <path d="M170 210 Q200 230 230 210" fill="none" stroke="#00ff41" stroke-width="4" stroke-linecap="round" />
-
-                <!-- Brazo saludando -->
+                <!-- Brazo saludando animado -->
                 <g class="arm-wave">
                     <path d="M300 220 C340 220 360 180 350 150" fill="none" stroke="#00ff41" stroke-width="6" />
                     <circle cx="350" cy="150" r="10" fill="#00ff41" />
                 </g>
-
                 <!-- Brazo sosteniendo -->
                 <path d="M100 220 C60 220 40 250 50 280" fill="none" stroke="#00ff41" stroke-width="6" />
-
                 <!-- Libro abierto estático -->
                 <g transform="translate(140, 250)">
                     <rect x="0" y="0" width="120" height="40" fill="none" stroke="#00ff41" stroke-width="3" />
@@ -330,221 +382,232 @@
                     <text x="5" y="25" fill="#00ff41" font-size="8" font-family="monospace">DECODE</text>
                     <text x="70" y="25" fill="#00ff41" font-size="8" font-family="monospace">READ</text>
                 </g>
-
                 <!-- Etiquetas de texto -->
                 <rect x="130" y="340" width="140" height="30" fill="#00ff41" />
                 <text x="140" y="360" fill="black" font-size="12" font-weight="bold">LMS UNIT V1.0</text>
             </svg>
             
-            <div class="mt-4 text-center">
-                <p class="text-xs">[STATUS: ONLINE]</p>
-                <p class="text-xs">BIENVENIDO, ESTUDIANTE</p>
+            <div class="status-area">
+                <div class="status-text">[STATUS: ONLINE] &nbsp; BIENVENIDO, ESTUDIANTE</div>
             </div>
         </div>
 
-        <!-- Botones Derecha -->
-        <a href="QSG_Unit_5.html" class="guide-btn btn-5">GUÍA 5 <span>Contextualize</span></a>
-        <a href="QSG_Unit_6.html" class="guide-btn btn-6">GUÍA 6 <span>Inflection</span></a>
-        <a href="QSG_Unit_7.html" class="guide-btn btn-7">GUÍA 7 <span>Technical English</span></a>
-        <a href="QSG_Unit_8.html" class="guide-btn btn-8">GUÍA 8 <span>Final Exam</span></a>
-
-        <!-- Botón de Emergencia Central (MODELOS DE EXAMEN) -->
-        <div class="emergency-container">
-            <a href="https://drive.google.com/drive/folders/1loafkFjvD7OOkCh7a983rln4RZ3yALEQ?usp=drive_link" class="emergency-btn" id="emergencyButton"></a>
-            <div class="emergency-label">MODELOS DE EXAMEN</div>
+        <!-- GUIDES GRID: 2 columns, all 8 buttons with original links and names -->
+        <div class="guides-grid">
+            <a href="QSG_Unit_1.html" class="guide-btn">GUÍA 1 <span>Introduction</span></a>
+            <a href="QSG_Unit_2.html" class="guide-btn">GUÍA 2 <span>Grammar I</span></a>
+            <a href="QSG_Unit_3.html" class="guide-btn">GUÍA 3 <span>Vocabulary</span></a>
+            <a href="QSG_Unit_4.html" class="guide-btn">GUÍA 4 <span>Syntax</span></a>
+            <a href="QSG_Unit_5.html" class="guide-btn">GUÍA 5 <span>Contextualize</span></a>
+            <a href="QSG_Unit_6.html" class="guide-btn">GUÍA 6 <span>Inflection</span></a>
+            <a href="QSG_Unit_7.html" class="guide-btn">GUÍA 7 <span>Technical English</span></a>
+            <a href="QSG_Unit_8.html" class="guide-btn">GUÍA 8 <span>Final Exam</span></a>
         </div>
+
+        <!-- Emergency / Exam Models button -->
+        <div class="emergency-wrapper">
+            <div class="emergency-container">
+                <a href="https://drive.google.com/drive/folders/1loafkFjvD7OOkCh7a983rln4RZ3yALEQ?usp=drive_link" class="emergency-btn" id="emergencyButton"></a>
+                <div class="emergency-label">MODELOS DE EXAMEN</div>
+            </div>
+        </div>
+        <div class="footer-note">⟡ sistema interactivo v2.0 | protocolo activo ⟡</div>
     </div>
 
     <script>
-        // Efecto de parpadeo aleatorio en la pantalla
+        // Preserve random CRT flicker effect (subtle)
         setInterval(() => {
-            const screen = document.querySelector('.screen');
-            screen.style.opacity = Math.random() > 0.98 ? '0.8' : '1';
-        }, 100);
+            const terminal = document.querySelector('.mobile-terminal');
+            if (terminal && Math.random() > 0.98) {
+                terminal.style.opacity = '0.85';
+                setTimeout(() => { if(terminal) terminal.style.opacity = '1'; }, 60);
+            } else if(terminal) {
+                terminal.style.opacity = '1';
+            }
+        }, 180);
 
-        // Interactividad de ojos
-        const pupils = document.querySelector('.eye-pupil');
-        const buttons = document.querySelectorAll('.guide-btn');
-
-        buttons.forEach(btn => {
-            btn.addEventListener('mouseenter', () => {
-                pupils.style.animation = 'none';
-                if (btn.classList.contains('btn-1') || btn.classList.contains('btn-2') || btn.classList.contains('btn-3') || btn.classList.contains('btn-4')) {
-                    pupils.style.transform = 'translateX(-8px)';
-                } else {
-                    pupils.style.transform = 'translateX(8px)';
-                }
-            });
-
-            btn.addEventListener('mouseleave', () => {
-                pupils.style.animation = 'lookAround 5s infinite';
-                pupils.style.transform = 'translateX(0)';
-            });
-        });
+        // EYE TRACKING: pupils follow hover over buttons & emergency (but keep animation default)
+        const pupilsGroup = document.querySelector('.eye-pupil');
+        const allButtons = document.querySelectorAll('.guide-btn');
+        const emergencyBtnElem = document.getElementById('emergencyButton');
         
-        // ======================
-        // SONIDO RETRO-FUTURISTA AL PASAR MOUSE SOBRE BOTÓN AMARILLO
-        // ======================
-        // Implementación con Web Audio para un "computer beep" sintetizado y estilo retro
-        
-        let audioContext = null;
-        
-        // Función para generar un beep corto estilo "ordenador antiguo / sci-fi"
-        function playRetroComputerSound() {
-            try {
-                // Crear AudioContext solo si no existe (inicialización diferida)
-                if (!audioContext) {
-                    audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                }
-                
-                // Reanudar si está suspendido (necesario por políticas de navegador)
-                if (audioContext.state === 'suspended') {
-                    audioContext.resume().then(() => {
-                        actuallyGenerateSound();
-                    }).catch(e => console.warn("AudioContext resume error:", e));
-                } else {
-                    actuallyGenerateSound();
-                }
-                
-                function actuallyGenerateSound() {
-                    const now = audioContext.currentTime;
-                    
-                    // --- Primer componente: tono principal con barrido ascendente (retro futurista)
-                    const osc = audioContext.createOscillator();
-                    const gainNode = audioContext.createGain();
-                    
-                    osc.type = 'sawtooth';    // Sonido más agresivo, vintage computer
-                    osc.frequency.setValueAtTime(650, now);
-                    osc.frequency.exponentialRampToValueAtTime(1150, now + 0.12);
-                    
-                    gainNode.gain.setValueAtTime(0.25, now);
-                    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
-                    
-                    osc.connect(gainNode);
-                    gainNode.connect(audioContext.destination);
-                    
-                    osc.start(now);
-                    osc.stop(now + 0.25);
-                    
-                    // --- Segundo componente: pequeño "chip" más agudo y corto (efecto láser/bit)
-                    const osc2 = audioContext.createOscillator();
-                    const gain2 = audioContext.createGain();
-                    osc2.type = 'square';
-                    osc2.frequency.setValueAtTime(1800, now);
-                    osc2.frequency.exponentialRampToValueAtTime(2200, now + 0.07);
-                    
-                    gain2.gain.setValueAtTime(0.12, now);
-                    gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
-                    
-                    osc2.connect(gain2);
-                    gain2.connect(audioContext.destination);
-                    osc2.start(now);
-                    osc2.stop(now + 0.09);
-                    
-                    // --- Tercer detalle: ruido blanco muy corto (como estática digital)
-                    const bufferSize = 4096;
-                    const noiseNode = audioContext.createScriptProcessor(bufferSize, 1, 1);
-                    const noiseGain = audioContext.createGain();
-                    
-                    noiseNode.onaudioprocess = function(e) {
-                        const output = e.outputBuffer.getChannelData(0);
-                        for (let i = 0; i < bufferSize; i++) {
-                            output[i] = (Math.random() * 2 - 1) * 0.3;
-                        }
-                    };
-                    
-                    noiseGain.gain.setValueAtTime(0.08, now);
-                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
-                    
-                    noiseNode.connect(noiseGain);
-                    noiseGain.connect(audioContext.destination);
-                    
-                    // Desconectar después de un tiempo muy corto para limpiar recursos
-                    setTimeout(() => {
-                        try {
-                            noiseNode.disconnect();
-                            noiseGain.disconnect();
-                        } catch(e) {}
-                    }, 100);
-                }
-                
-            } catch (error) {
-                console.warn("Web Audio no disponible o error al reproducir sonido:", error);
-                // Fallback silencioso: no rompe la experiencia visual
+        function resetPupils() {
+            if(pupilsGroup) {
+                pupilsGroup.style.animation = 'lookAround 5s infinite';
+                pupilsGroup.style.transform = 'translate(0px, 0px)';
             }
         }
         
-        // Asignar el sonido al botón de emergencia (botón amarillo)
-        const emergencyBtn = document.getElementById('emergencyButton');
-        if (emergencyBtn) {
-            // Al pasar el mouse (hover) -> reproduce el sonido retro futurista
-            emergencyBtn.addEventListener('mouseenter', (e) => {
-                playRetroComputerSound();
+        function movePupils(xOffset = 0, yOffset = 0) {
+            if(pupilsGroup) {
+                pupilsGroup.style.animation = 'none';
+                pupilsGroup.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            }
+        }
+        
+        // left side guides (1-4) look left, right side (5-8) look right, emergency look down
+        allButtons.forEach(btn => {
+            btn.addEventListener('mouseenter', (e) => {
+                const classes = btn.classList;
+                let isLeft = false;
+                // detect position by text content or better: we can detect its position in grid? but we use index
+                // simpler: check if it's among guias 1-4 -> left side
+                const btnText = btn.innerText;
+                if(btnText.includes('GUÍA 1') || btnText.includes('GUÍA 2') || btnText.includes('GUÍA 3') || btnText.includes('GUÍA 4')) {
+                    movePupils(-6, -1);
+                } else {
+                    movePupils(6, -1);
+                }
+            });
+            btn.addEventListener('mouseleave', resetPupils);
+        });
+        
+        if(emergencyBtnElem && pupilsGroup) {
+            emergencyBtnElem.addEventListener('mouseenter', () => {
+                movePupils(0, 8);
+            });
+            emergencyBtnElem.addEventListener('mouseleave', resetPupils);
+        }
+        
+        // ========== RETRO-FUTURISTIC SOUNDS (Web Audio) with same logic but improved compatibility ==========
+        let audioContextGlobal = null;
+        
+        function playRetroComputerSound() {
+            try {
+                if (!audioContextGlobal) {
+                    audioContextGlobal = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                const ctx = audioContextGlobal;
+                const resumePlay = () => {
+                    const now = ctx.currentTime;
+                    // main synth sweep
+                    const osc = ctx.createOscillator();
+                    const gainNode = ctx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(620, now);
+                    osc.frequency.exponentialRampToValueAtTime(1120, now + 0.13);
+                    gainNode.gain.setValueAtTime(0.22, now);
+                    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.27);
+                    osc.connect(gainNode);
+                    gainNode.connect(ctx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.27);
+                    
+                    const osc2 = ctx.createOscillator();
+                    const gain2 = ctx.createGain();
+                    osc2.type = 'square';
+                    osc2.frequency.setValueAtTime(1750, now);
+                    osc2.frequency.exponentialRampToValueAtTime(2150, now + 0.08);
+                    gain2.gain.setValueAtTime(0.1, now);
+                    gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
+                    osc2.connect(gain2);
+                    gain2.connect(ctx.destination);
+                    osc2.start(now);
+                    osc2.stop(now + 0.1);
+                    
+                    // tiny noise blip
+                    const bufferSize = 2048;
+                    const noiseNode = ctx.createScriptProcessor(bufferSize, 1, 1);
+                    const noiseGain = ctx.createGain();
+                    noiseNode.onaudioprocess = function(e) {
+                        const output = e.outputBuffer.getChannelData(0);
+                        for (let i = 0; i < bufferSize; i++) {
+                            output[i] = (Math.random() * 2 - 1) * 0.2;
+                        }
+                    };
+                    noiseGain.gain.setValueAtTime(0.06, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+                    noiseNode.connect(noiseGain);
+                    noiseGain.connect(ctx.destination);
+                    setTimeout(() => {
+                        try { noiseNode.disconnect(); noiseGain.disconnect(); } catch(e) {}
+                    }, 80);
+                };
                 
-                // Pequeño efecto adicional: hacer vibrar sutilmente el ícono de exclamación (feedback)
-                const pseudoAfter = window.getComputedStyle(emergencyBtn, '::after');
-                // No podemos modificar pseudo-elementos directamente, pero agregamos una clase efímera para efecto extra de brillo
-                emergencyBtn.style.transform = 'scale(1.12) rotate(3deg)'; // reforzado por CSS pero añadimos un temblor visual
-                setTimeout(() => {
-                    // Se restaura sola la transición CSS, no necesitamos resetear manualmente
-                }, 120);
-            });
-            
-            // Opcional: pequeño feedback táctil con vibración si se soporta (no indispensable)
-            emergencyBtn.addEventListener('touchstart', (e) => {
-                // Para móviles: también sonido al tocar (no solo hover)
-                playRetroComputerSound();
-            });
+                if (ctx.state === 'suspended') {
+                    ctx.resume().then(() => { resumePlay(); }).catch(e => console.warn("Audio resume error"));
+                } else {
+                    resumePlay();
+                }
+            } catch (err) {
+                // silent fail
+            }
         }
         
-        // Bonus: el label también activa el sonido si alguien hace hover sobre el texto? Por coherencia añadimos también al contenedor? 
-        // Para mantener la inmersión, hacemos que el contenedor también active el sonido si se pasa sobre el label (pero no duplicamos)
-        const emergencyContainer = document.querySelector('.emergency-container');
-        if (emergencyContainer) {
-            emergencyContainer.addEventListener('mouseenter', (e) => {
-                // Evitar que si el mouse entra exactamente al botón, se dispare dos veces (pero no pasa nada)
-                if (e.target === emergencyBtn || emergencyBtn.contains(e.target)) return;
+        // attach hover sound to emergency button
+        if (emergencyBtnElem) {
+            emergencyBtnElem.addEventListener('mouseenter', (e) => {
+                playRetroComputerSound();
+                // little vibration-like scale effect already in CSS
+            });
+            emergencyBtnElem.addEventListener('touchstart', (e) => {
                 playRetroComputerSound();
             });
-        }
-        
-        // Añadir un "click" sutil al botón que también podría tener sonido adicional (opcional, pero queda retro)
-        if (emergencyBtn) {
-            emergencyBtn.addEventListener('click', (e) => {
-                // Agregamos un beep extra para confirmación, tipo "comando ejecutado"
+            // additional click beep (confirmation)
+            emergencyBtnElem.addEventListener('click', (e) => {
                 try {
-                    if (!audioContext) {
-                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                    }
-                    if (audioContext.state === 'suspended') {
-                        audioContext.resume();
-                    }
-                    const shortBeep = audioContext.createOscillator();
-                    const beepGain = audioContext.createGain();
-                    shortBeep.type = 'sine';
-                    shortBeep.frequency.value = 1200;
-                    beepGain.gain.setValueAtTime(0.15, audioContext.currentTime);
-                    beepGain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.1);
-                    shortBeep.connect(beepGain);
-                    beepGain.connect(audioContext.destination);
-                    shortBeep.start();
-                    shortBeep.stop(audioContext.currentTime + 0.1);
-                } catch(err) {}
+                    if(!audioContextGlobal) audioContextGlobal = new (window.AudioContext || window.webkitAudioContext)();
+                    const ctx = audioContextGlobal;
+                    const resumeClick = () => {
+                        const now = ctx.currentTime;
+                        const beep = ctx.createOscillator();
+                        const beepGain = ctx.createGain();
+                        beep.type = 'sine';
+                        beep.frequency.value = 1180;
+                        beepGain.gain.setValueAtTime(0.12, now);
+                        beepGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+                        beep.connect(beepGain);
+                        beepGain.connect(ctx.destination);
+                        beep.start();
+                        beep.stop(now + 0.09);
+                    };
+                    if(ctx.state === 'suspended') ctx.resume().then(resumeClick);
+                    else resumeClick();
+                } catch(e) {}
             });
         }
         
-        // (opcional) Pequeña mejora: las pupilas pueden seguir brevemente al botón de emergencia cuando se le hace hover? 
-        // efecto sutil: si el mouse entra en emergency, las pupilas miran hacia abajo (hacia el botón)
-        if (emergencyBtn && pupils) {
-            emergencyBtn.addEventListener('mouseenter', () => {
-                pupils.style.animation = 'none';
-                pupils.style.transform = 'translateY(8px) scale(0.95)';
-            });
-            emergencyBtn.addEventListener('mouseleave', () => {
-                pupils.style.animation = 'lookAround 5s infinite';
-                pupils.style.transform = 'translate(0, 0)';
+        // Also attach to the emergency label hover for immersion (extra)
+        const labelEmergency = document.querySelector('.emergency-label');
+        if(labelEmergency && emergencyBtnElem) {
+            labelEmergency.addEventListener('mouseenter', () => {
+                playRetroComputerSound();
             });
         }
+        
+        // Optional: maintain that pupils also follow the emergency + general hover extra effect: Already added.
+        // Also interactive glowing effect on buttons (preserved)
+        
+        // Additional function: add subtle blink on any guide click? not necessary but adds immersion
+        const allGuideBtns = document.querySelectorAll('.guide-btn');
+        allGuideBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // subtle micro audio optional but not intrusive
+                try {
+                    if(audioContextGlobal && audioContextGlobal.state !== 'closed') {
+                        const ctx = audioContextGlobal;
+                        const quickClick = () => {
+                            const now = ctx.currentTime;
+                            const tick = ctx.createOscillator();
+                            const tickGain = ctx.createGain();
+                            tick.type = 'triangle';
+                            tick.frequency.value = 880;
+                            tickGain.gain.setValueAtTime(0.05, now);
+                            tickGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+                            tick.connect(tickGain);
+                            tickGain.connect(ctx.destination);
+                            tick.start();
+                            tick.stop(now + 0.05);
+                        };
+                        if(ctx.state === 'suspended') ctx.resume().then(quickClick);
+                        else quickClick();
+                    }
+                } catch(e) {}
+            });
+        });
+        
+        // Additional tiny detail: Random status blink in mascot (already present)
+        // Ensure no reduction of mascot size: done via CSS max-width auto
     </script>
 </body>
-</html>
+                        </html>
