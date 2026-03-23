@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 8 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .motivation {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c5e2a;
+            margin: 30px 0 20px;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+        .prof-info {
+            text-align: right;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 8 - Resúmenes e Inferencia</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+    <div class="prof-info">Lic. Oney Clavijo, Tel: 0412-3585427</div>
+
+    <!-- ==================== RESÚMENES ==================== -->
+    <div class="section-header">Resúmenes</div>
+    
+    <div class="subheader">Definición de un Resumen</div>
+    <div class="definition-box">
+        <p>Un resumen es una presentación concisa y objetiva de las ideas principales de un texto, destilando la información esencial de los detalles de apoyo. En contabilidad y administración, la capacidad de resumir es crítica para una comunicación eficiente y la toma de decisiones.</p>
+    </div>
+
+    <div class="subheader">Diferencias entre Resumen, Paráfrasis y Síntesis</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Resumen:</strong> Condensa un texto a su mensaje central, acortándolo significativamente mientras mantiene la objetividad.</p>
+            <span class="example">Ejemplo: Un informe anual de 50 páginas se resume en una página de resumen ejecutivo con resultados financieros clave y perspectivas estratégicas.</span>
+        </div>
+        <div>
+            <p><strong>Paráfrasis:</strong> Reformula un pasaje o idea específica usando palabras diferentes, a menudo manteniendo una longitud similar al original.</p>
+            <span class="example">Ejemplo: Original: "The company experienced a precipitous decline in liquid assets." Paráfrasis: "The firm's cash and cash equivalents fell sharply."</span>
+        </div>
+    </div>
+    <div>
+        <p><strong>Síntesis:</strong> Combina ideas principales e información de múltiples fuentes para crear una nueva comprensión o perspectiva integrada.</p>
+        <span class="example">Ejemplo: Crear una recomendación de inversión sintetizando datos de un informe anual, un análisis de la industria y un informe de tendencias del mercado.</span>
+    </div>
+
+    <div class="subheader">Características de un Buen Resumen</div>
+    <ul class="bullet-list">
+        <li><strong>Conciso:</strong> Significativamente más corto que el texto original, eliminando ejemplos, repeticiones y detalles menores. <span class="example">Ejemplo: Un documento de hallazgos de auditoría de 10 páginas se condensa en tres puntos clave.</span></li>
+        <li><strong>Claro:</strong> Escrito en lenguaje sencillo y directo, fácil de entender para la audiencia objetivo. <span class="example">Ejemplo: Usar "profit increased due to higher sales" en lugar de oraciones complejas llenas de jerga.</span></li>
+        <li><strong>Objetivo:</strong> Representa fielmente las ideas e intención del autor original sin agregar opiniones personales, interpretaciones o sesgos. <span class="example">Ejemplo: Decir "The report indicates a potential risk of inventory obsolescence" en lugar de "I think the company's inventory management is poor."</span></li>
+        <li><strong>Completo:</strong> Incluye todas las ideas principales y puntos de apoyo cruciales necesarios para una comprensión precisa del texto original. <span class="example">Ejemplo: Un resumen de un estado financiero incluye no solo los ingresos, sino también cambios significativos en gastos y ganancias netas.</span></li>
+    </ul>
+
+    <div class="subheader">Diferencias Clave en la Condensación de Textos</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Resumen vs. Cita Directa:</strong></p>
+            <span class="example">Resumen: Captura la esencia de una idea con tus propias palabras. "The CEO's letter stated that the past year was challenging but that the company's fundamentals remain strong."</span>
+            <span class="example mt-2">Cita Directa: Copia las palabras exactas del autor entre comillas. "The CEO wrote, 'While FY 2023 presented significant headwinds, we are confident in the resilience of our core business model.'"</span>
+        </div>
+        <div>
+            <p><strong>Resumen Objetivo vs. Análisis Crítico:</strong></p>
+            <span class="example">Resumen Objetivo: "The proposal recommends a 15% budget reallocation from marketing to R&D."</span>
+            <span class="example mt-2">Análisis Crítico: "The proposal to reallocate the budget is persuasive because it provides strong evidence of R&D's higher return on investment."</span>
+        </div>
+    </div>
+
+    <div class="subheader">El Proceso de Resumir</div>
+    <ul class="bullet-list">
+        <li><strong>Lectura:</strong> Leer todo el texto a fondo para entender su propósito general y argumento principal.</li>
+        <li><strong>Identificación:</strong> Localizar la tesis, oraciones temáticas y hallazgos o recomendaciones clave. En textos financieros, prestar atención a datos como ingresos, márgenes de beneficio y ratios clave.</li>
+        <li><strong>Borrador:</strong> Escribir una versión condensada usando tus propias palabras, enfocándote en las ideas principales y sus conexiones lógicas.</li>
+        <li><strong>Revisión:</strong> Comparar el borrador con el original para asegurar precisión y completitud, y editar para concisión y claridad.</li>
+    </ul>
+
+    <div class="subheader">Usos de la Técnica de Resumir en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Estudio:</strong> Simplificar informes financieros complejos, normas contables (ej.: IFRS, GAAP) y documentos regulatorios para una mejor comprensión y retención.</li>
+        <li><strong>Investigación:</strong> Documentar hallazgos clave de múltiples fuentes durante due diligence, análisis de mercado o revisiones de literatura para investigación académica.</li>
+        <li><strong>Comunicación:</strong> Presentar información de manera concisa en resúmenes ejecutivos, sesiones informativas gerenciales, actualizaciones por correo y diapositivas para tomadores de decisiones con poco tiempo.</li>
+        <li><strong>Informes:</strong> Proporcionar resúmenes de documentos extensos como informes de auditoría, detalles de contratos y actas de reuniones de directorio.</li>
+    </ul>
+
+    <div class="subheader">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Resúmenes Ejecutivos:</strong> Crear la sección inicial de un plan de negocios o informe que resume los puntos clave de todo el documento.</li>
+        <li><strong>Sesiones Informativas Gerenciales:</strong> Preparar un resumen verbal o escrito breve del desempeño financiero trimestral para la alta gerencia.</li>
+        <li><strong>Comunicación con el Cliente:</strong> Explicar las conclusiones clave de una regulación fiscal compleja o un prospecto de inversión a un cliente en términos simples.</li>
+        <li><strong>Documentación de Auditoría:</strong> Resumir los hallazgos de una prueba de auditoría específica o una sección de la auditoría para papeles de trabajo y la opinión de auditoría final.</li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave sobre Resúmenes</strong></p>
+        <ul class="bullet-list">
+            <li>Un resumen es una reformulación breve, clara, objetiva y completa de las ideas principales de un texto.</li>
+            <li>Resumir es distinto de parafrasear (reformular con palabras diferentes) y sintetizar (combinar múltiples fuentes).</li>
+            <li>La capacidad de resumir efectivamente es esencial para estudiar, investigar y comunicarse en los campos de contabilidad y administración.</li>
+            <li>Un resumen bien escrito ahorra tiempo, mejora la comprensión y facilita la toma de decisiones informadas al destilar información compleja en sus elementos más críticos.</li>
+        </ul>
+        <p class="mt-2">Al dominar la habilidad de resumir, los profesionales de contabilidad y administración pueden procesar eficientemente grandes volúmenes de información, comunicar ideas clave con claridad y agregar un valor significativo a sus organizaciones.</p>
+    </div>
+
+    <!-- ==================== INFERENCIA ==================== -->
+    <div class="section-header">Inferencia</div>
+
+    <div class="subheader">Definición de Inferencia</div>
+    <div class="definition-box">
+        <p>La inferencia es el proceso de sacar conclusiones basadas en información implícita en un texto. En contabilidad/administración, la inferencia es crucial para interpretar estados financieros, entender tendencias subyacentes y tomar decisiones informadas cuando la información explícita no está disponible.</p>
+    </div>
+
+    <div class="subheader">Importancia de la Inferencia en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Interpretación de Datos Financieros:</strong> Ayuda a descubrir tendencias e insights no explícitamente declarados en informes financieros. <span class="example">Ejemplo: Inferir problemas de liquidez de una empresa a partir de una tendencia de flujo de caja decreciente.</span></li>
+        <li><strong>Toma de Decisiones:</strong> Apoya decisiones estratégicas identificando riesgos u oportunidades implícitas. <span class="example">Ejemplo: Inferir la rentabilidad futura a partir de patrones de crecimiento histórico de ingresos.</span></li>
+        <li><strong>Auditoría y Cumplimiento:</strong> Asiste a los auditores en la identificación de discrepancias o fraudes potenciales. <span class="example">Ejemplo: Inferir mala gestión a partir de irregularidades en informes de gastos.</span></li>
+    </ul>
+
+    <div class="subheader">Tipos de Inferencias en Contabilidad/Administración</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Inferencias Inductivas:</strong> Generalizar a partir de observaciones específicas.</p>
+            <span class="example">Ejemplo: Observar que los ingresos de una empresa han crecido un 10% anualmente durante los últimos tres años e inferir que continuarán creciendo a la misma tasa.</span>
+        </div>
+        <div>
+            <p><strong>Inferencias Deductivas:</strong> Sacar conclusiones específicas a partir de principios generales.</p>
+            <span class="example">Ejemplo: Saber que todas las empresas que cotizan en bolsa deben seguir GAAP, e inferir que los estados financieros de una empresa específica cumplen con GAAP.</span>
+        </div>
+    </div>
+
+    <div class="subheader">Claves Contextuales para Inferir Significado en Textos de Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Sinónimos y Reformulaciones:</strong> Palabras o frases que reformulan o aclaran una idea. <span class="example">Ejemplo: "Net income, or profit, increased by 15%." ("Profit" es un sinónimo de "net income".)</span></li>
+        <li><strong>Antónimos y Contrastes:</strong> Palabras o frases que indican ideas opuestas. <span class="example">Ejemplo: "While revenue increased, net profit decreased due to higher operating costs."</span></li>
+        <li><strong>Ejemplos:</strong> Instancias específicas que ilustran un concepto. <span class="example">Ejemplo: "Current assets, such as cash and accounts receivable, increased by 20%."</span></li>
+        <li><strong>Claves Morfológicas:</strong> Analizar partes de palabras (prefijos, sufijos, raíces) para inferir significado. <span class="example">Ejemplo: "Depreciation" (raíz: "depreciate" que significa perder valor; sufijo: "-tion" que indica un proceso).</span></li>
+        <li><strong>Contexto General:</strong> Usar el contexto general de una oración o párrafo. <span class="example">Ejemplo: "The company's leverage ratio is high, indicating significant debt." (El contexto sugiere que "leverage ratio" se relaciona con la deuda.)</span></li>
+    </ul>
+
+    <div class="subheader">Contexto Cultural en la Interpretación Contable/Administrativa</div>
+    <ul class="bullet-list">
+        <li><strong>Impacto:</strong> El contexto cultural influye en la interpretación de normas, prácticas y terminología contable/administrativa. <span class="example">Ejemplo: Diferentes países pueden tener definiciones variables de "fair value" o "revenue recognition".</span></li>
+        <li><strong>Importancia:</strong> Comprender los matices culturales asegura una interpretación precisa de informes financieros internacionales.</li>
+    </ul>
+
+    <div class="subheader">Orden de las Oraciones e Inferencia en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Importancia:</strong> La secuencia de oraciones puede revelar relaciones causa-efecto, tendencias o prioridades. <span class="example">Ejemplo: "The company reduced its operating costs. As a result, its net profit increased." (Causa: reducción de costos; Efecto: aumento de ganancias.)</span></li>
+    </ul>
+
+    <div class="subheader">Hechos vs. Opiniones</div>
+    <ul class="bullet-list">
+        <li><strong>Hechos:</strong> Respaldados por evidencia (ej.: "The company's revenue was $1 million in Q1.").</li>
+        <li><strong>Opiniones:</strong> Declaraciones subjetivas (ej.: "The company's revenue growth is impressive.").</li>
+        <li><strong>Palabras Clave:</strong> Buscar lenguaje subjetivo como "I believe", "in my opinion" o "it seems".</li>
+    </ul>
+
+    <div class="subheader">Premisas y Conclusiones en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Premisa:</strong> Una declaración que se asume verdadera, sirviendo como base para el razonamiento. <span class="example">Ejemplo: "All companies must comply with tax regulations."</span></li>
+        <li><strong>Tipos de Conclusiones:</strong>
+            <ul class="list-disc ml-8 mt-1">
+                <li><strong>Conclusión Verdadera:</strong> Basada en premisas verdaderas y razonamiento válido. <span class="example">Ejemplo: "The company complies with tax regulations because it filed its tax return on time."</span></li>
+                <li><strong>Conclusión Falsa:</strong> Basada en premisas falsas o razonamiento inválido. <span class="example">Ejemplo: "The company avoids taxes because it reported low profits." (Falsa si la empresa minimizó impuestos legalmente.)</span></li>
+                <li><strong>Conclusión Probable:</strong> Probable pero no segura, común en razonamiento inductivo. <span class="example">Ejemplo: "The company's revenue will likely grow next year based on past trends."</span></li>
+                <li><strong>Conclusión Necesaria:</strong> Lógicamente segura, común en razonamiento deductivo. <span class="example">Ejemplo: "If the company follows GAAP, its financial statements are GAAP-compliant."</span></li>
+            </ul>
+        </li>
+    </ul>
+
+    <div class="subheader">Sesgos Cognitivos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Definición:</strong> Atajos mentales que pueden llevar a juicios o decisiones distorsionados.</li>
+        <li><strong>Ejemplos:</strong>
+            <ul class="list-disc ml-8">
+                <li><strong>Sesgo de Confirmación:</strong> Favorecer información que confirma creencias preexistentes. <span class="example">Ejemplo: Un auditor que se enfoca solo en evidencia que apoya su evaluación inicial.</span></li>
+                <li><strong>Sesgo de Anclaje:</strong> Basarse demasiado en la primera información encontrada. <span class="example">Ejemplo: Un analista que se fija en la estimación inicial de ganancias e ignora datos actualizados.</span></li>
+                <li><strong>Efecto Halo:</strong> Generalizar un rasgo positivo al desempeño general. <span class="example">Ejemplo: Asumir que una empresa es financieramente estable porque tiene una marca fuerte.</span></li>
+                <li><strong>Falacia del Apostador:</strong> Creer que eventos pasados aleatorios afectan resultados futuros. <span class="example">Ejemplo: Asumir que el precio de las acciones subirá porque ha caído varios días.</span></li>
+            </ul>
+        </li>
+        <li><strong>Importancia de Reconocer Sesgos:</strong> Mejora la toma de decisiones y objetividad en el análisis financiero; aumenta la precisión de auditorías y evaluaciones de riesgo.</li>
+    </ul>
+
+    <div class="subheader">Aplicaciones Prácticas de la Inferencia</div>
+    <ul class="bullet-list">
+        <li><strong>Análisis Financiero:</strong> Inferir desempeño futuro a partir de datos históricos. <span class="example">Ejemplo: Predecir tendencias de flujo de caja basadas en patrones pasados.</span></li>
+        <li><strong>Auditoría:</strong> Identificar posibles fraudes o errores a través de pistas implícitas. <span class="example">Ejemplo: Inferir mala gestión a partir de variaciones inexplicables en estados financieros.</span></li>
+        <li><strong>Planificación Estratégica:</strong> Sacar insights para guiar decisiones empresariales. <span class="example">Ejemplo: Inferir oportunidades de mercado a partir de análisis de la competencia.</span></li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave sobre Inferencia</strong></p>
+        <ul class="bullet-list">
+            <li>La inferencia es esencial para interpretar información implícita en textos de contabilidad/administración.</li>
+            <li>El razonamiento inductivo y deductivo son herramientas clave para sacar conclusiones.</li>
+            <li>Las claves contextuales y morfológicas ayudan a inferir el significado de términos desconocidos.</li>
+            <li>Reconocer sesgos cognitivos mejora la objetividad y la toma de decisiones en contabilidad/administración.</li>
+        </ul>
+        <p class="mt-2">Al dominar la inferencia, los profesionales de contabilidad/administración pueden mejorar su capacidad para analizar datos financieros, tomar decisiones informadas y comunicar insights de manera efectiva.</p>
+    </div>
+
+    <!-- ==================== ANEXO: LA FALACIA ==================== -->
+    <div class="section-header">Anexo: La Falacia</div>
+    <div class="definition-box">
+        <p>Una falacia es un error en el razonamiento o la lógica que debilita la validez de un argumento. Las falacias pueden ser engañosas porque a menudo parecen convincentes, pero carecen de fundamento lógico o factual. Se usan comúnmente (intencionalmente o no) en debates, publicidad, política y conversaciones cotidianas.</p>
+    </div>
+
+    <div class="subheader">Características Clave de una Falacia</div>
+    <ul class="bullet-list">
+        <li><strong>Engañosa:</strong> Crea la ilusión de un argumento sólido sin evidencia válida.</li>
+        <li><strong>Persuasiva:</strong> Puede influir emocionalmente, aunque sea lógicamente incorrecta.</li>
+        <li><strong>Estructural o de Contenido:</strong> Falacias Formales (errores en estructura lógica) vs. Falacias Informales (errores en contenido, contexto o relevancia).</li>
+    </ul>
+
+    <div class="subheader">Tipos Comunes de Falacias</div>
+    <div class="grid-2col">
+        <div>
+            <ul class="bullet-list">
+                <li><strong>Ad Hominem:</strong> Atacar a la persona en lugar de su argumento. <span class="example">Ejemplo: "No puedes confiar en su opinión sobre el cambio climático porque no es científico."</span></li>
+                <li><strong>Hombre de Paja:</strong> Distorsionar el argumento del oponente para refutarlo fácilmente. <span class="example">Ejemplo: Original: "Deberíamos reducir el gasto militar." Hombre de paja: "¿Así que quieres dejar al país indefenso?"</span></li>
+                <li><strong>Falso Dilema (Blanco o Negro):</strong> Presentar solo dos opciones extremas cuando hay más alternativas. <span class="example">Ejemplo: "O apoyas esta ley, o odias la libertad."</span></li>
+                <li><strong>Apelación a la Autoridad:</strong> Usar una figura de autoridad como prueba, aunque sea irrelevante. <span class="example">Ejemplo: "Un actor famoso dice que esta dieta funciona, así que debe ser cierto."</span></li>
+            </ul>
+        </div>
+        <div>
+            <ul class="bullet-list">
+                <li><strong>Pendiente Resbaladiza:</strong> Sugerir que una acción menor llevará inevitablemente a un resultado extremo. <span class="example">Ejemplo: "Si permitimos el matrimonio gay, ¡luego la gente se casará con animales!"</span></li>
+                <li><strong>Razonamiento Circular (Petición de Principio):</strong> La conclusión se asume en la premisa. <span class="example">Ejemplo: "La Biblia es verdadera porque lo dice la Biblia."</span></li>
+                <li><strong>Generalización Apresurada:</strong> Sacar una conclusión amplia con poca evidencia. <span class="example">Ejemplo: "Un empleado fue flojo, así que todos los millennials son flojos."</span></li>
+                <li><strong>Post Hoc (Falsa Causa):</strong> Asumir causalidad porque un evento siguió a otro. <span class="example">Ejemplo: "Usé una camisa roja y gané el partido, así que el rojo da suerte."</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subheader">¿Por qué es Importante Reconocer las Falacias?</div>
+    <ul class="bullet-list">
+        <li><strong>Pensamiento Crítico:</strong> Ayuda a evaluar argumentos con objetividad.</li>
+        <li><strong>Evitar Manipulación:</strong> Previene engaños en política, publicidad o estafas.</li>
+        <li><strong>Debates Más Sólidos:</strong> Fomenta discusiones basadas en hechos.</li>
+    </ul>
+
+    <div class="subheader">¿Cómo Contraargumentar Falacias?</div>
+    <ul class="bullet-list">
+        <li>Identifica el tipo de falacia.</li>
+        <li>Señala el error lógico.</li>
+        <li>Pide evidencia o razonamiento válido.</li>
+    </ul>
+    <div class="example">
+        <strong>Ejemplo:</strong> Falacia: "Todos los políticos son corruptos porque uno fue pillado robando."<br>
+        Respuesta: "Esa es una generalización apresurada. Un caso no prueba que todos lo sean."
+    </div>
+
+    <!-- Mensaje motivador -->
+    <div class="motivation">
+        ✨ ¡Ya casi lo tienes! ✨
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT8_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
