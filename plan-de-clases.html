@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Lessons Plan - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .class-card {
+            border-left: 4px solid #8b9a6e;
+            padding-left: 16px;
+            margin-bottom: 28px;
+            page-break-inside: avoid;
+        }
+        .class-title {
+            font-weight: 800;
+            font-size: 1.3rem;
+            font-family: 'Rajdhani', sans-serif;
+            margin-bottom: 8px;
+            color: #2c3e2f;
+        }
+        .class-details {
+            margin-left: 12px;
+            font-size: 0.95rem;
+        }
+        .class-details ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        .class-details li {
+            margin-bottom: 4px;
+            position: relative;
+            padding-left: 20px;
+        }
+        .class-details li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #5f7a4e;
+        }
+        .badge-taller {
+            display: inline-block;
+            background: #2c3e2f20;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border-radius: 0px;
+            font-family: 'Share Tech Mono', monospace;
+            margin-right: 8px;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header {
+                page-break-after: avoid;
+            }
+            .class-card {
+                page-break-inside: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .grid-classes {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .grid-classes {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">My Lessons Plan</div>
+            <div class="mono text-sm">Cronograma de actividades // Semestre I</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>PERÍODO: I-2026 <span class="input-line w-24"></span></p>
+            <p>NÚCLEO: GUATAMARE <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- INTRODUCCIÓN / INDUCCIÓN -->
+    <div class="bg-paper p-4 border border-gray-300 mb-8">
+        <div class="font-bold uppercase text-sm border-b border-gray-400 pb-1">[ PLANIFICACIÓN ACADÉMICA ]</div>
+        <p class="text-sm mt-2">El presente plan de clases detalla las actividades, talleres, micro‑conferencias y evaluaciones para la asignatura <strong>Inglés I para Ciencias Administrativas</strong>. Las fechas son referenciales y podrán ajustarse según el desarrollo del semestre.</p>
+    </div>
+
+    <!-- CLASES (listado completo extraído del PDF) -->
+    <div class="section-header">Clases y Contenidos</div>
+
+    <div class="grid-classes">
+        <!-- CLASE 1 -->
+        <div class="class-card">
+            <div class="class-title">📌 CLASE 1 – Inducción</div>
+            <div class="class-details">
+                <ul>
+                    <li>Charla de bienvenida. Conducta en la UDO.</li>
+                    <li>WhatsApp y horarios.</li>
+                    <li>Explicación de Drive y evaluaciones: <span class="badge-taller">MLiteraryC</span> <span class="badge-taller">BetterU</span> <span class="badge-taller">MasterC</span> <span class="badge-taller">Micro</span></li>
+                    <li>Reproducción de materiales, autoridades y seguridad.</li>
+                    <li>Práctica de la Bitácora. Cómo hacer un buen resumen.</li>
+                    <li>Creación de Grupos para Micro‑conferencia.</li>
+                    <li>Asignación de Glosario.</li>
+                    <li>Preguntas de los estudiantes.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 2 -->
+        <div class="class-card">
+            <div class="class-title">📘 CLASE 2 – Tema I: Estrategia de Lectura y Partes del discurso</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Masterclass 1.</li>
+                    <li>Entrega del Glosario.</li>
+                    <li>Primera exposición (Unidad 1) – Micro‑conferencia (Partes del Discurso) en YT (On‑Line). <a href="https://youtu.be/8rTozwhN7mM?si=NWS_6WNt_0cOLe1j" target="_blank" class="text-blue-600 underline">Ver video</a></li>
+                    <li>Bitácora 1 (online).</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 3 -->
+        <div class="class-card">
+            <div class="class-title">📘 CLASE 3 – Tema I (continuación)</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 1.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 4 -->
+        <div class="class-card">
+            <div class="class-title">⚙️ CLASE 4 – Tema II: Claves Morfológicas y Contextuales</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 2.</li>
+                    <li>Micro‑conferencia: Claves Morfológicas y Contextuales (Grupo 2).</li>
+                    <li>Bitácora 2.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 5 -->
+        <div class="class-card">
+            <div class="class-title">📖 CLASE 5 – MLC (Mi Desafío Literario)</div>
+            <div class="class-details">
+                <ul>
+                    <li>Mi Desafío Literario 1.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 6 -->
+        <div class="class-card">
+            <div class="class-title">📝 CLASE 6 – Parcial I</div>
+            <div class="class-details">
+                <ul>
+                    <li>Quick Test I: Unidades 1 y 2.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 7 -->
+        <div class="class-card">
+            <div class="class-title">📘 CLASE 7 – Tema III: Pronombres</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Master Class 2.</li>
+                    <li>Tercera Micro‑conferencia (Pronombres) en YT (On‑Line).</li>
+                    <li>Bitácora 3.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 8 -->
+        <div class="class-card">
+            <div class="class-title">📘 CLASE 8 – Tema III: Pronombres (continuación)</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 3.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 9 -->
+        <div class="class-card">
+            <div class="class-title">🔗 CLASE 9 – Tema IV: Conectores</div>
+            <div class="class-details">
+                <ul>
+                    <li>Micro‑conferencia de los conectores (Grupo 4).</li>
+                    <li>Bitácora 4.</li>
+                    <li>Taller: Better Understanding 4.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 10 -->
+        <div class="class-card">
+            <div class="class-title">📖 CLASE 10 – MLC</div>
+            <div class="class-details">
+                <ul>
+                    <li>Mi Desafío Literario 2.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 11 -->
+        <div class="class-card">
+            <div class="class-title">📝 CLASE 11 – Parcial II</div>
+            <div class="class-details">
+                <ul>
+                    <li>Quick Test II: Unidades 3 y 4.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 12 -->
+        <div class="class-card">
+            <div class="class-title">📄 CLASE 12 – Tema V: Identificación del Formato del Texto</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Masterclass 3.</li>
+                    <li>Micro‑conferencia: Identificación del Formato del Texto (Grupo 5).</li>
+                    <li>Bitácora 5.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 13 -->
+        <div class="class-card">
+            <div class="class-title">📄 CLASE 13 – Tema V (continuación)</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 5.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 14 -->
+        <div class="class-card">
+            <div class="class-title">🧠 CLASE 14 – Tema VI: Ideas Principales, Secundarias y Mapas de ideas</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 6.</li>
+                    <li>Micro‑conferencia (Grupo 6).</li>
+                    <li>Bitácora 6.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 15 -->
+        <div class="class-card">
+            <div class="class-title">📖 CLASE 15 – MLC</div>
+            <div class="class-details">
+                <ul>
+                    <li>Mi Desafío Literario 3.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 16 -->
+        <div class="class-card">
+            <div class="class-title">📝 CLASE 16 – Parcial III</div>
+            <div class="class-details">
+                <ul>
+                    <li>Quick Test III: Unidades 5 y 6.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 17 -->
+        <div class="class-card">
+            <div class="class-title">📑 CLASE 17 – Unidad VII: Organización Retórica</div>
+            <div class="class-details">
+                <ul>
+                    <li>Masterclass 4.</li>
+                    <li>Micro‑conferencia sobre Organización retórica (Grupo 7).</li>
+                    <li>Bitácora 7.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 18 -->
+        <div class="class-card">
+            <div class="class-title">📑 CLASE 18 – Unidad VII (continuación)</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 7.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 19 -->
+        <div class="class-card">
+            <div class="class-title">📝 CLASE 19 – Unidad VIII: Resumen e inferencia</div>
+            <div class="class-details">
+                <ul>
+                    <li>Taller: Better Understanding 8.</li>
+                    <li>Micro‑conferencia sobre Resumen e inferencia (Grupo 8).</li>
+                    <li>Bitácora 8 + Bitácora adicional.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 20 -->
+        <div class="class-card">
+            <div class="class-title">📖 CLASE 20 – MLC</div>
+            <div class="class-details">
+                <ul>
+                    <li>Mi Desafío Literario 4.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 21 -->
+        <div class="class-card">
+            <div class="class-title">📝 CLASE 21 – Parcial IV</div>
+            <div class="class-details">
+                <ul>
+                    <li>Quick Test IV: Unidades 7 y 8.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 22 -->
+        <div class="class-card">
+            <div class="class-title">🎓 CLASE 22 – Examen Final</div>
+            <div class="class-details">
+                <ul>
+                    <li>Evaluación acumulativa.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- CLASE 23 -->
+        <div class="class-card">
+            <div class="class-title">🔄 CLASE 23 – Examen de Reparación</div>
+            <div class="class-details">
+                <ul>
+                    <li>Oportunidad para recuperar unidades pendientes.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTAS ADICIONALES / CRONOGRAMA RESUMEN -->
+    <div class="section-header">Resumen de Evaluaciones</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+        <div class="border border-gray-300 p-3">
+            <p class="font-bold">Quick Tests (Parciales)</p>
+            <ul class="list-disc ml-5 text-sm">
+                <li>Quick Test I – Unidades 1 y 2 (Clase 6)</li>
+                <li>Quick Test II – Unidades 3 y 4 (Clase 11)</li>
+                <li>Quick Test III – Unidades 5 y 6 (Clase 16)</li>
+                <li>Quick Test IV – Unidades 7 y 8 (Clase 21)</li>
+            </ul>
+        </div>
+        <div class="border border-gray-300 p-3">
+            <p class="font-bold">Micro‑conferencias (Grupos)</p>
+            <ul class="list-disc ml-5 text-sm">
+                <li>Grupo 1: Partes del Discurso (Clase 2)</li>
+                <li>Grupo 2: Claves Morfológicas y Contextuales (Clase 4)</li>
+                <li>Grupo 3: Pronombres (Clase 7)</li>
+                <li>Grupo 4: Conectores (Clase 9)</li>
+                <li>Grupo 5: Formato del Texto (Clase 12)</li>
+                <li>Grupo 6: Ideas Principales, Secundarias y Mapas (Clase 14)</li>
+                <li>Grupo 7: Organización Retórica (Clase 17)</li>
+                <li>Grupo 8: Resumen e Inferencia (Clase 19)</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">PLAN_2025_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR PLAN DE CLASES (PDF)
+    </button>
+</div>
+
+</body>
+</html>
