@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 1 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 1 - Estrategias de Lectura y Partes de la Oración</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Estrategias de Lectura</div>
+    <div class="definition-box">
+        <p><strong>Definición de Estrategias de Lectura</strong><br>
+        Las estrategias de lectura son técnicas utilizadas para extraer información clave de los textos, especialmente en idiomas no familiares o contextos complejos. En contabilidad/administración, estas estrategias ayudan a los profesionales a interpretar informes financieros, resúmenes de auditoría y documentos regulatorios de manera efectiva.</p>
+    </div>
+
+    <div class="subheader">Tipos de Estrategias de Lectura</div>
+
+    <div class="subheader" style="font-size:1.1rem">1. Estrategias Previas a la Lectura</div>
+    <ul class="bullet-list">
+        <li><strong>Previsualización (Preview):</strong> Examina el título, subtítulos, imágenes y estructura del texto.<br>
+            <span class="example">Ejemplo: Previsualizar un informe financiero para identificar secciones como "Income Statement" y "Balance Sheet".</span></li>
+        <li><strong>Lluvia de Ideas (Brainstorming):</strong> Asocia temas relacionados con el título.<br>
+            <span class="example">Ejemplo: Hacer una lluvia de ideas con términos como "revenue", "expenses" y "profit" al leer sobre desempeño financiero.</span></li>
+        <li><strong>Preguntas Previas (Pre-Questions):</strong> Formula preguntas sobre el tema y propósito del texto.<br>
+            <span class="example">Ejemplo: Preguntar "What caused the increase in operating costs?" antes de leer un informe de análisis de costos.</span></li>
+    </ul>
+
+    <div class="subheader" style="font-size:1.1rem">2. Estrategias Durante la Lectura</div>
+    <ul class="bullet-list">
+        <li><strong>Identificar Partes de la Oración (Identify Parts of Speech):</strong> Reconoce categorías gramaticales para comprender la estructura de las oraciones.<br>
+            <span class="example">Ejemplo: Identificar "revenue" como un noun y "increased" como un verb en la oración: "Revenue increased by 10%."</span></li>
+        <li><strong>Analizar Claves Morfológicas y Contextuales (Analyze Morphological and Contextual Clues):</strong> Deduce el significado de palabras desconocidas.<br>
+            <span class="example">Ejemplo: Inferir que "depreciation" se relaciona con una disminución de valor basándose en la raíz "depreciate".</span></li>
+        <li><strong>Reconocer la Estructura del Texto (Recognize Textual Structure):</strong> Identifica introducción, cuerpo y conclusión.<br>
+            <span class="example">Ejemplo: Localizar el resumen ejecutivo (introducción), el análisis financiero (cuerpo) y las recomendaciones (conclusión) en un informe.</span></li>
+        <li><strong>Extraer Ideas Principales y Palabras Clave (Extract Main Ideas and Keywords):</strong> Enfócate en conceptos y términos clave.<br>
+            <span class="example">Ejemplo: Resaltar términos como "net income", "cash flow" y "liabilities" en un estado financiero.</span></li>
+    </ul>
+
+    <div class="subheader" style="font-size:1.1rem">3. Estrategias Posteriores a la Lectura</div>
+    <ul class="bullet-list">
+        <li><strong>Hacer Inferencias (Make Inferences):</strong> Deduce información implícita.<br>
+            <span class="example">Ejemplo: Inferir que una empresa es financieramente estable basándose en un crecimiento consistente de los ingresos y bajos niveles de deuda.</span></li>
+        <li><strong>Desarrollar y Responder Preguntas (Develop and Answer Questions):</strong> Reflexiona sobre el contenido del texto.<br>
+            <span class="example">Ejemplo: Responder "What factors contributed to the profit margin increase?"</span></li>
+        <li><strong>Crear Resúmenes y Mapas Semánticos (Create Summaries and Semantic Maps):</strong> Organiza la información visualmente.<br>
+            <span class="example">Ejemplo: Resumir un informe financiero en un diagrama de flujo que muestre "revenue", "expenses" y "net profit".</span></li>
+        <li><strong>Discutir el Tema (Discuss the Topic):</strong> Amplía perspectivas y profundiza la comprensión.<br>
+            <span class="example">Ejemplo: Discutir hallazgos de auditoría con colegas para identificar riesgos potenciales.</span></li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Importancia de las Estrategias de Lectura en Contabilidad/Administración</strong></p>
+        <ul class="bullet-list">
+            <li><strong>Eficiencia:</strong> Ahorra tiempo al enfocarse en información clave.</li>
+            <li><strong>Precisión:</strong> Reduce la mala interpretación de datos financieros.</li>
+            <li><strong>Pensamiento Crítico:</strong> Fomenta el análisis y la inferencia.</li>
+            <li><strong>Comunicación:</strong> Mejora la capacidad de explicar conceptos financieros con claridad.</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Partes de la Oración (Parts of Speech)</div>
+    <div class="definition-box">
+        <p><strong>Definición de Partes de la Oración</strong><br>
+        Las partes de la oración son categorías fundamentales en el análisis lingüístico que agrupan palabras según sus funciones sintácticas y semánticas en las oraciones. Comprenderlas es esencial para interpretar textos técnicos.</p>
+    </div>
+
+    <div class="grid-2col">
+        <div>
+            <ul class="bullet-list">
+                <li><strong>Sustantivo (Noun):</strong> Denota entidades (personas, lugares, cosas o ideas).<br>Ejemplo: Revenue, expenses, company, asset.</li>
+                <li><strong>Adjetivo (Adjective):</strong> Modifica sustantivos al describirlos o calificarlos.<br>Ejemplo: High revenue, operating expenses, financial statement.</li>
+                <li><strong>Verbo (Verb):</strong> Expresa acciones o estados.<br>Ejemplo: Increase, calculate, report, analyze.</li>
+                <li><strong>Pronombre (Pronoun):</strong> Sustituye sustantivos para evitar repeticiones.<br>Ejemplo: It (the company), they (the auditors), this (the report).</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="bullet-list">
+                <li><strong>Adverbio (Adverb):</strong> Modifica verbos, adjetivos u otros adverbios.<br>Ejemplo: Quickly analyze, very high, significantly increase.</li>
+                <li><strong>Preposición (Preposition):</strong> Establece relaciones entre palabras.<br>Ejemplo: In the report, on the balance sheet, at the end.</li>
+                <li><strong>Conjunción (Conjunction):</strong> Conecta palabras, frases u oraciones.<br>Ejemplo: And, but, however, therefore.</li>
+                <li><strong>Determinante (Determiner):</strong> Especifica, cuantifica o identifica sustantivos.<br>Ejemplo: The revenue, some expenses, this asset.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="subheader">Diferencias Clave Entre Partes de la Oración</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>1. Adjetivos vs. Demostrativos</strong><br>
+            - Los adjetivos describen sustantivos (ej.: high profit).<br>
+            - Los demostrativos señalan sustantivos específicos (ej.: this profit).</p>
+        </div>
+        <div>
+            <p><strong>2. Verbos Transitivos vs. Intransitivos</strong><br>
+            - Los verbos transitivos requieren un objeto (ej.: calculate the tax).<br>
+            - Los verbos intransitivos no requieren un objeto (ej.: The revenue increased).</p>
+        </div>
+    </div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>3. Preposiciones Comunes y Sus Usos</strong><br>
+            - In: "The data is in the report."<br>
+            - On: "The figures are on the balance sheet."<br>
+            - At: "The meeting is at 3 PM."</p>
+        </div>
+        <div>
+            <p><strong>4. Determinantes en Inglés</strong><br>
+            <em>Función:</em> Especificar, cuantificar o identificar sustantivos.<br>
+            <strong>Tipos:</strong> Artículos (The, a, an), Demostrativos (This, that, these, those), Posesivos (My, your, their), Cuantificadores (Some, many, few), Numerales (One, two, first).</p>
+        </div>
+    </div>
+    <div>
+        <p><strong>5. Pre-determinantes (Pre-determiners)</strong><br>
+        Definición: Palabras que preceden a los determinantes para expresar cantidad o aproximación.<br>
+        Ejemplos: All the revenue, both companies, half the expenses.</p>
+    </div>
+
+    <div class="importance-box">
+        <p><strong>Importancia de las Partes de la Oración en la Interpretación de Textos de Contabilidad/Administración</strong></p>
+        <ul class="bullet-list">
+            <li><strong>Estructura de la Oración:</strong> Ayuda a identificar sujetos, verbos y objetos para mayor claridad.<br>
+                <span class="example">Ejemplo: "The auditor reviewed the financial statements." (Sujeto: auditor; Verbo: reviewed; Objeto: financial statements).</span></li>
+            <li><strong>Significado:</strong> Aclara las relaciones entre palabras.<br>
+                <span class="example">Ejemplo: "The report on the audit" vs. "The report and the audit."</span></li>
+            <li><strong>Intención:</strong> Revela el propósito de las oraciones (ej.: declarativas, interrogativas).<br>
+                <span class="example">Ejemplo: "What is the net profit?" (Interrogativa) vs. "The net profit is $1 million." (Declarativa).</span></li>
+        </ul>
+    </div>
+
+    <div class="subheader">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Informes Financieros:</strong> Identificar términos clave como revenue (noun), increased (verb) y significantly (adverb).</li>
+        <li><strong>Resúmenes de Auditoría:</strong> Analizar oraciones para comprender hallazgos y recomendaciones.</li>
+        <li><strong>Documentos Regulatorios:</strong> Interpretar oraciones complejas utilizando las partes de la oración.</li>
+        <li><strong>Comunicación:</strong> Escribir correos electrónicos o memorandos claros y concisos utilizando gramática adecuada.</li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave de la Unidad 1</strong></p>
+        <ul class="bullet-list">
+            <li>Las estrategias de lectura (previas, durante y posteriores) mejoran la comprensión de textos de contabilidad/administración.</li>
+            <li>Las partes de la oración son esenciales para analizar la estructura y el significado de las oraciones.</li>
+            <li>Dominar estas habilidades mejora la eficiencia, precisión y comunicación en contabilidad/administración.</li>
+        </ul>
+        <p class="mt-2">Al aplicar estas estrategias y comprender las partes de la oración, los profesionales de contabilidad/administración pueden interpretar y comunicar información financiera de manera efectiva.</p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT1_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
