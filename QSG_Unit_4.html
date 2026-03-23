@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 4 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .motivation {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c5e2a;
+            margin: 30px 0 20px;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 4 - Conectores y Coherencia en Textos Profesionales</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Definición de Conectores</div>
+    <div class="definition-box">
+        <p>Los conectores (o palabras de enlace) son palabras o frases utilizadas para vincular ideas, oraciones y párrafos, asegurando un flujo lógico de la información. Son cruciales en textos de contabilidad y administración para construir argumentos claros, coherentes y persuasivos.</p>
+    </div>
+
+    <div class="section-header">Clasificación Tradicional de Conectores por Función</div>
+
+    <div class="subheader">• Adición (Addition)</div>
+    <ul class="bullet-list">
+        <li>Introducen información adicional.<br>
+            <span class="example">Ejemplo: Furthermore, the audit revealed discrepancies. In addition, we must consider tax implications.</span></li>
+    </ul>
+
+    <div class="subheader">• Contraste (Contrast)</div>
+    <ul class="bullet-list">
+        <li>Muestran una diferencia u idea opuesta.<br>
+            <span class="example">Ejemplo: The revenue increased; however, net profit fell. Despite the economic downturn, the company remained profitable.</span></li>
+    </ul>
+
+    <div class="subheader">• Causa y Efecto (Cause and Effect)</div>
+    <ul class="bullet-list">
+        <li>Indican una razón o resultado.<br>
+            <span class="example">Ejemplo: There was a significant error in the ledger. Therefore, the financial statements were revised. The company expanded as a result of high demand.</span></li>
+    </ul>
+
+    <div class="subheader">• Ejemplo / Ilustración (Example / Illustration)</div>
+    <ul class="bullet-list">
+        <li>Introducen ejemplos específicos.<br>
+            <span class="example">Ejemplo: Several expenses were over budget, for instance, marketing and travel costs.</span></li>
+    </ul>
+
+    <div class="subheader">• Secuencia / Orden (Sequence / Order)</div>
+    <ul class="bullet-list">
+        <li>Organizan ideas en una secuencia lógica o temporal.<br>
+            <span class="example">Ejemplo: First, we analyze the data. Then, we prepare the report. Finally, we present the findings to the board.</span></li>
+    </ul>
+
+    <div class="section-header">Diferencias Clave Entre Conectores</div>
+
+    <div class="subheader">Conjunciones vs. Adverbios Conectivos</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Conjunciones</strong> (ej.: and, but, because) unen cláusulas dentro de una misma oración.</p>
+            <span class="example">Ejemplo: The audit was completed, and the report was filed.</span>
+        </div>
+        <div>
+            <p><strong>Adverbios Conectivos</strong> (ej.: however, therefore, furthermore) enlazan dos oraciones o ideas independientes, a menudo con punto y coma.</p>
+            <span class="example">Ejemplo: The initial forecast was optimistic; however, the actual results were disappointing.</span>
+        </div>
+    </div>
+
+    <div class="subheader">Conectores Formales vs. Informales</div>
+    <div class="grid-2col">
+        <div>
+            <p><strong>Conectores Formales</strong> se prefieren en informes, auditorías y documentos oficiales.</p>
+            <span class="example">Ejemplo: Therefore, nevertheless, consequently, in addition.</span>
+        </div>
+        <div>
+            <p><strong>Conectores Informales</strong> se usan en memorandos internos o comunicación informal.</p>
+            <span class="example">Ejemplo: So, but, also, then.</span>
+        </div>
+    </div>
+
+    <div class="section-header">Ejemplos de Conectores en Contexto</div>
+    <ul class="bullet-list">
+        <li><strong>However:</strong> "Q2 sales were strong. However, Q3 projections are lower due to market volatility."</li>
+        <li><strong>Therefore:</strong> "The asset is fully depreciated; therefore, it will be written off the balance sheet."</li>
+        <li><strong>For example:</strong> "The company has reduced operational costs, for example, by renegotiating supplier contracts."</li>
+        <li><strong>Despite / In spite of:</strong> "Despite the initial investment, the project achieved a positive ROI within a year."</li>
+    </ul>
+
+    <div class="section-header">Conectores en Diferentes Tipos de Texto</div>
+
+    <div class="subheader">• Textos Narrativos</div>
+    <p>Usan conectores temporales.</p>
+    <span class="example">Ejemplo: "First, the startup secured funding. Subsequently, it launched its product."</span>
+
+    <div class="subheader">• Textos Expositivos</div>
+    <p>Usan conectores explicativos e ilustrativos.</p>
+    <span class="example">Ejemplo: "For instance, the rise in cost of goods sold can be attributed to inflation. In other words, our gross margin is under pressure."</span>
+
+    <div class="subheader">• Textos Argumentativos</div>
+    <p>Usan conectores causales y de contraste para construir un caso.</p>
+    <span class="example">Ejemplo: "The current strategy is not sustainable. As a result, we propose a shift to digital marketing. Although there are risks, the potential rewards are significant."</span>
+
+    <div class="section-header">Consideraciones de Posición y Puntuación</div>
+    <ul class="bullet-list">
+        <li><strong>Posición:</strong> Los conectores pueden aparecer al principio, en medio o al final de una oración para variar el estilo y el énfasis.<br>
+            <span class="example">Ejemplo: "However, the budget was approved." / "The budget, however, was approved." / "The budget was approved, however."</span></li>
+        <li><strong>Puntuación:</strong> La puntuación correcta es crítica. Los conectores al inicio de una oración van seguidos de una coma. Cuando se usan en medio, a menudo se separan con comas.</li>
+        <li><strong>Consistencia:</strong> Usa conectores que coincidan con la formalidad y el propósito del texto.<br>
+            <span class="example">Ejemplo: Usa "consequently" en una opinión de auditoría formal y "so" en una actualización informal por correo.</span></li>
+    </ul>
+
+    <div class="section-header">Importancia de los Conectores en la Interpretación de Textos de Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Flujo Lógico:</strong> Los conectores revelan el razonamiento del autor, mostrando cómo las ideas se apoyan, contradicen o resultan unas de otras.<br>
+            <span class="example">Ejemplo: "Sales increased by 15%. However, marketing costs rose by 25%, therefore eroding profitability."</span></li>
+        <li><strong>Estructura del Argumento:</strong> Ayudan a identificar el argumento principal y la evidencia de apoyo en textos persuasivos como propuestas.<br>
+            <span class="example">Ejemplo: "We recommend investing in new software. Firstly, it will improve efficiency. Furthermore, it will reduce long-term costs."</span></li>
+        <li><strong>Claridad y Precisión:</strong> El uso adecuado de conectores elimina ambigüedades, asegurando que la relación entre los datos financieros y su interpretación sea clara.</li>
+    </ul>
+
+    <div class="section-header">Aplicaciones Prácticas en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Análisis Financiero:</strong> Interpretar relaciones de causa y efecto en comentarios gerenciales (ej.: "Due to exchange rate fluctuations, the foreign revenue decreased.").</li>
+        <li><strong>Informes de Auditoría:</strong> Comprender la conexión entre hallazgos y conclusiones mediante conectores como "accordingly" y "consequently".</li>
+        <li><strong>Propuestas Gerenciales:</strong> Construir un argumento coherente y persuasivo para una nueva iniciativa usando conectores de secuencia y adición.</li>
+        <li><strong>Resúmenes Ejecutivos:</strong> Mejorar el flujo y la legibilidad de información densa para los tomadores de decisiones.</li>
+    </ul>
+
+    <div class="importance-box">
+        <p><strong>Puntos Clave de la Unidad 4</strong></p>
+        <ul class="bullet-list">
+            <li>Los conectores son esenciales para crear vínculos lógicos y coherentes entre ideas en la escritura profesional.</li>
+            <li>La función de los conectores (ej.: contraste, causa, adición) determina la relación lógica entre cláusulas y oraciones.</li>
+            <li>Elegir el conector apropiado para el tipo de texto y nivel de formalidad es crucial para una comunicación efectiva.</li>
+            <li>Dominar los conectores permite a los profesionales de contabilidad y administración desconstruir argumentos complejos y construir documentos claros y persuasivos propios.</li>
+        </ul>
+        <p class="mt-2">Al aplicar la comprensión de los conectores, los profesionales de contabilidad/administración pueden mejorar significativamente tanto su interpretación de textos complejos como su capacidad para comunicar información financiera con claridad y fuerza lógica.</p>
+    </div>
+
+    <!-- Mensaje motivador -->
+    <div class="motivation">
+        ✨ You're doing well! ✨
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT4_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>

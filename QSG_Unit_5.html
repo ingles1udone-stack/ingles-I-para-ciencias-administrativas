@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QSG - Unidad 5 - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .subheader {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin: 20px 0 12px 0;
+            border-left: 4px solid #8b9a6e;
+            padding-left: 12px;
+        }
+        .definition-box {
+            background: #fcfaf6;
+            border-left: 6px solid #8b9a6e;
+            padding: 12px 20px;
+            margin: 16px 0;
+        }
+        .example {
+            background: #f0f3ea;
+            padding: 8px 16px;
+            margin: 8px 0;
+            font-style: italic;
+            border-left: 3px solid #b8c9a0;
+        }
+        .bullet-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .bullet-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .bullet-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 16px 0;
+        }
+        .importance-box {
+            background: #eef2e6;
+            border: 1px solid #8b9a6e;
+            padding: 16px;
+            margin: 20px 0;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .section-header, .subheader {
+                page-break-after: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+        .prof-info {
+            text-align: right;
+            font-size: 0.9rem;
+            margin-top: -10px;
+            margin-bottom: 20px;
+            font-family: 'Share Tech Mono', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Quick Study Guide</div>
+            <div class="mono text-sm">Unidad 5 - Identificación del Formato del Texto</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+    <div class="prof-info">Lic. Oney Clavijo. Tel: 0412-3585427</div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">Definición de un Texto</div>
+    <div class="definition-box">
+        <p>Un texto es un conjunto coherente y completo de palabras organizadas para transmitir un mensaje. En contabilidad/administración, los textos incluyen informes financieros, resúmenes de auditoría, declaraciones de impuestos y memorandos internos. Estos textos comunican información financiera, explican principios contables/administrativos o brindan instrucciones.</p>
+    </div>
+
+    <div class="subheader">Características de un Texto en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Propósito Comunicativo:</strong> Cada texto tiene un objetivo, como informar (ej.: estados financieros), persuadir (ej.: recomendaciones de auditoría) o instruir (ej.: manuales contables/administrativos).</li>
+        <li><strong>Coherencia:</strong> Las ideas están conectadas lógicamente y siguen una estructura clara. <span class="example">Ejemplo: Un balance general presenta activos, pasivos y patrimonio en un formato estructurado.</span></li>
+        <li><strong>Cohesión:</strong> Las palabras y frases se vinculan usando conectores (ej.: "however", "therefore") para asegurar un flujo fluido.<br>
+            <span class="example">Ejemplo: "Revenue increased by 10%; however, expenses also rose by 5%."</span></li>
+        <li><strong>Contexto:</strong> El significado de un texto depende de la situación. <span class="example">Ejemplo: La interpretación de un informe financiero varía según la industria de la empresa y las condiciones económicas.</span></li>
+    </ul>
+
+    <div class="section-header">Tipos de Textos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Textos Narrativos:</strong> Cuentan una historia o describen eventos. <span class="example">Ejemplo: Un estudio de caso sobre la recuperación financiera de una empresa.</span></li>
+        <li><strong>Textos Descriptivos:</strong> Proporcionan descripciones detalladas. <span class="example">Ejemplo: Un informe que describe la posición financiera de una empresa.</span></li>
+        <li><strong>Textos Expositivos:</strong> Explican conceptos o procesos. <span class="example">Ejemplo: Una guía sobre cómo calcular la depreciación.</span></li>
+        <li><strong>Textos Argumentativos:</strong> Presentan y defienden un punto de vista. <span class="example">Ejemplo: El informe de un auditor que argumenta a favor de controles internos más estrictos.</span></li>
+        <li><strong>Textos Instruccionales:</strong> Proporcionan orientación paso a paso. <span class="example">Ejemplo: Un manual sobre el uso de software contable/administrativo.</span></li>
+    </ul>
+
+    <div class="section-header">Propósito de los Textos en Contabilidad/Administración</div>
+    <div class="grid-2col">
+        <div>
+            <ul class="bullet-list">
+                <li>Transmitir Información: Estados financieros, declaraciones de impuestos, informes de auditoría.</li>
+                <li>Expresar Ideas: Artículos de opinión sobre normas contables/administrativas o tendencias financieras.</li>
+                <li>Narrar Eventos: Estudios de caso o análisis financieros históricos.</li>
+                <li>Describir: Descripciones detalladas de transacciones financieras o cuentas.</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="bullet-list">
+                <li>Persuadir: Propuestas para adoptar nuevo software o prácticas contables/administrativas.</li>
+                <li>Instruir: Materiales de capacitación para nuevos procedimientos contables/administrativos.</li>
+                <li>Entretener: Raro en contabilidad/administración, pero puede incluir anécdotas humorísticas en materiales de capacitación.</li>
+                <li>Registrar Hechos: Actas de reuniones de directorio o registros financieros.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section-header">El Párrafo</div>
+    <div class="subheader">Definición de un Párrafo</div>
+    <div class="definition-box">
+        <p>Un párrafo es una unidad de texto formada por una o más oraciones que desarrollan una idea central. En contabilidad/administración, los párrafos se utilizan para organizar información lógicamente, como en informes financieros o resúmenes de auditoría.</p>
+    </div>
+
+    <div class="subheader">Características de un Párrafo</div>
+    <ul class="bullet-list">
+        <li><strong>Unidad Temática:</strong> Todas las oraciones se centran en una sola idea. <span class="example">Ejemplo: Un párrafo que discute el impacto de la inflación en los ingresos.</span></li>
+        <li><strong>Coherencia:</strong> Las ideas se presentan de manera lógica. <span class="example">Ejemplo: Un párrafo que explica los pasos de una auditoría financiera.</span></li>
+        <li><strong>Cohesión:</strong> Las oraciones se conectan mediante palabras transicionales. <span class="example">Ejemplo: "First, revenue increased. Second, expenses decreased."</span></li>
+        <li><strong>Independencia:</strong> Cada párrafo puede entenderse por sí solo como un pensamiento completo. <span class="example">Ejemplo: Un párrafo que resume la posición de liquidez de una empresa.</span></li>
+    </ul>
+
+    <div class="subheader">Tipos de Párrafos en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Párrafos Introductorios:</strong> Presentan el tema principal. <span class="example">Ejemplo: Una introducción a un informe financiero anual.</span></li>
+        <li><strong>Párrafos de Desarrollo:</strong> Proporcionan detalles, ejemplos y explicaciones. <span class="example">Ejemplo: Un párrafo que analiza la estructura de costos de una empresa.</span></li>
+        <li><strong>Párrafos Conclusivos:</strong> Resumen los puntos clave. <span class="example">Ejemplo: Una conclusión en un informe de auditoría que resume los hallazgos.</span></li>
+    </ul>
+
+    <div class="subheader">Recursos Lingüísticos para Identificar Tipos de Párrafos</div>
+    <ul class="bullet-list">
+        <li><strong>Conectores:</strong> Palabras como "however", "therefore" e "in addition" indican relaciones entre ideas.</li>
+        <li><strong>Verbos:</strong> Verbos de acción (ej.: "analyze", "calculate") revelan el propósito del párrafo.</li>
+        <li><strong>Adverbios:</strong> Palabras como "initially", "subsequently" y "finally" indican secuencia.</li>
+        <li><strong>Pronombres:</strong> Palabras como "this", "that" y "these" se refieren a ideas mencionadas anteriormente.</li>
+    </ul>
+
+    <div class="section-header">La Oración</div>
+    <div class="subheader">Definición de una Oración</div>
+    <div class="definition-box">
+        <p>Una oración es la unidad más pequeña del lenguaje que expresa un pensamiento completo.</p>
+    </div>
+
+    <div class="subheader">Características de una Oración</div>
+    <ul class="bullet-list">
+        <li><strong>Intencionalidad:</strong> Cada oración tiene un propósito, como informar, cuestionar o ordenar. <span class="example">Ejemplo: "The company's revenue increased by 10%." (Informativa)</span></li>
+        <li><strong>Estructura:</strong> Las oraciones se organizan jerárquicamente, con un sujeto y un predicado. <span class="example">Ejemplo: "The auditor reviewed the financial statements."</span></li>
+        <li><strong>Modalidad:</strong> Las oraciones pueden ser declarativas, interrogativas, exclamativas o imperativas. <span class="example">Ejemplo: "Submit the tax return by April 15." (Imperativa)</span></li>
+        <li><strong>Completitud:</strong> Las oraciones transmiten un pensamiento completo. <span class="example">Ejemplo: "The balance sheet is accurate."</span></li>
+    </ul>
+
+    <div class="subheader">Tipos de Oraciones en Contabilidad/Administración</div>
+    <ul class="bullet-list">
+        <li><strong>Oraciones Simples:</strong> Contienen una cláusula independiente. <span class="example">Ejemplo: "The company reported a profit."</span></li>
+        <li><strong>Oraciones Compuestas:</strong> Contienen dos o más cláusulas independientes. <span class="example">Ejemplo: "Revenue increased, but expenses also rose."</span></li>
+        <li><strong>Oraciones Complejas:</strong> Contienen una cláusula independiente y una o más cláusulas dependientes. <span class="example">Ejemplo: "Although revenue increased, expenses rose as well."</span></li>
+    </ul>
+
+    <div class="subheader">Relación Jerárquica: Texto, Párrafo, Oración</div>
+    <ul class="bullet-list">
+        <li><strong>Texto:</strong> Una colección de párrafos que desarrollan un tema central (ej.: un informe financiero).</li>
+        <li><strong>Párrafo:</strong> Un grupo de oraciones que desarrollan una sola idea (ej.: una sección sobre tendencias de ingresos).</li>
+        <li><strong>Oración:</strong> La unidad más pequeña que expresa un pensamiento completo (ej.: "Revenue increased by 10%.").</li>
+    </ul>
+
+    <div class="section-header">Importancia de la Correcta Interpretación de Textos en Contabilidad/Administración</div>
+    <div class="importance-box">
+        <ul class="bullet-list">
+            <li>Comunicación Efectiva: Garantiza una comprensión clara de la información financiera.</li>
+            <li>Acceso a la Información: Facilita la comprensión de normas y regulaciones contables/administrativas.</li>
+            <li>Desarrollo Profesional: Mejora la capacidad de analizar e interpretar datos financieros.</li>
+            <li>Toma de Decisiones: Apoya decisiones empresariales y de inversión informadas.</li>
+        </ul>
+    </div>
+
+    <div class="section-header">Habilidades Desarrolladas a través de la Interpretación de Textos</div>
+    <ul class="bullet-list">
+        <li><strong>Comprensión Lectora:</strong> Capacidad de extraer y comprender información.</li>
+        <li><strong>Análisis Crítico:</strong> Evaluar la validez y relevancia de los datos financieros.</li>
+        <li><strong>Vocabulario:</strong> Ampliar el conocimiento de la terminología contable/administrativa.</li>
+        <li><strong>Gramática:</strong> Dominar la estructura y sintaxis de las oraciones.</li>
+        <li><strong>Razonamiento:</strong> Sacar conclusiones lógicas a partir de información financiera.</li>
+    </ul>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">QSG_UNIT5_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GUÍA (PDF)
+    </button>
+</div>
+
+</body>
+</html>
