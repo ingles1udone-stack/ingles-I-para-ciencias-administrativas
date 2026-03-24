@@ -11,7 +11,6 @@
         :root {
             --neon-green: #00ff41;
             --dark-bg: #0a0a0a;
-            --crt-overlay: rgba(18, 16, 16, 0.1);
         }
 
         body {
@@ -63,7 +62,7 @@
 
         /* Botón de Hardware "Bitácora" - inicialmente invisible e inactivo */
         .hardware-btn-container {
-            display: none;          /* completamente oculto hasta finalizar */
+            display: none;
             justify-content: center;
             margin: 40px 0;
             opacity: 0;
@@ -71,7 +70,7 @@
         }
 
         .hardware-btn-container.visible {
-            display: flex;          /* se hace visible */
+            display: flex;
             opacity: 1;
         }
 
@@ -90,7 +89,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s active;
+            transition: transform 0.1s ease, box-shadow 0.2s;
             outline: none;
         }
 
@@ -103,12 +102,36 @@
             border-radius: 50%;
             border: 4px solid #400;
             box-shadow: inset 0 5px 10px rgba(255,255,255,0.3);
-            transition: transform 0.1s;
+            transition: transform 0.1s cubic-bezier(0.2, 1.2, 0.8, 1);
         }
 
+        /* Efecto al presionar */
         .bitacora-btn:active::before {
             transform: scale(0.92);
-            background: radial-gradient(circle, #cc0000 0%, #660000 100%);
+            background: radial-gradient(circle, #ff6666 0%, #aa2222 100%);
+        }
+
+        .bitacora-btn:active {
+            transform: scale(0.97);
+            box-shadow: 0 0 0 4px #111, 0 5px 15px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.2);
+        }
+
+        /* Efecto de energía al hacer clic (clase temporal) */
+        .bitacora-btn.energy-burst {
+            animation: energyPulse 0.3s cubic-bezier(0.2, 2, 0.8, 1);
+        }
+
+        @keyframes energyPulse {
+            0% {
+                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0,0,0,0.8), inset 0 0 0 rgba(255,200,100,0);
+            }
+            50% {
+                box-shadow: 0 0 0 4px #ffaa33, 0 0 30px 15px #ff5500, inset 0 0 20px 5px rgba(255,200,0,0.8);
+                border-color: #ffaa33;
+            }
+            100% {
+                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0,0,0,0.8), inset 0 0 0 rgba(255,200,100,0);
+            }
         }
 
         .bitacora-btn span {
@@ -120,6 +143,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.5);
             pointer-events: none;
             font-size: 1.2rem;
+            z-index: 2;
         }
 
         .btn-label {
@@ -168,12 +192,6 @@
             0%, 100% { opacity: 0.3; }
             50% { opacity: 0.8; }
         }
-
-        .highlight {
-            color: #fff;
-            background: rgba(0, 255, 65, 0.2);
-            padding: 0 4px;
-        }
     </style>
 </head>
 <body onclick="advanceText()">
@@ -199,6 +217,7 @@
     <div class="instruction-tap" id="tap-hint">TOQUE LA PANTALLA PARA CONTINUAR...</div>
 
     <script>
+        // ------------------- TEXTO Y ANIMACIÓN DE MÁQUINA DE ESCRIBIR -------------------
         const content = [
             "> INICIALIZANDO PROTOCOLO DE APRENDIZAJE...\n",
             "> CARGANDO GUÍA DE BITÁCORA V1.0...\n\n",
@@ -232,7 +251,7 @@
         let charIndex = 0;
         let isTyping = false;
         let finished = false;
-        const speed = 30; // ms por carácter
+        const speed = 30;
         const textElement = document.getElementById('text-content');
         const actionArea = document.getElementById('action-area');
         const backBtn = document.getElementById('back-btn');
@@ -257,7 +276,7 @@
         }
 
         function advanceText() {
-            if (finished) return;     // no hacer nada si ya terminó
+            if (finished) return;
             if (isTyping) return;
             if (currentLine < content.length) {
                 isTyping = true;
@@ -267,22 +286,105 @@
 
         function finishTerminal() {
             finished = true;
-            // Mostrar el botón y el enlace de regreso
             actionArea.classList.add('visible');
             backBtn.style.display = 'inline-block';
             tapHint.style.display = 'none';
-            // Remover el cursor intermitente (opcional)
             const cursorSpan = document.getElementById('cursor');
             if (cursorSpan) cursorSpan.style.display = 'none';
         }
 
-        // Asignar el evento click al botón de bitácora de forma segura
+        // ------------------- SONIDO ÉPICO: LASER / CARGA ENERGÉTICA -------------------
+        let audioCtx = null;
+        let soundEnabled = false;
+
+        async function playLaserChargeSound() {
+            try {
+                if (!audioCtx) {
+                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+                // Reanudar contexto si está suspendido (necesario en navegadores modernos)
+                if (audioCtx.state === 'suspended') {
+                    await audioCtx.resume();
+                }
+
+                const now = audioCtx.currentTime;
+
+                // 1. Ruido de carga ascendente (filter sweep)
+                const oscCharge = audioCtx.createOscillator();
+                const gainCharge = audioCtx.createGain();
+                const filterCharge = audioCtx.createBiquadFilter();
+                oscCharge.type = 'sawtooth';
+                oscCharge.frequency.setValueAtTime(80, now);
+                oscCharge.frequency.exponentialRampToValueAtTime(600, now + 0.25);
+                filterCharge.type = 'lowpass';
+                filterCharge.frequency.setValueAtTime(200, now);
+                filterCharge.frequency.exponentialRampToValueAtTime(1800, now + 0.25);
+                gainCharge.gain.setValueAtTime(0.35, now);
+                gainCharge.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+                oscCharge.connect(filterCharge);
+                filterCharge.connect(gainCharge);
+                gainCharge.connect(audioCtx.destination);
+                oscCharge.start(now);
+                oscCharge.stop(now + 0.3);
+
+                // 2. Disparo láser agudo + armónicos
+                const oscLaser = audioCtx.createOscillator();
+                const gainLaser = audioCtx.createGain();
+                oscLaser.type = 'square';
+                oscLaser.frequency.setValueAtTime(1800, now + 0.25);
+                oscLaser.frequency.exponentialRampToValueAtTime(3200, now + 0.45);
+                gainLaser.gain.setValueAtTime(0.4, now + 0.25);
+                gainLaser.gain.exponentialRampToValueAtTime(0.0001, now + 0.6);
+                oscLaser.connect(gainLaser);
+                gainLaser.connect(audioCtx.destination);
+                oscLaser.start(now + 0.25);
+                oscLaser.stop(now + 0.6);
+
+                // 3. Descarga eléctrica: ruido blanco con envolvente rápida
+                const bufferSize = 4096;
+                const noiseNode = audioCtx.createScriptProcessor(bufferSize, 1, 1);
+                const gainNoise = audioCtx.createGain();
+                noiseNode.onaudioprocess = function(e) {
+                    const output = e.outputBuffer.getChannelData(0);
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * 0.8;
+                    }
+                };
+                gainNoise.gain.setValueAtTime(0.2, now + 0.2);
+                gainNoise.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+                noiseNode.connect(gainNoise);
+                gainNoise.connect(audioCtx.destination);
+                noiseNode.start(now + 0.2);
+                setTimeout(() => {
+                    try {
+                        noiseNode.disconnect();
+                        gainNoise.disconnect();
+                    } catch(e) {}
+                }, 500);
+            } catch (err) {
+                console.warn("Audio no disponible:", err);
+            }
+        }
+
+        // ------------------- EVENTO DEL BOTÓN ROJO -------------------
         bitacoraBtn.addEventListener('click', function(e) {
-            e.stopPropagation();   // Evitar que el click en el botón también active advanceText
-            window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
+            e.stopPropagation(); // evitar que el click avance el texto si aún está visible
+            // Añadir efecto visual de energía
+            bitacoraBtn.classList.add('energy-burst');
+            setTimeout(() => {
+                bitacoraBtn.classList.remove('energy-burst');
+            }, 300);
+
+            // Reproducir sonido láser/energía
+            playLaserChargeSound();
+
+            // Redirigir al formulario después de un pequeño delay para que el sonido y animación se sientan
+            setTimeout(() => {
+                window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
+            }, 150);
         });
 
-        // Iniciar la primera línea automáticamente
+        // Iniciar escritura automática
         window.onload = () => {
             advanceText();
         };
