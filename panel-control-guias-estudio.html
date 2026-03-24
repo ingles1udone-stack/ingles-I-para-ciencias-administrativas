@@ -58,47 +58,57 @@
             transition: all 0.2s;
         }
 
-        /* header area */
-        .terminal-header {
-            text-align: center;
-            padding: 20px 12px 12px 12px;
-            border-bottom: 1px dashed var(--phosphor-green);
-            position: relative;
+        /* back bar: separate, above header */
+        .back-bar {
+            padding: 14px 18px 0 18px;
+            display: flex;
+            justify-content: flex-start;
         }
-        .decode-title {
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            text-shadow: 0 0 6px var(--phosphor-green);
-            animation: pulse 2s infinite;
-            font-weight: bold;
-            word-break: keep-all;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--phosphor-green);}
-            50% { opacity: 0.7; text-shadow: 0 0 12px var(--phosphor-green);}
-        }
-
-        /* back button */
         .back-btn {
-            position: absolute;
-            top: 18px;
-            left: 18px;
-            padding: 5px 14px;
-            border: 1px solid var(--phosphor-green);
-            border-radius: 30px;
-            font-size: 0.7rem;
+            padding: 6px 16px;
+            border: 1.5px solid var(--phosphor-green);
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: bold;
             text-decoration: none;
             color: var(--phosphor-green);
-            font-weight: bold;
-            transition: all 0.25s;
-            background: rgba(0, 30, 0, 0.5);
+            background: rgba(0, 30, 0, 0.6);
             backdrop-filter: blur(4px);
-            z-index: 50;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            letter-spacing: 0.5px;
         }
         .back-btn:hover {
             background: var(--phosphor-green);
             color: black;
             box-shadow: 0 0 12px var(--phosphor-green);
+            transform: scale(1.02);
+        }
+
+        /* header area */
+        .terminal-header {
+            text-align: center;
+            padding: 12px 12px 10px 12px;
+            border-bottom: 1px dashed var(--phosphor-green);
+            position: relative;
+        }
+        .decode-title {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px var(--phosphor-green);
+            animation: pulse 2s infinite;
+            font-weight: bold;
+            word-break: keep-all;
+            background: rgba(0,0,0,0.4);
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 40px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; text-shadow: 0 0 5px var(--phosphor-green);}
+            50% { opacity: 0.7; text-shadow: 0 0 12px var(--phosphor-green);}
         }
 
         /* MASCOT SECTION: FULL SIZE PRESERVED */
@@ -107,8 +117,9 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 20px 12px 16px 12px;
+            padding: 16px 12px 12px 12px;
             border-bottom: 1px solid rgba(0, 255, 65, 0.3);
+            cursor: crosshair;
         }
         #mascot-svg {
             width: 100%;
@@ -117,6 +128,10 @@
             filter: drop-shadow(0 0 12px var(--phosphor-green));
             display: block;
             margin: 0 auto;
+            transition: filter 0.2s;
+        }
+        #mascot-svg:hover {
+            filter: drop-shadow(0 0 18px #00ff41);
         }
         .status-area {
             text-align: center;
@@ -132,7 +147,7 @@
             border: 1px solid var(--phosphor-green);
         }
 
-        /* BUTTONS GRID: flexible, adjusted to mobile */
+        /* BUTTONS GRID */
         .guides-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -141,7 +156,6 @@
             background: rgba(0, 0, 0, 0.4);
         }
 
-        /* redesigned buttons: rounded-pill style but maintain terminal vibe */
         .guide-btn {
             background: rgba(0, 30, 0, 0.7);
             backdrop-filter: blur(4px);
@@ -177,7 +191,7 @@
             border-color: #b3ffb3;
         }
 
-        /* emergency container: compact but prominent */
+        /* emergency container */
         .emergency-wrapper {
             display: flex;
             justify-content: center;
@@ -251,7 +265,6 @@
             backdrop-filter: blur(2px);
         }
 
-        /* small extra details */
         .footer-note {
             text-align: center;
             font-size: 0.55rem;
@@ -261,7 +274,7 @@
             margin-top: 6px;
         }
 
-        /* responsive fine-tune: if screen too small, buttons text wraps */
+        /* responsive */
         @media (max-width: 460px) {
             .guides-grid {
                 gap: 12px;
@@ -275,13 +288,14 @@
                 font-size: 0.6rem;
             }
             .decode-title {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
+            }
+            .back-bar {
+                padding: 12px 14px 0 14px;
             }
             .back-btn {
-                top: 12px;
-                left: 12px;
-                padding: 4px 10px;
-                font-size: 0.65rem;
+                padding: 5px 12px;
+                font-size: 0.7rem;
             }
             #mascot-svg {
                 max-width: 280px;
@@ -294,45 +308,70 @@
                 font-size: 46px;
             }
         }
-
-        /* no reduction of mascot size — preserved full scale */
         @media (max-width: 380px) {
             #mascot-svg {
                 max-width: 260px;
             }
         }
 
-        /* eye animation class keep */
-        .eye-pupil {
-            animation: lookAround 5s infinite;
-            transform-origin: center;
+        /* pupil base styling */
+        .pupil {
+            transition: transform 0.08s linear;
+            will-change: transform;
         }
-        @keyframes lookAround {
-            0%, 10% { transform: translate(0, 0); }
-            15%, 25% { transform: translate(3px, -2px); }
-            30%, 45% { transform: translate(-3px, 1px); }
-            50%, 60% { transform: translate(0, 2px); }
-            65%, 100% { transform: translate(0, 0); }
+        /* idle animation for pupils (gentle wandering) */
+        .pupil-idle {
+            animation: idleLook 4.5s ease-in-out infinite;
         }
+        @keyframes idleLook {
+            0% { transform: translate(0px, 0px); }
+            20% { transform: translate(2px, -1px); }
+            40% { transform: translate(-2px, 1px); }
+            60% { transform: translate(1px, 2px); }
+            80% { transform: translate(-1px, -1px); }
+            100% { transform: translate(0px, 0px); }
+        }
+        /* left pupil slight independent timing for more organic feel */
+        .left-pupil {
+            animation-delay: 0s;
+        }
+        .right-pupil {
+            animation-delay: 0.6s;
+        }
+
+        /* arm interactive animation */
         .arm-wave {
             transform-origin: 80% 60%;
             animation: wave 3s ease-in-out infinite;
+            transition: all 0.2s;
+        }
+        .arm-wave-active {
+            animation: waveIntense 0.8s ease-in-out infinite !important;
         }
         @keyframes wave {
             0%, 100% { transform: rotate(0deg); }
-            50% { transform: rotate(-15deg); }
+            50% { transform: rotate(-14deg); }
+        }
+        @keyframes waveIntense {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-18deg); }
+            75% { transform: rotate(6deg); }
+            100% { transform: rotate(0deg); }
+        }
+        /* subtle hover on other arm */
+        .static-arm {
+            transition: transform 0.2s;
+            transform-origin: 20% 70%;
+        }
+        .mascot-section:hover .static-arm {
+            transform: translateY(2px);
         }
     </style>
     <!-- Load Tailwind just for minimal extra helpers but we override mostly custom -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* override tailwind default to keep our style consistent */
         body, .mobile-terminal, .guide-btn, .emergency-label {
             font-family: 'Fira Code', monospace;
-        }
-        /* ensure no unwanted margin */
-        .tailwind-override {
-            all: unset;
         }
     </style>
 </head>
@@ -340,16 +379,20 @@
     <div class="crt-overlay"></div>
 
     <div class="mobile-terminal">
-        <!-- header with decode title and back button -->
-        <div class="terminal-header">
+        <!-- BACK BUTTON ABOVE HEADER: no overlap -->
+        <div class="back-bar">
             <a href="https://ingles1udone-stack.github.io/ingles-I-para-ciencias-administrativas/index.html" class="back-btn">
                 ← REGRESAR
             </a>
+        </div>
+        
+        <!-- header with decode title -->
+        <div class="terminal-header">
             <div class="decode-title">DECODE THE TEXT & ANALYSIS PROTOCOL</div>
         </div>
 
-        <!-- MASCOT SECTION: size preserved, full animations intact -->
-        <div class="mascot-section">
+        <!-- MASCOT SECTION: INTERACTIVE EYES + ARMS -->
+        <div class="mascot-section" id="mascotArea">
             <svg id="mascot-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                 <!-- Cuerpo del libro -->
                 <rect x="100" y="80" width="200" height="240" rx="15" fill="none" stroke="#00ff41" stroke-width="8" />
@@ -357,25 +400,28 @@
                 <path d="M300 80 L310 70 L310 310 L300 320" fill="none" stroke="#00ff41" stroke-width="4" />
                 <!-- Circuitos decorativos -->
                 <path d="M110 100 H140 M110 120 H130 M110 300 H150" stroke="#00ff41" stroke-width="2" opacity="0.6"/>
-                <!-- Lentes -->
+                <!-- Lentes (círculos oculares) -->
                 <circle cx="160" cy="160" r="30" fill="none" stroke="#00ff41" stroke-width="4" />
                 <circle cx="240" cy="160" r="30" fill="none" stroke="#00ff41" stroke-width="4" />
                 <path d="M190 160 H210" stroke="#00ff41" stroke-width="4" />
-                <!-- Ojos (Pupilas animadas) -->
-                <g class="eye-pupil">
-                    <circle cx="165" cy="160" r="8" fill="#00ff41" />
-                    <circle cx="245" cy="160" r="8" fill="#00ff41" />
-                </g>
+                
+                <!-- PUPILAS INTERACTIVAS: se moverán con el mouse e idle animation -->
+                <circle cx="165" cy="160" r="9" fill="#00ff41" class="pupil left-pupil pupil-idle" id="leftPupil" />
+                <circle cx="245" cy="160" r="9" fill="#00ff41" class="pupil right-pupil pupil-idle" id="rightPupil" />
+                
                 <!-- Boca sonrisa -->
                 <path d="M170 210 Q200 230 230 210" fill="none" stroke="#00ff41" stroke-width="4" stroke-linecap="round" />
-                <!-- Brazo saludando animado -->
-                <g class="arm-wave">
+                <!-- Brazo saludando animado (derecho) -->
+                <g class="arm-wave" id="waveArm">
                     <path d="M300 220 C340 220 360 180 350 150" fill="none" stroke="#00ff41" stroke-width="6" />
                     <circle cx="350" cy="150" r="10" fill="#00ff41" />
                 </g>
-                <!-- Brazo sosteniendo -->
-                <path d="M100 220 C60 220 40 250 50 280" fill="none" stroke="#00ff41" stroke-width="6" />
-                <!-- Libro abierto estático -->
+                <!-- Brazo izquierdo (estático pero con micro-interacción) -->
+                <g class="static-arm" id="staticArm">
+                    <path d="M100 220 C60 220 40 250 50 280" fill="none" stroke="#00ff41" stroke-width="6" />
+                    <circle cx="48" cy="282" r="8" fill="#00ff41" />
+                </g>
+                <!-- Libro abierto -->
                 <g transform="translate(140, 250)">
                     <rect x="0" y="0" width="120" height="40" fill="none" stroke="#00ff41" stroke-width="3" />
                     <line x1="60" y1="0" x2="60" y2="40" stroke="#00ff41" stroke-width="3" />
@@ -411,67 +457,12 @@
                 <div class="emergency-label">MODELOS DE EXAMEN</div>
             </div>
         </div>
-        <div class="footer-note">⟡ sistema interactivo v2.0 | protocolo activo ⟡</div>
+        <div class="footer-note">⟡ sistema interactivo v2.0 | protocolo activo | mascota interactiva ⟡</div>
     </div>
 
     <script>
-        // Preserve random CRT flicker effect (subtle)
-        setInterval(() => {
-            const terminal = document.querySelector('.mobile-terminal');
-            if (terminal && Math.random() > 0.98) {
-                terminal.style.opacity = '0.85';
-                setTimeout(() => { if(terminal) terminal.style.opacity = '1'; }, 60);
-            } else if(terminal) {
-                terminal.style.opacity = '1';
-            }
-        }, 180);
-
-        // EYE TRACKING: pupils follow hover over buttons & emergency (but keep animation default)
-        const pupilsGroup = document.querySelector('.eye-pupil');
-        const allButtons = document.querySelectorAll('.guide-btn');
-        const emergencyBtnElem = document.getElementById('emergencyButton');
-        
-        function resetPupils() {
-            if(pupilsGroup) {
-                pupilsGroup.style.animation = 'lookAround 5s infinite';
-                pupilsGroup.style.transform = 'translate(0px, 0px)';
-            }
-        }
-        
-        function movePupils(xOffset = 0, yOffset = 0) {
-            if(pupilsGroup) {
-                pupilsGroup.style.animation = 'none';
-                pupilsGroup.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-            }
-        }
-        
-        // left side guides (1-4) look left, right side (5-8) look right, emergency look down
-        allButtons.forEach(btn => {
-            btn.addEventListener('mouseenter', (e) => {
-                const classes = btn.classList;
-                let isLeft = false;
-                // detect position by text content or better: we can detect its position in grid? but we use index
-                // simpler: check if it's among guias 1-4 -> left side
-                const btnText = btn.innerText;
-                if(btnText.includes('GUÍA 1') || btnText.includes('GUÍA 2') || btnText.includes('GUÍA 3') || btnText.includes('GUÍA 4')) {
-                    movePupils(-6, -1);
-                } else {
-                    movePupils(6, -1);
-                }
-            });
-            btn.addEventListener('mouseleave', resetPupils);
-        });
-        
-        if(emergencyBtnElem && pupilsGroup) {
-            emergencyBtnElem.addEventListener('mouseenter', () => {
-                movePupils(0, 8);
-            });
-            emergencyBtnElem.addEventListener('mouseleave', resetPupils);
-        }
-        
-        // ========== RETRO-FUTURISTIC SOUNDS (Web Audio) with same logic but improved compatibility ==========
+        // ---------- RETRO SOUNDS (preserved) ----------
         let audioContextGlobal = null;
-        
         function playRetroComputerSound() {
             try {
                 if (!audioContextGlobal) {
@@ -480,7 +471,6 @@
                 const ctx = audioContextGlobal;
                 const resumePlay = () => {
                     const now = ctx.currentTime;
-                    // main synth sweep
                     const osc = ctx.createOscillator();
                     const gainNode = ctx.createGain();
                     osc.type = 'sawtooth';
@@ -505,7 +495,6 @@
                     osc2.start(now);
                     osc2.stop(now + 0.1);
                     
-                    // tiny noise blip
                     const bufferSize = 2048;
                     const noiseNode = ctx.createScriptProcessor(bufferSize, 1, 1);
                     const noiseGain = ctx.createGain();
@@ -523,27 +512,19 @@
                         try { noiseNode.disconnect(); noiseGain.disconnect(); } catch(e) {}
                     }, 80);
                 };
-                
                 if (ctx.state === 'suspended') {
                     ctx.resume().then(() => { resumePlay(); }).catch(e => console.warn("Audio resume error"));
                 } else {
                     resumePlay();
                 }
-            } catch (err) {
-                // silent fail
-            }
+            } catch (err) {}
         }
-        
-        // attach hover sound to emergency button
+
+        // attach hover sounds to emergency button
+        const emergencyBtnElem = document.getElementById('emergencyButton');
         if (emergencyBtnElem) {
-            emergencyBtnElem.addEventListener('mouseenter', (e) => {
-                playRetroComputerSound();
-                // little vibration-like scale effect already in CSS
-            });
-            emergencyBtnElem.addEventListener('touchstart', (e) => {
-                playRetroComputerSound();
-            });
-            // additional click beep (confirmation)
+            emergencyBtnElem.addEventListener('mouseenter', () => playRetroComputerSound());
+            emergencyBtnElem.addEventListener('touchstart', () => playRetroComputerSound());
             emergencyBtnElem.addEventListener('click', (e) => {
                 try {
                     if(!audioContextGlobal) audioContextGlobal = new (window.AudioContext || window.webkitAudioContext)();
@@ -567,22 +548,10 @@
             });
         }
         
-        // Also attach to the emergency label hover for immersion (extra)
-        const labelEmergency = document.querySelector('.emergency-label');
-        if(labelEmergency && emergencyBtnElem) {
-            labelEmergency.addEventListener('mouseenter', () => {
-                playRetroComputerSound();
-            });
-        }
-        
-        // Optional: maintain that pupils also follow the emergency + general hover extra effect: Already added.
-        // Also interactive glowing effect on buttons (preserved)
-        
-        // Additional function: add subtle blink on any guide click? not necessary but adds immersion
+        // micro sounds for guide buttons
         const allGuideBtns = document.querySelectorAll('.guide-btn');
         allGuideBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // subtle micro audio optional but not intrusive
                 try {
                     if(audioContextGlobal && audioContextGlobal.state !== 'closed') {
                         const ctx = audioContextGlobal;
@@ -606,8 +575,155 @@
             });
         });
         
-        // Additional tiny detail: Random status blink in mascot (already present)
-        // Ensure no reduction of mascot size: done via CSS max-width auto
+        // ---------- MASCOT INTERACTIVITY: EYES TRACK MOUSE + ARM ACTIVE ON HOVER ----------
+        const svgElement = document.getElementById('mascot-svg');
+        const leftPupil = document.getElementById('leftPupil');
+        const rightPupil = document.getElementById('rightPupil');
+        const waveArmGroup = document.getElementById('waveArm');
+        const mascotContainer = document.getElementById('mascotArea');
+        
+        // eye centers in viewBox coordinates (0-400)
+        const leftEyeCenter = { cx: 165, cy: 160 };
+        const rightEyeCenter = { cx: 245, cy: 160 };
+        const maxOffset = 12; // max movement radius (pupils stay inside lens)
+        
+        // get mouse position relative to SVG viewBox coordinates
+        function getMouseViewBoxCoords(e, svg) {
+            const pt = svg.createSVGPoint();
+            pt.x = e.clientX;
+            pt.y = e.clientY;
+            const cursor = pt.matrixTransform(svg.getScreenCTM().inverse());
+            return { x: cursor.x, y: cursor.y };
+        }
+        
+        // update pupil position based on mouse
+        function updatePupils(mouseX, mouseY) {
+            if (!leftPupil || !rightPupil) return;
+            // vector for left eye
+            let dxLeft = mouseX - leftEyeCenter.cx;
+            let dyLeft = mouseY - leftEyeCenter.cy;
+            let distanceLeft = Math.hypot(dxLeft, dyLeft);
+            let moveXLeft = 0, moveYLeft = 0;
+            if (distanceLeft > 0.1) {
+                let ratio = Math.min(maxOffset, distanceLeft) / distanceLeft;
+                moveXLeft = dxLeft * ratio;
+                moveYLeft = dyLeft * ratio;
+            }
+            // right eye
+            let dxRight = mouseX - rightEyeCenter.cx;
+            let dyRight = mouseY - rightEyeCenter.cy;
+            let distanceRight = Math.hypot(dxRight, dyRight);
+            let moveXRight = 0, moveYRight = 0;
+            if (distanceRight > 0.1) {
+                let ratio = Math.min(maxOffset, distanceRight) / distanceRight;
+                moveXRight = dxRight * ratio;
+                moveYRight = dyRight * ratio;
+            }
+            // apply transforms
+            leftPupil.style.transform = `translate(${moveXLeft}px, ${moveYLeft}px)`;
+            rightPupil.style.transform = `translate(${moveXRight}px, ${moveYRight}px)`;
+        }
+        
+        // remove idle animation while tracking
+        function disableIdleAnimation() {
+            leftPupil.classList.remove('pupil-idle');
+            rightPupil.classList.remove('pupil-idle');
+        }
+        
+        function enableIdleAnimation() {
+            leftPupil.classList.add('pupil-idle');
+            rightPupil.classList.add('pupil-idle');
+        }
+        
+        function resetPupilsToIdle() {
+            leftPupil.style.transform = '';
+            rightPupil.style.transform = '';
+            enableIdleAnimation();
+        }
+        
+        // Mousemove handler on SVG
+        let trackingActive = false;
+        function onMouseMoveInsideSvg(e) {
+            if (!svgElement) return;
+            const coords = getMouseViewBoxCoords(e, svgElement);
+            if (!trackingActive) {
+                trackingActive = true;
+                disableIdleAnimation();
+            }
+            updatePupils(coords.x, coords.y);
+        }
+        
+        function onMouseLeaveSvg() {
+            trackingActive = false;
+            resetPupilsToIdle();
+        }
+        
+        if (svgElement) {
+            svgElement.addEventListener('mousemove', onMouseMoveInsideSvg);
+            svgElement.addEventListener('mouseleave', onMouseLeaveSvg);
+            // also for touch devices
+            svgElement.addEventListener('touchmove', (e) => {
+                e.preventDefault();
+                if (e.touches.length) {
+                    const touch = e.touches[0];
+                    const fakeEvent = { clientX: touch.clientX, clientY: touch.clientY };
+                    const coords = getMouseViewBoxCoords(fakeEvent, svgElement);
+                    if (!trackingActive) {
+                        trackingActive = true;
+                        disableIdleAnimation();
+                    }
+                    updatePupils(coords.x, coords.y);
+                }
+            });
+            svgElement.addEventListener('touchend', () => {
+                trackingActive = false;
+                resetPupilsToIdle();
+            });
+        }
+        
+        // ARM INTERACTION: more dynamic wave on mascot hover
+        if (waveArmGroup && mascotContainer) {
+            mascotContainer.addEventListener('mouseenter', () => {
+                waveArmGroup.classList.add('arm-wave-active');
+                // subtle sound for immersion
+                playRetroComputerSound();
+            });
+            mascotContainer.addEventListener('mouseleave', () => {
+                waveArmGroup.classList.remove('arm-wave-active');
+            });
+            // also make the static arm wiggle slightly on hover
+            const staticArm = document.getElementById('staticArm');
+            if (staticArm) {
+                mascotContainer.addEventListener('mouseenter', () => {
+                    staticArm.style.transform = 'translateY(3px)';
+                });
+                mascotContainer.addEventListener('mouseleave', () => {
+                    staticArm.style.transform = '';
+                });
+            }
+        }
+        
+        // preserve CRT flicker effect
+        setInterval(() => {
+            const terminal = document.querySelector('.mobile-terminal');
+            if (terminal && Math.random() > 0.98) {
+                terminal.style.opacity = '0.85';
+                setTimeout(() => { if(terminal) terminal.style.opacity = '1'; }, 60);
+            } else if(terminal) {
+                terminal.style.opacity = '1';
+            }
+        }, 180);
+        
+        // extra pupils idle animation already applied via CSS, but we ensure initial class
+        // also ensures when not hovering, the pupils wander nicely.
+        // ensure that any pre-existing inline styles are cleared after idle
+        window.addEventListener('load', () => {
+            if (leftPupil && rightPupil) {
+                leftPupil.style.transform = '';
+                rightPupil.style.transform = '';
+                enableIdleAnimation();
+            }
+        });
     </script>
 </body>
-                        </html>
+                </html>
