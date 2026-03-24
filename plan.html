@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TERMINAL: Plan de Evaluación 2026</title>
+    <!-- Google Fonts: Share Tech Mono para estilo terminal -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0b10;
+            --primary-cyan: #00f2ff;
+            --primary-magenta: #ff00ff;
+            --text-color: #c0caf5;
+            --border-glow: 0 0 10px rgba(0, 242, 255, 0.5);
+            --neon-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+        }
+
+        * {
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(20, 20, 35, 1) 0%, rgba(5, 5, 10, 1) 100%),
+                linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.2) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            background-size: 100% 100%, 100% 4px, 3px 100%;
+            color: var(--text-color);
+            font-family: 'Share Tech Mono', monospace;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Efecto CRT */
+        body::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: rgba(18, 16, 16, 0.1);
+            opacity: 0;
+            z-index: 9999;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.02; }
+            100% { opacity: 0.08; }
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 20px;
+            border: 2px solid var(--primary-cyan);
+            box-shadow: var(--border-glow);
+            background: rgba(0, 0, 0, 0.8);
+            position: relative;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 10px var(--primary-cyan);
+            border-bottom: 2px solid var(--primary-cyan);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .layout { grid-template-columns: 1fr; }
+        }
+
+        /* Cuadrícula de botones */
+        .eval-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+        }
+
+        .eval-btn {
+            background: transparent;
+            border: 1px solid var(--primary-magenta);
+            color: var(--primary-magenta);
+            padding: 15px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 0 var(--primary-magenta);
+        }
+
+        .eval-btn:hover {
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 15px var(--primary-magenta);
+            transform: translateY(-2px);
+        }
+
+        .eval-btn.active {
+            background: var(--primary-magenta);
+            color: #000;
+            box-shadow: 0 0 20px var(--primary-magenta);
+        }
+
+        .eval-btn .weight {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+
+        /* Sección Estrategia */
+        .strategy-panel {
+            border: 1px solid var(--primary-cyan);
+            padding: 20px;
+            background: rgba(0, 242, 255, 0.05);
+            min-height: 200px;
+            position: relative;
+        }
+
+        .strategy-panel h2 {
+            font-size: 1.2rem;
+            color: var(--primary-cyan);
+            margin-top: 0;
+            border-bottom: 1px solid var(--primary-cyan);
+        }
+
+        #strategy-content {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: #fff;
+        }
+
+        /* Botón Especial ? */
+        .help-center {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .special-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--primary-cyan);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 2s infinite;
+        }
+
+        .special-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--primary-cyan);
+            color: #000;
+            box-shadow: 0 0 40px var(--primary-cyan);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px var(--primary-cyan); }
+            50% { box-shadow: 0 0 25px var(--primary-cyan); }
+            100% { box-shadow: 0 0 10px var(--primary-cyan); }
+        }
+
+        /* Botón Volver al Inicio */
+        .home-btn {
+            background: transparent;
+            border: 1px solid var(--primary-magenta);
+            padding: 12px 24px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: var(--primary-magenta);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 12px var(--primary-magenta);
+            transform: scale(1.02);
+        }
+
+        /* Pantalla Terminal Modal */
+        .terminal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .terminal-window {
+            width: 100%;
+            max-width: 700px;
+            max-height: 85vh;
+            border: 2px solid var(--primary-cyan);
+            background: #050505;
+            padding: 20px;
+            box-shadow: 0 0 50px rgba(0, 242, 255, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            color: var(--primary-cyan);
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+            animation: blink 1s step-end infinite;
+        }
+
+        .terminal-body {
+            color: #00ff41;
+            font-size: 1rem;
+            line-height: 1.5;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 10px;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        /* Estilo de la barra de scroll retro */
+        .terminal-body::-webkit-scrollbar {
+            width: 6px;
+            background: #222;
+        }
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: var(--primary-cyan);
+            border-radius: 3px;
+        }
+
+        .terminal-btn {
+            margin-top: 15px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            font-family: 'Share Tech Mono', monospace;
+            cursor: pointer;
+            align-self: flex-start;
+        }
+
+        .terminal-btn:hover {
+            background: var(--primary-cyan);
+            color: #000;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+
+        .glitch-effect {
+            animation: glitch 0.3s linear;
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); color: var(--primary-magenta); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); color: var(--primary-cyan); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        .click-hint {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>EVALUATION_PLAN_CORE_v2.6</h1>
+    
+    <div class="layout">
+        <section>
+            <div class="eval-grid" id="evalGrid">
+                <!-- Generado por JS -->
+            </div>
+        </section>
+
+        <aside class="strategy-panel">
+            <h2>ESTRATEGIA SELECTA</h2>
+            <div id="strategy-content">
+                Seleccione un módulo de evaluación para desplegar datos estratégicos...
+            </div>
+        </aside>
+    </div>
+
+    <div class="help-center">
+        <button class="special-btn" id="helpBtn">?</button>
+        <a href="index.html" class="home-btn">⌂ VOLVER AL INICIO</a>
+    </div>
+</div>
+
+<!-- Modal Terminal -->
+<div class="terminal-overlay" id="terminalOverlay">
+    <div class="terminal-window" id="terminalWindow">
+        <div class="terminal-header" id="terminalHeader">> ESTABLECIENDO CONEXIÓN TEMPORAL...</div>
+        <div class="terminal-body" id="terminalBody">
+            <!-- Texto dinámico -->
+        </div>
+        <div class="click-hint" id="clickHint">Haz clic en la pantalla para continuar...</div>
+        <button class="terminal-btn" id="closeTerminal" style="display:none">CERRAR TERMINAL</button>
+    </div>
+</div>
+
+<script>
+    // Datos de evaluaciones
+    const evaluations = [
+        { name: "Quick Test", qty: 4, weight: "5%", total: "20%", strategy: "Son pruebas cortas pero constantes. No faltes a clase, ya que representan el 20% total. Es puntaje 'fácil' si mantienes el ritmo semanal." },
+        { name: "Masterclass", qty: 1, weight: "5%", total: "5%", strategy: "Enfoque total en la participación. Al ser una sola sesión, tu preparación previa definirá ese 5% de inmediato." },
+        { name: "Better Understanding (BU)", qty: 8, weight: "10% c/u", total: "10%", strategy: "Son ejercicios prácticos. Aunque son 8, el peso total es bajo (1.25% cada uno). Úsalos para practicar sin miedo al error." },
+        { name: "My Literary Challenge", qty: 4, weight: "15% c/u", total: "15%", strategy: "Proyectos de lectura. Tienen un peso significativo individualmente. Asegúrate de entregar los 4 para asegurar este 15%." },
+        { name: "Glosario", qty: 1, weight: "5%", total: "5%", strategy: "Es un trabajo de hormiga. Ve alimentándolo cada semana con términos de las clases para que no se acumule al final." },
+        { name: "Inducción", qty: 1, weight: "5%", total: "5%", strategy: "¡Puntos gratis! Solo requiere tu presencia y atención inicial para entender las reglas del juego." },
+        { name: "Bitácora", qty: 8, weight: "5% c/u", total: "5%", strategy: "Reflexión constante. Es una evaluación de proceso. Mantenerla al día te garantiza el éxito con poco esfuerzo técnico." },
+        { name: "Microconferencia", qty: 1, weight: "5%", total: "5%", strategy: "Habilidades comunicativas. Prepara una estructura clara. Son 5 puntos que dependen de 5-10 minutos de exposición." },
+        { name: "Examen Final", qty: 1, weight: "30%", total: "30%", strategy: "El peso pesado. El 30% del curso se define aquí. No lo dejes para el final; usa el glosario y los BU para estudiar progresivamente." }
+    ];
+
+    // Estrategia maestra para el botón especial
+    const masterStrategy = [
+        "MENSAJE DEL FUTURO RECIBIDO...\nAnalizando probabilidades de éxito...",
+        "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': La Inducción, Glosario, Bitácora y Masterclass suman un 20% casi garantizado con solo cumplimiento.",
+        "2. Relación Esfuerzo/Puntaje: Los Quick Tests (20%) son vitales. Estudiar para ellos te prepara automáticamente para el Examen Final (30%). Si dominas estos, ya tienes el 50%.",
+        "3. La Regla del 5: Para alcanzar los 5 puntos necesarios sobre 10, enfócate en entregar TODO lo que valga 5%. Sumar pequeñas victorias es más seguro que apostar todo al examen final.",
+        "CONSEJO FINAL: El Examen Final es el 30%, pero las evaluaciones continuas son el 70%. No necesitas ser perfecto en el examen si eres constante en el semestre. \n\n[FIN DE LA TRANSMISIÓN]"
+    ];
+
+    // Inicializar cuadrícula
+    const grid = document.getElementById('evalGrid');
+    evaluations.forEach((eval, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'eval-btn';
+        btn.innerHTML = `
+            ${eval.name}
+            <span class="weight">Cant: ${eval.qty} | Total: ${eval.total}</span>
+        `;
+        btn.onclick = () => showStrategy(eval, btn);
+        grid.appendChild(btn);
+    });
+
+    function showStrategy(eval, btn) {
+        playTone(440, 0.05, "sine");
+        document.querySelectorAll('.eval-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const content = document.getElementById('strategy-content');
+        content.innerHTML = `<p class="glitch-effect">${eval.strategy}</p>`;
+    }
+
+    // Sonidos
+    function playTone(freq, duration, type) {
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.type = type;
+            osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+            g.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration);
+            osc.connect(g);
+            g.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + duration);
+        } catch(e) {}
+    }
+
+    function playFuturisticCharge() {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const oscillator = audioCtx.createOscillator();
+        const gainNode = audioCtx.createGain();
+        oscillator.type = 'sawtooth';
+        oscillator.frequency.setValueAtTime(100, audioCtx.currentTime);
+        oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.5);
+        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+        oscillator.connect(gainNode);
+        gainNode.connect(audioCtx.destination);
+        oscillator.start();
+        oscillator.stop(audioCtx.currentTime + 1.5);
+    }
+
+    // --- Lógica del botón especial y terminal ---
+    const helpBtn = document.getElementById('helpBtn');
+    const overlay = document.getElementById('terminalOverlay');
+    const termBody = document.getElementById('terminalBody');
+    const termHeader = document.getElementById('terminalHeader');
+    const closeBtn = document.getElementById('closeTerminal');
+    const termWindow = document.getElementById('terminalWindow');
+    let strategyStep = 0;
+
+    helpBtn.onclick = () => {
+        playFuturisticCharge();
+        overlay.style.display = 'flex';
+        termWindow.classList.add('glitch-effect');
+        strategyStep = 0;
+        termBody.innerHTML = "";          // Limpia el contenido anterior
+        termHeader.innerText = "> SINTONIZANDO SEÑAL...";
+        closeBtn.style.display = 'none';
+        document.getElementById('clickHint').style.display = 'block';
+
+        setTimeout(() => {
+            termHeader.innerText = "> MENSAJE DEL FUTURO RECIBIDO...";
+            advanceStrategy();
+        }, 1000);
+    };
+
+    function advanceStrategy() {
+        if (strategyStep < masterStrategy.length) {
+            const p = document.createElement('p');
+            p.innerText = masterStrategy[strategyStep];
+            p.className = 'glitch-effect';
+            termBody.appendChild(p);
+            // Hacer scroll automático al nuevo mensaje
+            termBody.scrollTop = termBody.scrollHeight;
+            strategyStep++;
+            playTone(200 + (strategyStep * 100), 0.2, "square");
+
+            if (strategyStep === masterStrategy.length) {
+                closeBtn.style.display = 'block';
+                document.getElementById('clickHint').style.display = 'none';
+            }
+        }
+    }
+
+    termWindow.onclick = (e) => {
+        e.stopPropagation();
+        if (strategyStep < masterStrategy.length) advanceStrategy();
+    };
+
+    closeBtn.onclick = () => {
+        overlay.style.display = 'none';
+    };
+
+    overlay.onclick = () => {
+        if (closeBtn.style.display === 'block') overlay.style.display = 'none';
+    };
+</script>
+</body>
+</html>
