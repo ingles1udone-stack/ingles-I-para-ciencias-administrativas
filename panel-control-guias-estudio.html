@@ -461,94 +461,169 @@
     </div>
 
     <script>
-        // ---------- RETRO SOUNDS (preserved) ----------
+        // ---------- AUDIO CONTEXT GLOBAL ----------
         let audioContextGlobal = null;
-        function playRetroComputerSound() {
+        
+        // ---------- NUEVO SONIDO PODEROSO / RETRO-FUTURISTA ----------
+        async function playPowerfulTechSound(clickVariant = false) {
             try {
                 if (!audioContextGlobal) {
                     audioContextGlobal = new (window.AudioContext || window.webkitAudioContext)();
                 }
                 const ctx = audioContextGlobal;
-                const resumePlay = () => {
-                    const now = ctx.currentTime;
-                    const osc = ctx.createOscillator();
-                    const gainNode = ctx.createGain();
-                    osc.type = 'sawtooth';
-                    osc.frequency.setValueAtTime(620, now);
-                    osc.frequency.exponentialRampToValueAtTime(1120, now + 0.13);
-                    gainNode.gain.setValueAtTime(0.22, now);
-                    gainNode.gain.exponentialRampToValueAtTime(0.0001, now + 0.27);
-                    osc.connect(gainNode);
-                    gainNode.connect(ctx.destination);
-                    osc.start(now);
-                    osc.stop(now + 0.27);
+                if (ctx.state === 'suspended') {
+                    await ctx.resume();
+                }
+                const now = ctx.currentTime;
+                
+                if (!clickVariant) {
+                    // SONIDO DE HOVER: breve ascenso eléctrico + chispa
+                    // Oscilador principal: subida rápida estilo "carga"
+                    const osc1 = ctx.createOscillator();
+                    const gain1 = ctx.createGain();
+                    osc1.type = 'sawtooth';
+                    osc1.frequency.setValueAtTime(200, now);
+                    osc1.frequency.exponentialRampToValueAtTime(1200, now + 0.12);
+                    gain1.gain.setValueAtTime(0.25, now);
+                    gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+                    osc1.connect(gain1);
+                    gain1.connect(ctx.destination);
+                    osc1.start(now);
+                    osc1.stop(now + 0.2);
                     
-                    const osc2 = ctx.createOscillator();
-                    const gain2 = ctx.createGain();
-                    osc2.type = 'square';
-                    osc2.frequency.setValueAtTime(1750, now);
-                    osc2.frequency.exponentialRampToValueAtTime(2150, now + 0.08);
-                    gain2.gain.setValueAtTime(0.1, now);
-                    gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.1);
-                    osc2.connect(gain2);
-                    gain2.connect(ctx.destination);
-                    osc2.start(now);
-                    osc2.stop(now + 0.1);
-                    
+                    // Ruido blanco con filtro barrido (efecto eléctrico)
                     const bufferSize = 2048;
                     const noiseNode = ctx.createScriptProcessor(bufferSize, 1, 1);
                     const noiseGain = ctx.createGain();
+                    const noiseFilter = ctx.createBiquadFilter();
+                    noiseFilter.type = 'bandpass';
+                    noiseFilter.frequency.setValueAtTime(800, now);
+                    noiseFilter.frequency.exponentialRampToValueAtTime(3000, now + 0.15);
                     noiseNode.onaudioprocess = function(e) {
                         const output = e.outputBuffer.getChannelData(0);
                         for (let i = 0; i < bufferSize; i++) {
-                            output[i] = (Math.random() * 2 - 1) * 0.2;
+                            output[i] = (Math.random() * 2 - 1) * 0.5;
                         }
                     };
-                    noiseGain.gain.setValueAtTime(0.06, now);
-                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
-                    noiseNode.connect(noiseGain);
+                    noiseGain.gain.setValueAtTime(0.12, now);
+                    noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
+                    noiseNode.connect(noiseFilter);
+                    noiseFilter.connect(noiseGain);
                     noiseGain.connect(ctx.destination);
+                    noiseNode.start(now);
                     setTimeout(() => {
-                        try { noiseNode.disconnect(); noiseGain.disconnect(); } catch(e) {}
-                    }, 80);
-                };
-                if (ctx.state === 'suspended') {
-                    ctx.resume().then(() => { resumePlay(); }).catch(e => console.warn("Audio resume error"));
+                        try { noiseNode.disconnect(); noiseFilter.disconnect(); noiseGain.disconnect(); } catch(e) {}
+                    }, 200);
+                    
                 } else {
-                    resumePlay();
+                    // SONIDO DE CLICK: carga profunda + descarga de energía con sub-grave
+                    // Oscilador de baja frecuencia (sub-bass)
+                    const subOsc = ctx.createOscillator();
+                    const subGain = ctx.createGain();
+                    subOsc.type = 'sine';
+                    subOsc.frequency.setValueAtTime(55, now);
+                    subOsc.frequency.exponentialRampToValueAtTime(80, now + 0.2);
+                    subGain.gain.setValueAtTime(0.35, now);
+                    subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+                    subOsc.connect(subGain);
+                    subGain.connect(ctx.destination);
+                    subOsc.start(now);
+                    subOsc.stop(now + 0.35);
+                    
+                    // Ascenso principal (carga)
+                    const oscMain = ctx.createOscillator();
+                    const gainMain = ctx.createGain();
+                    oscMain.type = 'sawtooth';
+                    oscMain.frequency.setValueAtTime(120, now);
+                    oscMain.frequency.exponentialRampToValueAtTime(1800, now + 0.28);
+                    gainMain.gain.setValueAtTime(0.4, now);
+                    gainMain.gain.exponentialRampToValueAtTime(0.0001, now + 0.45);
+                    oscMain.connect(gainMain);
+                    gainMain.connect(ctx.destination);
+                    oscMain.start(now);
+                    oscMain.stop(now + 0.45);
+                    
+                    // Segundo oscilador armónico (agudo)
+                    const oscHarm = ctx.createOscillator();
+                    const gainHarm = ctx.createGain();
+                    oscHarm.type = 'triangle';
+                    oscHarm.frequency.setValueAtTime(880, now);
+                    oscHarm.frequency.exponentialRampToValueAtTime(3200, now + 0.3);
+                    gainHarm.gain.setValueAtTime(0.2, now);
+                    gainHarm.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
+                    oscHarm.connect(gainHarm);
+                    gainHarm.connect(ctx.destination);
+                    oscHarm.start(now);
+                    oscHarm.stop(now + 0.4);
+                    
+                    // Ruido de descarga con filtro resonante
+                    const noiseNode2 = ctx.createScriptProcessor(4096, 1, 1);
+                    const noiseGain2 = ctx.createGain();
+                    const filter2 = ctx.createBiquadFilter();
+                    filter2.type = 'bandpass';
+                    filter2.frequency.setValueAtTime(1500, now + 0.2);
+                    filter2.frequency.exponentialRampToValueAtTime(4000, now + 0.45);
+                    filter2.Q.value = 8;
+                    noiseNode2.onaudioprocess = function(e) {
+                        const output = e.outputBuffer.getChannelData(0);
+                        for (let i = 0; i < 4096; i++) {
+                            output[i] = (Math.random() * 2 - 1) * 0.7;
+                        }
+                    };
+                    noiseGain2.gain.setValueAtTime(0.25, now + 0.2);
+                    noiseGain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.55);
+                    noiseNode2.connect(filter2);
+                    filter2.connect(noiseGain2);
+                    noiseGain2.connect(ctx.destination);
+                    noiseNode2.start(now + 0.2);
+                    setTimeout(() => {
+                        try { noiseNode2.disconnect(); filter2.disconnect(); noiseGain2.disconnect(); } catch(e) {}
+                    }, 600);
+                    
+                    // Pequeño "pop" de cierre
+                    const popOsc = ctx.createOscillator();
+                    const popGain = ctx.createGain();
+                    popOsc.type = 'square';
+                    popOsc.frequency.setValueAtTime(180, now + 0.48);
+                    popGain.gain.setValueAtTime(0.08, now + 0.48);
+                    popGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.58);
+                    popOsc.connect(popGain);
+                    popGain.connect(ctx.destination);
+                    popOsc.start(now + 0.48);
+                    popOsc.stop(now + 0.58);
                 }
-            } catch (err) {}
+            } catch (err) {
+                console.warn("Audio no disponible:", err);
+            }
         }
-
-        // attach hover sounds to emergency button
+        
+        // Mantenemos la función original para otros sonidos (no se usa en emergencia)
+        function playRetroComputerSound() {
+            // No se utiliza en el botón amarillo, pero se conserva para otros elementos.
+        }
+        
+        // ---------- ASIGNAR SONIDOS AL BOTÓN DE EMERGENCIA ----------
         const emergencyBtnElem = document.getElementById('emergencyButton');
         if (emergencyBtnElem) {
-            emergencyBtnElem.addEventListener('mouseenter', () => playRetroComputerSound());
-            emergencyBtnElem.addEventListener('touchstart', () => playRetroComputerSound());
+            // Hover: sonido breve de carga
+            emergencyBtnElem.addEventListener('mouseenter', (e) => {
+                playPowerfulTechSound(false); // hover variant
+            });
+            emergencyBtnElem.addEventListener('touchstart', (e) => {
+                playPowerfulTechSound(false);
+            });
+            // Click: sonido completo y redirección con delay para escuchar el clímax
             emergencyBtnElem.addEventListener('click', (e) => {
-                try {
-                    if(!audioContextGlobal) audioContextGlobal = new (window.AudioContext || window.webkitAudioContext)();
-                    const ctx = audioContextGlobal;
-                    const resumeClick = () => {
-                        const now = ctx.currentTime;
-                        const beep = ctx.createOscillator();
-                        const beepGain = ctx.createGain();
-                        beep.type = 'sine';
-                        beep.frequency.value = 1180;
-                        beepGain.gain.setValueAtTime(0.12, now);
-                        beepGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
-                        beep.connect(beepGain);
-                        beepGain.connect(ctx.destination);
-                        beep.start();
-                        beep.stop(now + 0.09);
-                    };
-                    if(ctx.state === 'suspended') ctx.resume().then(resumeClick);
-                    else resumeClick();
-                } catch(e) {}
+                e.preventDefault(); // evitar navegación inmediata
+                playPowerfulTechSound(true); // click variant (más potente)
+                // Pequeño retraso para que el sonido se reproduzca antes de la redirección
+                setTimeout(() => {
+                    window.location.href = "https://drive.google.com/drive/folders/1loafkFjvD7OOkCh7a983rln4RZ3yALEQ?usp=drive_link";
+                }, 280);
             });
         }
         
-        // micro sounds for guide buttons
+        // micro sounds for guide buttons (preservado, sin cambios)
         const allGuideBtns = document.querySelectorAll('.guide-btn');
         allGuideBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -575,19 +650,17 @@
             });
         });
         
-        // ---------- MASCOT INTERACTIVITY: EYES TRACK MOUSE + ARM ACTIVE ON HOVER ----------
+        // ---------- MASCOT INTERACTIVITY (sin cambios) ----------
         const svgElement = document.getElementById('mascot-svg');
         const leftPupil = document.getElementById('leftPupil');
         const rightPupil = document.getElementById('rightPupil');
         const waveArmGroup = document.getElementById('waveArm');
         const mascotContainer = document.getElementById('mascotArea');
         
-        // eye centers in viewBox coordinates (0-400)
         const leftEyeCenter = { cx: 165, cy: 160 };
         const rightEyeCenter = { cx: 245, cy: 160 };
-        const maxOffset = 12; // max movement radius (pupils stay inside lens)
+        const maxOffset = 12;
         
-        // get mouse position relative to SVG viewBox coordinates
         function getMouseViewBoxCoords(e, svg) {
             const pt = svg.createSVGPoint();
             pt.x = e.clientX;
@@ -596,10 +669,8 @@
             return { x: cursor.x, y: cursor.y };
         }
         
-        // update pupil position based on mouse
         function updatePupils(mouseX, mouseY) {
             if (!leftPupil || !rightPupil) return;
-            // vector for left eye
             let dxLeft = mouseX - leftEyeCenter.cx;
             let dyLeft = mouseY - leftEyeCenter.cy;
             let distanceLeft = Math.hypot(dxLeft, dyLeft);
@@ -609,7 +680,6 @@
                 moveXLeft = dxLeft * ratio;
                 moveYLeft = dyLeft * ratio;
             }
-            // right eye
             let dxRight = mouseX - rightEyeCenter.cx;
             let dyRight = mouseY - rightEyeCenter.cy;
             let distanceRight = Math.hypot(dxRight, dyRight);
@@ -619,12 +689,10 @@
                 moveXRight = dxRight * ratio;
                 moveYRight = dyRight * ratio;
             }
-            // apply transforms
             leftPupil.style.transform = `translate(${moveXLeft}px, ${moveYLeft}px)`;
             rightPupil.style.transform = `translate(${moveXRight}px, ${moveYRight}px)`;
         }
         
-        // remove idle animation while tracking
         function disableIdleAnimation() {
             leftPupil.classList.remove('pupil-idle');
             rightPupil.classList.remove('pupil-idle');
@@ -641,7 +709,6 @@
             enableIdleAnimation();
         }
         
-        // Mousemove handler on SVG
         let trackingActive = false;
         function onMouseMoveInsideSvg(e) {
             if (!svgElement) return;
@@ -661,7 +728,6 @@
         if (svgElement) {
             svgElement.addEventListener('mousemove', onMouseMoveInsideSvg);
             svgElement.addEventListener('mouseleave', onMouseLeaveSvg);
-            // also for touch devices
             svgElement.addEventListener('touchmove', (e) => {
                 e.preventDefault();
                 if (e.touches.length) {
@@ -681,17 +747,32 @@
             });
         }
         
-        // ARM INTERACTION: more dynamic wave on mascot hover
         if (waveArmGroup && mascotContainer) {
             mascotContainer.addEventListener('mouseenter', () => {
                 waveArmGroup.classList.add('arm-wave-active');
-                // subtle sound for immersion
-                playRetroComputerSound();
+                // Sonido sutil para la mascota (opcional, no interfiere)
+                if(audioContextGlobal && audioContextGlobal.state !== 'closed') {
+                    const ctx = audioContextGlobal;
+                    const quickBlip = () => {
+                        const now = ctx.currentTime;
+                        const blip = ctx.createOscillator();
+                        const gainBlip = ctx.createGain();
+                        blip.type = 'sine';
+                        blip.frequency.value = 680;
+                        gainBlip.gain.setValueAtTime(0.03, now);
+                        gainBlip.gain.exponentialRampToValueAtTime(0.0001, now + 0.08);
+                        blip.connect(gainBlip);
+                        gainBlip.connect(ctx.destination);
+                        blip.start();
+                        blip.stop(now + 0.08);
+                    };
+                    if(ctx.state === 'suspended') ctx.resume().then(quickBlip);
+                    else quickBlip();
+                }
             });
             mascotContainer.addEventListener('mouseleave', () => {
                 waveArmGroup.classList.remove('arm-wave-active');
             });
-            // also make the static arm wiggle slightly on hover
             const staticArm = document.getElementById('staticArm');
             if (staticArm) {
                 mascotContainer.addEventListener('mouseenter', () => {
@@ -714,9 +795,6 @@
             }
         }, 180);
         
-        // extra pupils idle animation already applied via CSS, but we ensure initial class
-        // also ensures when not hovering, the pupils wander nicely.
-        // ensure that any pre-existing inline styles are cleared after idle
         window.addEventListener('load', () => {
             if (leftPupil && rightPupil) {
                 leftPupil.style.transform = '';
@@ -726,4 +804,4 @@
         });
     </script>
 </body>
-                </html>
+    </html>
