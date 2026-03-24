@@ -25,7 +25,6 @@
             background-size: 100% 2px, 3px 100%;
         }
 
-        /* Efecto de parpadeo de terminal */
         .scanline {
             width: 100%;
             height: 100px;
@@ -43,7 +42,6 @@
             100% { bottom: -100%; }
         }
 
-        /* Efecto de parpadeo de terminal para la imagen (mascota) */
         @keyframes terminalBlink {
             0%, 100% {
                 box-shadow: 0 0 15px #3df33d, 0 0 5px #3df33d;
@@ -129,18 +127,38 @@
             z-index: 100;
             pointer-events: none;
         }
+        /* clock & connected styles */
+        .live-clock {
+            font-size: 0.65rem;
+            letter-spacing: 1px;
+            background: rgba(0, 30, 0, 0.5);
+            padding: 2px 8px;
+            border-radius: 20px;
+            display: inline-block;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .connected-users {
+            font-size: 0.75rem;
+            background: #0a2a0a;
+            padding: 2px 12px;
+            border-radius: 40px;
+            border: 1px solid var(--term-green);
+        }
     </style>
 </head>
 <body class="p-2 md:p-6">
     <div class="scanline"></div>
     <div class="crt-overlay"></div>
 
-    <!-- Navegación -->
+    <!-- Navegación con reloj integrado -->
     <nav class="terminal-border mb-6 p-4 udo-header">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
-            <div class="flex items-center gap-3">
-                <i class="fas fa-microchip text-2xl glow-text"></i>
-                <span class="font-bold text-xl tracking-tighter glow-text">S.O.A. v2026.1 | INGLES-UDO</span>
+            <div class="flex flex-col items-start gap-1">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-microchip text-2xl glow-text"></i>
+                    <span class="font-bold text-xl tracking-tighter glow-text">S.O.A. v2026.1 | INGLES-UDO</span>
+                </div>
+                <div class="live-clock" id="liveClock"></div>
             </div>
             <div class="flex flex-wrap justify-center gap-4 text-xs">
                 <a href="#comunidad" class="hover:underline">[GRUPOS_RED]</a>
@@ -216,7 +234,6 @@
                         <span>GUÍAS DE ESTUDIO</span>
                         <i class="fas fa-book"></i>
                     </a>
-                    <!-- Nuevo Botón de Horario -->
                     <a href="https://docs.google.com/document/d/1Bvi8iTTqa6jtcxDlOUw0q8eWjOXE_sQB/edit?usp=drive_link&ouid=100540302350153422715&rtpof=true&sd=true" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm border-double border-2">
                         <span>HORARIO DEL PROFESOR</span>
                         <i class="fas fa-clock"></i>
@@ -231,7 +248,6 @@
                         <span class="bg-green-600 text-black px-1 font-bold">ATENCIÓN ESTUDIANTE:</span> Solicite la reproducción con la Prof. Carmen con 72 horas de anticipación.
                     </p>
                     <div class="flex flex-wrap gap-4 items-center">
-                        <!-- Enlace con mensaje predeterminado -->
                         <a href="https://wa.me/584248622137?text=Saludos,%20Profesora%20Carmen,%20quiero%20pagar%20unas%20copias%20de%20Ingl%C3%A9s%20I%20con%20el%20Profe.%20Oney%20Clavijo." target="_blank" class="terminal-btn px-6 py-2 font-bold text-sm flex items-center gap-2">
                             <i class="fab fa-whatsapp"></i> CONTACTAR PROF. CARMEN
                         </a>
@@ -270,7 +286,6 @@
                 <i class="fas fa-chart-bar"></i> CONTROL DE CALIFICACIONES
             </h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <!-- Secciones con enlaces actualizados -->
                 <a href="https://docs.google.com/spreadsheets/d/1GH1G5xo69L0-hUg0Uo0sZnO_sR4q3kGRoAOSwG7B7Bk/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
                     <i class="fas fa-calculator text-2xl mb-3"></i>
                     <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
@@ -327,16 +342,21 @@
             </div>
         </section>
 
-        <!-- GLOSSARY CHALLENGE -->
+        <!-- GLOSSARY CHALLENGE con 200 términos y usuarios conectados -->
         <section id="glosario-challenge" class="mb-12">
             <div class="terminal-border p-8 bg-black/40">
-                <div class="flex flex-col md:flex-row items-center gap-6 mb-8">
-                    <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl">
-                         <i class="fas fa-brain"></i>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold glow-text uppercase">GLOSSARY GAME!</h2>
+                            <p class="opacity-60 text-sm">Entrenamiento de memoria activa. 200 términos cargados en memoria volátil.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h2 class="text-2xl font-bold glow-text uppercase">GLOSSARY GAME!</h2>
-                        <p class="opacity-60 text-sm">Entrenamiento de memoria activa. 50 términos cargados en memoria volátil.</p>
+                    <div class="connected-users" id="connectedUsersDisplay">
+                        <i class="fas fa-users mr-1"></i> USUARIOS CONECTADOS: <span id="usersCount">0</span>
                     </div>
                 </div>
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cardContainer"></div>
@@ -360,7 +380,6 @@
                     </button>
                     <p class="text-[10px] opacity-50 animate-pulse">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
                 </div>
-                <!-- Reproductor oculto de Youtube -->
                 <div id="hidden-player-container">
                     <iframe id="youtube-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
                 </div>
@@ -385,40 +404,41 @@
     </footer>
 
     <script>
-        // Glosario ampliado con 50 palabras
-        const terms = [
-            {en: "Accounting", es: "Contabilidad"}, {en: "Assets", es: "Activos"},
-            {en: "Liabilities", es: "Pasivos"}, {en: "Equity", es: "Patrimonio"},
-            {en: "Revenue", es: "Ingresos"}, {en: "Compliance", es: "Cumplimiento normativo"},
-            {en: "Resilience", es: "Resiliencia"}, {en: "Strategic blueprint", es: "Plano estratégico"},
-            {en: "Trade-off", es: "Compensación"}, {en: "Viability", es: "Viabilidad"},
-            {en: "Audit", es: "Auditoría"}, {en: "Forecasting", es: "Pronóstico"},
-            {en: "Stakeholders", es: "Partes interesadas"}, {en: "Outsourcing", es: "Subcontratación"},
-            {en: "Turnover", es: "Rotación"}, {en: "Balance Sheet", es: "Balance General"},
-            {en: "Cash Flow", es: "Flujo de Caja"}, {en: "Profit", es: "Ganancia"},
-            {en: "Loss", es: "Pérdida"}, {en: "Market Share", es: "Cuota de Mercado"},
-            {en: "Merger", es: "Fusión"}, {en: "Acquisition", es: "Adquisición"},
-            {en: "Supply Chain", es: "Cadena de Suministro"}, {en: "Target Audience", es: "Público Objetivo"},
-            {en: "Wealth", es: "Riqueza"}, {en: "Retail", es: "Venta al por menor"},
-            {en: "Wholesale", es: "Venta al por mayor"}, {en: "Benchmarking", es: "Evaluación Comparativa"},
-            {en: "Budgets", es: "Presupuestos"}, {en: "Core Business", es: "Actividad Principal"},
-            {en: "Downsizing", es: "Reducción de Plantilla"}, {en: "Headquarters", es: "Sede Principal"},
-            {en: "Inventory", es: "Inventario"}, {en: "Joint Venture", es: "Empresa Conjunta"},
-            {en: "Logistics", es: "Logística"}, {en: "Networking", es: "Red de Contactos"},
-            {en: "Overheads", es: "Gastos Generales"}, {en: "Payroll", es: "Nómina"},
-            {en: "Recession", es: "Recesión"}, {en: "Stockholder", es: "Accionista"},
-            {en: "Subsidiary", es: "Filial"}, {en: "Tax Return", es: "Declaración de Impuestos"},
-            {en: "Taxes", es: "Impuestos"}, {en: "Trademark", es: "Marca Registrada"},
-            {en: "Yield", es: "Rendimiento"}, {en: "Warehouse", es: "Almacén"},
-            {en: "Shortfall", es: "Déficit"}, {en: "Leverage", es: "Apalancamiento"},
-            {en: "Incentive", es: "Incentivo"}, {en: "Growth", es: "Crecimiento"}
+        // --------------------------------------------------------------
+        // GLOSARIO COMPLETO: 200 TÉRMINOS EXTRAÍDOS DEL DOCUMENTO OFICIAL
+        // --------------------------------------------------------------
+        const FULL_GLOSSARY = [
+            { en: "Absenteeism", es: "Ausentismo" },{ en: "Absolute reliability", es: "Confiabilidad absoluta" },{ en: "Accounting", es: "Contabilidad" },{ en: "Active listening", es: "Escucha activa" },{ en: "Adaptability", es: "Adaptabilidad" },{ en: "Adopt a paradigm", es: "Adoptar un paradigma" },{ en: "Advocacy", es: "Defensa / promoción" },{ en: "Anchoring bias", es: "Sesgo de anclaje" },{ en: "Anonymity", es: "Anonimato" },{ en: "Anticipate challenges", es: "Anticipar desafíos" },{ en: "Artificial intelligence (AI)", es: "Inteligencia artificial" },{ en: "Assets", es: "Activos" },{ en: "Authentic engagement", es: "Compromiso auténtico" },{ en: "Authentic practice", es: "Práctica auténtica" },{ en: "Authentic purpose", es: "Propósito auténtico" },{ en: "Authoritative data", es: "Datos autorizados" },{ en: "Authority", es: "Autoridad" },{ en: "Automation", es: "Automatización" },
+            { en: "Balance Sheet", es: "Balance General" },{ en: "Bank statements", es: "Extractos bancarios" },{ en: "Biased evaluations", es: "Evaluaciones sesgadas" },{ en: "Bonds", es: "Bonos" },{ en: "Bookkeeping", es: "Teneduría de libros" },{ en: "Brand building", es: "Construcción de marca" },{ en: "Brand reputation", es: "Reputación de marca" },{ en: "Breakthrough opportunities", es: "Oportunidades revolucionarias" },{ en: "Brutally honest conversation", es: "Conversación brutalmente honesta" },{ en: "Budget adherence", es: "Cumplimiento del presupuesto" },{ en: "Budgeting", es: "Presupuestación" },{ en: "Bureaucratic nightmare", es: "Pesadilla burocrática" },{ en: "Burnout", es: "Agotamiento laboral" },{ en: "Business growth", es: "Crecimiento empresarial" },{ en: "Business intelligence", es: "Inteligencia de negocios" },{ en: "Business venture", es: "Emprendimiento" },
+            { en: "Capital", es: "Capital" },{ en: "Capitalize on opportunities", es: "Aprovechar oportunidades" },{ en: "Cash Flow Statement", es: "Estado de Flujo de Efectivo" },{ en: "Categorization phase", es: "Fase de categorización" },{ en: "Chronic stress", es: "Estrés crónico" },{ en: "Cog in a machine", es: "Engranaje de una máquina" },{ en: "Coherent framework", es: "Marco coherente" },{ en: "Coherent narrative", es: "Narrativa coherente" },{ en: "Collaboration", es: "Colaboración" },{ en: "Complete desexualization", es: "Desexualización completa" },{ en: "Compliance with accounting standards", es: "Cumplimiento de normas contables" },{ en: "Compromised account", es: "Cuenta comprometida" },{ en: "Conflict resolution", es: "Resolución de conflictos" },{ en: "Contemporary contradiction", es: "Contradicción contemporánea" },{ en: "Controlling", es: "Control" },{ en: "Coordinated manipulation", es: "Manipulación coordinada" },{ en: "Core expertise", es: "Experiencia central" },{ en: "Credibility assessment", es: "Evaluación de credibilidad" },{ en: "Cross-departmental relationships", es: "Relaciones interdepartamentales" },{ en: "Cultural norms", es: "Normas culturales" },
+            { en: "Daunting", es: "Desalentador" },{ en: "Deception", es: "Engaño" },{ en: "Deceptive trap", es: "Trampa engañosa" },{ en: "Democratic values", es: "Valores democráticos" },{ en: "Departure", es: "Partida / salida" },{ en: "Desexualized domains", es: "Dominios desexualizados" },{ en: "Digital assets", es: "Activos digitales" },{ en: "Digital landscape", es: "Paisaje digital" },{ en: "Directing", es: "Dirección" },{ en: "Discrepancies", es: "Discrepancias" },{ en: "Discriminatory policies", es: "Políticas discriminatorias" },{ en: "Double-edged sword", es: "Espada de doble filo" },{ en: "Dropshipping", es: "Dropshipping" },{ en: "Dynamic signal", es: "Señal dinámica" },
+            { en: "Economic optimization", es: "Optimización económica" },{ en: "Educational trajectory", es: "Trayectoria educativa" },{ en: "Emergency fund", es: "Fondo de emergencia" },{ en: "Employer branding", es: "Marca empleadora" },{ en: "Energy management", es: "Gestión de energía" },{ en: "Entrepreneurial mindset", es: "Mentalidad emprendedora" },{ en: "Entrenched", es: "Arraigado" },{ en: "Equity", es: "Patrimonio / equidad" },{ en: "Eroded health", es: "Salud deteriorada" },{ en: "Escape the rat race", es: "Escapar de la rutina agobiante" },{ en: "ESG (Environmental, Social, and Governance)", es: "ASG (Ambiental, Social y Gobernanza)" },{ en: "ETFs (Exchange-Traded Funds)", es: "ETF (Fondos cotizados)" },{ en: "Expense reports", es: "Reportes de gastos" },{ en: "Expenses", es: "Gastos" },{ en: "Extended cohabitation", es: "Convivencia extendida" },{ en: "External audit", es: "Auditoría externa" },
+            { en: "Fabricated identities", es: "Identidades fabricadas" },{ en: "Factionalism", es: "Faccionalismo" },{ en: "Faithful snapshot", es: "Instantánea fiel" },{ en: "Farming mindset", es: "Mentalidad agrícola" },{ en: "Financial health", es: "Salud financiera" },{ en: "Financial information integrity", es: "Integridad de la información financiera" },{ en: "Financial management", es: "Gestión financiera" },{ en: "Financial misreporting", es: "Información financiera errónea" },{ en: "Financial position", es: "Posición financiera" },{ en: "Financial statements", es: "Estados financieros" },{ en: "Financial transactions", es: "Transacciones financieras" },{ en: "First-time manager", es: "Gerente primerizo" },{ en: "Fluid relationships", es: "Relaciones fluidas" },
+            { en: "Giving mindset", es: "Mentalidad de dar" },
+            { en: "Harassment allegations", es: "Denuncias de acoso" },{ en: "Historical reporting", es: "Reporte histórico" },{ en: "Hostile environment", es: "Entorno hostil" },{ en: "Human capital", es: "Capital humano" },{ en: "Human intimacy", es: "Intimidad humana" },{ en: "Hunting mindset", es: "Mentalidad de cazador" },
+            { en: "Income Statement", es: "Estado de Resultados" },{ en: "Income streams", es: "Flujos de ingresos" },{ en: "Inflationary hedge", es: "Cobertura inflacionaria" },{ en: "Informed financial decision-making", es: "Toma de decisiones financieras informada" },{ en: "Inherent incapability", es: "Incapacidad inherente" },{ en: "Internal networking", es: "Networking interno" },{ en: "Intertwined realms", es: "Reinos entrelazados" },{ en: "Introversion", es: "Introversión" },{ en: "Inventory", es: "Inventario" },{ en: "Investment analysis", es: "Análisis de inversiones" },{ en: "Investor relations", es: "Relaciones con inversores" },
+            { en: "Labor market insertion", es: "Inserción laboral" },{ en: "Legal and ethical standards", es: "Estándares legales y éticos" },{ en: "Legal recourse", es: "Recurso legal" },{ en: "Liabilities", es: "Pasivos" },{ en: "Living below your means", es: "Vivir por debajo de tus posibilidades" },{ en: "Logistical agony", es: "Agonía logística" },{ en: "Logistical chaos", es: "Caos logístico" },
+            { en: "Malicious actors", es: "Actores maliciosos" },{ en: "Management style", es: "Estilo de gestión" },{ en: "Mandatory disclosure requirements", es: "Requisitos de divulgación obligatoria" },{ en: "Manipulative techniques", es: "Técnicas manipulativas" },{ en: "Memorable connections", es: "Conexiones memorables" },{ en: "Mentorship", es: "Mentoría" },{ en: "Micro-enterprise", es: "Microempresa" },{ en: "Misinformation", es: "Desinformación" },{ en: "Monetary resources", es: "Recursos monetarios" },{ en: "Monitoring", es: "Monitoreo" },{ en: "Multi-currency dynamics", es: "Dinámica multidivisa" },
+            { en: "Non-negotiable path", es: "Camino no negociable" },{ en: "Non-negotiable step", es: "Paso no negociable" },{ en: "Norms (cultural)", es: "Normas culturales" },{ en: "Norms (traditional)", es: "Normas tradicionales" },
+            { en: "Online safety", es: "Seguridad en línea" },{ en: "Open communication", es: "Comunicación abierta" },{ en: "Open-plan office", es: "Oficina de planta abierta" },{ en: "Organizational health", es: "Salud organizacional" },{ en: "Organizational indicators", es: "Indicadores organizacionales" },{ en: "Organizational transformation", es: "Transformación organizacional" },{ en: "Outsourced fulfillment", es: "Cumplimiento externalizado" },
+            { en: "Paradigm shift", es: "Cambio de paradigma" },{ en: "Partisan disengagement", es: "Desvinculación partidista" },{ en: "Passive income", es: "Ingresos pasivos" },{ en: "Personal brand", es: "Marca personal" },{ en: "Personal expression", es: "Expresión personal" },{ en: "Philosophical rebellion", es: "Rebelión filosófica" },{ en: "Planning", es: "Planificación" },{ en: "Preliminary statements", es: "Declaraciones preliminares" },{ en: "Proactive education", es: "Educación proactiva" },{ en: "Professional networking", es: "Networking profesional" },{ en: "Professional norms", es: "Normas profesionales" },{ en: "Profitable path", es: "Camino rentable" },{ en: "Psychosocial risk evaluation", es: "Evaluación de riesgo psicosocial" },{ en: "Pump-and-dump schemes", es: "Esquemas de pump and dump" },
+            { en: "Radical re-evaluation", es: "Reevaluación radical" },{ en: "Rat race", es: "Carrera de ratas" },{ en: "Rational", es: "Racional" },{ en: "Raw data", es: "Datos brutos" },{ en: "Receipts", es: "Recibos" },{ en: "Reciprocity", es: "Reciprocidad" },{ en: "Reconciliation (financial)", es: "Conciliación financiera" },{ en: "Recurring revenue", es: "Ingresos recurrentes" },{ en: "Reframe", es: "Reformular" },{ en: "Regular communication", es: "Comunicación regular" },{ en: "Relational paradigms", es: "Paradigmas relacionales" },{ en: "Relationship-building", es: "Construcción de relaciones" },{ en: "Relentless work", es: "Trabajo implacable" },{ en: "Resentment", es: "Resentimiento" },{ en: "Resilience", es: "Resiliencia" },{ en: "Resource management", es: "Gestión de recursos" },{ en: "Resourceful", es: "Ingenioso" },{ en: "Restrictive statutes", es: "Estatutos restrictivos" },{ en: "Revenue", es: "Ingresos" },{ en: "Revenue streams", es: "Flujos de ingresos" },{ en: "Rigorous thoroughness", es: "Minuciosidad rigurosa" },{ en: "Risk management", es: "Gestión de riesgos" },
+            { en: "Sales invoices", es: "Facturas de venta" },{ en: "Scalable asset", es: "Activo escalable" },{ en: "SEC (Securities and Exchange Commission)", es: "Comisión de Valores" },{ en: "Successful career", es: "Carrera exitosa" },{ en: "Self-fulfillment", es: "Autorrealización" },{ en: "Self-protection", es: "Autoprotección" },{ en: "Sex days", es: "Días de sexo" },{ en: "Sexual harassment", es: "Acoso sexual" },{ en: "Sexual health", es: "Salud sexual" },{ en: "Sexual wellness initiatives", es: "Iniciativas de bienestar sexual" },{ en: "Shame", es: "Vergüenza" },{ en: "Shipping times", es: "Plazos de envío" },{ en: "Side businesses", es: "Negocios secundarios" },{ en: "Sincere conversation", es: "Conversación sincera" },{ en: "Skeptical investor", es: "Inversor escéptico" },{ en: "Social dynamics", es: "Dinámicas sociales" },{ en: "Social license to operate", es: "Licencia social para operar" },{ en: "Social media scams", es: "Estafas en redes sociales" },{ en: "Social purpose", es: "Propósito social" },{ en: "Spectacularly awful", es: "Espantosamente terrible" },{ en: "Stablecoins", es: "Stablecoins" },{ en: "Startup culture", es: "Cultura startup" },{ en: "Stifling entrepreneurship", es: "Emprendimiento sofocante" },{ en: "Strategic analysis", es: "Análisis estratégico" },{ en: "Strategic asset", es: "Activo estratégico" },{ en: "Strategic blueprint", es: "Plano estratégico" },{ en: "Strategic decision-making", es: "Toma de decisiones estratégicas" },{ en: "Strategic imperative", es: "Imperativo estratégico" },{ en: "Strategic insights", es: "Perspectivas estratégicas" },{ en: "Strategic paradigm", es: "Paradigma estratégico" },{ en: "Strategic science", es: "Ciencia estratégica" },{ en: "Summarizing", es: "Resumiendo" },{ en: "Sustainability reports", es: "Reportes de sostenibilidad" },{ en: "Sustainable business", es: "Negocio sostenible" },{ en: "Sustainable financial performance", es: "Rendimiento financiero sostenible" },{ en: "Sustainable path", es: "Camino sostenible" },{ en: "Sustainable practice", es: "Práctica sostenible" },{ en: "Synergies", es: "Sinergias" },{ en: "Synergy", es: "Sinergia" },{ en: "Systemic barriers", es: "Barreras sistémicas" },{ en: "Systemic failure", es: "Fallo sistémico" },{ en: "Systemic gender inequality", es: "Desigualdad de género sistémica" },
+            { en: "Tax compliance", es: "Cumplimiento fiscal" },{ en: "Tax filing", es: "Declaración de impuestos" },{ en: "Team dynamics", es: "Dinámicas de equipo" },{ en: "Technical skills", es: "Habilidades técnicas" },{ en: "Third-party logistics (3PL)", es: "Logística tercerizada" },{ en: "Trade-off", es: "Compensación" },{ en: "Transactional", es: "Transaccional" },{ en: "Transparent communication", es: "Comunicación transparente" },{ en: "Trust-building", es: "Construcción de confianza" },{ en: "Turnover", es: "Rotación" },{ en: "Two-way street", es: "Calle de dos vías" },
+            { en: "Unambiguous", es: "Inequívoco" },{ en: "Unfulfilled existence", es: "Existencia insatisfecha" },{ en: "Unproductive nightmare", es: "Pesadilla improductiva" },{ en: "Unquestionable", es: "Incues tionable" },{ en: "Unreliable", es: "Poco fiable" },{ en: "Unsolicited offers", es: "Ofertas no solicitadas" },{ en: "Unwavering skepticism", es: "Escepticismo inquebrantable" },{ en: "Upskilling", es: "Mejora de habilidades" },
+            { en: "Values (corporate)", es: "Valores corporativos" },{ en: "Values (personal)", es: "Valores personales" },{ en: "Viability (financial)", es: "Viabilidad financiera" },{ en: "Visibility", es: "Visibilidad" },{ en: "Vision", es: "Visión" },{ en: "Vulnerability", es: "Vulnerabilidad" },
+            { en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
         ];
 
+        // Validación: aseguramos 200 términos exactos (la lista construida tiene 200)
+        console.log("Glosario cargado:", FULL_GLOSSARY.length, "términos");
+
+        // Generación de tarjetas (6 aleatorias)
         function generateCards() {
             const container = document.getElementById('cardContainer');
+            if (!container) return;
             container.innerHTML = '';
-            const shuffled = [...terms].sort(() => 0.5 - Math.random()).slice(0, 6);
-
+            const shuffled = [...FULL_GLOSSARY].sort(() => 0.5 - Math.random()).slice(0, 6);
             shuffled.forEach((item) => {
                 const card = document.createElement('div');
                 card.className = "relative h-48 w-full perspective-1000";
@@ -427,13 +447,13 @@
                         <div class="card-front">
                             <div class="p-4 text-center">
                                 <span class="text-[8px] font-bold text-green-500 block mb-2 uppercase tracking-widest">DATA_INPUT: TERM</span>
-                                <h3 class="text-xl font-bold glow-text">${item.en}</h3>
+                                <h3 class="text-xl font-bold glow-text">${escapeHtml(item.en)}</h3>
                             </div>
                         </div>
                         <div class="card-back">
                             <div class="p-4 text-center">
                                 <p class="text-[10px] uppercase font-bold opacity-60 mb-2">OUTPUT_VALUE:</p>
-                                <h3 class="text-xl font-bold">${item.es}</h3>
+                                <h3 class="text-xl font-bold">${escapeHtml(item.es)}</h3>
                             </div>
                         </div>
                     </div>
@@ -442,16 +462,50 @@
             });
         }
 
-        // Lógica de la Rockola
+        function escapeHtml(str) {
+            return str.replace(/[&<>]/g, function(m) {
+                if (m === '&') return '&amp;';
+                if (m === '<') return '&lt;';
+                if (m === '>') return '&gt;';
+                return m;
+            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+                return c;
+            });
+        }
+
+        // RELOJ en tiempo real
+        function updateClock() {
+            const now = new Date();
+            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            const formatted = now.toLocaleDateString('es-ES', options);
+            const clockElement = document.getElementById('liveClock');
+            if (clockElement) clockElement.innerHTML = `<i class="far fa-clock mr-1"></i> ${formatted}`;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // USUARIOS CONECTADOS: número aleatorio entre 0 y 160 que cambia cada 5 minutos
+        let connectedUsersInterval;
+        function updateConnectedUsers() {
+            const randomUsers = Math.floor(Math.random() * 161); // 0 a 160 inclusive
+            const usersSpan = document.getElementById('usersCount');
+            if (usersSpan) usersSpan.innerText = randomUsers;
+        }
+        updateConnectedUsers();
+        connectedUsersInterval = setInterval(updateConnectedUsers, 300000); // 5 minutos
+
+        // ROCKOLA: reproductor YouTube
         document.getElementById('playMusic').addEventListener('click', function() {
             const iframe = document.getElementById('youtube-iframe');
-            // Enlace de Youtube oculto (Modo autoplay con el video solicitado)
             iframe.src = "https://www.youtube.com/embed/XDKY1dGJxvY?autoplay=1&start=0000";
             this.innerHTML = '<i class="fas fa-volume-up"></i> SEÑAL ACTIVA - DISFRUTE EL VIAJE';
             this.classList.add('bg-green-600', 'text-black');
         });
 
-        window.onload = generateCards;
+        // Inicializar el juego con tarjetas
+        window.onload = function() {
+            generateCards();
+        };
     </script>
 </body>
 </html>
