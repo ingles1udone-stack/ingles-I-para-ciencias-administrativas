@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Terminal de Aprendizaje - Bitácora</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -22,6 +22,7 @@
             margin: 0;
             padding: 0;
             line-height: 1.6;
+            cursor: pointer;
         }
 
         /* Efecto CRT Scanline */
@@ -60,16 +61,17 @@
             50%, 100% { opacity: 0; }
         }
 
-        /* Botón de Hardware "Bitácora" */
+        /* Botón de Hardware "Bitácora" - inicialmente invisible e inactivo */
         .hardware-btn-container {
-            display: flex;
+            display: none;          /* completamente oculto hasta finalizar */
             justify-content: center;
             margin: 40px 0;
             opacity: 0;
-            transition: opacity 1s ease-in;
+            transition: opacity 0.8s ease-in;
         }
 
         .hardware-btn-container.visible {
+            display: flex;          /* se hace visible */
             opacity: 1;
         }
 
@@ -159,6 +161,7 @@
             font-size: 0.8rem;
             opacity: 0.5;
             animation: pulse 2s infinite;
+            pointer-events: none;
         }
 
         @keyframes pulse {
@@ -181,7 +184,7 @@
 
         <div id="action-area" class="hardware-btn-container">
             <div>
-                <button class="bitacora-btn" onclick="window.location.href='https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715'">
+                <button class="bitacora-btn" id="bitacoraBtn">
                     <span>PUSH</span>
                 </button>
                 <div class="btn-label">BITÁCORA</div>
@@ -228,11 +231,13 @@
         let currentLine = 0;
         let charIndex = 0;
         let isTyping = false;
+        let finished = false;
         const speed = 30; // ms por carácter
         const textElement = document.getElementById('text-content');
         const actionArea = document.getElementById('action-area');
         const backBtn = document.getElementById('back-btn');
         const tapHint = document.getElementById('tap-hint');
+        const bitacoraBtn = document.getElementById('bitacoraBtn');
 
         function typeChar() {
             if (currentLine < content.length) {
@@ -252,6 +257,7 @@
         }
 
         function advanceText() {
+            if (finished) return;     // no hacer nada si ya terminó
             if (isTyping) return;
             if (currentLine < content.length) {
                 isTyping = true;
@@ -260,12 +266,23 @@
         }
 
         function finishTerminal() {
+            finished = true;
+            // Mostrar el botón y el enlace de regreso
             actionArea.classList.add('visible');
             backBtn.style.display = 'inline-block';
             tapHint.style.display = 'none';
+            // Remover el cursor intermitente (opcional)
+            const cursorSpan = document.getElementById('cursor');
+            if (cursorSpan) cursorSpan.style.display = 'none';
         }
 
-        // Iniciar primer bloque automáticamente
+        // Asignar el evento click al botón de bitácora de forma segura
+        bitacoraBtn.addEventListener('click', function(e) {
+            e.stopPropagation();   // Evitar que el click en el botón también active advanceText
+            window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
+        });
+
+        // Iniciar la primera línea automáticamente
         window.onload = () => {
             advanceText();
         };
