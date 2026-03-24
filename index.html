@@ -484,10 +484,10 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // USUARIOS CONECTADOS: número aleatorio entre 0 y 160 que cambia cada 5 minutos
+        // USUARIOS CONECTADOS: número aleatorio entre 1 y 160 que cambia cada 5 minutos
         let connectedUsersInterval;
         function updateConnectedUsers() {
-            const randomUsers = Math.floor(Math.random() * 161); // 0 a 160 inclusive
+            const randomUsers = Math.floor(Math.random() * 161)+1; // 1 a 160 inclusive
             const usersSpan = document.getElementById('usersCount');
             if (usersSpan) usersSpan.innerText = randomUsers;
         }
