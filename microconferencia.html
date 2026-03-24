@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault-Tec: Terminal de Microconferencia v2.0</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --fallout-green: #1aff80;
+            --fallout-green-dim: #054424;
+            --fallout-bg: #0b1d12;
+            --neon-pink: #ff00ff;
+        }
+
+        body {
+            background-color: #000;
+            color: var(--fallout-green);
+            font-family: 'VT323', monospace;
+            overflow-x: hidden;
+            text-transform: uppercase;
+        }
+
+        /* Efecto CRT Scanlines y Parpadeo */
+        .crt::before {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 9999;
+            background-size: 100% 4px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .crt::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: rgba(18, 16, 16, 0.1);
+            opacity: 0;
+            z-index: 9998;
+            pointer-events: none;
+            animation: flicker 0.15s infinite;
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.1; }
+            50% { opacity: 0.2; }
+            100% { opacity: 0.1; }
+        }
+
+        /* Ruleta de 8 Unidades */
+        .wheel-container {
+            position: relative;
+            width: 340px;
+            height: 340px;
+            margin: 2rem auto;
+            border-radius: 50%;
+            border: 2px dashed var(--fallout-green);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .unit-node {
+            position: absolute;
+            width: 55px;
+            height: 55px;
+            background: var(--fallout-bg);
+            border: 2px solid var(--fallout-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 0 15px var(--fallout-green-dim);
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+
+        .unit-node:hover {
+            background: var(--fallout-green);
+            color: #000;
+            box-shadow: 0 0 25px var(--fallout-green);
+        }
+
+        .light-orbit {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate-lights 10s linear infinite;
+        }
+
+        .light-dot {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--fallout-green);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--fallout-green);
+        }
+
+        @keyframes rotate-lights {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Marquesina Glitch */
+        .marquee-box {
+            border: 2px solid var(--fallout-green);
+            background: var(--fallout-bg);
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 180px;
+            cursor: pointer;
+            box-shadow: inset 0 0 20px rgba(26, 255, 128, 0.2);
+        }
+
+        .glitch-text {
+            position: relative;
+            font-size: 1.4rem;
+            line-height: 1.2;
+        }
+
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 #ff0000;
+            top: 0;
+            color: var(--fallout-green);
+            background: var(--fallout-bg);
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 3s infinite linear alternate-reverse;
+            opacity: 0.7;
+        }
+
+        @keyframes noise-anim {
+            0% { clip: rect(10px, 9999px, 50px, 0); }
+            20% { clip: rect(80px, 9999px, 20px, 0); }
+            50% { clip: rect(20px, 9999px, 90px, 0); }
+            100% { clip: rect(40px, 9999px, 30px, 0); }
+        }
+
+        /* Botón Rosa Neón Energizado */
+        .neon-btn {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: transparent;
+            border: 4px solid var(--neon-pink);
+            color: var(--neon-pink);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            box-shadow: 0 0 15px var(--neon-pink), inset 0 0 15px var(--neon-pink);
+        }
+
+        .neon-btn:hover {
+            background: rgba(255, 0, 255, 0.1);
+            box-shadow: 0 0 40px var(--neon-pink), inset 0 0 20px var(--neon-pink);
+            transform: scale(1.1);
+        }
+
+        .energy-charge {
+            position: absolute;
+            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            border: 2px solid var(--neon-pink);
+            border-radius: 50%;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .neon-btn:hover .energy-charge {
+            animation: charge-expand 0.5s infinite;
+            opacity: 1;
+        }
+
+        @keyframes charge-expand {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* Contenedor Principal Estilo Vault-Tec */
+        .vault-frame {
+            max-width: 900px;
+            margin: 2rem auto;
+            border: 12px solid #2c2c2c;
+            border-radius: 50px;
+            background: #121212;
+            padding: 10px;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .screen {
+            background: radial-gradient(circle, #1a3a2a 0%, #000 100%);
+            border-radius: 35px;
+            padding: 30px;
+            min-height: 80vh;
+            position: relative;
+            border: 2px solid #333;
+        }
+
+        .terminal-header {
+            border-bottom: 2px solid var(--fallout-green);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.5rem;
+        }
+
+        .scanline {
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(26, 255, 128, 0.1) 50%, rgba(0,0,0,0) 100%);
+            position: absolute;
+            top: -100px;
+            left: 0;
+            pointer-events: none;
+            animation: scanline-move 8s linear infinite;
+        }
+
+        @keyframes scanline-move {
+            0% { top: -100px; }
+            100% { top: 100%; }
+        }
+
+        .question-item {
+            border-left: 3px solid var(--fallout-green);
+            padding-left: 10px;
+            margin-bottom: 8px;
+            background: rgba(26, 255, 128, 0.05);
+            transition: all 0.3s;
+        }
+
+        .question-item:hover {
+            background: rgba(26, 255, 128, 0.15);
+        }
+    </style>
+</head>
+<body class="crt">
+
+    <div class="vault-frame">
+        <div class="screen">
+            <div class="scanline"></div>
+            
+            <div class="terminal-header">
+                <span>VAULT-OS V3.1.26 - UDO-NE</span>
+                <span>[ STATUS: ONLINE ]</span>
+            </div>
+
+            <div class="text-center mb-6">
+                <h1 class="text-5xl font-bold tracking-tighter">MICROCONFERENCIA: TÓPICOS</h1>
+                <p class="text-xl opacity-70">INTERFAZ DE CARGA DE DATOS PARA MORADORES</p>
+            </div>
+
+            <div class="flex flex-col lg:flex-row items-center gap-10">
+                <!-- Ruleta de Fortuna / Microconferencia -->
+                <div class="relative">
+                    <div class="light-orbit" id="lights-bg"></div>
+                    <div class="wheel-container" id="wheel">
+                        <!-- Nodos generados por JS -->
+                    </div>
+                </div>
+
+                <!-- Monitor de Preguntas -->
+                <div class="flex-1 w-full border-4 border-double border-green-500 p-6 bg-black/40 min-h-[350px] relative">
+                    <div class="absolute top-2 right-4 text-xs opacity-40">DISPLAY_MEM_UDR</div>
+                    <h2 class="text-3xl mb-4 text-white bg-green-900/50 inline-block px-2" id="unit-title">>> SELECCIONE NODO</h2>
+                    <div id="questions-area" class="text-xl space-y-3">
+                        <p class="animate-pulse">CARGANDO MÓDULOS DE INTERROGACIÓN...</p>
+                        <p class="text-sm opacity-50 mt-4">Nota: Cada unidad contiene 6 preguntas clave para el éxito de su misión académica.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guía de YouTube Glitch -->
+            <div class="mt-12">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="bg-green-500 text-black px-2 font-bold">MANUAL</span>
+                    <h3 class="text-2xl">PROTOCOLO DE TRANSMISIÓN (YOUTUBE)</h3>
+                </div>
+                <div class="marquee-box" onclick="nextStep()">
+                    <div class="glitch-text" id="guide-display" data-text="INICIALIZANDO PROTOCOLO...">
+                        CARGANDO ARCHIVO GUÍA... TOQUE PARA COMENZAR.
+                    </div>
+                    <div class="absolute bottom-2 right-4 text-xs opacity-40 animate-bounce">Siguiente Paso >></div>
+                </div>
+            </div>
+
+            <!-- Botones y Enlaces -->
+            <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-12">
+                <div class="text-center">
+                    <button class="neon-btn" 
+                            onmouseenter="laserCharge()" 
+                            onmouseleave="laserStop()"
+                            onclick="window.open('https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm', '_blank')">
+                        <div class="energy-charge"></div>
+                        <svg viewBox="0 0 24 24" width="60" height="60" fill="currentColor">
+                            <path d="M18 7c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-3.333L22 17V7l-4 3.333V7z"/>
+                        </svg>
+                        <span class="text-xs font-bold mt-2">PLAYLIST UDO</span>
+                    </button>
+                    <p class="text-xs mt-2 text-[#ff00ff] animate-pulse">CANAL DE MICROCONFERENCIAS</p>
+                </div>
+
+                <div class="flex flex-col gap-4">
+                    <button class="bg-green-500 text-black px-10 py-3 text-2xl font-bold hover:bg-white transition-colors" onclick="location.reload()">
+                        REINICIAR TERMINAL
+                    </button>
+                    <button class="border-2 border-green-500 px-10 py-2 text-xl hover:bg-green-900 transition-colors" onclick="alert('Regresando al menú del Refugio...')">
+                        VOLVER AL RECURSERO
+                    </button>
+                </div>
+            </div>
+
+            <div class="mt-12 pt-4 border-t border-green-900 text-center opacity-40 text-sm">
+                ALGORITMO DE SEGURIDAD VAULT-TEC INDUSTRIES © 2077 - RECONOCIMIENTO FACIAL REQUERIDO
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- DATOS DE TÓPICOS (1-8) ---
+        const microData = {
+            1: ["¿Qué es la lectura global (Skimming) y cuál es su propósito?", "¿Cómo se diferencia la lectura selectiva (Scanning) de la lectura global?", "Identifique tres tipos de títulos y su función en la anticipación del contenido.", "Explique la importancia de los elementos paratextuales (imágenes, negritas, índices).", "¿Cómo ayudan los cognados (palabras similares) en la comprensión inicial?", "¿Qué papel juega el conocimiento previo del lector en esta fase?"],
+            2: ["¿Qué es el contexto de situación y cómo influye en la interpretación?", "¿Cómo ayudan las pistas tipográficas a jerarquizar la información?", "Defina 'Palabras Clave' y explique cómo seleccionarlas correctamente.", "¿Cuál es la función de los conectores lógicos en la estructura de un párrafo?", "Explique la técnica de ignorar palabras no esenciales para mantener la fluidez.", "¿Cómo se identifican las categorías gramaticales básicas para entender la oración?"],
+            3: ["¿Qué es la Idea Principal y cómo se diferencia de las ideas secundarias?", "Explique la técnica para encontrar la idea principal cuando no es explícita.", "¿Cómo afectan los prefijos y sufijos al significado de las raíces de las palabras?", "Defina 'Referencia Textual' (Anáfora y Catáfora) con un ejemplo.", "¿Para qué sirve el análisis de la estructura de la oración (Sujeto + Verbo + Complemento)?", "¿Cómo se distingue un hecho de una opinión dentro del texto?"],
+            4: ["¿Qué son los marcadores de secuencia y por qué son vitales en procesos?", "Explique el uso de diccionarios técnicos versus diccionarios generales.", "¿Cómo se interpreta el vocabulario técnico a partir del contexto inmediato?", "Describa la función de los gráficos y tablas como apoyo a la lectura.", "¿Qué importancia tiene identificar la intención del autor (informar, persuadir, etc.)?", "¿Cómo se realiza un mapa conceptual básico a partir de un texto leído?"],
+            5: ["¿Qué es la Idea Principal y cómo se diferencia de las ideas secundarias?", "¿Cómo se identifica la ubicación de la idea principal en párrafos deductivos e inductivos?", "Defina 'Palabras Clave' y explique su importancia para la recuperación de información.", "¿Qué técnicas permiten distinguir entre información esencial y decorativa?", "¿Cómo influyen los detalles de apoyo en la validez de la idea principal?", "Explique el proceso de síntesis para extraer la esencia de un texto largo."],
+            6: ["¿Qué son los Afijos (prefijos y sufijos) y cómo cambian la categoría gramatical?", "Explique la importancia de identificar la 'Raíz' de una palabra técnica.", "Defina 'Cognados falsos' (false friends) y proporcione tres ejemplos comunes.", "¿Cómo ayuda el análisis morfológico a deducir el significado de palabras desconocidas?", "¿Cuál es la diferencia entre un sufijo flexivo y uno derivativo?", "Mencione tres prefijos negativos y su impacto en el sentido de la oración."],
+            7: ["¿Qué es la 'Referencia Textual' y cuál es su función en la cohesión?", "Explique la diferencia entre Referencia Anafórica y Catafórica.", "Identifique tres pronombres comunes que actúan como elementos de referencia.", "¿Cómo se resuelven las ambigüedades cuando un pronombre tiene varios antecedentes?", "Explique el concepto de Elipsis y cómo afecta la velocidad de lectura.", "¿Por qué el seguimiento de referencias es crítico para no perder el hilo del texto?"],
+            8: ["¿Qué es la Paráfrasis y cómo demuestra la comprensión real del lector?", "Explique la diferencia crítica entre realizar una síntesis y una paráfrasis.", "Defina el concepto de 'Inferencia Lógica' y dé un ejemplo.", "¿Cómo se diferencia una evidencia textual de una conclusión basada en inferencia?", "Describa la estrategia de 'Post-lectura' para verificar inferencias.", "¿Cómo contribuye la capacidad de síntesis a la eficiencia organizacional?"]
+        };
+
+        // --- DATOS GUÍA YOUTUBE ---
+        const youtubeSteps = [
+            "PASO 1: Accede a YouTube Studio con tu cuenta UDO/Personal.",
+            "PASO 2: Pulsa 'Crear' y sube tu archivo (MP4 recomendado).",
+            "PASO 3: Título: Exposición Microconferencia - Grupo #X.",
+            "PASO 4: Descripción: Incluye tu Nombre, Sección y Puntos Clave.",
+            "PASO 5: Audiencia: Marca 'No es contenido para niños' para habilitar comentarios.",
+            "PASO 6: Visibilidad: Configura como 'PÚBLICO' u 'OCULTO'.",
+            "PASO 7: Copia el enlace y compártelo en el grupo de WhatsApp.",
+            "¡MISIÓN CUMPLIDA! Video en órbita."
+        ];
+
+        // --- INICIALIZACIÓN DE RULETA ---
+        const wheel = document.getElementById('wheel');
+        const lightsBg = document.getElementById('lights-bg');
+        let rotation = 0;
+
+        for (let i = 1; i <= 8; i++) {
+            const angle = (i - 1) * (360 / 8);
+            const rad = (angle * Math.PI) / 180;
+            const x = 170 + 130 * Math.cos(rad);
+            const y = 170 + 130 * Math.sin(rad);
+
+            const node = document.createElement('div');
+            node.className = 'unit-node';
+            node.style.left = `${x}px`;
+            node.style.top = `${y}px`;
+            node.innerHTML = `U${i}`;
+            node.onclick = () => loadUnit(i, angle);
+            wheel.appendChild(node);
+
+            // Luces parpadeantes en órbita
+            const dot = document.createElement('div');
+            dot.className = 'light-dot';
+            dot.style.left = `${170 + 160 * Math.cos(rad)}px`;
+            dot.style.top = `${170 + 160 * Math.sin(rad)}px`;
+            dot.style.animationDelay = `${i * 0.2}s`;
+            lightsBg.appendChild(dot);
+        }
+
+        function loadUnit(num, angle) {
+            rotation = -angle;
+            wheel.style.transform = `rotate(${rotation}deg)`;
+            
+            // Compensar rotación del texto de los nodos
+            const nodes = document.querySelectorAll('.unit-node');
+            nodes.forEach(n => n.style.transform = `translate(-50%, -50%) rotate(${-rotation}deg)`);
+
+            // Actualizar monitor
+            const area = document.getElementById('questions-area');
+            const title = document.getElementById('unit-title');
+            title.innerText = `>> UNIDAD 0${num}: CARGADA`;
+            
+            area.innerHTML = '';
+            microData[num].forEach((q, idx) => {
+                const div = document.createElement('div');
+                div.className = 'question-item';
+                div.innerHTML = `<span class="font-bold text-white mr-2">P${idx+1}:</span> ${q}`;
+                area.appendChild(div);
+            });
+
+            playSfx(400, 0.05); // Sonido de terminal
+        }
+
+        // --- LÓGICA GUÍA YOUTUBE ---
+        let currentStep = 0;
+        const guideDisplay = document.getElementById('guide-display');
+
+        function nextStep() {
+            currentStep = (currentStep + 1) % youtubeSteps.length;
+            guideDisplay.style.opacity = 0;
+            setTimeout(() => {
+                guideDisplay.innerText = youtubeSteps[currentStep];
+                guideDisplay.setAttribute('data-text', youtubeSteps[currentStep]);
+                guideDisplay.style.opacity = 1;
+                playSfx(600, 0.03);
+            }, 100);
+        }
+
+        // --- AUDIO ENGINE ---
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        let laserOsc = null;
+
+        function playSfx(f, d) {
+            const osc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            osc.frequency.value = f;
+            osc.type = 'square';
+            g.gain.setValueAtTime(0.05, audioCtx.currentTime);
+            g.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + d);
+            osc.connect(g);
+            g.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + d);
+        }
+
+        function laserCharge() {
+            if(laserOsc) return;
+            laserOsc = audioCtx.createOscillator();
+            const g = audioCtx.createGain();
+            laserOsc.type = 'sawtooth';
+            laserOsc.frequency.setValueAtTime(80, audioCtx.currentTime);
+            laserOsc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 1.5);
+            g.gain.setValueAtTime(0.03, audioCtx.currentTime);
+            laserOsc.connect(g);
+            g.connect(audioCtx.destination);
+            laserOsc.start();
+        }
+
+        function laserStop() {
+            if(laserOsc) {
+                laserOsc.stop();
+                laserOsc = null;
+            }
+        }
+    </script>
+</body>
+</html>
