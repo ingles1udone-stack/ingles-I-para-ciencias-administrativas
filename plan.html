@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL: Plan de Evaluación 2026</title>
-    <!-- Google Fonts: Share Tech Mono para estilo terminal -->
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Share Tech Mono + Rajdhani -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0a0b10;
@@ -29,7 +29,7 @@
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 100%, 100% 4px, 3px 100%;
             color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Share Tech Mono', monospace; /* Base monospace */
             margin: 0;
             min-height: 100vh;
             display: flex;
@@ -69,6 +69,8 @@
         }
 
         h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
             text-align: center;
             color: var(--primary-cyan);
             text-transform: uppercase;
@@ -102,7 +104,8 @@
             border: 1px solid var(--primary-magenta);
             color: var(--primary-magenta);
             padding: 15px;
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
             font-size: 0.9rem;
             text-align: left;
             transition: all 0.3s ease;
@@ -126,6 +129,7 @@
         .eval-btn .weight {
             display: block;
             font-size: 0.7rem;
+            font-family: 'Share Tech Mono', monospace;
             opacity: 0.8;
             margin-top: 5px;
         }
@@ -140,6 +144,8 @@
         }
 
         .strategy-panel h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
             font-size: 1.2rem;
             color: var(--primary-cyan);
             margin-top: 0;
@@ -147,6 +153,7 @@
         }
 
         #strategy-content {
+            font-family: 'Share Tech Mono', monospace;
             font-size: 1rem;
             line-height: 1.5;
             color: #fff;
@@ -177,6 +184,7 @@
             box-shadow: 0 0 20px var(--primary-cyan);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 2s infinite;
+            font-family: 'Rajdhani', sans-serif;
         }
 
         .special-btn:hover {
@@ -197,7 +205,8 @@
             background: transparent;
             border: 1px solid var(--primary-magenta);
             padding: 12px 24px;
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
             font-size: 1rem;
             color: var(--primary-magenta);
             cursor: pointer;
@@ -241,6 +250,7 @@
         }
 
         .terminal-header {
+            font-family: 'Share Tech Mono', monospace;
             color: var(--primary-cyan);
             margin-bottom: 15px;
             font-size: 1.2rem;
@@ -248,6 +258,7 @@
         }
 
         .terminal-body {
+            font-family: 'Share Tech Mono', monospace;
             color: #00ff41;
             font-size: 1rem;
             line-height: 1.5;
@@ -258,7 +269,6 @@
             flex: 1;
         }
 
-        /* Estilo de la barra de scroll retro */
         .terminal-body::-webkit-scrollbar {
             width: 6px;
             background: #222;
@@ -274,7 +284,8 @@
             background: transparent;
             border: 1px solid var(--primary-cyan);
             color: var(--primary-cyan);
-            font-family: 'Share Tech Mono', monospace;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 500;
             cursor: pointer;
             align-self: flex-start;
         }
@@ -302,6 +313,7 @@
         }
 
         .click-hint {
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.7rem;
             color: #888;
             margin-top: 10px;
@@ -437,7 +449,7 @@
         overlay.style.display = 'flex';
         termWindow.classList.add('glitch-effect');
         strategyStep = 0;
-        termBody.innerHTML = "";          // Limpia el contenido anterior
+        termBody.innerHTML = "";
         termHeader.innerText = "> SINTONIZANDO SEÑAL...";
         closeBtn.style.display = 'none';
         document.getElementById('clickHint').style.display = 'block';
@@ -454,7 +466,6 @@
             p.innerText = masterStrategy[strategyStep];
             p.className = 'glitch-effect';
             termBody.appendChild(p);
-            // Hacer scroll automático al nuevo mensaje
             termBody.scrollTop = termBody.scrollHeight;
             strategyStep++;
             playTone(200 + (strategyStep * 100), 0.2, "square");
