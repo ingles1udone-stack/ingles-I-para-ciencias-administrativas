@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horario del Profesor - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+        .schedule-table th, .schedule-table td {
+            border: 1px solid #2c3e2f;
+            padding: 8px 6px;
+            text-align: left;
+            vertical-align: top;
+        }
+        .schedule-table th {
+            background-color: #eef2e6;
+            font-weight: 700;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        .letter-text {
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+        .signature-placeholder {
+            margin: 20px 0;
+            padding: 10px;
+            background: #fef9e6;
+            border-left: 4px solid #e0a800;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            text-align: center;
+        }
+        @media print {
+            .no-print { display: none; }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 20px;
+                margin: 20px auto;
+                max-width: 100%;
+            }
+            .header-box {
+                margin-bottom: 16px;
+                padding-bottom: 8px;
+            }
+            .title-main {
+                font-size: 1.8rem;
+            }
+            .section-header {
+                margin: 24px 0 12px 0;
+                padding: 4px 12px;
+                font-size: 1.1rem;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">Horario del Profesor</div>
+            <div class="mono text-sm">Carga Académica 2026</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>CPCP N-086/2026</p>
+            <p>Guatamare, 2026</p>
+        </div>
+    </div>
+
+    <!-- CARTA DE NOTIFICACIÓN -->
+    <div class="letter-text">
+        <p><strong>Ciudadano</strong><br>
+        Prof. Oney Francisco Clavijo<br>
+        Presente. –</p>
+        <p>Ante todo, reciba un cordial saludo. La presente tiene como finalidad notificarle su carga académica y horario correspondiente al <strong>periodo actual</strong>, el cual no puede ser modificado sin autorización de la Coordinador (a) del Programa de Licenciatura en Contaduría Pública, Director (a) ECSA y Coordinadora Académica. <strong>Asimismo, informarle que la modalidad de las clases es presencial y que debe enviar al correo del Programa: contaduriaudone@gmail.com, el (los) Plan (es) de Evaluación de la (s) asignatura (s) que dicta en el formato anexo, antes del día 30 de octubre del año en curso.</strong></p>
+    </div>
+
+    <!-- TABLA DE HORARIOS (secciones claramente definidas) -->
+    <div class="section-header">Carga Académica y Horario</div>
+    <table class="schedule-table">
+        <thead>
+            <tr>
+                <th>Código</th>
+                <th>Asignatura</th>
+                <th>Sección</th>
+                <th>Día(s)</th>
+                <th>Horario</th>
+                <th>Aula</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Primera fila: Sección 1101 (dos días) -->
+            <tr>
+                <td rowspan="2">007-1513</td>
+                <td rowspan="2">Inglés I para Cs. Administrativas (Contaduría)</td>
+                <td rowspan="2">1101</td>
+                <td>Lunes</td>
+                <td>10:45 a.m. a 12:15 p.m.</td>
+                <td rowspan="2">36</td>
+            </tr>
+            <tr>
+                <td>Viernes</td>
+                <td>09:15 a.m. a 10:45 a.m.</td>
+            </tr>
+            <!-- Segunda fila: Sección 1201 (dos días) -->
+            <tr>
+                <td rowspan="2">007-1513</td>
+                <td rowspan="2">Inglés I para Cs. Administrativas (Administración)</td>
+                <td rowspan="2">1201</td>
+                <td>Miércoles</td>
+                <td>10:45 a.m. a 12:15 p.m.</td>
+                <td rowspan="2">36</td>
+            </tr>
+            <tr>
+                <td>Viernes</td>
+                <td>07:45 a.m. a 09:15 a.m.</td>
+            </tr>
+            <!-- Tercera fila: Sección 1200 (dos días) -->
+            <tr>
+                <td rowspan="2">007-1513</td>
+                <td rowspan="2">Inglés I para Cs. Administrativas</td>
+                <td rowspan="2">1200</td>
+                <td>Lunes</td>
+                <td>09:15 a.m. a 10:45 a.m.</td>
+                <td rowspan="2">36</td>
+            </tr>
+            <tr>
+                <td>Miércoles</td>
+                <td>09:15 a.m. a 10:45 a.m.</td>
+            </tr>
+            <!-- Cuarta fila: Secciones 1120/1220/1190/1290 (dos días) -->
+            <tr>
+                <td rowspan="2">007-1513</td>
+                <td rowspan="2">Inglés I para Cs. Administrativas</td>
+                <td rowspan="2">1120/1220/1190/1290</td>
+                <td>Lunes</td>
+                <td>12:15 p.m. a 01:45 p.m.</td>
+                <td rowspan="2">36</td>
+            </tr>
+            <tr>
+                <td>Viernes</td>
+                <td>10:45 a.m. a 12:15 p.m.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- FIRMA Y CIERRE -->
+    <div class="letter-text mt-4">
+        <p>Agradeciendo su receptividad, se despide de Usted,</p>
+    </div>
+    <div class="signature-placeholder">
+        🖼️ [Firma y sello]<br>
+        <span class="text-xs">(Imagen de firma institucional)</span>
+    </div>
+    <div class="letter-text">
+        <p>Atentamente,</p>
+        <p><strong>Profa. Yolimar Marcano Jiménez</strong><br>
+        Coordinadora (E)<br>
+        Programa de Licenciatura en Contaduría Pública.</p>
+        <p class="mt-2">C/c: Coordinación Académica/Dirección ECSA/ Archivo.</p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">SCHEDULE_2026_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR HORARIO (PDF)
+    </button>
+</div>
+
+</body>
+</html>
