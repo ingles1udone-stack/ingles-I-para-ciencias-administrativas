@@ -233,7 +233,7 @@
         }
         .back-btn:hover { background: #8b3a3a; transform: scale(1.02); color: white; }
 
-        /* Botón final */
+        /* Botón final - MEJORADO: texto debajo del cubo */
         #final-launch {
             position: absolute;
             top: 35%;
@@ -246,14 +246,15 @@
             transition: 0.2s;
         }
         .triangle-download {
-            width: 210px;
-            height: 180px;
+            width: 230px;
+            height: 200px;
             background: radial-gradient(circle at 30% 20%, #21ff6e, #00aa44);
             clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 12px;
             position: relative;
             transition: transform 0.2s;
         }
@@ -261,17 +262,24 @@
         #rainbow-cube-container {
             width: 80px;
             height: 80px;
-            margin-top: 20px;
+            margin-top: 15px;
         }
         .download-text {
             font-family: 'VT323', monospace;
-            background: black;
+            background: rgba(0,0,0,0.7);
             color: #00ffaa;
-            padding: 4px 10px;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 1rem;
-            margin-bottom: 8px;
+            font-size: 1.1rem;
             letter-spacing: 2px;
+            margin-bottom: 20px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        @media (max-width: 500px) {
+            .download-text { font-size: 0.8rem; white-space: normal; padding: 4px 8px; }
+            .triangle-download { width: 200px; height: 180px; }
+            #rainbow-cube-container { width: 65px; height: 65px; }
         }
 
         /* Hiperespacio */
@@ -310,8 +318,8 @@
     <div id="hyperspaceLayer" class="hyperspace-effect"></div>
     <div id="final-launch">
         <div class="triangle-download" id="downloadBtn">
-            <div class="download-text">DESCARGAR GUÍA MLC</div>
             <div id="rainbow-cube-container"></div>
+            <div class="download-text">DESCARGAR GUÍA MLC</div>
         </div>
     </div>
 
@@ -588,61 +596,120 @@
             }, 2200);
         }
 
-        // Botón de descarga: genera página imprimible con la guía completa y mensajes subliminales
-        finalLaunchDiv.addEventListener('click', () => {
-            const fullGuide = `
-            <!DOCTYPE html>
-            <html>
-            <head><meta charset="UTF-8"><title>Guía MLC - Desafío Literario</title>
-            <style>
-                body { font-family: 'Courier New', monospace; background: #fef7e0; padding: 2rem; max-width: 800px; margin: auto; }
-                h1 { color: #1a4d1a; }
-                .step { margin-bottom: 1.8rem; border-left: 5px solid #2a7f2a; padding-left: 1rem; }
-                .subliminal { font-size: 8px; color: #aaa; text-align: center; margin-top: 40px; letter-spacing: 0.5px; }
-                hr { margin: 2rem 0; }
-            </style>
-            </head>
-            <body>
-            <h1>🚀 BITÁCORA DE VUELO: DESAFÍO MLC</h1>
-            <p><strong>Estudiante:</strong> ___________________ &nbsp;&nbsp; <strong>Sección:</strong> _________________</p>
-            <hr/>
-            <div class="step"><strong>🔹 FASE 0: ORGANIZACIÓN DEL EQUIPO</strong><br>
-            - Coordinador: gestiona tiempos.<br>
-            - Secretario: registra y consolida.<br>
-            - Supervisor: verifica comprensión y calidad.<br>
-            - Distribución de tiempos: Pre-lectura (10'), Durante (25'), Post (40').
-            </div>
-            <div class="step"><strong>🔹 FASE 1: PRE-LECTURA</strong><br>
-            ▹ Compromiso SMART: Definir S (específico), M (medible), T (tiempo).<br>
-            ▹ Brainstorming: 5 palabras clave. Explicar 1 con relevancia en Contaduría/Administración.<br>
-            ▹ Preguntas previas: 3 preguntas basadas en el título; justificar una.
-            </div>
-            <div class="step"><strong>🔹 FASE 2: DURANTE LA LECTURA</strong><br>
-            ▹ Conectores: identificar 3, clasificarlos y reescribir una oración cambiando el conector.<br>
-            ▹ Estructura: señalar oración introductoria, desarrollo y conclusión (primeras 3 palabras).<br>
-            ▹ Tipo textual: justificar si es narrativo, descriptivo, expositivo o argumentativo.<br>
-            ▹ Análisis de argumentos: tesis, tipo de argumento, evaluación.
-            </div>
-            <div class="step"><strong>🔹 FASE 3: POST-LECTURA</strong><br>
-            ▹ Síntesis creativa: título + 3 ideas principales (bullet points).<br>
-            ▹ Pedagogía: explicar el concepto central como para un niño de 12 años.<br>
-            ▹ Intención del autor: frase clave.<br>
-            ▹ Preguntas nivel experto: 2 preguntas profundas con respuestas.
-            </div>
-            <div class="step"><strong>🔹 ORGANIZADOR GRÁFICO (elegir uno)</strong><br>
-            - Mapa conceptual / Diagrama de Ishikawa / Línea de tiempo / Tabla comparativa.<br>
-            - Autoevaluación (1-5): si puntaje < 4, corregir.
-            </div>
-            <hr/>
-            <div class="subliminal">estudiante, llévalo impreso a la clase para realizarlo con tus compañeros</div>
-            <div class="subliminal">✧ comparte tus ideas en el taller colaborativo ✧</div>
-            <div class="subliminal">✧ la lectura crítica es tu motor de hiperimpulso ✧</div>
-            </body>
-            </html>`;
-            const blob = new Blob([fullGuide], {type: 'text/html'});
-            const url = URL.createObjectURL(blob);
-            window.open(url, '_blank');
-            setTimeout(() => URL.revokeObjectURL(url), 150);
+        // ========== SONIDO THEREMIN PARA EL CUBO FINAL ==========
+        let audioCtx = null;
+        let currentOsc = null;
+        let currentGain = null;
+
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playTheremin(frequency, duration, volume = 0.3) {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sine';
+            osc.frequency.value = frequency;
+            gain.gain.value = volume;
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(now + duration);
+            return { osc, gain };
+        }
+
+        function hoverTheremin() {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            // Efecto theremin ascendente al entrar
+            playTheremin(440, 0.4, 0.15);
+            playTheremin(660, 0.5, 0.12);
+        }
+
+        function clickTheremin() {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+            // Sonido más intenso y descendente al hacer clic
+            playTheremin(880, 0.2, 0.25);
+            setTimeout(() => playTheremin(660, 0.3, 0.2), 100);
+            setTimeout(() => playTheremin(440, 0.5, 0.15), 300);
+        }
+
+        // Aplicar eventos al botón final (cuando aparezca)
+        const finalButton = document.getElementById('downloadBtn');
+        finalButton.addEventListener('mouseenter', hoverTheremin);
+        finalButton.addEventListener('click', () => {
+            clickTheremin();
+            // La descarga se dispara en el evento original, pero no interferimos
+        });
+
+        // Botón de descarga (ya existente)
+        finalLaunchDiv.addEventListener('click', (e) => {
+            // Si el clic es en el botón, ya se ejecuta la descarga
+            if (e.target.closest('#downloadBtn')) {
+                const fullGuide = `
+                <!DOCTYPE html>
+                <html>
+                <head><meta charset="UTF-8"><title>Guía MLC - Desafío Literario</title>
+                <style>
+                    body { font-family: 'Courier New', monospace; background: #fef7e0; padding: 2rem; max-width: 800px; margin: auto; }
+                    h1 { color: #1a4d1a; }
+                    .step { margin-bottom: 1.8rem; border-left: 5px solid #2a7f2a; padding-left: 1rem; }
+                    .subliminal { font-size: 8px; color: #aaa; text-align: center; margin-top: 40px; letter-spacing: 0.5px; }
+                    hr { margin: 2rem 0; }
+                </style>
+                </head>
+                <body>
+                <h1>🚀 BITÁCORA DE VUELO: DESAFÍO MLC</h1>
+                <p><strong>Estudiante:</strong> ___________________ &nbsp;&nbsp; <strong>Sección:</strong> _________________</p>
+                <hr/>
+                <div class="step"><strong>🔹 FASE 0: ORGANIZACIÓN DEL EQUIPO</strong><br>
+                - Coordinador: gestiona tiempos.<br>
+                - Secretario: registra y consolida.<br>
+                - Supervisor: verifica comprensión y calidad.<br>
+                - Distribución de tiempos: Pre-lectura (10'), Durante (25'), Post (40').
+                </div>
+                <div class="step"><strong>🔹 FASE 1: PRE-LECTURA</strong><br>
+                ▹ Compromiso SMART: Definir S (específico), M (medible), T (tiempo).<br>
+                ▹ Brainstorming: 5 palabras clave. Explicar 1 con relevancia en Contaduría/Administración.<br>
+                ▹ Preguntas previas: 3 preguntas basadas en el título; justificar una.
+                </div>
+                <div class="step"><strong>🔹 FASE 2: DURANTE LA LECTURA</strong><br>
+                ▹ Conectores: identificar 3, clasificarlos y reescribir una oración cambiando el conector.<br>
+                ▹ Estructura: señalar oración introductoria, desarrollo y conclusión (primeras 3 palabras).<br>
+                ▹ Tipo textual: justificar si es narrativo, descriptivo, expositivo o argumentativo.<br>
+                ▹ Análisis de argumentos: tesis, tipo de argumento, evaluación.
+                </div>
+                <div class="step"><strong>🔹 FASE 3: POST-LECTURA</strong><br>
+                ▹ Síntesis creativa: título + 3 ideas principales (bullet points).<br>
+                ▹ Pedagogía: explicar el concepto central como para un niño de 12 años.<br>
+                ▹ Intención del autor: frase clave.<br>
+                ▹ Preguntas nivel experto: 2 preguntas profundas con respuestas.
+                </div>
+                <div class="step"><strong>🔹 ORGANIZADOR GRÁFICO (elegir uno)</strong><br>
+                - Mapa conceptual / Diagrama de Ishikawa / Línea de tiempo / Tabla comparativa.<br>
+                - Autoevaluación (1-5): si puntaje < 4, corregir.
+                </div>
+                <hr/>
+                <div class="subliminal">estudiante, llévalo impreso a la clase para realizarlo con tus compañeros</div>
+                <div class="subliminal">✧ comparte tus ideas en el taller colaborativo ✧</div>
+                <div class="subliminal">✧ la lectura crítica es tu motor de hiperimpulso ✧</div>
+                </body>
+                </html>`;
+                const blob = new Blob([fullGuide], {type: 'text/html'});
+                const url = URL.createObjectURL(blob);
+                window.open(url, '_blank');
+                setTimeout(() => URL.revokeObjectURL(url), 150);
+            }
         });
 
         backBtn.addEventListener('click', () => window.location.href = 'index.html');
