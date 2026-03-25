@@ -32,7 +32,7 @@
             body { overflow-y: auto; }
         }
 
-        /* Fondo estelar animado */
+        /* Fondo estelar animado (Three.js canvas) */
         #stars-canvas {
             position: fixed;
             top: 0;
@@ -40,7 +40,7 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            background: radial-gradient(ellipse at center, #030d1a 0%, #000000 100%);
+            display: block;
         }
 
         /* Cristal de la cabina */
@@ -244,15 +244,15 @@
             cursor: pointer;
             filter: drop-shadow(0 0 20px #00ffaa);
             transition: 0.2s;
-            width: 160px;
-            height: 160px;
+            width: 200px;
+            height: 200px;
         }
         #final-cube-container:hover {
             transform: translate(-50%, -50%) scale(1.05);
             filter: drop-shadow(0 0 30px #88ff88);
         }
 
-        /* Hiperespacio */
+        /* Hiperespacio (líneas de velocidad) */
         .hyperspace-effect {
             position: fixed;
             top: 0;
@@ -315,7 +315,54 @@
     <script type="module">
         import * as THREE from 'three';
 
-        // === Configuración 3D: Cubo inicial y cubo arcoíris (doble tamaño) ===
+        // ========== 1. FONDO ESTELAR CON MOVIMIENTO (viaje espacial) ==========
+        const starCanvas = document.getElementById('stars-canvas');
+        const starRenderer = new THREE.WebGLRenderer({ canvas: starCanvas, alpha: true });
+        starRenderer.setSize(window.innerWidth, window.innerHeight);
+        const starScene = new THREE.Scene();
+        const starCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        starCamera.position.z = 5;
+        
+        // Crear muchas estrellas (puntos) que se mueven en Z
+        const starCount = 800;
+        const starGeometry = new THREE.BufferGeometry();
+        const starPositions = new Float32Array(starCount * 3);
+        for (let i = 0; i < starCount; i++) {
+            starPositions[i*3] = (Math.random() - 0.5) * 200;   // X
+            starPositions[i*3+1] = (Math.random() - 0.5) * 200; // Y
+            starPositions[i*3+2] = (Math.random() - 0.5) * 100; // Z
+        }
+        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+        const starMaterial = new THREE.PointsMaterial({ color: 0x88ffaa, size: 0.3, transparent: true });
+        const starsPoints = new THREE.Points(starGeometry, starMaterial);
+        starScene.add(starsPoints);
+        
+        let starSpeed = 0.5;
+        function animateStars() {
+            requestAnimationFrame(animateStars);
+            // Mover estrellas hacia la cámara (aumentar Z)
+            const positions = starsPoints.geometry.attributes.position.array;
+            for (let i = 0; i < starCount; i++) {
+                positions[i*3+2] += starSpeed;
+                if (positions[i*3+2] > 50) {
+                    positions[i*3+2] = -50;
+                    positions[i*3] = (Math.random() - 0.5) * 200;
+                    positions[i*3+1] = (Math.random() - 0.5) * 200;
+                }
+            }
+            starsPoints.geometry.attributes.position.needsUpdate = true;
+            starRenderer.render(starScene, starCamera);
+        }
+        animateStars();
+        
+        window.addEventListener('resize', () => {
+            starCamera.aspect = window.innerWidth / window.innerHeight;
+            starCamera.updateProjectionMatrix();
+            starRenderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ========== 2. CUBOS 3D: inicial y final ==========
+        // Cubo inicial (verde wireframe)
         const cubeContainer = document.getElementById('cubeBtn');
         const cubeScene = new THREE.Scene();
         const cubeCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
@@ -331,20 +378,20 @@
         cubeScene.add(ambientLight, pointLight);
         cubeCamera.position.z = 2.3;
 
-        // Cubo arcoíris final (doble tamaño: geometría 2x2x2, renderer de 160x160)
+        // Cubo final (arcoíris, tamaño grande)
         const finalContainer = document.getElementById('final-cube-container');
         const finalScene = new THREE.Scene();
         const finalCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
         const finalRenderer = new THREE.WebGLRenderer({ alpha: true });
-        finalRenderer.setSize(160, 160);
+        finalRenderer.setSize(200, 200);
         finalContainer.appendChild(finalRenderer.domElement);
         const rainbowMat = new THREE.MeshStandardMaterial({ color: 0xff0000, emissive: 0x442200 });
-        const finalCube = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 2), rainbowMat);
+        const finalCube = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.8, 1.8), rainbowMat);
         finalScene.add(finalCube);
         const finalLight = new THREE.PointLight(0xffaa66, 1);
         finalLight.position.set(2, 3, 4);
         finalScene.add(finalLight);
-        finalCamera.position.z = 3.5; // Ajustado para ver el cubo más grande
+        finalCamera.position.z = 2.8; // Ajustado para que el cubo quede completamente visible
 
         function animateCubes() {
             requestAnimationFrame(animateCubes);
@@ -360,50 +407,7 @@
         }
         animateCubes();
 
-        // === Estrellas animadas (fondo) ===
-        const starsCanvas = document.getElementById('stars-canvas');
-        const ctx = starsCanvas.getContext('2d');
-        let starsArray = [];
-        function initStars() {
-            starsCanvas.width = window.innerWidth;
-            starsCanvas.height = window.innerHeight;
-            starsArray = [];
-            for(let i=0; i<500; i++) {
-                starsArray.push({
-                    x: Math.random() * starsCanvas.width,
-                    y: Math.random() * starsCanvas.height,
-                    radius: Math.random() * 2 + 1,
-                    alpha: Math.random() * 0.8 + 0.2,
-                    speed: Math.random() * 2 + 0.5
-                });
-            }
-        }
-        function drawStars() {
-            if(!starsCanvas) return;
-            ctx.fillStyle = "#000000";
-            ctx.fillRect(0, 0, starsCanvas.width, starsCanvas.height);
-            for(let s of starsArray) {
-                ctx.beginPath();
-                ctx.arc(s.x, s.y, s.radius, 0, Math.PI*2);
-                ctx.fillStyle = `rgba(100, 255, 150, ${s.alpha * 0.7})`;
-                ctx.fill();
-                s.y += s.speed;
-                if(s.y > starsCanvas.height) {
-                    s.y = 0;
-                    s.x = Math.random() * starsCanvas.width;
-                }
-            }
-            requestAnimationFrame(drawStars);
-        }
-        window.addEventListener('resize', () => {
-            starsCanvas.width = window.innerWidth;
-            starsCanvas.height = window.innerHeight;
-            initStars();
-        });
-        initStars();
-        drawStars();
-
-        // ========== DATOS DEL DESAFÍO (Basado en Guía MLC) ==========
+        // ========== 3. DATOS DEL DESAFÍO ==========
         const mapNodes = [
             { id: 0, text: "FASE 0: EQUIPO", x: 80, y: 80,
               info: "📋 Asignen roles: Coordinador (tiempos), Secretario (registro), Supervisor (calidad). Establezcan tiempos: Pre (10'), Durante (25'), Post (40')." },
@@ -437,7 +441,6 @@
         const finalContainerDiv = document.getElementById('final-cube-container');
         const backBtn = document.getElementById('backButton');
 
-        // Dibujar mapa mental
         function drawMindMapSequential() {
             mindmapSvg.style.display = "block";
             const svgNS = "http://www.w3.org/2000/svg";
@@ -507,7 +510,6 @@
             recomendacionDiv.innerHTML = "✅ Mapa de fases activado. Toca cada nodo para ver los pasos detallados de la Guía MLC.";
         }
 
-        // Palanca SMART
         let smartOpen = false;
         smartLever.addEventListener('click', () => {
             if(!challengeStarted) {
@@ -561,37 +563,31 @@
             }, 2200);
         }
 
-        // ========== SONIDO THEREMIN PARA EL CUBO FINAL ==========
+        // ========== SONIDO THEREMIN ==========
         let audioCtx = null;
-
         function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }
-
-        function playTheremin(frequency, duration, volume = 0.3) {
+        function playTheremin(freq, dur, vol = 0.3) {
             if (!audioCtx) return;
             const now = audioCtx.currentTime;
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
-            osc.frequency.value = frequency;
-            gain.gain.value = volume;
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+            osc.frequency.value = freq;
+            gain.gain.value = vol;
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start();
-            osc.stop(now + duration);
+            osc.stop(now + dur);
         }
-
         function hoverTheremin() {
             initAudio();
             if (audioCtx.state === 'suspended') audioCtx.resume();
             playTheremin(440, 0.4, 0.15);
             playTheremin(660, 0.5, 0.12);
         }
-
         function clickTheremin() {
             initAudio();
             if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -600,7 +596,6 @@
             setTimeout(() => playTheremin(440, 0.5, 0.15), 300);
         }
 
-        // Eventos del cubo final
         finalContainerDiv.addEventListener('mouseenter', hoverTheremin);
         finalContainerDiv.addEventListener('click', (e) => {
             e.stopPropagation();
