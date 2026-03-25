@@ -628,7 +628,6 @@
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
-            // Efecto theremin ascendente al entrar
             playTheremin(440, 0.4, 0.15);
             playTheremin(660, 0.5, 0.12);
         }
@@ -638,7 +637,6 @@
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
-            // Sonido más intenso y descendente al hacer clic
             playTheremin(880, 0.2, 0.25);
             setTimeout(() => playTheremin(660, 0.3, 0.2), 100);
             setTimeout(() => playTheremin(440, 0.5, 0.15), 300);
@@ -647,68 +645,18 @@
         // Aplicar eventos al botón final (cuando aparezca)
         const finalButton = document.getElementById('downloadBtn');
         finalButton.addEventListener('mouseenter', hoverTheremin);
-        finalButton.addEventListener('click', () => {
+        finalButton.addEventListener('click', (e) => {
+            e.stopPropagation();
             clickTheremin();
-            // La descarga se dispara en el evento original, pero no interferimos
+            // Abrir el enlace de Google Drive directamente
+            window.open('https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link', '_blank');
         });
 
-        // Botón de descarga (ya existente)
+        // También aseguramos que el contenedor final no tenga otro handler conflictivo
         finalLaunchDiv.addEventListener('click', (e) => {
-            // Si el clic es en el botón, ya se ejecuta la descarga
-            if (e.target.closest('#downloadBtn')) {
-                const fullGuide = `
-                <!DOCTYPE html>
-                <html>
-                <head><meta charset="UTF-8"><title>Guía MLC - Desafío Literario</title>
-                <style>
-                    body { font-family: 'Courier New', monospace; background: #fef7e0; padding: 2rem; max-width: 800px; margin: auto; }
-                    h1 { color: #1a4d1a; }
-                    .step { margin-bottom: 1.8rem; border-left: 5px solid #2a7f2a; padding-left: 1rem; }
-                    .subliminal { font-size: 8px; color: #aaa; text-align: center; margin-top: 40px; letter-spacing: 0.5px; }
-                    hr { margin: 2rem 0; }
-                </style>
-                </head>
-                <body>
-                <h1>🚀 BITÁCORA DE VUELO: DESAFÍO MLC</h1>
-                <p><strong>Estudiante:</strong> ___________________ &nbsp;&nbsp; <strong>Sección:</strong> _________________</p>
-                <hr/>
-                <div class="step"><strong>🔹 FASE 0: ORGANIZACIÓN DEL EQUIPO</strong><br>
-                - Coordinador: gestiona tiempos.<br>
-                - Secretario: registra y consolida.<br>
-                - Supervisor: verifica comprensión y calidad.<br>
-                - Distribución de tiempos: Pre-lectura (10'), Durante (25'), Post (40').
-                </div>
-                <div class="step"><strong>🔹 FASE 1: PRE-LECTURA</strong><br>
-                ▹ Compromiso SMART: Definir S (específico), M (medible), T (tiempo).<br>
-                ▹ Brainstorming: 5 palabras clave. Explicar 1 con relevancia en Contaduría/Administración.<br>
-                ▹ Preguntas previas: 3 preguntas basadas en el título; justificar una.
-                </div>
-                <div class="step"><strong>🔹 FASE 2: DURANTE LA LECTURA</strong><br>
-                ▹ Conectores: identificar 3, clasificarlos y reescribir una oración cambiando el conector.<br>
-                ▹ Estructura: señalar oración introductoria, desarrollo y conclusión (primeras 3 palabras).<br>
-                ▹ Tipo textual: justificar si es narrativo, descriptivo, expositivo o argumentativo.<br>
-                ▹ Análisis de argumentos: tesis, tipo de argumento, evaluación.
-                </div>
-                <div class="step"><strong>🔹 FASE 3: POST-LECTURA</strong><br>
-                ▹ Síntesis creativa: título + 3 ideas principales (bullet points).<br>
-                ▹ Pedagogía: explicar el concepto central como para un niño de 12 años.<br>
-                ▹ Intención del autor: frase clave.<br>
-                ▹ Preguntas nivel experto: 2 preguntas profundas con respuestas.
-                </div>
-                <div class="step"><strong>🔹 ORGANIZADOR GRÁFICO (elegir uno)</strong><br>
-                - Mapa conceptual / Diagrama de Ishikawa / Línea de tiempo / Tabla comparativa.<br>
-                - Autoevaluación (1-5): si puntaje < 4, corregir.
-                </div>
-                <hr/>
-                <div class="subliminal">estudiante, llévalo impreso a la clase para realizarlo con tus compañeros</div>
-                <div class="subliminal">✧ comparte tus ideas en el taller colaborativo ✧</div>
-                <div class="subliminal">✧ la lectura crítica es tu motor de hiperimpulso ✧</div>
-                </body>
-                </html>`;
-                const blob = new Blob([fullGuide], {type: 'text/html'});
-                const url = URL.createObjectURL(blob);
-                window.open(url, '_blank');
-                setTimeout(() => URL.revokeObjectURL(url), 150);
+            // Si el clic es en el botón, ya lo maneja finalButton; si no, redirigimos igual
+            if (!e.target.closest('#downloadBtn')) {
+                window.open('https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link', '_blank');
             }
         });
 
