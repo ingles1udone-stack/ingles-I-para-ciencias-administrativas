@@ -32,10 +32,7 @@
             overflow-x: hidden;
         }
         @media (max-width: 768px) {
-            body {
-                overflow-y: auto;
-                overflow-x: hidden;
-            }
+            body { overflow-y: auto; overflow-x: hidden; }
         }
 
         #stars-canvas {
@@ -48,7 +45,7 @@
             display: block;
         }
 
-        /* Ticker superior */
+        /* Ticker */
         .ticker {
             position: fixed;
             top: 0;
@@ -70,11 +67,8 @@
             padding-left: 100%;
             animation: scrollTicker 20s linear infinite;
             color: #ffdd88;
-            text-shadow: 0 0 3px #ffaa33;
         }
-        .ticker-content span {
-            margin-right: 50px;
-        }
+        .ticker-content span { margin-right: 50px; }
         @keyframes scrollTicker {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
@@ -111,18 +105,13 @@
             pointer-events: none;
         }
         @media (max-width: 768px) {
-            .cockpit-glass {
-                border-width: 10px;
-                border-bottom-width: 120px;
-            }
+            .cockpit-glass { border-width: 10px; border-bottom-width: 120px; }
         }
 
         /* Dashboard */
         #dashboard {
             position: relative;
             bottom: 0;
-            left: 0;
-            right: 0;
             background: #0f0f12;
             border-top: 3px solid #3a3a3a;
             display: flex;
@@ -132,18 +121,12 @@
             padding: 20px;
             z-index: 15;
             flex-wrap: wrap;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
             margin-top: auto;
         }
         @media (max-width: 768px) {
-            #dashboard {
-                flex-direction: column;
-                padding: 15px;
-                gap: 15px;
-            }
+            #dashboard { flex-direction: column; padding: 15px; gap: 15px; }
         }
 
-        /* Monitores */
         .monitor {
             background: #071a07;
             border: 6px solid #2d2d2d;
@@ -156,7 +139,6 @@
             height: 220px;
             position: relative;
             overflow-y: auto;
-            overflow-x: hidden;
             padding: 12px;
         }
         .side-monitor {
@@ -170,17 +152,10 @@
             background: #021102;
             border: 3px solid #3a3a3a;
         }
-        .side-monitor::-webkit-scrollbar, .main-monitor::-webkit-scrollbar {
-            width: 6px;
-            background: #1a3a1a;
-        }
-        .side-monitor::-webkit-scrollbar-thumb, .main-monitor::-webkit-scrollbar-thumb {
-            background: #1aff80;
-            border-radius: 4px;
-        }
+        .main-monitor::-webkit-scrollbar, .side-monitor::-webkit-scrollbar { width: 6px; background: #1a3a1a; }
+        .main-monitor::-webkit-scrollbar-thumb, .side-monitor::-webkit-scrollbar-thumb { background: #1aff80; border-radius: 4px; }
         @media (max-width: 768px) {
-            .main-monitor { width: 95vw; height: 200px; }
-            .side-monitor { width: 95vw; height: 180px; }
+            .main-monitor, .side-monitor { width: 95vw; height: 200px; }
         }
 
         /* Cubo inicial */
@@ -194,7 +169,7 @@
         .cube-btn:hover { filter: drop-shadow(0 0 12px #1aff80); }
         @media (max-width: 768px) { .cube-btn { width: 100px; height: 100px; } }
 
-        /* Mapa SVG */
+        /* Mapa mental SVG */
         #mindmap-svg {
             width: 100%;
             height: 100%;
@@ -202,10 +177,7 @@
             background: rgba(5, 15, 5, 0.7);
         }
         .node-group { cursor: pointer; }
-        .node-group:hover circle {
-            stroke: #ffff80;
-            filter: drop-shadow(0 0 6px #ffcc44);
-        }
+        .node-group:hover circle { stroke: #ffff80; filter: drop-shadow(0 0 6px #ffcc44); }
 
         /* Overlay SMART */
         .smart-overlay {
@@ -253,9 +225,22 @@
             transition: top 0.3s ease;
             box-shadow: 0 2px 5px black;
         }
+        .lever-handle::after {
+            content: "";
+            width: 30px;
+            height: 30px;
+            background: #3cff6e;
+            border-radius: 50%;
+            position: absolute;
+            top: -12px;
+            left: -5px;
+            opacity: 0;
+            transition: 0.2s;
+        }
         .lever-active .lever-handle { top: 45px; }
+        .lever-active .lever-handle::after { opacity: 1; box-shadow: 0 0 12px #1aff80; }
 
-        /* Botón BACK mejorado */
+        /* BOTÓN BACK ESTILO PLÁSTICO NEÓN */
         .back-btn {
             width: 85px;
             height: 85px;
@@ -341,8 +326,7 @@
         }
         @media (max-width: 768px) {
             #final-cube-container { width: 150px; height: 150px; }
-            .download-label { font-size: 1rem; padding: 4px 12px; }
-            #final-cube-wrapper { top: 40%; }
+            .download-label { font-size: 1rem; }
         }
 
         /* Hiperespacio */
@@ -472,7 +456,6 @@
             starRenderer.render(starScene, starCamera);
         }
         animateStars();
-        
         window.addEventListener('resize', () => {
             starCamera.aspect = window.innerWidth / window.innerHeight;
             starCamera.updateProjectionMatrix();
@@ -514,7 +497,6 @@
             mainCube.rotation.x += 0.02;
             mainCube.rotation.y += 0.025;
             cubeRenderer.render(cubeScene, cubeCamera);
-            
             const hue = (Date.now() * 0.003) % 1;
             rainbowMat.color.setHSL(hue, 1.0, 0.55);
             finalCube.rotation.x += 0.02;
@@ -526,18 +508,22 @@
         function resizeFinalCube() {
             const isMobile = window.innerWidth <= 768;
             finalRenderer.setSize(isMobile ? 150 : 200, isMobile ? 150 : 200);
-            finalCamera.position.z = 2.8;
         }
         window.addEventListener('resize', resizeFinalCube);
         resizeFinalCube();
 
         // ==================== DATOS DEL DESAFÍO ====================
         const mapNodes = [
-            { id: 0, text: "FASE 0: EQUIPO", x: 80, y: 80, info: "📋 Asignen roles: Coordinador (tiempos), Secretario (registro), Supervisor (calidad). Establezcan tiempos: Pre (10'), Durante (25'), Post (40')." },
-            { id: 1, text: "FASE 1: PRE-LECTURA", x: 220, y: 40, info: "🎯 1. Compromiso SMART: definan S-M-T. 2. Brainstorming: 5 palabras clave, expliquen 1 relevante para Contaduría/Administración. 3. Preguntas previas: 3 preguntas basadas en título, justifiquen 1." },
-            { id: 2, text: "FASE 2: DURANTE", x: 360, y: 80, info: "🔍 1. Conectores: localicen 3, clasifiquen y reescriban una oración cambiando conector. 2. Estructura: oración introductoria, desarrollo, conclusión (primeras palabras). 3. Tipo textual: narrativo/descriptivo/expositivo/argumentativo, justifiquen. 4. Análisis de argumentos: tesis, tipo de argumento, evaluación." },
-            { id: 3, text: "FASE 3: POST-LECTURA", x: 220, y: 170, info: "✍️ 1. Síntesis creativa: título creativo + 3 ideas principales (bullet points). 2. Pedagogía: explicar concepto central para niño de 12 años. 3. Intención del autor: frase clave. 4. Preguntas nivel experto: 2 preguntas profundas con respuestas." },
-            { id: 4, text: "ORGANIZADOR GRÁFICO", x: 480, y: 160, info: "📊 Elijan UNO: mapa conceptual, diagrama de Ishikawa, línea de tiempo, o tabla comparativa. Autoevalúen (1-5); si <4, corrijan. Este será su entregable final." }
+            { id: 0, text: "FASE 0: EQUIPO", x: 80, y: 80,
+              info: "📋 Asignen roles: Coordinador (tiempos), Secretario (registro), Supervisor (calidad). Establezcan tiempos: Pre (10'), Durante (25'), Post (40')." },
+            { id: 1, text: "FASE 1: PRE-LECTURA", x: 220, y: 40,
+              info: "🎯 1. Compromiso SMART: definan S-M-T. 2. Brainstorming: 5 palabras clave, expliquen 1 relevante para Contaduría/Administración. 3. Preguntas previas: 3 preguntas basadas en título, justifiquen 1." },
+            { id: 2, text: "FASE 2: DURANTE", x: 360, y: 80,
+              info: "🔍 1. Conectores: localicen 3, clasifiquen y reescriban una oración cambiando conector. 2. Estructura: oración introductoria, desarrollo, conclusión (primeras palabras). 3. Tipo textual: narrativo/descriptivo/expositivo/argumentativo, justifiquen. 4. Análisis de argumentos: tesis, tipo de argumento, evaluación." },
+            { id: 3, text: "FASE 3: POST-LECTURA", x: 220, y: 170,
+              info: "✍️ 1. Síntesis creativa: título creativo + 3 ideas principales (bullet points). 2. Pedagogía: explicar concepto central para niño de 12 años. 3. Intención del autor: frase clave. 4. Preguntas nivel experto: 2 preguntas profundas con respuestas." },
+            { id: 4, text: "ORGANIZADOR GRÁFICO", x: 480, y: 160,
+              info: "📊 Elijan UNO: mapa conceptual, diagrama de Ishikawa, línea de tiempo, o tabla comparativa. Autoevalúen (1-5); si <4, corrijan. Este será su entregable final." }
         ];
 
         const smartExamples = [
@@ -560,99 +546,106 @@
         const finalWrapper = document.getElementById('final-cube-wrapper');
         const backBtn = document.getElementById('backButton');
 
-        // ==================== SONIDOS VIDEOJUEGO ====================
+        // ==================== SONIDOS ARCADES MEJORADOS ====================
         let audioCtx = null;
         function initAudio() {
             if (!audioCtx) {
                 audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
         }
 
-        // Sonido para BACK: "Power Pellet" de Pac-Man (ascendente rápido)
-        function playPowerPellet() {
+        // Sonido tipo "comiendo punto" de Pac-Man (descendente rápido)
+        function playBackSound() {
             if (!audioCtx) return;
             const now = audioCtx.currentTime;
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'square';
-            osc.frequency.value = 523.25; // Do5
-            gain.gain.value = 0.3;
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.frequency.exponentialRampToValue(1046.50, now + 0.2);
-            osc.stop(now + 0.2);
-            
-            // Segundo armónico para más cuerpo
-            const osc2 = audioCtx.createOscillator();
-            const gain2 = audioCtx.createGain();
-            osc2.type = 'sine';
-            osc2.frequency.value = 659.25;
-            gain2.gain.value = 0.15;
-            gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.18);
-            osc2.connect(gain2);
-            gain2.connect(audioCtx.destination);
-            osc2.start();
-            osc2.stop(now + 0.18);
-        }
-
-        // Sonido para el cubo final: "Moneda" o "Estrella" (corto y brillante)
-        function playCoinSound() {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
             osc.frequency.value = 880;
-            gain.gain.value = 0.25;
+            gain.gain.value = 0.3;
             gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
             osc.connect(gain);
             gain.connect(audioCtx.destination);
             osc.start();
-            osc.frequency.setValueAtTime(880, now);
-            osc.frequency.exponentialRampToValue(1396.91, now + 0.1);
+            osc.frequency.exponentialRampToValue(440, now + 0.12);
             osc.stop(now + 0.15);
-            
-            // Pequeño eco
+        }
+
+        // Sonido tipo "power-up / campana" (ascendente y brillante)
+        function playDownloadSound() {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            // Primer tono
+            const osc1 = audioCtx.createOscillator();
+            const gain1 = audioCtx.createGain();
+            osc1.type = 'sine';
+            osc1.frequency.value = 523.25; // C5
+            gain1.gain.value = 0.25;
+            gain1.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+            osc1.connect(gain1);
+            gain1.connect(audioCtx.destination);
+            osc1.start();
+            osc1.stop(now + 0.3);
+            // Segundo tono (más agudo)
             const osc2 = audioCtx.createOscillator();
             const gain2 = audioCtx.createGain();
-            osc2.type = 'triangle';
-            osc2.frequency.value = 660;
-            gain2.gain.value = 0.12;
-            gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.12);
+            osc2.type = 'sine';
+            osc2.frequency.value = 783.99; // G5
+            gain2.gain.value = 0.25;
+            gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
             osc2.connect(gain2);
             gain2.connect(audioCtx.destination);
-            osc2.start();
-            osc2.stop(now + 0.12);
+            osc2.start(now + 0.1);
+            osc2.stop(now + 0.4);
+            // Glissando ascendente corto
+            const osc3 = audioCtx.createOscillator();
+            const gain3 = audioCtx.createGain();
+            osc3.type = 'triangle';
+            osc3.frequency.value = 659.25; // E5
+            gain3.gain.value = 0.15;
+            gain3.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+            osc3.connect(gain3);
+            gain3.connect(audioCtx.destination);
+            osc3.start();
+            osc3.frequency.exponentialRampToValue(1046.5, now + 0.18); // C6
+            osc3.stop(now + 0.2);
         }
 
-        function safePlay(soundFunc) {
+        // Función segura para BACK (con redirección a nueva pestaña)
+        function handleBackClick() {
             initAudio();
-            if (audioCtx.state === 'suspended') {
-                audioCtx.resume().then(() => soundFunc()).catch(e => console.log(e));
-            } else {
-                soundFunc();
-            }
+            playBackSound();
+            // Pequeña pausa para escuchar el efecto antes de abrir la nueva ventana
+            setTimeout(() => {
+                window.open('index.html', '_blank');
+            }, 120);
         }
 
-        // ==================== BOTÓN BACK: redirige a index.html ====================
+        // Función segura para el cubo final (descarga)
+        function handleDownloadClick() {
+            initAudio();
+            playDownloadSound();
+            setTimeout(() => {
+                const driveLink = 'https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link';
+                window.open(driveLink, '_blank');
+            }, 120);
+        }
+
+        // Asignar eventos
         backBtn.addEventListener('click', (e) => {
-            // Reproducir sonido y luego redirigir inmediatamente
-            safePlay(playPowerPellet);
-            // Redirigir sin setTimeout para asegurar que se ejecute
-            window.location.href = 'index.html';
+            e.stopPropagation();
+            handleBackClick();
         });
 
-        // ==================== CUBO FINAL: descargar / abrir enlace ====================
         finalWrapper.addEventListener('click', (e) => {
             e.stopPropagation();
-            safePlay(playCoinSound);
-            // Abrir el enlace en la misma pestaña (evita bloqueo de popup)
-            window.location.href = 'https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link';
+            handleDownloadClick();
         });
 
-        // ==================== MAPA MENTAL ====================
+        // ==================== MAPA MENTAL SECUENCIAL ====================
         function drawMindMapSequential() {
             mindmapSvg.style.display = "block";
             const svgNS = "http://www.w3.org/2000/svg";
@@ -666,6 +659,7 @@
                 setTimeout(() => {
                     const g = document.createElementNS(svgNS, "g");
                     g.setAttribute("class", "node-group");
+                    g.setAttribute("data-id", node.id);
                     const circle = document.createElementNS(svgNS, "circle");
                     circle.setAttribute("cx", node.x);
                     circle.setAttribute("cy", node.y);
@@ -685,7 +679,7 @@
 
                     g.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if (!nodesClicked.has(node.id)) {
+                        if(!nodesClicked.has(node.id)) {
                             nodesClicked.add(node.id);
                             recomendacionDiv.innerHTML = `📖 ${node.info}`;
                             circle.setAttribute("fill", "#1aff8044");
@@ -697,7 +691,7 @@
                     });
                     nodesGroup.appendChild(g);
 
-                    if (idx > 0) {
+                    if(idx > 0) {
                         const prev = mapNodes[idx-1];
                         const line = document.createElementNS(svgNS, "line");
                         line.setAttribute("x1", prev.x);
@@ -714,7 +708,7 @@
         }
 
         function iniciarDesafio() {
-            if (challengeStarted) return;
+            if(challengeStarted) return;
             challengeStarted = true;
             document.getElementById('cube-area').style.display = 'none';
             drawMindMapSequential();
@@ -723,12 +717,12 @@
 
         let smartOpen = false;
         smartLever.addEventListener('click', () => {
-            if (!challengeStarted) {
+            if(!challengeStarted) {
                 recomendacionDiv.innerHTML = "⚠️ Primero activa el cubo central para iniciar el desafío.";
                 return;
             }
             smartOpen = !smartOpen;
-            if (smartOpen) {
+            if(smartOpen) {
                 smartLever.classList.add('lever-active');
                 smartOverlay.style.display = "block";
                 smartTextDiv.innerHTML = smartExamples.map(ex => `<div style="margin-bottom: 16px;">${ex}</div>`).join('');
@@ -746,19 +740,19 @@
         });
 
         function verificarCompletado() {
-            if (hyperspaceTriggered) return;
+            if(hyperspaceTriggered) return;
             const allNodesClicked = nodesClicked.size === mapNodes.length;
-            if (allNodesClicked && smartUsed) {
+            if(allNodesClicked && smartUsed) {
                 iniciarHiperespacio();
             }
         }
 
         function iniciarHiperespacio() {
-            if (hyperspaceTriggered) return;
+            if(hyperspaceTriggered) return;
             hyperspaceTriggered = true;
             const layer = document.getElementById('hyperspaceLayer');
             layer.style.display = "block";
-            for (let i = 0; i < 70; i++) {
+            for(let i=0; i<70; i++) {
                 const streak = document.createElement('div');
                 streak.classList.add('streak');
                 streak.style.left = Math.random() * 100 + '%';
