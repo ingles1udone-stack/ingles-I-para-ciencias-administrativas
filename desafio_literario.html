@@ -12,6 +12,8 @@
             }
         }
     </script>
+    <!-- Font Awesome 6 (necesario para el ícono fantasma) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
@@ -137,7 +139,7 @@
             z-index: 15;
             flex-wrap: wrap;
             box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
-            margin-top: auto; /* para que se mantenga abajo en flujo normal */
+            margin-top: auto;
         }
         @media (max-width: 768px) {
             #dashboard {
@@ -285,24 +287,52 @@
         .lever-active .lever-handle { top: 45px; }
         .lever-active .lever-handle::after { opacity: 1; box-shadow: 0 0 12px #1aff80; }
 
-        /* Botón back */
+        /* NUEVO BOTÓN BACK ESTILO PLÁSTICO NEÓN (desde segundo.html) */
         .back-btn {
-            background: #4a1a1a;
-            border: 3px solid #b53b3b;
-            width: 70px;
-            height: 70px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
-            font-family: monospace;
-            font-weight: bold;
-            color: #ffaaaa;
+            background: radial-gradient(circle at 30% 25%, #ffa040, #ff6600);
+            border: none;
             cursor: pointer;
-            transition: 0.2s;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            gap: 4px;
+            font-family: 'VT323', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #ffffcc;
+            text-shadow: 0 1px 2px #aa3300;
+            box-shadow: 0 8px 0 #b34700, 0 4px 12px rgba(0,0,0,0.5), inset 0 2px 2px rgba(255,255,200,0.8);
+            transition: all 0.07s linear;
         }
-        .back-btn:hover { background: #8b3a3a; transform: scale(1.02); color: white; }
+        .back-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #b34700, 0 6px 12px black;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #b34700, 0 8px 20px rgba(255,100,0,0.6);
+            background: radial-gradient(circle at 30% 25%, #ffb85e, #ff7a1a);
+        }
+        .back-btn i {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+            animation: ghostFloat 1.2s infinite ease-in-out;
+        }
+        .back-btn span { font-size: 0.85rem; letter-spacing: 1px; }
+        @keyframes ghostFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+        @media (max-width: 768px) {
+            .back-btn { width: 70px; height: 70px; }
+            .back-btn i { font-size: 1.6rem; }
+            .back-btn span { font-size: 0.7rem; }
+        }
 
         /* Contenedor del cubo final con etiqueta */
         #final-cube-wrapper {
@@ -447,7 +477,11 @@
                 <div id="smartLever" class="lever-base"><div class="lever-handle"></div></div>
                 <span style="font-size: 9px;">EJEMPLOS</span>
             </div>
-            <div class="back-btn" id="backButton">← BACK</div>
+            <!-- BOTÓN BACK NUEVO: mismo estilo que segundo.html -->
+            <button id="backButton" class="back-btn">
+                <i class="fas fa-ghost"></i>
+                <span>BACK</span>
+            </button>
         </div>
     </div>
 
@@ -547,7 +581,7 @@
             const isMobile = window.innerWidth <= 768;
             if (isMobile) {
                 finalRenderer.setSize(150, 150);
-                finalCamera.position.z = 2.8; // mismo
+                finalCamera.position.z = 2.8;
             } else {
                 finalRenderer.setSize(200, 200);
             }
@@ -711,7 +745,7 @@
             }, 2200);
         }
 
-        // ========== SONIDO THEREMIN ==========
+        // ========== SONIDOS (theremin original + back sound) ==========
         let audioCtx = null;
         function initAudio() {
             if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -743,6 +777,34 @@
             setTimeout(() => playTheremin(660, 0.3, 0.2), 100);
             setTimeout(() => playTheremin(440, 0.5, 0.15), 300);
         }
+        // Sonido específico para el botón BACK (como en segundo.html)
+        function playBackSound() {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'square';
+            osc.frequency.value = 880;
+            gain.gain.value = 0.3;
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.15);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.frequency.exponentialRampToValue(440, now + 0.12);
+            osc.stop(now + 0.15);
+        }
+
+        // EVENTO DEL NUEVO BOTÓN BACK (con sonido y redirección que funciona)
+        backBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            playBackSound();
+            // Pequeña pausa para escuchar el efecto antes de redirigir
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 120);
+        });
 
         finalWrapper.addEventListener('mouseenter', hoverTheremin);
         finalWrapper.addEventListener('click', (e) => {
@@ -751,7 +813,6 @@
             window.open('https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link', '_blank');
         });
 
-        backBtn.addEventListener('click', () => window.location.href = 'index.html');
         document.getElementById('cubeBtn').addEventListener('click', iniciarDesafio);
 
         // Scroll suave en monitores
