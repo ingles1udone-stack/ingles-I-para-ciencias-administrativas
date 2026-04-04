@@ -12,6 +12,8 @@
             }
         }
     </script>
+    <!-- Font Awesome 6 (para iconos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
@@ -285,24 +287,68 @@
         .lever-active .lever-handle { top: 45px; }
         .lever-active .lever-handle::after { opacity: 1; box-shadow: 0 0 12px #1aff80; }
 
-        /* Botón back */
+        /* ========== NUEVO BOTÓN BACK ESTILO PLÁSTICO NEÓN ========== */
         .back-btn {
-            background: #4a1a1a;
-            border: 3px solid #b53b3b;
-            width: 70px;
-            height: 70px;
+            width: 85px;
+            height: 85px;
             border-radius: 50%;
-            font-family: monospace;
-            font-weight: bold;
-            color: #ffaaaa;
+            background: radial-gradient(circle at 30% 25%, #ffa040, #ff6600);
+            border: none;
             cursor: pointer;
-            transition: 0.2s;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
+            gap: 4px;
+            font-family: 'VT323', monospace;
+            font-weight: bold;
+            font-size: 1rem;
+            color: #ffffcc;
+            text-shadow: 0 1px 2px #aa3300;
+            box-shadow: 0 8px 0 #b34700, 0 4px 12px rgba(0,0,0,0.5), inset 0 2px 2px rgba(255,255,200,0.8);
+            transition: all 0.07s linear;
+            position: relative;
+            backdrop-filter: blur(2px);
         }
-        .back-btn:hover { background: #8b3a3a; transform: scale(1.02); color: white; }
+        /* Efecto 3D al presionar */
+        .back-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 4px 0 #b34700, 0 6px 12px black;
+        }
+        /* Hover: brillo extra y levitación */
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 0 #b34700, 0 8px 20px rgba(255,100,0,0.6);
+            background: radial-gradient(circle at 30% 25%, #ffb85e, #ff7a1a);
+        }
+        .back-btn i {
+            font-size: 2rem;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+            animation: ghostFloat 1.2s infinite ease-in-out;
+        }
+        .back-btn span {
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+        /* Animación flotante del fantasma */
+        @keyframes ghostFloat {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-4px); }
+            100% { transform: translateY(0px); }
+        }
+        @media (max-width: 768px) {
+            .back-btn {
+                width: 70px;
+                height: 70px;
+            }
+            .back-btn i {
+                font-size: 1.6rem;
+            }
+            .back-btn span {
+                font-size: 0.7rem;
+            }
+        }
 
         /* Contenedor del cubo final con etiqueta */
         #final-cube-wrapper {
@@ -447,7 +493,11 @@
                 <div id="smartLever" class="lever-base"><div class="lever-handle"></div></div>
                 <span style="font-size: 9px;">EJEMPLOS</span>
             </div>
-            <div class="back-btn" id="backButton">← BACK</div>
+            <!-- BOTÓN BACK totalmente renovado: neón, plástico, fantasma, sonido power-up -->
+            <button id="backButton" class="back-btn">
+                <i class="fas fa-ghost"></i>
+                <span>BACK</span>
+            </button>
         </div>
     </div>
 
@@ -547,7 +597,7 @@
             const isMobile = window.innerWidth <= 768;
             if (isMobile) {
                 finalRenderer.setSize(150, 150);
-                finalCamera.position.z = 2.8; // mismo
+                finalCamera.position.z = 2.8;
             } else {
                 finalRenderer.setSize(200, 200);
             }
@@ -588,6 +638,78 @@
         const closeSmartBtn = document.getElementById('closeSmart');
         const finalWrapper = document.getElementById('final-cube-wrapper');
         const backBtn = document.getElementById('backButton');
+
+        // ========== SONIDO POWER-UP / COMIENDO FANTASMA (Pac-Man style) ==========
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+        function playPowerUpSound() {
+            if (!audioCtx) return;
+            const now = audioCtx.currentTime;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'square';   // sonido más "arcade"
+            osc.frequency.value = 880;
+            gain.gain.value = 0.35;
+            // Envolvente rápida tipo "waka" + subida
+            gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.25);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(now + 0.25);
+            // segundo armónico para dar sensación de power-up
+            const osc2 = audioCtx.createOscillator();
+            const gain2 = audioCtx.createGain();
+            osc2.type = 'sine';
+            osc2.frequency.value = 440;
+            gain2.gain.value = 0.2;
+            gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.3);
+            osc2.connect(gain2);
+            gain2.connect(audioCtx.destination);
+            osc2.start();
+            osc2.stop(now + 0.3);
+            // glissando ascendente característico
+            const osc3 = audioCtx.createOscillator();
+            const gain3 = audioCtx.createGain();
+            osc3.type = 'triangle';
+            osc3.frequency.value = 660;
+            gain3.gain.value = 0.15;
+            gain3.gain.exponentialRampToValueAtTime(0.0001, now + 0.2);
+            osc3.connect(gain3);
+            gain3.connect(audioCtx.destination);
+            osc3.start();
+            osc3.frequency.exponentialRampToValue(1200, now + 0.2);
+            osc3.stop(now + 0.2);
+        }
+        // Función para reproducción segura (resume audio context si está suspendido)
+        function safePlayPowerUp() {
+            initAudio();
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume().then(() => {
+                    playPowerUpSound();
+                }).catch(e => console.log("audio error", e));
+            } else {
+                playPowerUpSound();
+            }
+        }
+
+        // Asignar sonido al botón BACK (además del clic normal)
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            safePlayPowerUp();      // sonido de "power-up / comer fantasma"
+            // Navegación a index.html después de una mínima pausa para escuchar el efecto
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 80);
+        });
+
+        // También un pequeño efecto hover: sonido suave opcional (no molesto)
+        backBtn.addEventListener('mouseenter', () => {
+            // opcional: tiny theremin pero sin saturar, mejor no poner nada extra.
+        });
 
         function drawMindMapSequential() {
             mindmapSvg.style.display = "block";
@@ -711,47 +833,17 @@
             }, 2200);
         }
 
-        // ========== SONIDO THEREMIN ==========
-        let audioCtx = null;
-        function initAudio() {
-            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        }
-        function playTheremin(freq, dur, vol = 0.3) {
-            if (!audioCtx) return;
-            const now = audioCtx.currentTime;
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.type = 'sine';
-            osc.frequency.value = freq;
-            gain.gain.value = vol;
-            gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-            osc.start();
-            osc.stop(now + dur);
-        }
-        function hoverTheremin() {
+        // Sonido de hover sutil para el cubo final (sin saturar)
+        finalWrapper.addEventListener('mouseenter', () => {
             initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            playTheremin(440, 0.4, 0.15);
-            playTheremin(660, 0.5, 0.12);
-        }
-        function clickTheremin() {
-            initAudio();
-            if (audioCtx.state === 'suspended') audioCtx.resume();
-            playTheremin(880, 0.2, 0.25);
-            setTimeout(() => playTheremin(660, 0.3, 0.2), 100);
-            setTimeout(() => playTheremin(440, 0.5, 0.15), 300);
-        }
-
-        finalWrapper.addEventListener('mouseenter', hoverTheremin);
+            if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        });
         finalWrapper.addEventListener('click', (e) => {
             e.stopPropagation();
-            clickTheremin();
+            safePlayPowerUp();  // mismo efecto power-up al descargar
             window.open('https://drive.google.com/file/d/1sRWOwKMrADIc7Szb6IH9CEa6dLfPe7Fv/view?usp=drive_link', '_blank');
         });
 
-        backBtn.addEventListener('click', () => window.location.href = 'index.html');
         document.getElementById('cubeBtn').addEventListener('click', iniciarDesafio);
 
         // Scroll suave en monitores
