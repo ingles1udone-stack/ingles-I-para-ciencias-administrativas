@@ -494,18 +494,24 @@
             </div>
         </section>
 
-        <!-- ROCKOLA TERMINAL -->
+         <!-- ROCKOLA TERMINAL con botones PAUSA y SKIP (+4min) -->
         <section class="mb-12">
             <div class="terminal-border p-6 bg-[#0a2a0a]/40 text-center">
                 <h3 class="font-bold mb-4 flex items-center justify-center gap-2">
                     <i class="fas fa-radio"></i> TRANSMISIÓN DE RADIO "EL CAMPUS"
                 </h3>
-                <div id="radio-controls" class="flex flex-col items-center gap-4">
+                <div id="radio-controls" class="flex flex-wrap justify-center items-center gap-4">
                     <button id="playMusic" class="terminal-btn px-8 py-4 border-double border-4 font-black flex items-center gap-3">
                         <i class="fas fa-play"></i> INICIAR REPRODUCCIÓN AMBIENTAL
                     </button>
-                    <p class="text-[10px] opacity-50 animate-pulse">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
+                    <button id="pauseMusic" class="terminal-btn px-6 py-4 font-bold flex items-center gap-3">
+                        <i class="fas fa-pause"></i> PAUSAR
+                    </button>
+                    <button id="skipMusic" class="terminal-btn px-6 py-4 font-bold flex items-center gap-3">
+                        <i class="fas fa-forward-step"></i> SALTAR +4min
+                    </button>
                 </div>
+                <p class="text-[10px] opacity-50 animate-pulse mt-4">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
                 <div id="hidden-player-container">
                     <iframe id="youtube-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
                 </div>
