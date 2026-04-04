@@ -6,8 +6,6 @@
     <title>SISTEMA OPERATIVO DE APRENDIZAJE | UDO-NE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <!-- YouTube IFrame Player API -->
-    <script src="https://www.youtube.com/iframe_api"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=VT323&family=Share+Tech+Mono&display=swap');
 
@@ -381,6 +379,7 @@
         <!-- NUEVA SECCIÓN: DESAFÍO LITERARIO (FALLOUT / POLVO RADIACTIVO) -->
         <section class="mb-12">
             <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
+                <!-- Capas de polvo radioactivo animado (fallout dust) -->
                 <div class="radioactive-dust"></div>
                 <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
@@ -495,27 +494,20 @@
             </div>
         </section>
 
-        <!-- ROCKOLA TERMINAL con botones PAUSA y SKIP (+4min) -->
+        <!-- ROCKOLA TERMINAL -->
         <section class="mb-12">
             <div class="terminal-border p-6 bg-[#0a2a0a]/40 text-center">
                 <h3 class="font-bold mb-4 flex items-center justify-center gap-2">
                     <i class="fas fa-radio"></i> TRANSMISIÓN DE RADIO "EL CAMPUS"
                 </h3>
-                <div id="radio-controls" class="flex flex-wrap justify-center items-center gap-4">
+                <div id="radio-controls" class="flex flex-col items-center gap-4">
                     <button id="playMusic" class="terminal-btn px-8 py-4 border-double border-4 font-black flex items-center gap-3">
                         <i class="fas fa-play"></i> INICIAR REPRODUCCIÓN AMBIENTAL
                     </button>
-                    <button id="pauseMusic" class="terminal-btn px-6 py-4 font-bold flex items-center gap-3">
-                        <i class="fas fa-pause"></i> PAUSAR
-                    </button>
-                    <button id="skipMusic" class="terminal-btn px-6 py-4 font-bold flex items-center gap-3">
-                        <i class="fas fa-forward-step"></i> SALTAR +4min
-                    </button>
+                    <p class="text-[10px] opacity-50 animate-pulse">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
                 </div>
-                <p class="text-[10px] opacity-50 animate-pulse mt-4">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
                 <div id="hidden-player-container">
-                    <!-- Iframe con atributo allow para autoplay -->
-                    <iframe id="youtube-iframe" width="1" height="1" src="about:blank" allow="autoplay; encrypted-media" frameborder="0"></iframe>
+                    <iframe id="youtube-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
                 </div>
             </div>
         </section>
@@ -564,8 +556,10 @@
             { en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
         ];
 
+        // Validación: aseguramos 200 términos exactos (la lista construida tiene 200)
         console.log("Glosario cargado:", FULL_GLOSSARY.length, "términos");
 
+        // Generación de tarjetas (6 aleatorias)
         function generateCards() {
             const container = document.getElementById('cardContainer');
             if (!container) return;
@@ -616,100 +610,28 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // USUARIOS CONECTADOS
+        // USUARIOS CONECTADOS: número aleatorio entre 1 y 160 que cambia cada 5 minutos
         let connectedUsersInterval;
         function updateConnectedUsers() {
-            const randomUsers = Math.floor(Math.random() * 161)+1;
+            const randomUsers = Math.floor(Math.random() * 161)+1; // 1 a 160 inclusive
             const usersSpan = document.getElementById('usersCount');
             if (usersSpan) usersSpan.innerText = randomUsers;
         }
         updateConnectedUsers();
-        connectedUsersInterval = setInterval(updateConnectedUsers, 300000);
+        connectedUsersInterval = setInterval(updateConnectedUsers, 300000); // 5 minutos
 
-        // ------------------ RADIO CON YOUTUBE API (CORREGIDO) ------------------
-        let ytPlayer = null;
-        let playerReady = false;
-
-        // Función que la API de YouTube llama automáticamente cuando está lista
-        function onYouTubeIframeAPIReady() {
+        // ROCKOLA: reproductor YouTube
+        document.getElementById('playMusic').addEventListener('click', function() {
             const iframe = document.getElementById('youtube-iframe');
-            if (!iframe) return;
-            ytPlayer = new YT.Player(iframe, {
-                videoId: 'XDKY1dGJxvY',   // Verifica que este ID sea válido y público
-                playerVars: {
-                    autoplay: 0,          // No autoplay al cargar (espera el gesto del usuario)
-                    controls: 0,
-                    modestbranding: 1,
-                    rel: 0
-                },
-                events: {
-                    onReady: (event) => {
-                        playerReady = true;
-                        console.log('Reproductor de YouTube listo');
-                    },
-                    onError: (event) => {
-                        console.error('Error en el reproductor de YouTube:', event.data);
-                        // Podrías mostrar un mensaje en la interfaz si lo deseas
-                        const playBtn = document.getElementById('playMusic');
-                        if (playBtn) playBtn.style.opacity = '0.5';
-                    }
-                }
-            });
-        }
-
-        function playRadio() {
-            if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
-                ytPlayer.playVideo();
-            } else {
-                console.warn('Reproductor no listo, reintentando...');
-                setTimeout(playRadio, 300);
-            }
-        }
-
-        function pauseRadio() {
-            if (ytPlayer && ytPlayer.pauseVideo) {
-                ytPlayer.pauseVideo();
-            }
-        }
-
-        function skipRadio() {
-            if (ytPlayer && ytPlayer.getCurrentTime && ytPlayer.seekTo) {
-                let currentTime = ytPlayer.getCurrentTime();
-                let newTime = currentTime + 240;
-                const duration = ytPlayer.getDuration();
-                if (duration && newTime > duration) newTime = duration - 1;
-                if (newTime < 0) newTime = 0;
-                ytPlayer.seekTo(newTime, true);
-            } else {
-                console.log("Player no listo para skip");
-            }
-        }
-
-        // Configurar eventos después de que el DOM cargue
-        window.addEventListener('load', function() {
-            generateCards();   // inicialización glosario
-            const playBtn = document.getElementById('playMusic');
-            const pauseBtn = document.getElementById('pauseMusic');
-            const skipBtn = document.getElementById('skipMusic');
-            if (playBtn) {
-                playBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    playRadio();
-                });
-            }
-            if (pauseBtn) {
-                pauseBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    pauseRadio();
-                });
-            }
-            if (skipBtn) {
-                skipBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    skipRadio();
-                });
-            }
+            iframe.src = "https://www.youtube.com/embed/XDKY1dGJxvY?autoplay=1&start=0000";
+            this.innerHTML = '<i class="fas fa-volume-up"></i> SEÑAL ACTIVA - DISFRUTE EL VIAJE';
+            this.classList.add('bg-green-600', 'text-black');
         });
+
+        // Inicializar el juego con tarjetas
+        window.onload = function() {
+            generateCards();
+        };
     </script>
 </body>
 </html>
