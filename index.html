@@ -145,7 +145,7 @@
             border: 1px solid var(--term-green);
         }
 
-        /* ---------- NUEVA SECCIÓN: EFECTO FALLOUT / POLVO RADIACTIVO + PULSO ---------- */
+        /* ---------- NUEVA SECCIÓN: EFECTO FALLOUT / POLVO RADIACTIVO ---------- */
         .fallout-section {
             position: relative;
             overflow: hidden;
@@ -239,6 +239,67 @@
             background-color: var(--term-green);
             color: #000;
             box-shadow: 0 0 25px #8aff8a;
+        }
+
+        /* ========== NUEVA ANIMACIÓN EXCLUSIVA: CARACTERES ASCENDENTES (ASCII RAIN) ========== */
+        .ascii-rain {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .ascii-char {
+            position: absolute;
+            color: var(--term-green);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 0.8rem;
+            opacity: 0.3;
+            white-space: nowrap;
+            animation: floatUp linear infinite;
+            user-select: none;
+            text-shadow: 0 0 2px #3df33d;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.5;
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+        }
+        /* Ajuste para que el contenido quede por encima de la animación */
+        .masterclass-content {
+            position: relative;
+            z-index: 2;
+        }
+        details > summary {
+            cursor: pointer;
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        details summary i {
+            transition: transform 0.2s;
+        }
+        details[open] summary i.fa-chevron-right {
+            transform: rotate(90deg);
+        }
+        .masterclass-card {
+            background: rgba(0,0,0,0.6);
+            border-left: 3px solid var(--term-green);
         }
     </style>
 </head>
@@ -376,10 +437,9 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: DESAFÍO LITERARIO (FALLOUT / POLVO RADIACTIVO) -->
+        <!-- DESAFÍO LITERARIO (FALLOUT) -->
         <section class="mb-12">
             <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
-                <!-- Capas de polvo radioactivo animado (fallout dust) -->
                 <div class="radioactive-dust"></div>
                 <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
@@ -467,6 +527,119 @@
                 </div>
             </div>
         </section>
+
+        <!-- ==================== NUEVA SECCIÓN: MASTERCLASS + COMPENDIO ==================== -->
+        <section class="mb-12 relative overflow-hidden">
+            <div class="terminal-border p-6 md:p-8 bg-black/40 relative" style="background: #030a03;">
+                <!-- Animación exclusiva: caracteres ASCII ascendentes (efecto único) -->
+                <div class="ascii-rain" id="asciiRainContainer"></div>
+                
+                <div class="masterclass-content relative z-10">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-green-700 pb-5 mb-6">
+                        <div>
+                            <h2 class="text-2xl font-bold glow-text flex items-center gap-3">
+                                <i class="fas fa-save text-3xl"></i> 
+                                <span>💾 CENTRO DE MASTERCLASS & COMPENDIOS</span>
+                            </h2>
+                            <p class="text-xs opacity-70 mt-1 tracking-wider">Material de trabajo colaborativo • Guías de análisis estructural y síntesis</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <span class="text-[11px] border border-green-600 px-3 py-1 rounded-full bg-black/50"><i class="fas fa-users mr-1"></i> trabajo en equipo</span>
+                            <span class="text-[11px] border border-green-600 px-3 py-1 rounded-full bg-black/50"><i class="fas fa-brain"></i> pensamiento crítico</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- COLUMNA IZQUIERDA: ENLACES PRINCIPALES -->
+                        <div class="space-y-6">
+                            <div class="terminal-border p-5 bg-black/40 hover:shadow-lg transition-all">
+                                <div class="flex items-start gap-4 flex-wrap md:flex-nowrap">
+                                    <i class="fas fa-chalkboard-user text-4xl glow-text"></i>
+                                    <div>
+                                        <h3 class="text-xl font-bold uppercase flex items-center gap-2"><i class="fas fa-folder-open"></i> MASTERCLASS (Guías de Ejercicios)</h3>
+                                        <p class="text-xs opacity-60 my-2">Talleres de análisis estructural, morfología, traducción contextual, debate y síntesis. 4 guías progresivas para trabajo en estaciones.</p>
+                                        <a href="https://drive.google.com/drive/u/1/folders/1-bDWY26X-74HnNJ1ssxN2g22c4qZPHXm" target="_blank" class="terminal-btn inline-flex items-center gap-2 px-5 py-2 mt-2 text-sm font-bold">
+                                            <i class="fab fa-google-drive"></i> ACCEDER A MASTERCLASS
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="terminal-border p-5 bg-black/40 hover:shadow-lg transition-all">
+                                <div class="flex items-start gap-4 flex-wrap md:flex-nowrap">
+                                    <i class="fas fa-book-open text-4xl glow-text"></i>
+                                    <div>
+                                        <h3 class="text-xl font-bold uppercase flex items-center gap-2"><i class="fas fa-compass"></i> COMPENDIO DE LECTURAS</h3>
+                                        <p class="text-xs opacity-60 my-2">Antología de textos administrativos, económicos y contables para fortalecer la interpretación en inglés. Material complementario.</p>
+                                        <a href="https://drive.google.com/drive/u/1/folders/1VUmnlhmyuH4dYd2socA0jSimdtczkWbm" target="_blank" class="terminal-btn inline-flex items-center gap-2 px-5 py-2 mt-2 text-sm font-bold">
+                                            <i class="fab fa-google-drive"></i> EXPLORAR COMPENDIO
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- COLUMNA DERECHA: DESGLOSE DE MASTERCLASSES (con detalles) -->
+                        <div>
+                            <div class="border border-green-800 rounded-md p-4 bg-black/30">
+                                <h3 class="font-bold mb-3 flex items-center gap-2"><i class="fas fa-layer-group"></i> 📚 GUÍAS DISPONIBLES</h3>
+                                <div class="space-y-3 text-sm">
+                                    <!-- Masterclass 1 -->
+                                    <details class="masterclass-card p-2 rounded">
+                                        <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 1 – Analista Léxico y Gramatical</span>
+                                        </summary>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
+                                            <p>📖 Estaciones: Cazador de Partes del Habla, Detective de Cognados, Morfólogo Estructural, Traductor Contextual.</p>
+                                            <p>🎯 Objetivo: Identificar categorías gramaticales, cognados y analizar morfología técnica.</p>
+                                        </div>
+                                    </details>
+                                    <!-- Masterclass 2 -->
+                                    <details class="masterclass-card p-2 rounded">
+                                        <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 2 – Cirujano de Párrafos e Inferencias</span>
+                                        </summary>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
+                                            <p>✂️ Estaciones: Cirujano de Párrafos (cohesión), Traductor Contextual + pronombres, Inferenciador Estructural.</p>
+                                            <p>🔍 Énfasis en reescritura, referencias pronominales y mapas causa-efecto.</p>
+                                        </div>
+                                    </details>
+                                    <!-- Masterclass 3 -->
+                                    <details class="masterclass-card p-2 rounded">
+                                        <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 3 – Analista Estructural y Jerarquías</span>
+                                        </summary>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
+                                            <p>📐 Estaciones: Organización retórica, Extractor de Ideas Jerárquicas, Traductor-Intérprete de párrafos densos.</p>
+                                            <p>🏛️ Trabajo con tesis, diagramas de flujo y análisis de términos técnicos.</p>
+                                        </div>
+                                    </details>
+                                    <!-- Masterclass 4 -->
+                                    <details class="masterclass-card p-2 rounded">
+                                        <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 4 – Síntesis y Debate</span>
+                                        </summary>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
+                                            <p>📱 Estaciones: Resumidor (hilo redes), Creador de Mapas Mentales, Question Master (kit de debate).</p>
+                                            <p>🎤 Desarrollo de pensamiento crítico, nube de palabras y preguntas generadoras.</p>
+                                        </div>
+                                    </details>
+                                </div>
+                                <div class="mt-4 text-[11px] text-center opacity-50 border-t border-green-800 pt-3">
+                                    <i class="fas fa-users"></i> Cada masterclass incluye rúbrica, pregunta integradora y roles colaborativos (coordinador, secretario, supervisor).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 text-center text-[10px] uppercase tracking-widest opacity-40 flex justify-center gap-4">
+                        <span><i class="fas fa-download"></i> Guías en formato descargable</span>
+                        <span><i class="fas fa-language"></i> Inglés I – Cs. Administrativas</span>
+                        <span><i class="fas fa-chalkboard"></i> Prof. Oney Clavijo</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ==================== FIN NUEVA SECCIÓN ==================== -->
 
         <!-- GLOSSARY CHALLENGE con 200 términos y usuarios conectados -->
         <section id="glosario-challenge" class="mb-12">
@@ -556,10 +729,8 @@
             { en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
         ];
 
-        // Validación: aseguramos 200 términos exactos (la lista construida tiene 200)
         console.log("Glosario cargado:", FULL_GLOSSARY.length, "términos");
 
-        // Generación de tarjetas (6 aleatorias)
         function generateCards() {
             const container = document.getElementById('cardContainer');
             if (!container) return;
@@ -599,7 +770,6 @@
             });
         }
 
-        // RELOJ en tiempo real
         function updateClock() {
             const now = new Date();
             const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
@@ -610,17 +780,15 @@
         setInterval(updateClock, 1000);
         updateClock();
 
-        // USUARIOS CONECTADOS: número aleatorio entre 1 y 160 que cambia cada 5 minutos
         let connectedUsersInterval;
         function updateConnectedUsers() {
-            const randomUsers = Math.floor(Math.random() * 161)+1; // 1 a 160 inclusive
+            const randomUsers = Math.floor(Math.random() * 161)+1;
             const usersSpan = document.getElementById('usersCount');
             if (usersSpan) usersSpan.innerText = randomUsers;
         }
         updateConnectedUsers();
-        connectedUsersInterval = setInterval(updateConnectedUsers, 300000); // 5 minutos
+        connectedUsersInterval = setInterval(updateConnectedUsers, 300000);
 
-        // ROCKOLA: reproductor YouTube
         document.getElementById('playMusic').addEventListener('click', function() {
             const iframe = document.getElementById('youtube-iframe');
             iframe.src = "https://www.youtube.com/embed/XDKY1dGJxvY?autoplay=1&start=0000";
@@ -628,10 +796,33 @@
             this.classList.add('bg-green-600', 'text-black');
         });
 
-        // Inicializar el juego con tarjetas
         window.onload = function() {
             generateCards();
+            iniciarLluviaAscii();
         };
+
+        // ANIMACIÓN EXCLUSIVA: Caracteres ascendentes (ASCII RAIN)
+        function iniciarLluviaAscii() {
+            const contenedor = document.getElementById('asciiRainContainer');
+            if (!contenedor) return;
+            const caracteres = ['<', '>', '/', '#', '~', '*', '@', '%', '&', '?', '░', '▒', '▓', '█', '␛', '⎚', '⌘', '⏎', '₿', '∑', '∏', '∫', '√', '∞', '∩', '∪', '∀', '∃', '∴', '∵', '~', '`', '|', '\\'];
+            const crearParticula = () => {
+                const span = document.createElement('span');
+                span.classList.add('ascii-char');
+                const char = caracteres[Math.floor(Math.random() * caracteres.length)];
+                span.textContent = char;
+                const size = 0.6 + Math.random() * 1.2;
+                span.style.fontSize = `${size}rem`;
+                span.style.left = `${Math.random() * 100}%`;
+                span.style.animationDuration = `${3 + Math.random() * 8}s`;
+                span.style.animationDelay = `${Math.random() * 5}s`;
+                span.style.opacity = 0.2 + Math.random() * 0.4;
+                contenedor.appendChild(span);
+                setTimeout(() => { if(span && span.remove) span.remove(); }, (parseFloat(span.style.animationDuration) + 1) * 1000);
+            };
+            for(let i=0; i<80; i++) setTimeout(crearParticula, i*80);
+            setInterval(crearParticula, 400);
+        }
     </script>
 </body>
 </html>
