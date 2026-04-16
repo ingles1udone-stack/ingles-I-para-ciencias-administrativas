@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL: Plan de Evaluación 2026</title>
-    <!-- Google Fonts: Share Tech Mono + Rajdhani -->
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>TERMINAL: Plan de Evaluación 2026 · Audio Integration</title>
+    <!-- Google Fonts: Share Tech Mono para estilo terminal -->
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg-color: #0a0b10;
@@ -29,7 +29,7 @@
                 linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
             background-size: 100% 100%, 100% 4px, 3px 100%;
             color: var(--text-color);
-            font-family: 'Share Tech Mono', monospace; /* Base monospace */
+            font-family: 'Share Tech Mono', monospace;
             margin: 0;
             min-height: 100vh;
             display: flex;
@@ -69,8 +69,6 @@
         }
 
         h1 {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
             text-align: center;
             color: var(--primary-cyan);
             text-transform: uppercase;
@@ -104,8 +102,7 @@
             border: 1px solid var(--primary-magenta);
             color: var(--primary-magenta);
             padding: 15px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 500;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 0.9rem;
             text-align: left;
             transition: all 0.3s ease;
@@ -129,7 +126,6 @@
         .eval-btn .weight {
             display: block;
             font-size: 0.7rem;
-            font-family: 'Share Tech Mono', monospace;
             opacity: 0.8;
             margin-top: 5px;
         }
@@ -144,8 +140,6 @@
         }
 
         .strategy-panel h2 {
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
             font-size: 1.2rem;
             color: var(--primary-cyan);
             margin-top: 0;
@@ -153,7 +147,6 @@
         }
 
         #strategy-content {
-            font-family: 'Share Tech Mono', monospace;
             font-size: 1rem;
             line-height: 1.5;
             color: #fff;
@@ -166,6 +159,7 @@
             justify-content: center;
             gap: 20px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         .special-btn {
@@ -184,7 +178,6 @@
             box-shadow: 0 0 20px var(--primary-cyan);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 2s infinite;
-            font-family: 'Rajdhani', sans-serif;
         }
 
         .special-btn:hover {
@@ -205,8 +198,7 @@
             background: transparent;
             border: 1px solid var(--primary-magenta);
             padding: 12px 24px;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 500;
+            font-family: 'Share Tech Mono', monospace;
             font-size: 1rem;
             color: var(--primary-magenta);
             cursor: pointer;
@@ -250,7 +242,6 @@
         }
 
         .terminal-header {
-            font-family: 'Share Tech Mono', monospace;
             color: var(--primary-cyan);
             margin-bottom: 15px;
             font-size: 1.2rem;
@@ -258,7 +249,6 @@
         }
 
         .terminal-body {
-            font-family: 'Share Tech Mono', monospace;
             color: #00ff41;
             font-size: 1rem;
             line-height: 1.5;
@@ -284,8 +274,7 @@
             background: transparent;
             border: 1px solid var(--primary-cyan);
             color: var(--primary-cyan);
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 500;
+            font-family: 'Share Tech Mono', monospace;
             cursor: pointer;
             align-self: flex-start;
         }
@@ -313,11 +302,108 @@
         }
 
         .click-hint {
-            font-family: 'Share Tech Mono', monospace;
             font-size: 0.7rem;
             color: #888;
             margin-top: 10px;
             text-align: center;
+        }
+
+        /* ========== NUEVO REPRODUCTOR DE AUDIO ESTILO TERMINAL ========== */
+        .audio-player {
+            margin-top: 40px;
+            border: 1px solid var(--primary-cyan);
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.75);
+            box-shadow: var(--border-glow);
+            backdrop-filter: blur(1px);
+            transition: all 0.2s;
+        }
+
+        .audio-title {
+            font-family: 'Share Tech Mono', monospace;
+            color: var(--primary-cyan);
+            text-align: center;
+            letter-spacing: 1.5px;
+            margin-bottom: 18px;
+            font-size: 1.15rem;
+            text-transform: uppercase;
+            border-left: 3px solid var(--primary-magenta);
+            border-right: 3px solid var(--primary-magenta);
+            display: inline-block;
+            width: auto;
+            padding: 0 16px;
+            background: rgba(0, 0, 0, 0.6);
+            line-height: 1.8;
+            text-shadow: 0 0 5px var(--primary-cyan);
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin: 20px 0 12px;
+            flex-wrap: wrap;
+        }
+
+        .audio-btn {
+            background: transparent;
+            border: 1.5px solid var(--primary-magenta);
+            color: var(--primary-magenta);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.25rem;
+            font-weight: bold;
+            padding: 8px 24px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 1px;
+            min-width: 100px;
+        }
+
+        .audio-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 14px var(--primary-magenta);
+            transform: scale(1.03);
+            border-color: var(--primary-cyan);
+            color: var(--primary-cyan);
+        }
+
+        .audio-btn:active {
+            transform: scale(0.98);
+        }
+
+        .audio-status {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #b0f0ff;
+            font-family: 'Share Tech Mono', monospace;
+            background: rgba(0, 242, 255, 0.1);
+            padding: 6px 12px;
+            margin-top: 10px;
+            display: inline-block;
+            width: auto;
+            border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .audio-status span {
+            color: var(--primary-magenta);
+            font-weight: bold;
+        }
+
+        .player-container {
+            text-align: center;
+        }
+
+        /* ajuste responsive */
+        @media (max-width: 550px) {
+            .audio-btn {
+                padding: 6px 16px;
+                font-size: 1rem;
+                min-width: 70px;
+            }
+            .audio-title {
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
@@ -345,6 +431,22 @@
         <button class="special-btn" id="helpBtn">?</button>
         <a href="index.html" class="home-btn">⌂ VOLVER AL INICIO</a>
     </div>
+
+    <!-- REPRODUCTOR DE AUDIO: Sobrevivir al inglés de Oney Clavijo -->
+    <div class="audio-player">
+        <div style="text-align: center;">
+            <div class="audio-title">🎧 SOBREVIVIR AL INGLÉS · ONEY CLAVIJO 🎧</div>
+        </div>
+        <div class="audio-controls">
+            <button id="playAudioBtn" class="audio-btn">▶ PLAY</button>
+            <button id="pauseAudioBtn" class="audio-btn">⏸ PAUSE</button>
+            <button id="stopAudioBtn" class="audio-btn">⏹ STOP</button>
+        </div>
+        <div class="player-container">
+            <div id="audioStatusMsg" class="audio-status">⚡ STATUS: <span>STANDBY</span> ⚡</div>
+        </div>
+        <div class="click-hint" style="margin-top: 12px; font-size: 0.7rem;">🎵 Archivo: Sobrevivir_al_inglés_de_Oney_Clavijo.mp3</div>
+    </div>
 </div>
 
 <!-- Modal Terminal -->
@@ -360,7 +462,7 @@
 </div>
 
 <script>
-    // Datos de evaluaciones
+    // ======================== DATOS DE EVALUACIÓN (ORIGINAL) ========================
     const evaluations = [
         { name: "Quick Test", qty: 4, weight: "5%", total: "20%", strategy: "Son pruebas cortas pero constantes. No faltes a clase, ya que representan el 20% total. Es puntaje 'fácil' si mantienes el ritmo semanal." },
         { name: "Masterclass", qty: 1, weight: "5%", total: "5%", strategy: "Enfoque total en la participación. Al ser una sola sesión, tu preparación previa definirá ese 5% de inmediato." },
@@ -373,37 +475,28 @@
         { name: "Examen Final", qty: 1, weight: "30%", total: "30%", strategy: "El peso pesado. El 30% del curso se define aquí. No lo dejes para el final; usa el glosario y los BU para estudiar progresivamente." }
     ];
 
-    // Estrategia maestra para el botón especial
-    const masterStrategy = [
-        "MENSAJE DEL FUTURO RECIBIDO...\nAnalizando probabilidades de éxito...",
-        "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': La Inducción, Glosario, Bitácora y Masterclass suman un 20% casi garantizado con solo cumplimiento.",
-        "2. Relación Esfuerzo/Puntaje: Los Quick Tests (20%) son vitales. Estudiar para ellos te prepara automáticamente para el Examen Final (30%). Si dominas estos, ya tienes el 50%.",
-        "3. La Regla del 5: Para alcanzar los 5 puntos necesarios sobre 10, enfócate en entregar TODO lo que valga 5%. Sumar pequeñas victorias es más seguro que apostar todo al examen final.",
-        "CONSEJO FINAL: El Examen Final es el 30%, pero las evaluaciones continuas son el 70%. No necesitas ser perfecto en el examen si eres constante en el semestre. \n\n[FIN DE LA TRANSMISIÓN]"
-    ];
-
-    // Inicializar cuadrícula
+    // Inicializar cuadrícula de evaluación
     const grid = document.getElementById('evalGrid');
-    evaluations.forEach((eval, index) => {
+    evaluations.forEach((evalItem, index) => {
         const btn = document.createElement('button');
         btn.className = 'eval-btn';
         btn.innerHTML = `
-            ${eval.name}
-            <span class="weight">Cant: ${eval.qty} | Total: ${eval.total}</span>
+            ${evalItem.name}
+            <span class="weight">Cant: ${evalItem.qty} | Total: ${evalItem.total}</span>
         `;
-        btn.onclick = () => showStrategy(eval, btn);
+        btn.onclick = () => showStrategy(evalItem, btn);
         grid.appendChild(btn);
     });
 
-    function showStrategy(eval, btn) {
+    function showStrategy(evalItem, btn) {
         playTone(440, 0.05, "sine");
         document.querySelectorAll('.eval-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const content = document.getElementById('strategy-content');
-        content.innerHTML = `<p class="glitch-effect">${eval.strategy}</p>`;
+        content.innerHTML = `<p class="glitch-effect">${evalItem.strategy}</p>`;
     }
 
-    // Sonidos
+    // Sonidos retro (compatibilidad)
     function playTone(freq, duration, type) {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -421,21 +514,23 @@
     }
 
     function playFuturisticCharge() {
-        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const oscillator = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        oscillator.type = 'sawtooth';
-        oscillator.frequency.setValueAtTime(100, audioCtx.currentTime);
-        oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.5);
-        gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
-        oscillator.connect(gainNode);
-        gainNode.connect(audioCtx.destination);
-        oscillator.start();
-        oscillator.stop(audioCtx.currentTime + 1.5);
+        try {
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.type = 'sawtooth';
+            oscillator.frequency.setValueAtTime(100, audioCtx.currentTime);
+            oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.5);
+            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            oscillator.start();
+            oscillator.stop(audioCtx.currentTime + 1.5);
+        } catch(e) {}
     }
 
-    // --- Lógica del botón especial y terminal ---
+    // ======================== LÓGICA TERMINAL (BOTÓN ?) ========================
     const helpBtn = document.getElementById('helpBtn');
     const overlay = document.getElementById('terminalOverlay');
     const termBody = document.getElementById('terminalBody');
@@ -443,6 +538,14 @@
     const closeBtn = document.getElementById('closeTerminal');
     const termWindow = document.getElementById('terminalWindow');
     let strategyStep = 0;
+
+    const masterStrategy = [
+        "MENSAJE DEL FUTURO RECIBIDO...\nAnalizando probabilidades de éxito...",
+        "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': La Inducción, Glosario, Bitácora y Masterclass suman un 20% casi garantizado con solo cumplimiento.",
+        "2. Relación Esfuerzo/Puntaje: Los Quick Tests (20%) son vitales. Estudiar para ellos te prepara automáticamente para el Examen Final (30%). Si dominas estos, ya tienes el 50%.",
+        "3. La Regla del 5: Para alcanzar los 5 puntos necesarios sobre 10, enfócate en entregar TODO lo que valga 5%. Sumar pequeñas victorias es más seguro que apostar todo al examen final.",
+        "CONSEJO FINAL: El Examen Final es el 30%, pero las evaluaciones continuas son el 70%. No necesitas ser perfecto en el examen si eres constante en el semestre. \n\n[FIN DE LA TRANSMISIÓN]"
+    ];
 
     helpBtn.onclick = () => {
         playFuturisticCharge();
@@ -453,7 +556,6 @@
         termHeader.innerText = "> SINTONIZANDO SEÑAL...";
         closeBtn.style.display = 'none';
         document.getElementById('clickHint').style.display = 'block';
-
         setTimeout(() => {
             termHeader.innerText = "> MENSAJE DEL FUTURO RECIBIDO...";
             advanceStrategy();
@@ -469,7 +571,6 @@
             termBody.scrollTop = termBody.scrollHeight;
             strategyStep++;
             playTone(200 + (strategyStep * 100), 0.2, "square");
-
             if (strategyStep === masterStrategy.length) {
                 closeBtn.style.display = 'block';
                 document.getElementById('clickHint').style.display = 'none';
@@ -489,6 +590,168 @@
     overlay.onclick = () => {
         if (closeBtn.style.display === 'block') overlay.style.display = 'none';
     };
+
+    // ======================== REPRODUCTOR DE AUDIO INTEGRADO ========================
+    // Configuración del track: "Sobrevivir_al_inglés_de_Oney_Clavijo"
+    // Se asume extensión .mp3 (ajustable manualmente si es otro formato)
+    const audioTrack = new Audio();
+    // Nombre exacto del archivo (debe estar en el mismo directorio que el HTML)
+    const audioFileName = "Sobrevivir_al_inglés_de_Oney_Clavijo.mp3";
+    audioTrack.src = audioFileName;
+    audioTrack.preload = "metadata";
+    
+    // Elementos UI del reproductor
+    const playBtn = document.getElementById('playAudioBtn');
+    const pauseBtn = document.getElementById('pauseAudioBtn');
+    const stopBtn = document.getElementById('stopAudioBtn');
+    const statusSpan = document.querySelector('#audioStatusMsg span');
+    const statusContainer = document.getElementById('audioStatusMsg');
+    
+    // Función para actualizar estado visual
+    function updateAudioStatus(message, isError = false) {
+        if (statusSpan) {
+            statusSpan.innerText = message;
+            if (isError) {
+                statusSpan.style.color = "#ff6699";
+                statusContainer.style.border = "1px solid #ff00ff";
+            } else {
+                statusSpan.style.color = "#00f2ff";
+                statusContainer.style.border = "none";
+            }
+        }
+        // pequeño efecto glitch en el texto del status (opcional)
+        if (statusContainer) {
+            statusContainer.classList.add('glitch-effect');
+            setTimeout(() => statusContainer.classList.remove('glitch-effect'), 200);
+        }
+    }
+    
+    // Manejo de errores (archivo no encontrado o no soportado)
+    audioTrack.onerror = (err) => {
+        console.warn("Error cargando audio:", err);
+        let errorDetail = "";
+        if (audioTrack.error) {
+            switch(audioTrack.error.code) {
+                case MediaError.MEDIA_ERR_ABORTED: errorDetail = "Carga abortada"; break;
+                case MediaError.MEDIA_ERR_NETWORK: errorDetail = "Error de red"; break;
+                case MediaError.MEDIA_ERR_DECODE: errorDetail = "Formato no soportado"; break;
+                case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorDetail = "Archivo no encontrado o formato inválido"; break;
+                default: errorDetail = "Error desconocido";
+            }
+        }
+        updateAudioStatus(`ERROR: ${errorDetail}`, true);
+        // También mostrar hint más visible
+        if (statusContainer) {
+            statusContainer.style.background = "rgba(255,0,100,0.2)";
+        }
+    };
+    
+    // Evento cuando el audio puede comenzar a reproducirse correctamente
+    audioTrack.oncanplay = () => {
+        if (audioTrack.error) return;
+        updateAudioStatus("READY");
+        statusContainer.style.background = "rgba(0, 242, 255, 0.1)";
+    };
+    
+    audioTrack.onplaying = () => {
+        updateAudioStatus("REPRODUCIENDO ▶");
+        playTone(660, 0.08, "sine");
+    };
+    
+    audioTrack.onpause = () => {
+        if (audioTrack.currentTime > 0 && !audioTrack.ended) {
+            updateAudioStatus("PAUSADO ⏸");
+        }
+    };
+    
+    audioTrack.onended = () => {
+        updateAudioStatus("COMPLETADO ✓");
+        playTone(523, 0.2, "sine");
+    };
+    
+    // Botón PLAY
+    playBtn.addEventListener('click', () => {
+        playTone(523, 0.08, "sine");
+        // Si el audio está en estado "stop" o con currentTime al final, reiniciamos simbólicamente para empezar desde 0 si está ended
+        if (audioTrack.ended) {
+            audioTrack.currentTime = 0;
+        }
+        // Si el src está vacío o error, reintentamos set src
+        if (!audioTrack.src || audioTrack.src === "" || audioTrack.error) {
+            audioTrack.src = audioFileName;
+            audioTrack.load();
+        }
+        audioTrack.play().then(() => {
+            // éxito, el evento onplaying actualizará estado
+        }).catch(err => {
+            console.error("Error al reproducir:", err);
+            let errorMsg = "No se pudo reproducir. Verifica archivo o permisos.";
+            if (err.name === "NotAllowedError") errorMsg = "Interacción requerida. Haz clic en Play nuevamente.";
+            updateAudioStatus(errorMsg, true);
+            statusContainer.style.background = "rgba(255,0,100,0.2)";
+        });
+    });
+    
+    // Botón PAUSE
+    pauseBtn.addEventListener('click', () => {
+        playTone(440, 0.06, "sine");
+        if (!audioTrack.paused) {
+            audioTrack.pause();
+            updateAudioStatus("PAUSADO ⏸");
+        } else {
+            // Si ya está pausado, simplemente notificamos
+            if (audioTrack.currentTime > 0 && !audioTrack.ended) {
+                updateAudioStatus("YA PAUSADO");
+            } else if (audioTrack.ended) {
+                updateAudioStatus("FINALIZADO, usa PLAY");
+            } else {
+                updateAudioStatus("SIN REPRODUCCIÓN");
+            }
+        }
+    });
+    
+    // Botón STOP: detiene, resetea el tiempo a 0 y actualiza estado
+    stopBtn.addEventListener('click', () => {
+        playTone(330, 0.1, "square");
+        // Pausar si se está reproduciendo
+        if (!audioTrack.paused) {
+            audioTrack.pause();
+        }
+        audioTrack.currentTime = 0;
+        updateAudioStatus("STOP ⏹️ | RESET");
+        // Asegurar que se muestre el estado de reset
+        if (audioTrack.ended) {
+            // remover estado ended visual
+            audioTrack.load(); // reset interno suave
+        }
+        // Forzar update visual adicional
+        setTimeout(() => {
+            if (audioTrack.paused && audioTrack.currentTime === 0) {
+                if (statusSpan) statusSpan.innerText = "DETENIDO";
+            }
+        }, 50);
+    });
+    
+    // Inicializar estado por defecto
+    updateAudioStatus("STANDBY");
+    statusContainer.style.background = "rgba(0,0,0,0.5)";
+    
+    // Pequeña mejora: si el usuario hace clic en cualquier parte del reproductor, feedback visual
+    const audioPlayerDiv = document.querySelector('.audio-player');
+    if (audioPlayerDiv) {
+        audioPlayerDiv.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'BUTTON') {
+                // solo efecto visual sin interferir
+                audioPlayerDiv.style.boxShadow = "0 0 12px #00f2ff";
+                setTimeout(() => audioPlayerDiv.style.boxShadow = "var(--border-glow)", 150);
+            }
+        });
+    }
+    
+    // Nota: Para que el audio funcione correctamente, colocar el archivo "Sobrevivir_al_inglés_de_Oney_Clavijo.mp3"
+    // en el mismo directorio que este documento HTML. Si el nombre o extensión es diferente, actualizar constante audioFileName.
+    // Se admite .wav, .ogg, etc cambiando extensión.
+    console.log("Reproductor de audio listo. Archivo esperado:", audioFileName);
 </script>
 </body>
 </html>
