@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TERMINAL: Plan de Evaluación 2026 · Audio Player</title>
-    <!-- Google Fonts: Share Tech Mono para estilo terminal -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -38,7 +37,6 @@
             overflow-x: hidden;
         }
 
-        /* Efecto CRT */
         body::after {
             content: " ";
             display: block;
@@ -90,7 +88,6 @@
             .layout { grid-template-columns: 1fr; }
         }
 
-        /* Cuadrícula de botones */
         .eval-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -130,7 +127,6 @@
             margin-top: 5px;
         }
 
-        /* Sección Estrategia */
         .strategy-panel {
             border: 1px solid var(--primary-cyan);
             padding: 20px;
@@ -152,70 +148,6 @@
             color: #fff;
         }
 
-        /* Botón Especial ? */
-        .help-center {
-            margin-top: 40px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .special-btn {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: transparent;
-            border: 3px solid var(--primary-cyan);
-            color: var(--primary-cyan);
-            font-size: 2.5rem;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--primary-cyan);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: pulse 2s infinite;
-        }
-
-        .special-btn:hover {
-            transform: scale(1.1) rotate(15deg);
-            background: var(--primary-cyan);
-            color: #000;
-            box-shadow: 0 0 40px var(--primary-cyan);
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 10px var(--primary-cyan); }
-            50% { box-shadow: 0 0 25px var(--primary-cyan); }
-            100% { box-shadow: 0 0 10px var(--primary-cyan); }
-        }
-
-        /* Botón Volver al Inicio */
-        .home-btn {
-            background: transparent;
-            border: 1px solid var(--primary-magenta);
-            padding: 12px 24px;
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1rem;
-            color: var(--primary-magenta);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .home-btn:hover {
-            background: rgba(255, 0, 255, 0.2);
-            box-shadow: 0 0 12px var(--primary-magenta);
-            transform: scale(1.02);
-        }
-
-        /* --- NUEVO REPRODUCTOR DE AUDIO (TERMINAL STYLE) --- */
         .audio-module {
             margin-top: 30px;
             border: 1px solid var(--primary-cyan);
@@ -294,11 +226,6 @@
             letter-spacing: 1px;
         }
 
-        .audio-time span {
-            font-weight: bold;
-            color: #fff;
-        }
-
         .progress-container {
             width: 100%;
             margin-top: 16px;
@@ -333,13 +260,67 @@
             text-align: right;
         }
 
-        @media (max-width: 600px) {
-            .audio-controls { justify-content: center; }
-            .audio-time { margin-left: 0; margin-top: 8px; }
-            .ctrl-btn { padding: 6px 14px; font-size: 0.9rem; }
+        .help-center {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
         }
 
-        /* Pantalla Terminal Modal */
+        .special-btn {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: transparent;
+            border: 3px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 20px var(--primary-cyan);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 2s infinite;
+        }
+
+        .special-btn:hover {
+            transform: scale(1.1) rotate(15deg);
+            background: var(--primary-cyan);
+            color: #000;
+            box-shadow: 0 0 40px var(--primary-cyan);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 10px var(--primary-cyan); }
+            50% { box-shadow: 0 0 25px var(--primary-cyan); }
+            100% { box-shadow: 0 0 10px var(--primary-cyan); }
+        }
+
+        .home-btn {
+            background: transparent;
+            border: 1px solid var(--primary-magenta);
+            padding: 12px 24px;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            color: var(--primary-magenta);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 12px var(--primary-magenta);
+            transform: scale(1.02);
+        }
+
         .terminal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -440,32 +421,17 @@
     
     <div class="layout">
         <section>
-            <div class="eval-grid" id="evalGrid">
-                <!-- Generado por JS -->
-            </div>
+            <div class="eval-grid" id="evalGrid"></div>
         </section>
-
         <aside class="strategy-panel">
             <h2>ESTRATEGIA SELECTA</h2>
-            <div id="strategy-content">
-                Seleccione un módulo de evaluación para desplegar datos estratégicos...
-            </div>
+            <div id="strategy-content">Seleccione un módulo de evaluación para desplegar datos estratégicos...</div>
         </aside>
     </div>
 
-    <!-- ========= REPRODUCTOR DE AUDIO INTEGRADO ========= -->
+    <!-- REPRODUCTOR DE AUDIO MEJORADO -->
     <div class="audio-module">
-        <div class="player-title">
-            <span>LECTURA AUDIO: EVALUACIÓN DE INGLÉS 1</span>
-        </div>
-        
-        <!-- Elemento de audio oculto (sin controles nativos) -->
-        <audio id="audioPlayer" preload="metadata" style="display: none;">
-            <source src="Evaluación_de_Inglés_1_para_Ciencias_Administrativas.mp4" type="audio/mp4">
-            Tu navegador no soporta el elemento de audio.
-        </audio>
-
-        <!-- Controles personalizados -->
+        <div class="player-title">📡 REPRODUCTOR: EVALUACIÓN DE INGLÉS 1</div>
         <div class="audio-controls">
             <button class="ctrl-btn" id="playBtn">▶ PLAY</button>
             <button class="ctrl-btn" id="pauseBtn">⏸ PAUSE</button>
@@ -474,14 +440,12 @@
                 <span id="currentTimeDisplay">0:00</span> / <span id="durationDisplay">--:--</span>
             </div>
         </div>
-        
-        <!-- Barra de progreso interactiva -->
         <div class="progress-container">
             <div class="progress-bar-bg" id="progressBarBg">
                 <div class="progress-fill" id="progressFill"></div>
             </div>
         </div>
-        <div class="status-msg" id="audioStatusMsg">▶ Estado: listo para reproducción</div>
+        <div class="status-msg" id="audioStatusMsg">🔍 Cargando archivo de audio...</div>
     </div>
 
     <div class="help-center">
@@ -490,20 +454,17 @@
     </div>
 </div>
 
-<!-- Modal Terminal -->
 <div class="terminal-overlay" id="terminalOverlay">
     <div class="terminal-window" id="terminalWindow">
-        <div class="terminal-header" id="terminalHeader">> ESTABLECIENDO CONEXIÓN TEMPORAL...</div>
-        <div class="terminal-body" id="terminalBody">
-            <!-- Texto dinámico -->
-        </div>
+        <div class="terminal-header" id="terminalHeader">> ESTABLECIENDO CONEXIÓN...</div>
+        <div class="terminal-body" id="terminalBody"></div>
         <div class="click-hint" id="clickHint">Haz clic en la pantalla para continuar...</div>
         <button class="terminal-btn" id="closeTerminal" style="display:none">CERRAR TERMINAL</button>
     </div>
 </div>
 
 <script>
-    // Datos de evaluaciones (original)
+    // ---------- DATOS DE EVALUACIONES ----------
     const evaluations = [
         { name: "Quick Test", qty: 4, weight: "5%", total: "20%", strategy: "Son pruebas cortas pero constantes. No faltes a clase, ya que representan el 20% total. Es puntaje 'fácil' si mantienes el ritmo semanal." },
         { name: "Masterclass", qty: 1, weight: "5%", total: "5%", strategy: "Enfoque total en la participación. Al ser una sola sesión, tu preparación previa definirá ese 5% de inmediato." },
@@ -516,28 +477,20 @@
         { name: "Examen Final", qty: 1, weight: "30%", total: "30%", strategy: "El peso pesado. El 30% del curso se define aquí. No lo dejes para el final; usa el glosario y los BU para estudiar progresivamente." }
     ];
 
-    // Inicializar cuadrícula
     const grid = document.getElementById('evalGrid');
-    evaluations.forEach((evalItem, index) => {
+    evaluations.forEach(evalItem => {
         const btn = document.createElement('button');
         btn.className = 'eval-btn';
-        btn.innerHTML = `
-            ${evalItem.name}
-            <span class="weight">Cant: ${evalItem.qty} | Total: ${evalItem.total}</span>
-        `;
-        btn.onclick = () => showStrategy(evalItem, btn);
+        btn.innerHTML = `${evalItem.name}<span class="weight">Cant: ${evalItem.qty} | Total: ${evalItem.total}</span>`;
+        btn.onclick = () => {
+            playTone(440, 0.05, "sine");
+            document.querySelectorAll('.eval-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('strategy-content').innerHTML = `<p class="glitch-effect">${evalItem.strategy}</p>`;
+        };
         grid.appendChild(btn);
     });
 
-    function showStrategy(evalItem, btn) {
-        playTone(440, 0.05, "sine");
-        document.querySelectorAll('.eval-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        const content = document.getElementById('strategy-content');
-        content.innerHTML = `<p class="glitch-effect">${evalItem.strategy}</p>`;
-    }
-
-    // Sonidos mínimos (mantener original)
     function playTone(freq, duration, type) {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -554,56 +507,37 @@
         } catch(e) {}
     }
 
-    function playFuturisticCharge() {
-        try {
-            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.type = 'sawtooth';
-            oscillator.frequency.setValueAtTime(100, audioCtx.currentTime);
-            oscillator.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 1.5);
-            gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-            gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.5);
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            oscillator.start();
-            oscillator.stop(audioCtx.currentTime + 1.5);
-        } catch(e) {}
-    }
-
-    // ----- REPRODUCTOR DE AUDIO: LÓGICA COMPLETA -----
-    const audioElem = document.getElementById('audioPlayer');
+    // ---------- REPRODUCTOR DE AUDIO (CORREGIDO) ----------
+    const audio = new Audio();
+    audio.preload = "metadata";
+    audio.src = "Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a";
+    
     const playBtn = document.getElementById('playBtn');
     const pauseBtn = document.getElementById('pauseBtn');
     const stopBtn = document.getElementById('stopBtn');
     const progressFill = document.getElementById('progressFill');
     const progressBg = document.getElementById('progressBarBg');
-    const currentTimeSpan = document.getElementById('currentTimeDisplay');
+    const currentSpan = document.getElementById('currentTimeDisplay');
     const durationSpan = document.getElementById('durationDisplay');
-    const audioStatusMsg = document.getElementById('audioStatusMsg');
+    const statusMsg = document.getElementById('audioStatusMsg');
 
-    let isAudioReady = false;
     let durationLoaded = false;
+    let errorShown = false;
 
-    // Formateador mm:ss
-    function formatTime(seconds) {
-        if (isNaN(seconds)) return "0:00";
-        const mins = Math.floor(seconds / 60);
-        const secs = Math.floor(seconds % 60);
+    function formatTime(sec) {
+        if (isNaN(sec)) return "0:00";
+        const mins = Math.floor(sec / 60);
+        const secs = Math.floor(sec % 60);
         return `${mins}:${secs < 10 ? '0' + secs : secs}`;
     }
 
-    // Actualizar barra y tiempo actual
     function updateProgress() {
-        if (!isAudioReady && audioElem.readyState < 2) return;
-        const current = audioElem.currentTime;
-        const duration = audioElem.duration;
-        if (!isNaN(duration) && duration > 0) {
-            const percent = (current / duration) * 100;
+        if (!isNaN(audio.duration) && audio.duration > 0) {
+            const percent = (audio.currentTime / audio.duration) * 100;
             progressFill.style.width = percent + "%";
-            currentTimeSpan.innerText = formatTime(current);
+            currentSpan.innerText = formatTime(audio.currentTime);
             if (!durationLoaded) {
-                durationSpan.innerText = formatTime(duration);
+                durationSpan.innerText = formatTime(audio.duration);
                 durationLoaded = true;
             }
         } else {
@@ -611,138 +545,141 @@
         }
     }
 
-    // Eventos del audio
-    function onLoadedMetadata() {
-        const dur = audioElem.duration;
-        if (!isNaN(dur) && isFinite(dur)) {
-            durationSpan.innerText = formatTime(dur);
-            durationLoaded = true;
+    function handleError() {
+        if (errorShown) return;
+        errorShown = true;
+        let errorMsg = "❌ ERROR: No se pudo cargar el archivo de audio.\n";
+        if (audio.error) {
+            switch (audio.error.code) {
+                case MediaError.MEDIA_ERR_ABORTED: errorMsg += "Carga abortada."; break;
+                case MediaError.MEDIA_ERR_NETWORK: errorMsg += "Error de red."; break;
+                case MediaError.MEDIA_ERR_DECODE: errorMsg += "Formato no soportado o archivo corrupto."; break;
+                case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorMsg += "Archivo no encontrado o extensión no soportada."; break;
+                default: errorMsg += "Error desconocido.";
+            }
         } else {
-            durationSpan.innerText = "--:--";
+            errorMsg += "Verifica que el archivo 'Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a' esté en la misma carpeta que este HTML.";
         }
-        isAudioReady = true;
-        audioStatusMsg.innerText = "✔ Archivo cargado. Listo para reproducción.";
-        audioStatusMsg.style.color = "#00ffaa";
-        setTimeout(() => {
-            if(audioStatusMsg) audioStatusMsg.style.color = "#9aa5ce";
-        }, 2000);
-    }
-
-    function onError(e) {
-        console.warn("Error cargando audio", e);
-        audioStatusMsg.innerText = "⚠ ERROR: No se pudo cargar el archivo .m4a. Verifica que el archivo 'Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a' esté en la misma carpeta.";
-        audioStatusMsg.style.color = "#ff6699";
+        statusMsg.innerText = errorMsg;
+        statusMsg.style.color = "#ff6699";
         playBtn.disabled = true;
         pauseBtn.disabled = true;
         stopBtn.disabled = true;
     }
 
-    function onPlay() {
-        audioStatusMsg.innerText = "▶ Reproduciendo...";
-        audioStatusMsg.style.color = "#00f2ff";
-        setTimeout(() => { if(audioStatusMsg) audioStatusMsg.style.color = "#9aa5ce"; }, 1500);
-    }
-    function onPause() {
-        audioStatusMsg.innerText = "⏸ Pausado";
-    }
-    function onEnded() {
-        audioStatusMsg.innerText = "⏹ Reproducción finalizada";
+    audio.addEventListener('loadedmetadata', () => {
+        statusMsg.innerText = "✅ Audio listo. Presiona PLAY.";
+        statusMsg.style.color = "#9aa5ce";
+        durationSpan.innerText = formatTime(audio.duration);
+        durationLoaded = true;
+        playBtn.disabled = false;
+        pauseBtn.disabled = false;
+        stopBtn.disabled = false;
+    });
+    audio.addEventListener('error', handleError);
+    audio.addEventListener('timeupdate', updateProgress);
+    audio.addEventListener('play', () => statusMsg.innerText = "▶ Reproduciendo...");
+    audio.addEventListener('pause', () => statusMsg.innerText = "⏸ Pausado");
+    audio.addEventListener('ended', () => {
+        statusMsg.innerText = "⏹ Finalizado";
         progressFill.style.width = "0%";
-        currentTimeSpan.innerText = formatTime(0);
-    }
+        currentSpan.innerText = "0:00";
+    });
 
-    // Controles
     playBtn.addEventListener('click', () => {
-        if (audioElem.src) {
-            audioElem.play().catch(err => {
-                console.warn("Play bloqueado o error:", err);
-                audioStatusMsg.innerText = "⚠ Error al reproducir: quizás falta archivo o formato no soportado.";
-                audioStatusMsg.style.color = "#ff6699";
+        if (audio.src) {
+            audio.play().catch(err => {
+                statusMsg.innerText = "⚠ No se pudo reproducir: " + (err.message || "verifica el archivo");
+                statusMsg.style.color = "#ffaa66";
             });
             playTone(880, 0.1, "sine");
-        } else {
-            audioStatusMsg.innerText = "⚠ Archivo no disponible. Comprueba la ruta.";
         }
     });
-    
     pauseBtn.addEventListener('click', () => {
-        audioElem.pause();
+        audio.pause();
         playTone(660, 0.08, "sine");
     });
-    
     stopBtn.addEventListener('click', () => {
-        audioElem.pause();
-        audioElem.currentTime = 0;
+        audio.pause();
+        audio.currentTime = 0;
         updateProgress();
         playTone(330, 0.12, "sawtooth");
-        audioStatusMsg.innerText = "⏹ Reiniciado (posición 0:00)";
-        setTimeout(() => { if(audioStatusMsg && audioStatusMsg.innerText.includes("Reiniciado")) audioStatusMsg.innerText = "Listo para reproducir"; }, 1200);
+        statusMsg.innerText = "⏹ Reiniciado (posición 0:00)";
+        setTimeout(() => { if (statusMsg.innerText.includes("Reiniciado")) statusMsg.innerText = "Listo"; }, 1200);
     });
 
-    // Barra de progreso clickeable
     progressBg.addEventListener('click', (e) => {
-        if (!isAudioReady || isNaN(audioElem.duration)) return;
+        if (!durationLoaded || isNaN(audio.duration)) return;
         const rect = progressBg.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const width = rect.width;
-        const percent = clickX / width;
-        const newTime = percent * audioElem.duration;
-        if (!isNaN(newTime) && newTime >= 0 && newTime <= audioElem.duration) {
-            audioElem.currentTime = newTime;
+        const percent = (e.clientX - rect.left) / rect.width;
+        const newTime = percent * audio.duration;
+        if (!isNaN(newTime)) {
+            audio.currentTime = newTime;
             updateProgress();
             playTone(520, 0.05, "sine");
         }
     });
 
-    // Suscribir eventos del audio
-    audioElem.addEventListener('loadedmetadata', onLoadedMetadata);
-    audioElem.addEventListener('error', onError);
-    audioElem.addEventListener('play', onPlay);
-    audioElem.addEventListener('pause', onPause);
-    audioElem.addEventListener('ended', onEnded);
-    audioElem.addEventListener('timeupdate', updateProgress);
-    
-    // Cargar archivo con ruta explícita (nombre exacto)
-    // Aseguramos que el source esté definido correctamente (ya está en HTML, pero reforzamos)
-    if (!audioElem.querySelector('source') || !audioElem.querySelector('source').src) {
-        audioElem.src = "Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a";
-        audioElem.load();
-    } else {
-        audioElem.load(); // forzamos recarga por si acaso
-    }
-    
-    // Si después de 1 segundo no se ha cargado metadata, mostrar mensaje amigable
-    setTimeout(() => {
-        if (!durationLoaded && audioElem.readyState === 0) {
-            audioStatusMsg.innerText = "⌛ Cargando o verificando archivo... Asegúrate que 'Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a' esté disponible.";
-            audioStatusMsg.style.color = "#ffcc00";
-        }
-    }, 800);
+    // Forzar carga para detectar errores temprano
+    audio.load();
 
-    // --- Lógica del botón especial y terminal (original) ---
+    // ---------- BOTÓN ESPECIAL "?" Y TERMINAL ----------
     const helpBtn = document.getElementById('helpBtn');
     const overlay = document.getElementById('terminalOverlay');
     const termBody = document.getElementById('terminalBody');
     const termHeader = document.getElementById('terminalHeader');
-    const closeBtn = document.getElementById('closeTerminal');
+    const closeTerminalBtn = document.getElementById('closeTerminal');
     const termWindow = document.getElementById('terminalWindow');
-    let strategyStep = 0;
+    let step = 0;
     const masterStrategy = [
         "MENSAJE DEL FUTURO RECIBIDO...\nAnalizando probabilidades de éxito...",
-        "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': La Inducción, Glosario, Bitácora y Masterclass suman un 20% casi garantizado con solo cumplimiento.",
-        "2. Relación Esfuerzo/Puntaje: Los Quick Tests (20%) son vitales. Estudiar para ellos te prepara automáticamente para el Examen Final (30%). Si dominas estos, ya tienes el 50%.",
-        "3. La Regla del 5: Para alcanzar los 5 puntos necesarios sobre 10, enfócate en entregar TODO lo que valga 5%. Sumar pequeñas victorias es más seguro que apostar todo al examen final.",
-        "CONSEJO FINAL: El Examen Final es el 30%, pero las evaluaciones continuas son el 70%. No necesitas ser perfecto en el examen si eres constante en el semestre. \n\n[FIN DE LA TRANSMISIÓN]"
+        "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': Inducción, Glosario, Bitácora y Masterclass suman 20% garantizado.",
+        "2. Relación Esfuerzo/Puntaje: Los Quick Tests (20%) son vitales. Te preparan para el Examen Final (30%).",
+        "3. La Regla del 5: Enfócate en entregar TODO lo que vale 5%. Sumar pequeñas victorias es más seguro.",
+        "CONSEJO FINAL: El 70% son evaluaciones continuas. Constancia > perfección.\n\n[FIN DE LA TRANSMISIÓN]"
     ];
+
+    function advanceStrategy() {
+        if (step < masterStrategy.length) {
+            const p = document.createElement('p');
+            p.innerText = masterStrategy[step];
+            p.className = 'glitch-effect';
+            termBody.appendChild(p);
+            termBody.scrollTop = termBody.scrollHeight;
+            step++;
+            playTone(200 + (step * 100), 0.2, "square");
+            if (step === masterStrategy.length) {
+                closeTerminalBtn.style.display = 'block';
+                document.getElementById('clickHint').style.display = 'none';
+            }
+        }
+    }
+
+    function playFuturisticCharge() {
+        try {
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(100, ctx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(880, ctx.currentTime + 1.5);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 1.5);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 1.5);
+        } catch(e) {}
+    }
 
     helpBtn.onclick = () => {
         playFuturisticCharge();
         overlay.style.display = 'flex';
         termWindow.classList.add('glitch-effect');
-        strategyStep = 0;
+        step = 0;
         termBody.innerHTML = "";
         termHeader.innerText = "> SINTONIZANDO SEÑAL...";
-        closeBtn.style.display = 'none';
+        closeTerminalBtn.style.display = 'none';
         document.getElementById('clickHint').style.display = 'block';
         setTimeout(() => {
             termHeader.innerText = "> MENSAJE DEL FUTURO RECIBIDO...";
@@ -750,34 +687,12 @@
         }, 1000);
     };
 
-    function advanceStrategy() {
-        if (strategyStep < masterStrategy.length) {
-            const p = document.createElement('p');
-            p.innerText = masterStrategy[strategyStep];
-            p.className = 'glitch-effect';
-            termBody.appendChild(p);
-            termBody.scrollTop = termBody.scrollHeight;
-            strategyStep++;
-            playTone(200 + (strategyStep * 100), 0.2, "square");
-            if (strategyStep === masterStrategy.length) {
-                closeBtn.style.display = 'block';
-                document.getElementById('clickHint').style.display = 'none';
-            }
-        }
-    }
-
     termWindow.onclick = (e) => {
         e.stopPropagation();
-        if (strategyStep < masterStrategy.length) advanceStrategy();
+        if (step < masterStrategy.length) advanceStrategy();
     };
-
-    closeBtn.onclick = () => {
-        overlay.style.display = 'none';
-    };
-
-    overlay.onclick = () => {
-        if (closeBtn.style.display === 'block') overlay.style.display = 'none';
-    };
+    closeTerminalBtn.onclick = () => overlay.style.display = 'none';
+    overlay.onclick = () => { if (closeTerminalBtn.style.display === 'block') overlay.style.display = 'none'; };
 </script>
 </body>
 </html>
