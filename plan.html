@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERMINAL: Plan de Evaluación 2026 · Audio Integration</title>
+    <title>TERMINAL: Plan de Evaluación 2026 · Audio Player</title>
     <!-- Google Fonts: Share Tech Mono para estilo terminal -->
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
     <style>
@@ -215,6 +215,130 @@
             transform: scale(1.02);
         }
 
+        /* --- NUEVO REPRODUCTOR DE AUDIO (TERMINAL STYLE) --- */
+        .audio-module {
+            margin-top: 30px;
+            border: 1px solid var(--primary-cyan);
+            background: rgba(0, 242, 255, 0.03);
+            padding: 18px 20px;
+            box-shadow: 0 0 8px rgba(0, 242, 255, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .audio-module:hover {
+            box-shadow: 0 0 16px rgba(0, 242, 255, 0.5);
+            background: rgba(0, 242, 255, 0.07);
+        }
+
+        .player-title {
+            font-size: 1.1rem;
+            color: var(--primary-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-left: 4px solid var(--primary-magenta);
+            padding-left: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .player-title::before {
+            content: "🎧";
+            font-size: 1.2rem;
+            filter: drop-shadow(0 0 4px var(--primary-cyan));
+        }
+
+        .audio-controls {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .ctrl-btn {
+            background: transparent;
+            border: 1px solid var(--primary-magenta);
+            color: var(--primary-magenta);
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1.1rem;
+            padding: 8px 20px;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: 1px;
+        }
+
+        .ctrl-btn:hover {
+            background: rgba(255, 0, 255, 0.2);
+            box-shadow: 0 0 12px var(--primary-magenta);
+            transform: scale(1.02);
+        }
+
+        .ctrl-btn:active {
+            transform: scale(0.98);
+        }
+
+        .audio-time {
+            margin-left: auto;
+            font-family: 'Share Tech Mono', monospace;
+            background: #000000aa;
+            padding: 5px 12px;
+            border-radius: 2px;
+            border: 1px solid var(--primary-cyan);
+            color: var(--primary-cyan);
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .audio-time span {
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .progress-container {
+            width: 100%;
+            margin-top: 16px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .progress-bar-bg {
+            flex: 1;
+            height: 6px;
+            background: #222;
+            border-radius: 3px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 0.5px solid var(--primary-cyan);
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--primary-cyan);
+            box-shadow: 0 0 4px var(--primary-cyan);
+            transition: width 0.05s linear;
+        }
+
+        .status-msg {
+            font-size: 0.7rem;
+            color: #9aa5ce;
+            margin-top: 10px;
+            text-align: right;
+        }
+
+        @media (max-width: 600px) {
+            .audio-controls { justify-content: center; }
+            .audio-time { margin-left: 0; margin-top: 8px; }
+            .ctrl-btn { padding: 6px 14px; font-size: 0.9rem; }
+        }
+
         /* Pantalla Terminal Modal */
         .terminal-overlay {
             position: fixed;
@@ -307,104 +431,6 @@
             margin-top: 10px;
             text-align: center;
         }
-
-        /* ========== NUEVO REPRODUCTOR DE AUDIO ESTILO TERMINAL ========== */
-        .audio-player {
-            margin-top: 40px;
-            border: 1px solid var(--primary-cyan);
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.75);
-            box-shadow: var(--border-glow);
-            backdrop-filter: blur(1px);
-            transition: all 0.2s;
-        }
-
-        .audio-title {
-            font-family: 'Share Tech Mono', monospace;
-            color: var(--primary-cyan);
-            text-align: center;
-            letter-spacing: 1.5px;
-            margin-bottom: 18px;
-            font-size: 1.15rem;
-            text-transform: uppercase;
-            border-left: 3px solid var(--primary-magenta);
-            border-right: 3px solid var(--primary-magenta);
-            display: inline-block;
-            width: auto;
-            padding: 0 16px;
-            background: rgba(0, 0, 0, 0.6);
-            line-height: 1.8;
-            text-shadow: 0 0 5px var(--primary-cyan);
-        }
-
-        .audio-controls {
-            display: flex;
-            gap: 25px;
-            justify-content: center;
-            margin: 20px 0 12px;
-            flex-wrap: wrap;
-        }
-
-        .audio-btn {
-            background: transparent;
-            border: 1.5px solid var(--primary-magenta);
-            color: var(--primary-magenta);
-            font-family: 'Share Tech Mono', monospace;
-            font-size: 1.25rem;
-            font-weight: bold;
-            padding: 8px 24px;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            letter-spacing: 1px;
-            min-width: 100px;
-        }
-
-        .audio-btn:hover {
-            background: rgba(255, 0, 255, 0.2);
-            box-shadow: 0 0 14px var(--primary-magenta);
-            transform: scale(1.03);
-            border-color: var(--primary-cyan);
-            color: var(--primary-cyan);
-        }
-
-        .audio-btn:active {
-            transform: scale(0.98);
-        }
-
-        .audio-status {
-            text-align: center;
-            font-size: 0.8rem;
-            color: #b0f0ff;
-            font-family: 'Share Tech Mono', monospace;
-            background: rgba(0, 242, 255, 0.1);
-            padding: 6px 12px;
-            margin-top: 10px;
-            display: inline-block;
-            width: auto;
-            border-radius: 2px;
-            letter-spacing: 0.5px;
-        }
-
-        .audio-status span {
-            color: var(--primary-magenta);
-            font-weight: bold;
-        }
-
-        .player-container {
-            text-align: center;
-        }
-
-        /* ajuste responsive */
-        @media (max-width: 550px) {
-            .audio-btn {
-                padding: 6px 16px;
-                font-size: 1rem;
-                min-width: 70px;
-            }
-            .audio-title {
-                font-size: 0.85rem;
-            }
-        }
     </style>
 </head>
 <body>
@@ -427,25 +453,40 @@
         </aside>
     </div>
 
+    <!-- ========= REPRODUCTOR DE AUDIO INTEGRADO ========= -->
+    <div class="audio-module">
+        <div class="player-title">
+            <span>LECTURA AUDIO: EVALUACIÓN DE INGLÉS 1</span>
+        </div>
+        
+        <!-- Elemento de audio oculto (sin controles nativos) -->
+        <audio id="audioPlayer" preload="metadata" style="display: none;">
+            <source src="Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a" type="audio/mp4">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+
+        <!-- Controles personalizados -->
+        <div class="audio-controls">
+            <button class="ctrl-btn" id="playBtn">▶ PLAY</button>
+            <button class="ctrl-btn" id="pauseBtn">⏸ PAUSE</button>
+            <button class="ctrl-btn" id="stopBtn">⏹ STOP</button>
+            <div class="audio-time">
+                <span id="currentTimeDisplay">0:00</span> / <span id="durationDisplay">--:--</span>
+            </div>
+        </div>
+        
+        <!-- Barra de progreso interactiva -->
+        <div class="progress-container">
+            <div class="progress-bar-bg" id="progressBarBg">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+        <div class="status-msg" id="audioStatusMsg">▶ Estado: listo para reproducción</div>
+    </div>
+
     <div class="help-center">
         <button class="special-btn" id="helpBtn">?</button>
         <a href="index.html" class="home-btn">⌂ VOLVER AL INICIO</a>
-    </div>
-
-    <!-- REPRODUCTOR DE AUDIO: Sobrevivir al inglés de Oney Clavijo -->
-    <div class="audio-player">
-        <div style="text-align: center;">
-            <div class="audio-title">🎧 SOBREVIVIR AL INGLÉS · ONEY CLAVIJO 🎧</div>
-        </div>
-        <div class="audio-controls">
-            <button id="playAudioBtn" class="audio-btn">▶ PLAY</button>
-            <button id="pauseAudioBtn" class="audio-btn">⏸ PAUSE</button>
-            <button id="stopAudioBtn" class="audio-btn">⏹ STOP</button>
-        </div>
-        <div class="player-container">
-            <div id="audioStatusMsg" class="audio-status">⚡ STATUS: <span>STANDBY</span> ⚡</div>
-        </div>
-        <div class="click-hint" style="margin-top: 12px; font-size: 0.7rem;">🎵 Archivo: Sobrevivir_al_inglés_de_Oney_Clavijo.mp3</div>
     </div>
 </div>
 
@@ -462,7 +503,7 @@
 </div>
 
 <script>
-    // ======================== DATOS DE EVALUACIÓN (ORIGINAL) ========================
+    // Datos de evaluaciones (original)
     const evaluations = [
         { name: "Quick Test", qty: 4, weight: "5%", total: "20%", strategy: "Son pruebas cortas pero constantes. No faltes a clase, ya que representan el 20% total. Es puntaje 'fácil' si mantienes el ritmo semanal." },
         { name: "Masterclass", qty: 1, weight: "5%", total: "5%", strategy: "Enfoque total en la participación. Al ser una sola sesión, tu preparación previa definirá ese 5% de inmediato." },
@@ -475,7 +516,7 @@
         { name: "Examen Final", qty: 1, weight: "30%", total: "30%", strategy: "El peso pesado. El 30% del curso se define aquí. No lo dejes para el final; usa el glosario y los BU para estudiar progresivamente." }
     ];
 
-    // Inicializar cuadrícula de evaluación
+    // Inicializar cuadrícula
     const grid = document.getElementById('evalGrid');
     evaluations.forEach((evalItem, index) => {
         const btn = document.createElement('button');
@@ -496,7 +537,7 @@
         content.innerHTML = `<p class="glitch-effect">${evalItem.strategy}</p>`;
     }
 
-    // Sonidos retro (compatibilidad)
+    // Sonidos mínimos (mantener original)
     function playTone(freq, duration, type) {
         try {
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -530,7 +571,155 @@
         } catch(e) {}
     }
 
-    // ======================== LÓGICA TERMINAL (BOTÓN ?) ========================
+    // ----- REPRODUCTOR DE AUDIO: LÓGICA COMPLETA -----
+    const audioElem = document.getElementById('audioPlayer');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const progressFill = document.getElementById('progressFill');
+    const progressBg = document.getElementById('progressBarBg');
+    const currentTimeSpan = document.getElementById('currentTimeDisplay');
+    const durationSpan = document.getElementById('durationDisplay');
+    const audioStatusMsg = document.getElementById('audioStatusMsg');
+
+    let isAudioReady = false;
+    let durationLoaded = false;
+
+    // Formateador mm:ss
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return "0:00";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' + secs : secs}`;
+    }
+
+    // Actualizar barra y tiempo actual
+    function updateProgress() {
+        if (!isAudioReady && audioElem.readyState < 2) return;
+        const current = audioElem.currentTime;
+        const duration = audioElem.duration;
+        if (!isNaN(duration) && duration > 0) {
+            const percent = (current / duration) * 100;
+            progressFill.style.width = percent + "%";
+            currentTimeSpan.innerText = formatTime(current);
+            if (!durationLoaded) {
+                durationSpan.innerText = formatTime(duration);
+                durationLoaded = true;
+            }
+        } else {
+            progressFill.style.width = "0%";
+        }
+    }
+
+    // Eventos del audio
+    function onLoadedMetadata() {
+        const dur = audioElem.duration;
+        if (!isNaN(dur) && isFinite(dur)) {
+            durationSpan.innerText = formatTime(dur);
+            durationLoaded = true;
+        } else {
+            durationSpan.innerText = "--:--";
+        }
+        isAudioReady = true;
+        audioStatusMsg.innerText = "✔ Archivo cargado. Listo para reproducción.";
+        audioStatusMsg.style.color = "#00ffaa";
+        setTimeout(() => {
+            if(audioStatusMsg) audioStatusMsg.style.color = "#9aa5ce";
+        }, 2000);
+    }
+
+    function onError(e) {
+        console.warn("Error cargando audio", e);
+        audioStatusMsg.innerText = "⚠ ERROR: No se pudo cargar el archivo .m4a. Verifica que el archivo 'Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a' esté en la misma carpeta.";
+        audioStatusMsg.style.color = "#ff6699";
+        playBtn.disabled = true;
+        pauseBtn.disabled = true;
+        stopBtn.disabled = true;
+    }
+
+    function onPlay() {
+        audioStatusMsg.innerText = "▶ Reproduciendo...";
+        audioStatusMsg.style.color = "#00f2ff";
+        setTimeout(() => { if(audioStatusMsg) audioStatusMsg.style.color = "#9aa5ce"; }, 1500);
+    }
+    function onPause() {
+        audioStatusMsg.innerText = "⏸ Pausado";
+    }
+    function onEnded() {
+        audioStatusMsg.innerText = "⏹ Reproducción finalizada";
+        progressFill.style.width = "0%";
+        currentTimeSpan.innerText = formatTime(0);
+    }
+
+    // Controles
+    playBtn.addEventListener('click', () => {
+        if (audioElem.src) {
+            audioElem.play().catch(err => {
+                console.warn("Play bloqueado o error:", err);
+                audioStatusMsg.innerText = "⚠ Error al reproducir: quizás falta archivo o formato no soportado.";
+                audioStatusMsg.style.color = "#ff6699";
+            });
+            playTone(880, 0.1, "sine");
+        } else {
+            audioStatusMsg.innerText = "⚠ Archivo no disponible. Comprueba la ruta.";
+        }
+    });
+    
+    pauseBtn.addEventListener('click', () => {
+        audioElem.pause();
+        playTone(660, 0.08, "sine");
+    });
+    
+    stopBtn.addEventListener('click', () => {
+        audioElem.pause();
+        audioElem.currentTime = 0;
+        updateProgress();
+        playTone(330, 0.12, "sawtooth");
+        audioStatusMsg.innerText = "⏹ Reiniciado (posición 0:00)";
+        setTimeout(() => { if(audioStatusMsg && audioStatusMsg.innerText.includes("Reiniciado")) audioStatusMsg.innerText = "Listo para reproducir"; }, 1200);
+    });
+
+    // Barra de progreso clickeable
+    progressBg.addEventListener('click', (e) => {
+        if (!isAudioReady || isNaN(audioElem.duration)) return;
+        const rect = progressBg.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        const percent = clickX / width;
+        const newTime = percent * audioElem.duration;
+        if (!isNaN(newTime) && newTime >= 0 && newTime <= audioElem.duration) {
+            audioElem.currentTime = newTime;
+            updateProgress();
+            playTone(520, 0.05, "sine");
+        }
+    });
+
+    // Suscribir eventos del audio
+    audioElem.addEventListener('loadedmetadata', onLoadedMetadata);
+    audioElem.addEventListener('error', onError);
+    audioElem.addEventListener('play', onPlay);
+    audioElem.addEventListener('pause', onPause);
+    audioElem.addEventListener('ended', onEnded);
+    audioElem.addEventListener('timeupdate', updateProgress);
+    
+    // Cargar archivo con ruta explícita (nombre exacto)
+    // Aseguramos que el source esté definido correctamente (ya está en HTML, pero reforzamos)
+    if (!audioElem.querySelector('source') || !audioElem.querySelector('source').src) {
+        audioElem.src = "Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a";
+        audioElem.load();
+    } else {
+        audioElem.load(); // forzamos recarga por si acaso
+    }
+    
+    // Si después de 1 segundo no se ha cargado metadata, mostrar mensaje amigable
+    setTimeout(() => {
+        if (!durationLoaded && audioElem.readyState === 0) {
+            audioStatusMsg.innerText = "⌛ Cargando o verificando archivo... Asegúrate que 'Evaluación_de_Inglés_1_para_Ciencias_Administrativas.m4a' esté disponible.";
+            audioStatusMsg.style.color = "#ffcc00";
+        }
+    }, 800);
+
+    // --- Lógica del botón especial y terminal (original) ---
     const helpBtn = document.getElementById('helpBtn');
     const overlay = document.getElementById('terminalOverlay');
     const termBody = document.getElementById('terminalBody');
@@ -538,7 +727,6 @@
     const closeBtn = document.getElementById('closeTerminal');
     const termWindow = document.getElementById('terminalWindow');
     let strategyStep = 0;
-
     const masterStrategy = [
         "MENSAJE DEL FUTURO RECIBIDO...\nAnalizando probabilidades de éxito...",
         "ESTRATEGIA PARA APROBAR LA MATERIA:\n\n1. Asegura el 'Piso de Cristal': La Inducción, Glosario, Bitácora y Masterclass suman un 20% casi garantizado con solo cumplimiento.",
@@ -590,168 +778,6 @@
     overlay.onclick = () => {
         if (closeBtn.style.display === 'block') overlay.style.display = 'none';
     };
-
-    // ======================== REPRODUCTOR DE AUDIO INTEGRADO ========================
-    // Configuración del track: "Sobrevivir_al_inglés_de_Oney_Clavijo"
-    // Se asume extensión .mp3 (ajustable manualmente si es otro formato)
-    const audioTrack = new Audio();
-    // Nombre exacto del archivo (debe estar en el mismo directorio que el HTML)
-    const audioFileName = "Sobrevivir_al_inglés_de_Oney_Clavijo.mp3";
-    audioTrack.src = audioFileName;
-    audioTrack.preload = "metadata";
-    
-    // Elementos UI del reproductor
-    const playBtn = document.getElementById('playAudioBtn');
-    const pauseBtn = document.getElementById('pauseAudioBtn');
-    const stopBtn = document.getElementById('stopAudioBtn');
-    const statusSpan = document.querySelector('#audioStatusMsg span');
-    const statusContainer = document.getElementById('audioStatusMsg');
-    
-    // Función para actualizar estado visual
-    function updateAudioStatus(message, isError = false) {
-        if (statusSpan) {
-            statusSpan.innerText = message;
-            if (isError) {
-                statusSpan.style.color = "#ff6699";
-                statusContainer.style.border = "1px solid #ff00ff";
-            } else {
-                statusSpan.style.color = "#00f2ff";
-                statusContainer.style.border = "none";
-            }
-        }
-        // pequeño efecto glitch en el texto del status (opcional)
-        if (statusContainer) {
-            statusContainer.classList.add('glitch-effect');
-            setTimeout(() => statusContainer.classList.remove('glitch-effect'), 200);
-        }
-    }
-    
-    // Manejo de errores (archivo no encontrado o no soportado)
-    audioTrack.onerror = (err) => {
-        console.warn("Error cargando audio:", err);
-        let errorDetail = "";
-        if (audioTrack.error) {
-            switch(audioTrack.error.code) {
-                case MediaError.MEDIA_ERR_ABORTED: errorDetail = "Carga abortada"; break;
-                case MediaError.MEDIA_ERR_NETWORK: errorDetail = "Error de red"; break;
-                case MediaError.MEDIA_ERR_DECODE: errorDetail = "Formato no soportado"; break;
-                case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED: errorDetail = "Archivo no encontrado o formato inválido"; break;
-                default: errorDetail = "Error desconocido";
-            }
-        }
-        updateAudioStatus(`ERROR: ${errorDetail}`, true);
-        // También mostrar hint más visible
-        if (statusContainer) {
-            statusContainer.style.background = "rgba(255,0,100,0.2)";
-        }
-    };
-    
-    // Evento cuando el audio puede comenzar a reproducirse correctamente
-    audioTrack.oncanplay = () => {
-        if (audioTrack.error) return;
-        updateAudioStatus("READY");
-        statusContainer.style.background = "rgba(0, 242, 255, 0.1)";
-    };
-    
-    audioTrack.onplaying = () => {
-        updateAudioStatus("REPRODUCIENDO ▶");
-        playTone(660, 0.08, "sine");
-    };
-    
-    audioTrack.onpause = () => {
-        if (audioTrack.currentTime > 0 && !audioTrack.ended) {
-            updateAudioStatus("PAUSADO ⏸");
-        }
-    };
-    
-    audioTrack.onended = () => {
-        updateAudioStatus("COMPLETADO ✓");
-        playTone(523, 0.2, "sine");
-    };
-    
-    // Botón PLAY
-    playBtn.addEventListener('click', () => {
-        playTone(523, 0.08, "sine");
-        // Si el audio está en estado "stop" o con currentTime al final, reiniciamos simbólicamente para empezar desde 0 si está ended
-        if (audioTrack.ended) {
-            audioTrack.currentTime = 0;
-        }
-        // Si el src está vacío o error, reintentamos set src
-        if (!audioTrack.src || audioTrack.src === "" || audioTrack.error) {
-            audioTrack.src = audioFileName;
-            audioTrack.load();
-        }
-        audioTrack.play().then(() => {
-            // éxito, el evento onplaying actualizará estado
-        }).catch(err => {
-            console.error("Error al reproducir:", err);
-            let errorMsg = "No se pudo reproducir. Verifica archivo o permisos.";
-            if (err.name === "NotAllowedError") errorMsg = "Interacción requerida. Haz clic en Play nuevamente.";
-            updateAudioStatus(errorMsg, true);
-            statusContainer.style.background = "rgba(255,0,100,0.2)";
-        });
-    });
-    
-    // Botón PAUSE
-    pauseBtn.addEventListener('click', () => {
-        playTone(440, 0.06, "sine");
-        if (!audioTrack.paused) {
-            audioTrack.pause();
-            updateAudioStatus("PAUSADO ⏸");
-        } else {
-            // Si ya está pausado, simplemente notificamos
-            if (audioTrack.currentTime > 0 && !audioTrack.ended) {
-                updateAudioStatus("YA PAUSADO");
-            } else if (audioTrack.ended) {
-                updateAudioStatus("FINALIZADO, usa PLAY");
-            } else {
-                updateAudioStatus("SIN REPRODUCCIÓN");
-            }
-        }
-    });
-    
-    // Botón STOP: detiene, resetea el tiempo a 0 y actualiza estado
-    stopBtn.addEventListener('click', () => {
-        playTone(330, 0.1, "square");
-        // Pausar si se está reproduciendo
-        if (!audioTrack.paused) {
-            audioTrack.pause();
-        }
-        audioTrack.currentTime = 0;
-        updateAudioStatus("STOP ⏹️ | RESET");
-        // Asegurar que se muestre el estado de reset
-        if (audioTrack.ended) {
-            // remover estado ended visual
-            audioTrack.load(); // reset interno suave
-        }
-        // Forzar update visual adicional
-        setTimeout(() => {
-            if (audioTrack.paused && audioTrack.currentTime === 0) {
-                if (statusSpan) statusSpan.innerText = "DETENIDO";
-            }
-        }, 50);
-    });
-    
-    // Inicializar estado por defecto
-    updateAudioStatus("STANDBY");
-    statusContainer.style.background = "rgba(0,0,0,0.5)";
-    
-    // Pequeña mejora: si el usuario hace clic en cualquier parte del reproductor, feedback visual
-    const audioPlayerDiv = document.querySelector('.audio-player');
-    if (audioPlayerDiv) {
-        audioPlayerDiv.addEventListener('click', (e) => {
-            if (e.target.tagName !== 'BUTTON') {
-                // solo efecto visual sin interferir
-                audioPlayerDiv.style.boxShadow = "0 0 12px #00f2ff";
-                setTimeout(() => audioPlayerDiv.style.boxShadow = "var(--border-glow)", 150);
-            }
-        });
-    }
-    
-    // Nota: Para que el audio funcione correctamente, colocar el archivo "Sobrevivir_al_inglés_de_Oney_Clavijo.mp3"
-    // en el mismo directorio que este documento HTML. Si el nombre o extensión es diferente, actualizar constante audioFileName.
-    // Se admite .wav, .ogg, etc cambiando extensión.
-    console.log("Reproductor de audio listo. Archivo esperado:", audioFileName);
 </script>
 </body>
 </html>
