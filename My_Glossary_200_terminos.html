@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Glossary - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .letter-block {
+            margin-bottom: 28px;
+            page-break-inside: avoid;
+        }
+        .letter-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            border-bottom: 2px solid #8b9a6e;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            color: #2c3e2f;
+        }
+        .term-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px 20px;
+            margin-bottom: 8px;
+        }
+        .term-item {
+            font-size: 0.9rem;
+            padding: 2px 0;
+            border-bottom: 1px dotted #ddd;
+        }
+        .term-item strong {
+            font-weight: 600;
+            color: #2c5e2a;
+        }
+        .instruction-box {
+            background: #fef9e6;
+            border-left: 6px solid #e0a800;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .requirement-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .requirement-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .requirement-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .letter-block {
+                break-inside: avoid;
+            }
+            .term-grid {
+                break-inside: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">My Glossary</div>
+            <div class="mono text-sm">Glosario Académico Permanente</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- INSTRUCCIONES PRINCIPALES -->
+    <div class="instruction-box">
+        <p class="font-bold text-lg">Guía para la Elaboración del Glosario Académico Permanente</p>
+        <p class="text-sm mt-1">Este glosario es una herramienta de construcción personal diseñada para acompañarle durante todo el periodo académico. Junto con los <strong>diccionarios</strong> y las <strong>guías de estudio</strong>, este documento será uno de los materiales de apoyo autorizados para su uso durante talleres y exámenes.</p>
+    </div>
+
+    <!-- REQUISITOS DE PRESENTACIÓN -->
+    <div class="section-header">1. Requisitos de Presentación (Estándar Profesional)</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Soporte Físico:</strong> Únicamente hojas sueltas (blancas o rayadas) <strong>tamaño Carta o A4</strong>.</li>
+            <li><strong>Restricción de Material:</strong> Se prohíben estrictamente las hojas arrancadas de cuadernos (con restos de espiral o bordes irregulares), papel arrugado, manchado o con tachaduras.</li>
+            <li><strong>Encabezado:</strong> La primera página debe incluir: Nombre completo, Curso/Sección y Título. Todas las páginas deben estar debidamente numeradas y grapadas.</li>
+            <li><strong>Escritura:</strong> El trabajo debe ser <strong>completamente manuscrito</strong> (a mano) con letra clara y legible. Use bolígrafo para las definiciones; el uso de lápiz queda limitado a esquemas o notas marginales.</li>
+        </ul>
+    </div>
+
+    <!-- CONTENIDO Y METODOLOGÍA -->
+    <div class="section-header">2. Contenido y Metodología</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Base Obligatoria:</strong> Debe investigar y redactar el significado en español de los <strong>200 términos</strong> proporcionados por la asignatura.</li>
+            <li><strong>Orden Alfabético:</strong> Los conceptos deben presentarse en estricto orden alfabético para permitir una consulta rápida durante las evaluaciones.</li>
+            <li><strong>Naturaleza Dinámica:</strong> Este es un documento vivo. Se le insta a <strong>agregar nuevos términos</strong> que surjan en las lecturas, materiales de clase y discusiones a lo largo del curso. Un glosario más robusto le brindará una ventaja competitiva en sus exámenes.</li>
+        </ul>
+    </div>
+
+    <!-- ENTREGA Y EVALUACIÓN -->
+    <div class="section-header">3. Entrega y Evaluación</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Plazo Único:</strong> El glosario debe entregarse físicamente al profesor <strong>al inicio de la primera semana del semestre</strong>.</li>
+            <li><strong>Política de Recepción:</strong> No se aceptará la entrega tardía bajo ninguna circunstancia. El trabajo debe estar listo antes de cruzar el umbral de la puerta del salón.</li>
+            <li><strong>Ponderación:</strong> 5% de la calificación final.</li>
+            <li><strong>Validación de Uso:</strong> Solo los glosarios que cumplan con estos requisitos de orden y limpieza serán sellados y autorizados como material de apoyo en clase.</li>
+        </ul>
+        <div class="tip-box mt-2">
+            <span class="font-bold">⚠️ Aviso importante:</span> Debido a la extensión de 200 términos y los estándares de limpieza exigidos, este trabajo requiere una planificación adecuada. No es posible realizarlo con calidad en los minutos previos a la sesión.
+        </div>
+    </div>
+
+    <!-- LISTA DE TÉRMINOS (AGRUPADA POR LETRA) -->
+    <div class="section-header">Glosario Unificado de 200 Términos y Expresiones (Textos 1–16)</div>
+
+    <!-- A -->
+    <div class="letter-block">
+        <div class="letter-title">A</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Absenteeism</strong></div>
+            <div class="term-item"><strong>Absolute reliability</strong></div>
+            <div class="term-item"><strong>Accounting</strong></div>
+            <div class="term-item"><strong>Active listening</strong></div>
+            <div class="term-item"><strong>Adaptability</strong></div>
+            <div class="term-item"><strong>Adopt a paradigm</strong></div>
+            <div class="term-item"><strong>Advocacy</strong></div>
+            <div class="term-item"><strong>Anchoring bias</strong></div>
+            <div class="term-item"><strong>Anonymity</strong></div>
+            <div class="term-item"><strong>Anticipate challenges</strong></div>
+            <div class="term-item"><strong>Artificial intelligence (AI)</strong></div>
+            <div class="term-item"><strong>Assets</strong></div>
+            <div class="term-item"><strong>Authentic engagement</strong></div>
+            <div class="term-item"><strong>Authentic practice</strong></div>
+            <div class="term-item"><strong>Authentic purpose</strong></div>
+            <div class="term-item"><strong>Authoritative data</strong></div>
+            <div class="term-item"><strong>Authority</strong></div>
+            <div class="term-item"><strong>Automation</strong></div>
+        </div>
+    </div>
+
+    <!-- B -->
+    <div class="letter-block">
+        <div class="letter-title">B</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Balance Sheet</strong></div>
+            <div class="term-item"><strong>Bank statements</strong></div>
+            <div class="term-item"><strong>Biased evaluations</strong></div>
+            <div class="term-item"><strong>Bonds</strong></div>
+            <div class="term-item"><strong>Bookkeeping</strong></div>
+            <div class="term-item"><strong>Brand building</strong></div>
+            <div class="term-item"><strong>Brand reputation</strong></div>
+            <div class="term-item"><strong>Breakthrough opportunities</strong></div>
+            <div class="term-item"><strong>Brutally honest conversation</strong></div>
+            <div class="term-item"><strong>Budget adherence</strong></div>
+            <div class="term-item"><strong>Budgeting</strong></div>
+            <div class="term-item"><strong>Bureaucratic nightmare</strong></div>
+            <div class="term-item"><strong>Burnout</strong></div>
+            <div class="term-item"><strong>Business growth</strong></div>
+            <div class="term-item"><strong>Business intelligence</strong></div>
+            <div class="term-item"><strong>Business venture</strong></div>
+        </div>
+    </div>
+
+    <!-- C -->
+    <div class="letter-block">
+        <div class="letter-title">C</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Capital</strong></div>
+            <div class="term-item"><strong>Capitalize on opportunities</strong></div>
+            <div class="term-item"><strong>Cash Flow Statement</strong></div>
+            <div class="term-item"><strong>Categorization phase</strong></div>
+            <div class="term-item"><strong>Chronic stress</strong></div>
+            <div class="term-item"><strong>Cog in a machine</strong></div>
+            <div class="term-item"><strong>Coherent framework</strong></div>
+            <div class="term-item"><strong>Coherent narrative</strong></div>
+            <div class="term-item"><strong>Collaboration</strong></div>
+            <div class="term-item"><strong>Complete desexualization</strong></div>
+            <div class="term-item"><strong>Compliance with accounting standards</strong></div>
+            <div class="term-item"><strong>Compromised account</strong></div>
+            <div class="term-item"><strong>Conflict resolution</strong></div>
+            <div class="term-item"><strong>Contemporary contradiction</strong></div>
+            <div class="term-item"><strong>Controlling</strong></div>
+            <div class="term-item"><strong>Coordinated manipulation</strong></div>
+            <div class="term-item"><strong>Core expertise</strong></div>
+            <div class="term-item"><strong>Credibility assessment</strong></div>
+            <div class="term-item"><strong>Cross-departmental relationships</strong></div>
+            <div class="term-item"><strong>Cultural norms</strong></div>
+        </div>
+    </div>
+
+    <!-- D -->
+    <div class="letter-block">
+        <div class="letter-title">D</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Daunting</strong></div>
+            <div class="term-item"><strong>Deception</strong></div>
+            <div class="term-item"><strong>Deceptive trap</strong></div>
+            <div class="term-item"><strong>Democratic values</strong></div>
+            <div class="term-item"><strong>Departure</strong></div>
+            <div class="term-item"><strong>Desexualized domains</strong></div>
+            <div class="term-item"><strong>Digital assets</strong></div>
+            <div class="term-item"><strong>Digital landscape</strong></div>
+            <div class="term-item"><strong>Directing</strong></div>
+            <div class="term-item"><strong>Discrepancies</strong></div>
+            <div class="term-item"><strong>Discriminatory policies</strong></div>
+            <div class="term-item"><strong>Double-edged sword</strong></div>
+            <div class="term-item"><strong>Dropshipping</strong></div>
+            <div class="term-item"><strong>Dynamic signal</strong></div>
+        </div>
+    </div>
+
+    <!-- E -->
+    <div class="letter-block">
+        <div class="letter-title">E</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Economic optimization</strong></div>
+            <div class="term-item"><strong>Educational trajectory</strong></div>
+            <div class="term-item"><strong>Emergency fund</strong></div>
+            <div class="term-item"><strong>Employer branding</strong></div>
+            <div class="term-item"><strong>Energy management</strong></div>
+            <div class="term-item"><strong>Entrepreneurial mindset</strong></div>
+            <div class="term-item"><strong>Entrenched</strong></div>
+            <div class="term-item"><strong>Equity</strong></div>
+            <div class="term-item"><strong>Eroded health</strong></div>
+            <div class="term-item"><strong>Escape the rat race</strong></div>
+            <div class="term-item"><strong>ESG (Environmental, Social, and Governance)</strong></div>
+            <div class="term-item"><strong>ETFs (Exchange-Traded Funds)</strong></div>
+            <div class="term-item"><strong>Expense reports</strong></div>
+            <div class="term-item"><strong>Expenses</strong></div>
+            <div class="term-item"><strong>Extended cohabitation</strong></div>
+            <div class="term-item"><strong>External audit</strong></div>
+        </div>
+    </div>
+
+    <!-- F -->
+    <div class="letter-block">
+        <div class="letter-title">F</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Fabricated identities</strong></div>
+            <div class="term-item"><strong>Factionalism</strong></div>
+            <div class="term-item"><strong>Faithful snapshot</strong></div>
+            <div class="term-item"><strong>Farming mindset</strong></div>
+            <div class="term-item"><strong>Financial health</strong></div>
+            <div class="term-item"><strong>Financial information integrity</strong></div>
+            <div class="term-item"><strong>Financial management</strong></div>
+            <div class="term-item"><strong>Financial misreporting</strong></div>
+            <div class="term-item"><strong>Financial position</strong></div>
+            <div class="term-item"><strong>Financial statements</strong></div>
+            <div class="term-item"><strong>Financial transactions</strong></div>
+            <div class="term-item"><strong>First-time manager</strong></div>
+            <div class="term-item"><strong>Fluid relationships</strong></div>
+        </div>
+    </div>
+
+    <!-- G -->
+    <div class="letter-block">
+        <div class="letter-title">G</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Giving mindset</strong></div>
+        </div>
+    </div>
+
+    <!-- H -->
+    <div class="letter-block">
+        <div class="letter-title">H</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Harassment allegations</strong></div>
+            <div class="term-item"><strong>Historical reporting</strong></div>
+            <div class="term-item"><strong>Hostile environment</strong></div>
+            <div class="term-item"><strong>Human capital</strong></div>
+            <div class="term-item"><strong>Human intimacy</strong></div>
+            <div class="term-item"><strong>Hunting mindset</strong></div>
+        </div>
+    </div>
+
+    <!-- I -->
+    <div class="letter-block">
+        <div class="letter-title">I</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Income Statement</strong></div>
+            <div class="term-item"><strong>Income streams</strong></div>
+            <div class="term-item"><strong>Inflationary hedge</strong></div>
+            <div class="term-item"><strong>Informed financial decision-making</strong></div>
+            <div class="term-item"><strong>Inherent incapability</strong></div>
+            <div class="term-item"><strong>Internal networking</strong></div>
+            <div class="term-item"><strong>Intertwined realms</strong></div>
+            <div class="term-item"><strong>Introversion</strong></div>
+            <div class="term-item"><strong>Inventory</strong></div>
+            <div class="term-item"><strong>Investment analysis</strong></div>
+            <div class="term-item"><strong>Investor relations</strong></div>
+        </div>
+    </div>
+
+    <!-- L -->
+    <div class="letter-block">
+        <div class="letter-title">L</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Labor market insertion</strong></div>
+            <div class="term-item"><strong>Legal and ethical standards</strong></div>
+            <div class="term-item"><strong>Legal recourse</strong></div>
+            <div class="term-item"><strong>Liabilities</strong></div>
+            <div class="term-item"><strong>Living below your means</strong></div>
+            <div class="term-item"><strong>Logistical agony</strong></div>
+            <div class="term-item"><strong>Logistical chaos</strong></div>
+        </div>
+    </div>
+
+    <!-- M -->
+    <div class="letter-block">
+        <div class="letter-title">M</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Malicious actors</strong></div>
+            <div class="term-item"><strong>Management style</strong></div>
+            <div class="term-item"><strong>Mandatory disclosure requirements</strong></div>
+            <div class="term-item"><strong>Manipulative techniques</strong></div>
+            <div class="term-item"><strong>Memorable connections</strong></div>
+            <div class="term-item"><strong>Mentorship</strong></div>
+            <div class="term-item"><strong>Micro-enterprise</strong></div>
+            <div class="term-item"><strong>Misinformation</strong></div>
+            <div class="term-item"><strong>Monetary resources</strong></div>
+            <div class="term-item"><strong>Monitoring</strong></div>
+            <div class="term-item"><strong>Multi-currency dynamics</strong></div>
+        </div>
+    </div>
+
+    <!-- N -->
+    <div class="letter-block">
+        <div class="letter-title">N</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Non-negotiable path</strong></div>
+            <div class="term-item"><strong>Non-negotiable step</strong></div>
+            <div class="term-item"><strong>Norms (cultural)</strong></div>
+            <div class="term-item"><strong>Norms (traditional)</strong></div>
+        </div>
+    </div>
+
+    <!-- O -->
+    <div class="letter-block">
+        <div class="letter-title">O</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Online safety</strong></div>
+            <div class="term-item"><strong>Open communication</strong></div>
+            <div class="term-item"><strong>Open-plan office</strong></div>
+            <div class="term-item"><strong>Organizational health</strong></div>
+            <div class="term-item"><strong>Organizational indicators</strong></div>
+            <div class="term-item"><strong>Organizational transformation</strong></div>
+            <div class="term-item"><strong>Outsourced fulfillment</strong></div>
+        </div>
+    </div>
+
+    <!-- P -->
+    <div class="letter-block">
+        <div class="letter-title">P</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Paradigm shift</strong></div>
+            <div class="term-item"><strong>Partisan disengagement</strong></div>
+            <div class="term-item"><strong>Passive income</strong></div>
+            <div class="term-item"><strong>Personal brand</strong></div>
+            <div class="term-item"><strong>Personal expression</strong></div>
+            <div class="term-item"><strong>Philosophical rebellion</strong></div>
+            <div class="term-item"><strong>Planning</strong></div>
+            <div class="term-item"><strong>Preliminary statements</strong></div>
+            <div class="term-item"><strong>Proactive education</strong></div>
+            <div class="term-item"><strong>Professional networking</strong></div>
+            <div class="term-item"><strong>Professional norms</strong></div>
+            <div class="term-item"><strong>Profitable path</strong></div>
+            <div class="term-item"><strong>Psychosocial risk evaluation</strong></div>
+            <div class="term-item"><strong>Pump-and-dump schemes</strong></div>
+        </div>
+    </div>
+
+    <!-- R -->
+    <div class="letter-block">
+        <div class="letter-title">R</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Radical re-evaluation</strong></div>
+            <div class="term-item"><strong>Rat race</strong></div>
+            <div class="term-item"><strong>Rational</strong></div>
+            <div class="term-item"><strong>Raw data</strong></div>
+            <div class="term-item"><strong>Receipts</strong></div>
+            <div class="term-item"><strong>Reciprocity</strong></div>
+            <div class="term-item"><strong>Reconciliation (financial)</strong></div>
+            <div class="term-item"><strong>Recurring revenue</strong></div>
+            <div class="term-item"><strong>Reframe</strong></div>
+            <div class="term-item"><strong>Regular communication</strong></div>
+            <div class="term-item"><strong>Relational paradigms</strong></div>
+            <div class="term-item"><strong>Relationship-building</strong></div>
+            <div class="term-item"><strong>Relentless work</strong></div>
+            <div class="term-item"><strong>Resentment</strong></div>
+            <div class="term-item"><strong>Resilience</strong></div>
+            <div class="term-item"><strong>Resource management</strong></div>
+            <div class="term-item"><strong>Resourceful</strong></div>
+            <div class="term-item"><strong>Restrictive statutes</strong></div>
+            <div class="term-item"><strong>Revenue</strong></div>
+            <div class="term-item"><strong>Revenue streams</strong></div>
+            <div class="term-item"><strong>Rigorous thoroughness</strong></div>
+            <div class="term-item"><strong>Risk management</strong></div>
+        </div>
+    </div>
+
+    <!-- S -->
+    <div class="letter-block">
+        <div class="letter-title">S</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Sales invoices</strong></div>
+            <div class="term-item"><strong>Scalable asset</strong></div>
+            <div class="term-item"><strong>SEC (Securities and Exchange Commission)</strong></div>
+            <div class="term-item"><strong>Successful career</strong></div>
+            <div class="term-item"><strong>Self-fulfillment</strong></div>
+            <div class="term-item"><strong>Self-protection</strong></div>
+            <div class="term-item"><strong>Sex days</strong></div>
+            <div class="term-item"><strong>Sexual harassment</strong></div>
+            <div class="term-item"><strong>Sexual health</strong></div>
+            <div class="term-item"><strong>Sexual wellness initiatives</strong></div>
+            <div class="term-item"><strong>Shame</strong></div>
+            <div class="term-item"><strong>Shipping times</strong></div>
+            <div class="term-item"><strong>Side businesses</strong></div>
+            <div class="term-item"><strong>Sincere conversation</strong></div>
+            <div class="term-item"><strong>Skeptical investor</strong></div>
+            <div class="term-item"><strong>Social dynamics</strong></div>
+            <div class="term-item"><strong>Social license to operate</strong></div>
+            <div class="term-item"><strong>Social media scams</strong></div>
+            <div class="term-item"><strong>Social purpose</strong></div>
+            <div class="term-item"><strong>Spectacularly awful</strong></div>
+            <div class="term-item"><strong>Stablecoins</strong></div>
+            <div class="term-item"><strong>Startup culture</strong></div>
+            <div class="term-item"><strong>Stifling entrepreneurship</strong></div>
+            <div class="term-item"><strong>Strategic analysis</strong></div>
+            <div class="term-item"><strong>Strategic asset</strong></div>
+            <div class="term-item"><strong>Strategic blueprint</strong></div>
+            <div class="term-item"><strong>Strategic decision-making</strong></div>
+            <div class="term-item"><strong>Strategic imperative</strong></div>
+            <div class="term-item"><strong>Strategic insights</strong></div>
+            <div class="term-item"><strong>Strategic paradigm</strong></div>
+            <div class="term-item"><strong>Strategic science</strong></div>
+            <div class="term-item"><strong>Summarizing</strong></div>
+            <div class="term-item"><strong>Sustainability reports</strong></div>
+            <div class="term-item"><strong>Sustainable business</strong></div>
+            <div class="term-item"><strong>Sustainable financial performance</strong></div>
+            <div class="term-item"><strong>Sustainable path</strong></div>
+            <div class="term-item"><strong>Sustainable practice</strong></div>
+            <div class="term-item"><strong>Synergies</strong></div>
+            <div class="term-item"><strong>Synergy</strong></div>
+            <div class="term-item"><strong>Systemic barriers</strong></div>
+            <div class="term-item"><strong>Systemic failure</strong></div>
+            <div class="term-item"><strong>Systemic gender inequality</strong></div>
+        </div>
+    </div>
+
+    <!-- T -->
+    <div class="letter-block">
+        <div class="letter-title">T</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Tax compliance</strong></div>
+            <div class="term-item"><strong>Tax filing</strong></div>
+            <div class="term-item"><strong>Team dynamics</strong></div>
+            <div class="term-item"><strong>Technical skills</strong></div>
+            <div class="term-item"><strong>Third-party logistics (3PL)</strong></div>
+            <div class="term-item"><strong>Trade-off</strong></div>
+            <div class="term-item"><strong>Transactional</strong></div>
+            <div class="term-item"><strong>Transparent communication</strong></div>
+            <div class="term-item"><strong>Trust-building</strong></div>
+            <div class="term-item"><strong>Turnover</strong></div>
+            <div class="term-item"><strong>Two-way street</strong></div>
+        </div>
+    </div>
+
+    <!-- U -->
+    <div class="letter-block">
+        <div class="letter-title">U</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Unambiguous</strong></div>
+            <div class="term-item"><strong>Unfulfilled existence</strong></div>
+            <div class="term-item"><strong>Unproductive nightmare</strong></div>
+            <div class="term-item"><strong>Unquestionable</strong></div>
+            <div class="term-item"><strong>Unreliable</strong></div>
+            <div class="term-item"><strong>Unsolicited offers</strong></div>
+            <div class="term-item"><strong>Unwavering skepticism</strong></div>
+            <div class="term-item"><strong>Upskilling</strong></div>
+        </div>
+    </div>
+
+    <!-- V -->
+    <div class="letter-block">
+        <div class="letter-title">V</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Values (corporate)</strong></div>
+            <div class="term-item"><strong>Values (personal)</strong></div>
+            <div class="term-item"><strong>Viability (financial)</strong></div>
+            <div class="term-item"><strong>Visibility</strong></div>
+            <div class="term-item"><strong>Vision</strong></div>
+            <div class="term-item"><strong>Vulnerability</strong></div>
+        </div>
+    </div>
+
+    <!-- W -->
+    <div class="letter-block">
+        <div class="letter-title">W</div>
+        <div class="term-grid">
+            <div class="term-item"><strong>Weak corporate culture</strong></div>
+            <div class="term-item"><strong>Weak ties</strong></div>
+            <div class="term-item"><strong>Well-being initiatives</strong></div>
+            <div class="term-item"><strong>Workplace discrimination</strong></div>
+            <div class="term-item"><strong>Workplace equality</strong></div>
+            <div class="term-item"><strong>Workplace equality metrics</strong></div>
+            <div class="term-item"><strong>Workplace romances</strong></div>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">GLOSSARY_200_TERMS_UDO_v1.0</span>
+    </div>
+</div>
+
+<div class="no-print mt-8 text-center pb-10">
+    <button onclick="window.print()" class="bg-gray-800 text-white px-8 py-3 rounded-none font-bold hover:bg-black transition-all">
+        IMPRIMIR GLOSARIO (PDF)
+    </button>
+</div>
+
+</body>
+</html>
