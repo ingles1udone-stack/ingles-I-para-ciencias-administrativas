@@ -417,12 +417,14 @@
             playSfx(400, 0.05); // Sonido de terminal
         }
 
-        // --- LÓGICA GUÍA YOUTUBE ---
-        let currentStep = 0;
+        // --- LÓGICA GUÍA YOUTUBE (CORREGIDA: primer clic muestra PASO 1) ---
+        let currentStep = -1;          // empezamos antes del primer paso
         const guideDisplay = document.getElementById('guide-display');
 
         function nextStep() {
+            // Incrementamos y ciclamos (ahora la primera llamada pasa de -1 a 0)
             currentStep = (currentStep + 1) % youtubeSteps.length;
+            // Animación de fade para efecto glitch
             guideDisplay.style.opacity = 0;
             setTimeout(() => {
                 guideDisplay.innerText = youtubeSteps[currentStep];
