@@ -82,7 +82,7 @@
             background: rgba(0, 40, 0, 0.2);
         }
 
-        /* Estilos del Juego de Glosario */
+        /* Estilos del Juego de Glosario (tamaño reducido) */
         .perspective-1000 { perspective: 1000px; }
         .card-inner {
             transition: transform 0.6s;
@@ -100,7 +100,7 @@
             display: flex; align-items: center; justify-content: center;
             border: 2px solid var(--term-green);
             background: var(--term-dark);
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
         }
         .card-back { 
@@ -127,15 +127,18 @@
             z-index: 100;
             pointer-events: none;
         }
-        /* clock & connected styles */
+        /* Reloj fucsia neon grande */
         .live-clock {
-            font-size: 0.65rem;
-            letter-spacing: 1px;
+            font-size: 1rem;
+            letter-spacing: 2px;
             background: rgba(0, 30, 0, 0.5);
-            padding: 2px 8px;
+            padding: 4px 12px;
             border-radius: 20px;
             display: inline-block;
             font-family: 'Share Tech Mono', monospace;
+            color: #ff44ff;
+            text-shadow: 0 0 8px #ff44ff, 0 0 2px #ff00aa;
+            font-weight: bold;
         }
         .connected-users {
             font-size: 0.75rem;
@@ -143,6 +146,21 @@
             padding: 2px 12px;
             border-radius: 40px;
             border: 1px solid var(--term-green);
+        }
+
+        /* Botón azul neon para el profesor */
+        .neon-blue-btn {
+            background-color: #0044aa;
+            border: 2px solid #00ccff;
+            color: #ffffff;
+            box-shadow: 0 0 15px #00ccff;
+            transition: all 0.3s;
+        }
+        .neon-blue-btn:hover {
+            background-color: #00ccff;
+            color: #000;
+            box-shadow: 0 0 25px #00ccff;
+            transform: scale(1.02);
         }
 
         /* ---------- NUEVA SECCIÓN: EFECTO FALLOUT / POLVO RADIACTIVO ---------- */
@@ -279,7 +297,6 @@
                 opacity: 0;
             }
         }
-        /* Ajuste para que el contenido quede por encima de la animación */
         .masterclass-content {
             position: relative;
             z-index: 2;
@@ -302,38 +319,40 @@
             border-left: 3px solid var(--term-green);
         }
 
-        /* ========== NUEVO: BOTÓN PARPADEANTE PARA GLOSARIO ========== */
-        @keyframes blink-attention {
-            0% {
-                background-color: transparent;
-                border-color: #3df33d;
-                box-shadow: 0 0 5px #3df33d;
-                color: #3df33d;
-            }
-            50% {
-                background-color: #3df33d;
-                border-color: #ffffff;
-                box-shadow: 0 0 20px #3df33d, 0 0 5px #ffffff;
-                color: #000000;
-            }
-            100% {
-                background-color: transparent;
-                border-color: #3df33d;
-                box-shadow: 0 0 5px #3df33d;
-                color: #3df33d;
-            }
+        /* Estilo para la lista de procesos (bullet list) */
+        .proceso-lista {
+            list-style-type: none;
+            padding-left: 0;
         }
-        .btn-blink {
-            animation: blink-attention 1.2s step-start infinite;
+        .proceso-lista li {
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .proceso-lista li:before {
+            content: ">";
+            color: var(--term-green);
+            position: absolute;
+            left: 0;
             font-weight: bold;
-            transition: all 0.2s;
         }
-        .btn-blink:hover {
-            animation: none;
-            background-color: #3df33d;
-            color: black;
+        /* Botón grande para Plan de Clases */
+        .btn-plan-clases {
+            background-color: rgba(0, 30, 0, 0.7);
+            border: 2px solid var(--term-green);
+            padding: 1rem 2rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s;
+        }
+        .btn-plan-clases:hover {
+            background-color: var(--term-green);
+            color: #000;
+            box-shadow: 0 0 20px var(--term-green);
             transform: scale(1.02);
-            box-shadow: 0 0 25px #8aff8a;
         }
     </style>
 </head>
@@ -341,7 +360,7 @@
     <div class="scanline"></div>
     <div class="crt-overlay"></div>
 
-    <!-- Navegación con reloj integrado -->
+    <!-- Navegación con reloj integrado + más enlaces -->
     <nav class="terminal-border mb-6 p-4 udo-header">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex flex-col items-start gap-1">
@@ -352,11 +371,16 @@
                 <div class="live-clock" id="liveClock"></div>
             </div>
             <div class="flex flex-wrap justify-center gap-4 text-xs">
-                <a href="#comunidad" class="hover:underline">[GRUPOS_RED]</a>
-                <a href="#documentos" class="hover:underline">[DATABASE]</a>
-                <a href="#ruta" class="hover:underline">[PROCESO]</a>
-                <a href="#notas" class="hover:underline">[REGISTROS]</a>
-                <a href="#glosario-challenge" class="hover:underline">[VOCAB_MODULE]</a>
+                <a href="#comunidad" class="hover:underline">[GRUPOS_WS]</a>
+                <a href="plan-de-clases.html" target="_blank" class="hover:underline">[PLAN_DE_CLASES]</a>
+                <a href="#masterclass" class="hover:underline">[MASTERCLASS]</a>
+                <a href="#notas" class="hover:underline">[CALIFICACIONES]</a>
+                <a href="#glosario-challenge" class="hover:underline">[GLOSARIO]</a>
+                <a href="bitacora.html" target="_blank" class="hover:underline">[BITÁCORA]</a>
+                <a href="microconferencia.html" target="_blank" class="hover:underline">[MICROCONF]</a>
+                <a href="plan.html" target="_blank" class="hover:underline">[PLAN_DE_EVALUACIÓN]</a>
+                <a href="panel-control-guias-estudio.html" target="_blank" class="hover:underline">[GUÍAS_DE_ESTUDIO]</a>
+                <a href="desafio_literario.html" target="_blank" class="hover:underline">[DESAFÍO_LITERARIO]</a>
             </div>
         </div>
     </nav>
@@ -364,7 +388,8 @@
     <!-- Header / Hero -->
     <header class="terminal-border p-8 mb-10 text-center relative overflow-hidden bg-black/40">
         <div class="container mx-auto relative z-10">
-            <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto border-2 border-[#3df33d] mb-4 bg-black p-2 shadow-[0_0_15px_#3df33d] object-contain grayscale invert hover:grayscale-0 hover:invert-0 transition-all duration-500 terminal-blink" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
+            <!-- Mascota: sin decoloración, solo parpadeo -->
+            <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto border-2 border-[#3df33d] mb-4 bg-black p-2 shadow-[0_0_15px_#3df33d] object-contain terminal-blink" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
             <h1 class="text-3xl md:text-5xl font-bold mb-3 glow-text uppercase">Interpretación de Textos Administrativos</h1>
             <p class="text-sm opacity-80 mb-8 max-w-2xl mx-auto italic">"EDUCANDO PARA EL ÉXITO GLOBAL DESDE EL CAMPUS GUATAMARE"</p>
             
@@ -412,23 +437,95 @@
             </div>
         </section>
 
-        <!-- DOCUMENTOS Y COPIADO -->
-        <section id="documentos" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- GLOSARIO CHALLENGE (movido justo debajo de canales) -->
+        <section id="glosario-challenge" class="mb-12">
             <div class="terminal-border p-6 bg-black/40">
-                <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-folder-open"></i> DOCUMENTOS BASE</h3>
-                <div class="space-y-3">
-                    <a href="plan.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
-                        <span>PLAN DE EVALUACIÓN 2026</span>
-                        <i class="fas fa-file-lines"></i>
-                    </a>
-                    <a href="panel-control-guias-estudio.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
-                        <span>GUÍAS DE ESTUDIO</span>
-                        <i class="fas fa-book"></i>
-                    </a>
-                    <a href="horario.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm border-double border-2">
-                        <span>HORARIO DEL PROFESOR</span>
-                        <i class="fas fa-clock"></i>
-                    </a>
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 terminal-border flex items-center justify-center text-2xl">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-xl font-bold glow-text uppercase">GLOSSARY GAME!</h2>
+                            <p class="opacity-60 text-xs">Entrenamiento de memoria activa. 200 términos cargados en memoria volátil.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <div class="connected-users" id="connectedUsersDisplay">
+                            <i class="fas fa-users mr-1"></i> USUARIOS CONECTADOS: <span id="usersCount">0</span>
+                        </div>
+                        <!-- Botón de descarga SIN animación intermitente -->
+                        <a href="My_Glossary_200_terminos.html" target="_blank" class="terminal-btn px-6 py-2 text-sm font-bold flex items-center gap-2">
+                            <i class="fas fa-download fa-fw"></i> DESCARGAR GLOSARIO (200 TÉRMINOS)
+                        </a>
+                    </div>
+                </div>
+                <!-- Tarjetas más pequeñas: altura reducida y padding menor -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="cardContainer"></div>
+                <div class="mt-6 text-center">
+                    <button onclick="generateCards()" class="terminal-btn px-8 py-2 text-sm font-bold">
+                        <i class="fas fa-sync-alt mr-2"></i> ACTUALIZAR TÉRMINOS
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ROCKOLA TERMINAL (movida después del glosario) -->
+        <section class="mb-12" id="rockola">
+            <div class="terminal-border p-6 bg-[#0a2a0a]/40 text-center">
+                <h3 class="font-bold mb-4 flex items-center justify-center gap-2">
+                    <i class="fas fa-radio"></i> TRANSMISIÓN DE RADIO "EL CAMPUS"
+                </h3>
+                <div id="radio-controls" class="flex flex-col items-center gap-4">
+                    <button id="playMusic" class="terminal-btn px-8 py-4 border-double border-4 font-black flex items-center gap-3">
+                        <i class="fas fa-play"></i> INICIAR REPRODUCCIÓN AMBIENTAL
+                    </button>
+                    <p class="text-[10px] opacity-50 animate-pulse">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
+                </div>
+                <div id="hidden-player-container">
+                    <iframe id="youtube-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- DOCUMENTOS Y COPIADO (sección integrada con la RUTA DE LA ASIGNATURA) -->
+        <section id="documentos" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="terminal-border p-6 bg-black/40 flex flex-col gap-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-folder-open"></i> DOCUMENTOS BASE</h3>
+                    <div class="space-y-3">
+                        <a href="plan.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
+                            <span>PLAN DE EVALUACIÓN 2026</span>
+                            <i class="fas fa-file-lines"></i>
+                        </a>
+                        <a href="panel-control-guias-estudio.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
+                            <span>GUÍAS DE ESTUDIO</span>
+                            <i class="fas fa-book"></i>
+                        </a>
+                        <a href="horario.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm border-double border-2">
+                            <span>HORARIO DEL PROFESOR</span>
+                            <i class="fas fa-clock"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- CONTENIDO MOVIDO: RUTA DE LA ASIGNATURA (integrada dentro de DOCUMENTOS BASE) -->
+                <div class="overflow-hidden bg-black/40 mt-2 border-t border-green-800 pt-4">
+                    <div class="bg-green-900/30 p-4 rounded-md border border-green-600 mb-2">
+                        <h2 class="text-xl font-bold flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
+                            <span><i class="fas fa-diagram-project mr-2"></i> RUTA DE LA ASIGNATURA</span>
+                            <a href="plan-de-clases.html" target="_blank" class="btn-plan-clases text-sm md:text-base py-2 px-4">
+                                <i class="fas fa-calendar-alt mr-2"></i> VER PLAN DE CLASES COMPLETO
+                            </a>
+                        </h2>
+                    </div>
+                    <div class="px-1">
+                        <ul class="proceso-lista space-y-2 text-sm md:text-base">
+                            <li><strong>PROCESO 01:</strong> Estrategias de Lectura</li>
+                            <li><strong>PROCESO 02:</strong> Estructuras Gramaticales</li>
+                            <li><strong>PROCESO 03:</strong> Vocabulario Técnico</li>
+                            <li><strong>PROCESO 04:</strong> Interpretación Final</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -530,44 +627,10 @@
             <p class="mt-4 text-[10px] opacity-40 text-center font-bold tracking-widest">>> STATUS: ACTUALIZACIÓN CADA 72 HORAS TRAS EVALUACIÓN</p>
         </section>
 
-        <!-- RUTA DE APRENDIZAJE -->
-        <section id="ruta" class="mb-12">
-            <div class="terminal-border overflow-hidden bg-black/40">
-                <div class="bg-green-900/30 p-4 border-b border-green-500">
-                    <h2 class="text-xl font-bold flex items-center justify-between">
-                        <span><i class="fas fa-diagram-project mr-2"></i> RUTA DE LA ASIGNATURA</span>
-                        <a href="plan-de-clases.html" target="_blank" class="terminal-btn px-4 py-1 text-xs">
-                           <i class="fas fa-calendar-alt mr-1"></i> VER PLAN DE CLASES
-                        </a>
-                    </h2>
-                </div>
-                <div class="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                    <div class="p-4 border border-green-900 bg-black/20">
-                        <span class="text-[10px] opacity-50 font-bold">PROCESO 01</span>
-                        <p class="font-bold uppercase glow-text">Estrategias de Lectura</p>
-                    </div>
-                    <div class="p-4 border border-green-900 bg-black/20">
-                        <span class="text-[10px] opacity-50 font-bold">PROCESO 02</span>
-                        <p class="font-bold uppercase glow-text">Estructuras Gramaticales</p>
-                    </div>
-                    <div class="p-4 border border-green-900 bg-black/20">
-                        <span class="text-[10px] opacity-50 font-bold">PROCESO 03</span>
-                        <p class="font-bold uppercase glow-text">Vocabulario Técnico</p>
-                    </div>
-                    <div class="p-4 border border-green-900 bg-black/20">
-                        <span class="text-[10px] opacity-50 font-bold">PROCESO 04</span>
-                        <p class="font-bold uppercase glow-text">Interpretación Final</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ==================== NUEVA SECCIÓN: MASTERCLASS + COMPENDIO ==================== -->
-        <section class="mb-12 relative overflow-hidden">
+        <!-- CENTRO DE MASTERCLASS & COMPENDIOS (con ID masterclass para navegación) -->
+        <section id="masterclass" class="mb-12 relative overflow-hidden">
             <div class="terminal-border p-6 md:p-8 bg-black/40 relative" style="background: #030a03;">
-                <!-- Animación exclusiva: caracteres ASCII ascendentes (efecto único) -->
                 <div class="ascii-rain" id="asciiRainContainer"></div>
-                
                 <div class="masterclass-content relative z-10">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-green-700 pb-5 mb-6">
                         <div>
@@ -584,7 +647,6 @@
                     </div>
                     
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        <!-- COLUMNA IZQUIERDA: ENLACES PRINCIPALES -->
                         <div class="space-y-6">
                             <div class="terminal-border p-5 bg-black/40 hover:shadow-lg transition-all">
                                 <div class="flex items-start gap-4 flex-wrap md:flex-nowrap">
@@ -612,12 +674,10 @@
                             </div>
                         </div>
                         
-                        <!-- COLUMNA DERECHA: DESGLOSE DE MASTERCLASSES (con detalles) -->
                         <div>
                             <div class="border border-green-800 rounded-md p-4 bg-black/30">
-                                <h3 class="font-bold mb-3 flex items-center gap-2"><i class="fas fa-layer-group"></i> GUÍAS DISPONIBLES</h3>
+                                <h3 class="font-bold mb-3 flex items-center gap-2"><i class="fas fa-layer-group"></i> GUÍAS MASTERCLASS DISPONIBLES</h3>
                                 <div class="space-y-3 text-sm">
-                                    <!-- Masterclass 1 -->
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 1 – Analista Léxico y Gramatical</span>
@@ -627,7 +687,6 @@
                                             <p>🎯 Objetivo: Identificar categorías gramaticales, cognados y analizar morfología técnica.</p>
                                         </div>
                                     </details>
-                                    <!-- Masterclass 2 -->
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 2 – Cirujano de Párrafos e Inferencias</span>
@@ -637,7 +696,6 @@
                                             <p>🔍 Énfasis en reescritura, referencias pronominales y mapas causa-efecto.</p>
                                         </div>
                                     </details>
-                                    <!-- Masterclass 3 -->
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 3 – Analista Estructural y Jerarquías</span>
@@ -647,7 +705,6 @@
                                             <p>🏛️ Trabajo con tesis, diagramas de flujo y análisis de términos técnicos.</p>
                                         </div>
                                     </details>
-                                    <!-- Masterclass 4 -->
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 4 – Síntesis y Debate</span>
@@ -673,67 +730,24 @@
                 </div>
             </div>
         </section>
-        <!-- ==================== FIN NUEVA SECCIÓN ==================== -->
-
-        <!-- GLOSSARY CHALLENGE con 200 términos y usuarios conectados -->
-        <section id="glosario-challenge" class="mb-12">
-            <div class="terminal-border p-8 bg-black/40">
-                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-                    <div class="flex items-center gap-6">
-                        <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl">
-                            <i class="fas fa-brain"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold glow-text uppercase">GLOSSARY GAME!</h2>
-                            <p class="opacity-60 text-sm">Entrenamiento de memoria activa. 200 términos cargados en memoria volátil.</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col sm:flex-row items-center gap-4">
-                        <div class="connected-users" id="connectedUsersDisplay">
-                            <i class="fas fa-users mr-1"></i> USUARIOS CONECTADOS: <span id="usersCount">0</span>
-                        </div>
-                        <!-- NUEVO BOTÓN PARPADEANTE PARA DESCARGAR GLOSARIO -->
-                        <a href="My_Glossary_200_terminos.html" target="_blank" class="terminal-btn btn-blink px-6 py-3 text-sm font-bold flex items-center gap-2">
-                            <i class="fas fa-download fa-fw"></i> DESCARGAR GLOSARIO (200 TÉRMINOS)
-                        </a>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="cardContainer"></div>
-                <div class="mt-8 text-center">
-                    <button onclick="generateCards()" class="terminal-btn px-10 py-3 font-bold">
-                        <i class="fas fa-sync-alt mr-2"></i> ACTUALIZAR TÉRMINOS
-                    </button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ROCKOLA TERMINAL -->
-        <section class="mb-12">
-            <div class="terminal-border p-6 bg-[#0a2a0a]/40 text-center">
-                <h3 class="font-bold mb-4 flex items-center justify-center gap-2">
-                    <i class="fas fa-radio"></i> TRANSMISIÓN DE RADIO "EL CAMPUS"
-                </h3>
-                <div id="radio-controls" class="flex flex-col items-center gap-4">
-                    <button id="playMusic" class="terminal-btn px-8 py-4 border-double border-4 font-black flex items-center gap-3">
-                        <i class="fas fa-play"></i> INICIAR REPRODUCCIÓN AMBIENTAL
-                    </button>
-                    <p class="text-[10px] opacity-50 animate-pulse">SINTONIZANDO SEÑAL RETRO-ELECTRÓNICA...</p>
-                </div>
-                <div id="hidden-player-container">
-                    <iframe id="youtube-iframe" width="1" height="1" src="" frameborder="0" allow="autoplay"></iframe>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer class="terminal-border bg-black p-8 text-center mt-10">
         <div class="container mx-auto">
+            <!-- NUEVA SECCIÓN: CONTROL DE ASISTENCIAS -->
+            <div class="mb-6 pb-4 border-b border-green-700">
+                <h4 class="font-bold text-lg mb-3 glow-text"><i class="fas fa-check-circle mr-2"></i> CONTROL DE ASISTENCIAS</h4>
+                <a href="https://docs.google.com/spreadsheets/d/1WRuK9WRLpAekuZhc3j-wEQ960_Od0fx-e6CFFepBlfE/edit?gid=917189855#gid=917189855" target="_blank" class="terminal-btn px-8 py-3 font-bold text-md inline-flex items-center gap-2">
+                    <i class="fas fa-clipboard-list"></i> REGISTRAR ASISTENCIA / VER PLANILLA
+                </a>
+            </div>
+
             <h4 class="font-bold text-2xl mb-1 glow-text uppercase">Prof. Oney Clavijo</h4>
             <p class="opacity-60 text-sm mb-6 uppercase tracking-[0.3em]">Asignatura de Inglés I para Cs. Administrativas | Universidad de Oriente</p>
             <div class="flex justify-center gap-6">
-                <a href="https://wa.me/584123585427?text=Saludos,%20Profesor,%20quiero%20hacerle%20una%20consulta%20sobre%20la%20materia,%20mi%20nombre,%20CI.%20y%20secc.%20son%20..." target="_blank" class="terminal-btn px-6 py-2 text-xs flex items-center gap-2">
-                    <i class="fab fa-whatsapp"></i> ENLACE DIRECTO PROFESOR
+                <!-- Botón más grande y color azul neon -->
+                <a href="https://wa.me/584123585427?text=Saludos,%20Profesor,%20quiero%20hacerle%20una%20consulta%20sobre%20la%20materia,%20mi%20nombre,%20CI.%20y%20secc.%20son%20..." target="_blank" class="terminal-btn neon-blue-btn px-10 py-5 text-lg font-bold flex items-center gap-3">
+                    <i class="fab fa-whatsapp text-2xl"></i> ENLACE DIRECTO PROFESOR
                 </a>
             </div>
             <div class="mt-8 text-[10px] opacity-20">
@@ -743,9 +757,7 @@
     </footer>
 
     <script>
-        // --------------------------------------------------------------
-        // GLOSARIO COMPLETO: 200 TÉRMINOS EXTRAÍDOS DEL DOCUMENTO OFICIAL
-        // --------------------------------------------------------------
+        // GLOSARIO COMPLETO: 200 TÉRMINOS
         const FULL_GLOSSARY = [
             { en: "Absenteeism", es: "Ausentismo" },{ en: "Absolute reliability", es: "Confiabilidad absoluta" },{ en: "Accounting", es: "Contabilidad" },{ en: "Active listening", es: "Escucha activa" },{ en: "Adaptability", es: "Adaptabilidad" },{ en: "Adopt a paradigm", es: "Adoptar un paradigma" },{ en: "Advocacy", es: "Defensa / promoción" },{ en: "Anchoring bias", es: "Sesgo de anclaje" },{ en: "Anonymity", es: "Anonimato" },{ en: "Anticipate challenges", es: "Anticipar desafíos" },{ en: "Artificial intelligence (AI)", es: "Inteligencia artificial" },{ en: "Assets", es: "Activos" },{ en: "Authentic engagement", es: "Compromiso auténtico" },{ en: "Authentic practice", es: "Práctica auténtica" },{ en: "Authentic purpose", es: "Propósito auténtico" },{ en: "Authoritative data", es: "Datos autorizados" },{ en: "Authority", es: "Autoridad" },{ en: "Automation", es: "Automatización" },
             { en: "Balance Sheet", es: "Balance General" },{ en: "Bank statements", es: "Extractos bancarios" },{ en: "Biased evaluations", es: "Evaluaciones sesgadas" },{ en: "Bonds", es: "Bonos" },{ en: "Bookkeeping", es: "Teneduría de libros" },{ en: "Brand building", es: "Construcción de marca" },{ en: "Brand reputation", es: "Reputación de marca" },{ en: "Breakthrough opportunities", es: "Oportunidades revolucionarias" },{ en: "Brutally honest conversation", es: "Conversación brutalmente honesta" },{ en: "Budget adherence", es: "Cumplimiento del presupuesto" },{ en: "Budgeting", es: "Presupuestación" },{ en: "Bureaucratic nightmare", es: "Pesadilla burocrática" },{ en: "Burnout", es: "Agotamiento laboral" },{ en: "Business growth", es: "Crecimiento empresarial" },{ en: "Business intelligence", es: "Inteligencia de negocios" },{ en: "Business venture", es: "Emprendimiento" },
@@ -769,8 +781,6 @@
             { en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
         ];
 
-        console.log("Glosario cargado:", FULL_GLOSSARY.length, "términos");
-
         function generateCards() {
             const container = document.getElementById('cardContainer');
             if (!container) return;
@@ -778,19 +788,19 @@
             const shuffled = [...FULL_GLOSSARY].sort(() => 0.5 - Math.random()).slice(0, 6);
             shuffled.forEach((item) => {
                 const card = document.createElement('div');
-                card.className = "relative h-48 w-full perspective-1000";
+                card.className = "relative h-36 w-full perspective-1000";
                 card.innerHTML = `
                     <div class="card-inner w-full h-full" onclick="this.classList.toggle('card-flipped')">
                         <div class="card-front">
-                            <div class="p-4 text-center">
-                                <span class="text-[8px] font-bold text-green-500 block mb-2 uppercase tracking-widest">DATA_INPUT: TERM</span>
-                                <h3 class="text-xl font-bold glow-text">${escapeHtml(item.en)}</h3>
+                            <div class="p-2 text-center">
+                                <span class="text-[7px] font-bold text-green-500 block mb-1 uppercase tracking-widest">DATA_INPUT: TERM</span>
+                                <h3 class="text-base font-bold glow-text">${escapeHtml(item.en)}</h3>
                             </div>
                         </div>
                         <div class="card-back">
-                            <div class="p-4 text-center">
-                                <p class="text-[10px] uppercase font-bold opacity-60 mb-2">OUTPUT_VALUE:</p>
-                                <h3 class="text-xl font-bold">${escapeHtml(item.es)}</h3>
+                            <div class="p-2 text-center">
+                                <p class="text-[8px] uppercase font-bold opacity-60 mb-1">OUTPUT_VALUE:</p>
+                                <h3 class="text-base font-bold">${escapeHtml(item.es)}</h3>
                             </div>
                         </div>
                     </div>
@@ -841,7 +851,6 @@
             iniciarLluviaAscii();
         };
 
-        // ANIMACIÓN EXCLUSIVA: Caracteres ascendentes (ASCII RAIN)
         function iniciarLluviaAscii() {
             const contenedor = document.getElementById('asciiRainContainer');
             if (!contenedor) return;
