@@ -147,7 +147,7 @@
             100% { clip: rect(40px, 9999px, 30px, 0); }
         }
 
-        /* Botón Rosa Neón Energizado */
+        /* Botón Rosa Neón Energizado (sin láser, ahora con ping) */
         .neon-btn {
             width: 130px;
             height: 130px;
@@ -302,10 +302,8 @@
             <!-- Botones y Enlaces -->
             <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-12">
                 <div class="text-center">
-                    <button class="neon-btn" 
-                            onmouseenter="laserCharge()" 
-                            onmouseleave="laserStop()"
-                            onclick="window.open('https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm', '_self')">
+                    <!-- BOTÓN ROSADO MODIFICADO: Ya no tiene láser, ahora reproduce un ping común al hacer clic -->
+                    <button class="neon-btn" id="rosadoBtn">
                         <div class="energy-charge"></div>
                         <svg viewBox="0 0 24 24" width="60" height="60" fill="currentColor">
                             <path d="M18 7c0-1.103-.897-2-2-2H4c-1.103 0-2 .897-2 2v10c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-3.333L22 17V7l-4 3.333V7z"/>
@@ -436,9 +434,10 @@
 
         // --- AUDIO ENGINE ---
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        let laserOsc = null;
 
         function playSfx(f, d) {
+            // Evita errores si el contexto está suspendido, se reanuda en el primer clic global
+            if (audioCtx.state === 'suspended') return;
             const osc = audioCtx.createOscillator();
             const g = audioCtx.createGain();
             osc.frequency.value = f;
@@ -451,32 +450,58 @@
             osc.stop(audioCtx.currentTime + d);
         }
 
-        function laserCharge() {
-            if(laserOsc) return;
-            laserOsc = audioCtx.createOscillator();
-            const g = audioCtx.createGain();
-            laserOsc.type = 'sawtooth';
-            laserOsc.frequency.setValueAtTime(80, audioCtx.currentTime);
-            laserOsc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 1.5);
-            g.gain.setValueAtTime(0.03, audioCtx.currentTime);
-            laserOsc.connect(g);
-            g.connect(audioCtx.destination);
-            laserOsc.start();
-        }
-
-        function laserStop() {
-            if(laserOsc) {
-                laserOsc.stop();
-                laserOsc = null;
+        // --- NUEVO: PING COMÚN PARA EL BOTÓN ROSADO ---
+        function playPing() {
+            if (audioCtx.state === 'suspended') {
+                // Si está suspendido, lo reanudamos y luego reproducimos el ping
+                audioCtx.resume().then(() => {
+                    generatePing();
+                }).catch(e => console.log("Audio resume error", e));
+            } else {
+                generatePing();
             }
         }
-        
+
+        function generatePing() {
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                // Frecuencia agradable tipo ping: 880 Hz (A5) + un pequeño armónico?
+                osc.frequency.value = 880;
+                osc.type = 'sine';  // sonido más limpio y "común"
+                gain.gain.setValueAtTime(0.12, now);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(now + 0.35);
+            } catch(e) { console.warn("ping error", e); }
+        }
+
+        // --- MANEJADOR DEL BOTÓN ROSADO: reproduce ping y luego abre el enlace ---
+        const rosadoBtn = document.getElementById('rosadoBtn');
+        if (rosadoBtn) {
+            rosadoBtn.addEventListener('click', (e) => {
+                e.preventDefault();  // Evita cualquier comportamiento extraño
+                playPing();          // Sonido de ping común
+                // Pequeña pausa para que el sonido se escuche bien antes de redirigir (opcional pero mejora experiencia)
+                setTimeout(() => {
+                    window.open('https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm', '_self');
+                }, 50);
+            });
+        }
+
         // Inicializar audio context con la interacción del usuario (evita bloqueo autoplay)
+        // Al primer clic en cualquier lugar se reanuda el contexto si está suspendido.
         document.body.addEventListener('click', function initAudio() {
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
         }, { once: true });
+        
+        // También nos aseguramos de que si se hace clic directamente en el botón rosado antes de cualquier otro,
+        // se reanude el contexto. El evento de body ya lo maneja, pero el playPing también lo intenta.
     </script>
 </body>
 </html>
