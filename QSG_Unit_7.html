@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QSG - Unidad 7 - Inglés I</title>
+    <title>QSG - Unidad 7 - Inglés I (Optimizado para impresión)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -111,19 +111,6 @@
             text-align: center;
             color: #4a5b4a;
         }
-        @media print {
-            .no-print { display: none; }
-            body { background: white; padding: 0; margin: 0; }
-            .vault-container {
-                border: 2px solid black;
-                box-shadow: none;
-                padding: 18px;
-                margin: 0;
-            }
-            .section-header, .subheader {
-                page-break-after: avoid;
-            }
-        }
         .scanline {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
@@ -142,6 +129,76 @@
             margin-top: -10px;
             margin-bottom: 20px;
             font-family: 'Share Tech Mono', monospace;
+        }
+
+        /* ========== ESTILOS EXCLUSIVOS PARA IMPRESIÓN (AHORRO DE TINTA) ========== */
+        @media print {
+            .scanline {
+                display: none !important;
+            }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .vault-container {
+                border: 1px solid #000 !important;
+                box-shadow: none !important;
+                background: white !important;
+                padding: 18px !important;
+                margin: 0 auto !important;
+            }
+            .header-box {
+                border-bottom: 1px solid #aaa !important;
+            }
+            .title-main {
+                color: #000;
+                font-size: 1.8rem;
+            }
+            .section-header {
+                background: #f4f4f4 !important;
+                border-left: 4px solid #6b7c5e !important;
+                padding: 4px 12px !important;
+                margin: 20px 0 12px 0 !important;
+                font-size: 1.1rem;
+                page-break-after: avoid;
+            }
+            .subheader {
+                border-left: 2px solid #999 !important;
+            }
+            .definition-box, .example, .importance-box {
+                background: white !important;
+                border: 1px solid #ccc !important;
+            }
+            .definition-box {
+                border-left: 3px solid #999 !important;
+            }
+            .example {
+                border-left: 2px solid #bbb !important;
+            }
+            .importance-box {
+                border: 1px solid #aaa !important;
+            }
+            .input-line {
+                border-bottom: 1px solid #000 !important;
+            }
+            .vault-container, .header-box, .section-header, .definition-box, .example, .importance-box {
+                box-shadow: none !important;
+            }
+            .vault-footer {
+                border-top: 1px solid #aaa !important;
+                color: #333 !important;
+                background: transparent !important;
+            }
+            body, .vault-container, .header-box, .section-header, .definition-box, .example, .importance-box, .bg-gray-50, .prof-info {
+                background-color: white !important;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .bullet-list li::before {
+                color: #333 !important;
+            }
         }
     </style>
 </head>
