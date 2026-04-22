@@ -14,6 +14,7 @@
             --term-dark: #0a0a0a;
             --term-dim: #1a4d1a;
             --term-bg: #050505;
+            --neon-blue: #00ccff;
         }
 
         body { 
@@ -77,12 +78,27 @@
             box-shadow: 0 0 15px var(--term-green);
         }
 
+        /* Botón estilo terminal con azul neón (fondo negro, texto azul claro) */
+        .terminal-btn-neon-blue {
+            background-color: #000000;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            transition: all 0.3s;
+            text-transform: uppercase;
+        }
+        .terminal-btn-neon-blue:hover {
+            background-color: var(--neon-blue);
+            color: #000000;
+            box-shadow: 0 0 20px var(--neon-blue);
+            border-color: var(--neon-blue);
+        }
+
         .udo-header {
             border-bottom: 2px solid var(--term-green);
             background: rgba(0, 40, 0, 0.2);
         }
 
-        /* Estilos del Juego de Glosario (tamaño reducido) */
+        /* Estilos del Juego de Glosario */
         .perspective-1000 { perspective: 1000px; }
         .card-inner {
             transition: transform 0.6s;
@@ -113,7 +129,6 @@
             text-shadow: 0 0 5px var(--term-green);
         }
 
-        /* Esconder Youtube */
         #hidden-player {
             display: none;
         }
@@ -127,7 +142,6 @@
             z-index: 100;
             pointer-events: none;
         }
-        /* Reloj fucsia neon grande */
         .live-clock {
             font-size: 1rem;
             letter-spacing: 2px;
@@ -148,22 +162,7 @@
             border: 1px solid var(--term-green);
         }
 
-        /* Botón azul neon para el profesor */
-        .neon-blue-btn {
-            background-color: #0044aa;
-            border: 2px solid #00ccff;
-            color: #ffffff;
-            box-shadow: 0 0 15px #00ccff;
-            transition: all 0.3s;
-        }
-        .neon-blue-btn:hover {
-            background-color: #00ccff;
-            color: #000;
-            box-shadow: 0 0 25px #00ccff;
-            transform: scale(1.02);
-        }
-
-        /* ---------- NUEVA SECCIÓN: EFECTO FALLOUT / POLVO RADIACTIVO ---------- */
+        /* FALLOUT SECTION */
         .fallout-section {
             position: relative;
             overflow: hidden;
@@ -187,7 +186,6 @@
             }
         }
 
-        /* Partículas de polvo radioactivo (fallout dust) */
         .radioactive-dust {
             position: absolute;
             top: 0;
@@ -227,30 +225,19 @@
         }
 
         @keyframes dustDrift {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                transform: translate(8%, 6%) rotate(3deg);
-            }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(8%, 6%) rotate(3deg); }
         }
-
         @keyframes dustDriftReverse {
-            0% {
-                transform: translate(0, 0) rotate(0deg);
-            }
-            100% {
-                transform: translate(-7%, -5%) rotate(-2deg);
-            }
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-7%, -5%) rotate(-2deg); }
         }
 
-        /* Botón especial con vibración suave */
         .mutant-btn {
             transition: all 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
             background: rgba(0, 20, 0, 0.7);
             backdrop-filter: blur(2px);
         }
-
         .mutant-btn:hover {
             transform: scale(1.02);
             letter-spacing: 4px;
@@ -259,7 +246,6 @@
             box-shadow: 0 0 25px #8aff8a;
         }
 
-        /* ========== NUEVA ANIMACIÓN EXCLUSIVA: CARACTERES ASCENDENTES (ASCII RAIN) ========== */
         .ascii-rain {
             position: absolute;
             top: 0;
@@ -282,61 +268,20 @@
             text-shadow: 0 0 2px #3df33d;
         }
         @keyframes floatUp {
-            0% {
-                transform: translateY(100%);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.5;
-            }
-            90% {
-                opacity: 0.4;
-            }
-            100% {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
+            0% { transform: translateY(100%); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.4; }
+            100% { transform: translateY(-100%); opacity: 0; }
         }
-        .masterclass-content {
-            position: relative;
-            z-index: 2;
-        }
-        details > summary {
-            cursor: pointer;
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-        details summary i {
-            transition: transform 0.2s;
-        }
-        details[open] summary i.fa-chevron-right {
-            transform: rotate(90deg);
-        }
-        .masterclass-card {
-            background: rgba(0,0,0,0.6);
-            border-left: 3px solid var(--term-green);
-        }
-
-        /* Estilo para la lista de procesos (bullet list) */
-        .proceso-lista {
-            list-style-type: none;
-            padding-left: 0;
-        }
-        .proceso-lista li {
-            margin-bottom: 0.75rem;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-        .proceso-lista li:before {
-            content: ">";
-            color: var(--term-green);
-            position: absolute;
-            left: 0;
-            font-weight: bold;
-        }
-        /* Botón grande para Plan de Clases */
+        .masterclass-content { position: relative; z-index: 2; }
+        details > summary { cursor: pointer; list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+        details summary i { transition: transform 0.2s; }
+        details[open] summary i.fa-chevron-right { transform: rotate(90deg); }
+        .masterclass-card { background: rgba(0,0,0,0.6); border-left: 3px solid var(--term-green); }
+        .proceso-lista { list-style-type: none; padding-left: 0; }
+        .proceso-lista li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
+        .proceso-lista li:before { content: ">"; color: var(--term-green); position: absolute; left: 0; font-weight: bold; }
         .btn-plan-clases {
             background-color: rgba(0, 30, 0, 0.7);
             border: 2px solid var(--term-green);
@@ -360,7 +305,7 @@
     <div class="scanline"></div>
     <div class="crt-overlay"></div>
 
-    <!-- Navegación con reloj integrado + más enlaces -->
+    <!-- Navegación -->
     <nav class="terminal-border mb-6 p-4 udo-header">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div class="flex flex-col items-start gap-1">
@@ -385,19 +330,16 @@
         </div>
     </nav>
 
-    <!-- Header / Hero -->
+    <!-- Hero Header -->
     <header class="terminal-border p-8 mb-10 text-center relative overflow-hidden bg-black/40">
         <div class="container mx-auto relative z-10">
-            <!-- Mascota: sin decoloración, solo parpadeo -->
             <img src="mascot.png" alt="Mascota del curso" class="w-24 h-24 mx-auto border-2 border-[#3df33d] mb-4 bg-black p-2 shadow-[0_0_15px_#3df33d] object-contain terminal-blink" onerror="this.src='https://via.placeholder.com/150?text=UDO'">
             <h1 class="text-3xl md:text-5xl font-bold mb-3 glow-text uppercase">Interpretación de Textos Administrativos</h1>
             <p class="text-sm opacity-80 mb-8 max-w-2xl mx-auto italic">"EDUCANDO PARA EL ÉXITO GLOBAL DESDE EL CAMPUS GUATAMARE"</p>
-            
             <div class="flex flex-col items-center gap-6">
                 <a href="boletin.html" target="_blank" class="terminal-btn px-12 py-4 font-bold text-lg shadow-lg flex items-center gap-2">
                     <i class="fas fa-envelope-open-text"></i> BOLETÍN DE BIENVENIDA
                 </a>
-
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="https://docs.google.com/forms/d/e/1FAIpQLSfMBJAGJlGrwAje1GmzsNIWNZT7RfZ4ak7ZoXlq5_d2hpmgmw/viewform?usp=sharing" target="_blank" class="terminal-btn px-6 py-2 text-xs">
                         <i class="fas fa-user-plus mr-2"></i> REALIZAR MI INDUCCIÓN
@@ -437,7 +379,7 @@
             </div>
         </section>
 
-        <!-- GLOSARIO CHALLENGE (movido justo debajo de canales) -->
+        <!-- GLOSARIO CHALLENGE -->
         <section id="glosario-challenge" class="mb-12">
             <div class="terminal-border p-6 bg-black/40">
                 <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-6">
@@ -454,13 +396,11 @@
                         <div class="connected-users" id="connectedUsersDisplay">
                             <i class="fas fa-users mr-1"></i> USUARIOS CONECTADOS: <span id="usersCount">0</span>
                         </div>
-                        <!-- Botón de descarga SIN animación intermitente -->
                         <a href="My_Glossary_200_terminos.html" target="_blank" class="terminal-btn px-6 py-2 text-sm font-bold flex items-center gap-2">
                             <i class="fas fa-download fa-fw"></i> DESCARGAR GLOSARIO (200 TÉRMINOS)
                         </a>
                     </div>
                 </div>
-                <!-- Tarjetas más pequeñas: altura reducida y padding menor -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="cardContainer"></div>
                 <div class="mt-6 text-center">
                     <button onclick="generateCards()" class="terminal-btn px-8 py-2 text-sm font-bold">
@@ -470,7 +410,7 @@
             </div>
         </section>
 
-        <!-- ROCKOLA TERMINAL (movida después del glosario) -->
+        <!-- ROCKOLA -->
         <section class="mb-12" id="rockola">
             <div class="terminal-border p-6 bg-[#0a2a0a]/40 text-center">
                 <h3 class="font-bold mb-4 flex items-center justify-center gap-2">
@@ -488,29 +428,11 @@
             </div>
         </section>
 
-        <!-- DOCUMENTOS Y COPIADO (sección integrada con la RUTA DE LA ASIGNATURA) -->
-        <section id="documentos" class="mb-12 grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="terminal-border p-6 bg-black/40 flex flex-col gap-6">
-                <div>
-                    <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-folder-open"></i> DOCUMENTOS BASE</h3>
-                    <div class="space-y-3">
-                        <a href="plan.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
-                            <span>PLAN DE EVALUACIÓN 2026</span>
-                            <i class="fas fa-file-lines"></i>
-                        </a>
-                        <a href="panel-control-guias-estudio.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
-                            <span>GUÍAS DE ESTUDIO</span>
-                            <i class="fas fa-book"></i>
-                        </a>
-                        <a href="horario.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm border-double border-2">
-                            <span>HORARIO DEL PROFESOR</span>
-                            <i class="fas fa-clock"></i>
-                        </a>
-                    </div>
-                </div>
-                <!-- CONTENIDO MOVIDO: RUTA DE LA ASIGNATURA (integrada dentro de DOCUMENTOS BASE) -->
-                <div class="overflow-hidden bg-black/40 mt-2 border-t border-green-800 pt-4">
-                    <div class="bg-green-900/30 p-4 rounded-md border border-green-600 mb-2">
+        <!-- DOCUMENTOS BASE + RUTA DE LA ASIGNATURA (se ha eliminado centro de copiado de aquí) -->
+        <section id="documentos" class="mb-12">
+            <div class="terminal-border p-6 bg-black/40">
+                <div class="overflow-hidden bg-black/40">
+                    <div class="bg-green-900/30 p-4 rounded-md border border-green-600 mb-4">
                         <h2 class="text-xl font-bold flex flex-col md:flex-row justify-between items-start md:items-center gap-3">
                             <span><i class="fas fa-diagram-project mr-2"></i> RUTA DE LA ASIGNATURA</span>
                             <a href="plan-de-clases.html" target="_blank" class="btn-plan-clases text-sm md:text-base py-2 px-4">
@@ -527,19 +449,21 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-
-            <div class="terminal-border p-6 col-span-1 md:col-span-2 bg-[#1a4d1a]/10">
-                <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-print"></i> CENTRO DE COPIADO OFICIAL</h3>
-                <div class="border border-green-900 p-5 bg-black/60">
-                    <p class="text-sm mb-4 leading-snug">
-                        <span class="bg-green-600 text-black px-1 font-bold">ATENCIÓN ESTUDIANTE:</span> Solicite la reproducción con la Prof. Carmen con 72 horas de anticipación.
-                    </p>
-                    <div class="flex flex-wrap gap-4 items-center">
-                        <a href="https://wa.me/584248622137?text=Saludos,%20Profesora%20Carmen,%20quiero%20pagar%20unas%20copias%20de%20Ingl%C3%A9s%20I%20con%20el%20Profe.%20Oney%20Clavijo." target="_blank" class="terminal-btn px-6 py-2 font-bold text-sm flex items-center gap-2">
-                            <i class="fab fa-whatsapp"></i> CONTACTAR PROF. CARMEN
+                <div class="mt-6">
+                    <h3 class="font-bold text-lg mb-3 flex items-center gap-2"><i class="fas fa-folder-open"></i> DOCUMENTOS BASE</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                        <a href="plan.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
+                            <span>PLAN DE EVALUACIÓN 2026</span>
+                            <i class="fas fa-file-lines"></i>
                         </a>
-                        <span class="text-[10px] uppercase tracking-widest opacity-60">UBICACIÓN: CURSOS BÁSICOS</span>
+                        <a href="panel-control-guias-estudio.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm">
+                            <span>GUÍAS DE ESTUDIO</span>
+                            <i class="fas fa-book"></i>
+                        </a>
+                        <a href="horario.html" target="_blank" class="terminal-btn flex items-center justify-between p-3 text-sm border-double border-2">
+                            <span>HORARIO DEL PROFESOR</span>
+                            <i class="fas fa-clock"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -568,66 +492,7 @@
             </div>
         </section>
 
-        <!-- DESAFÍO LITERARIO (FALLOUT) -->
-        <section class="mb-12">
-            <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
-                <div class="radioactive-dust"></div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl bg-black/60 animate-pulse">
-                            <i class="fas fa-hand-fist glow-text"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold glow-text uppercase flex items-center gap-2">
-                                <i class="fas fa-radiation"></i> DESAFÍO LITERARIO
-                                <i class="fas fa-skull"></i>
-                            </h2>
-                            <p class="opacity-70 text-xs md:text-sm max-w-md mt-1">Zona de resistencia léxica • Entrena tu intelecto en el yermo académico. Vocabulario, comprensión y análisis crítico.</p>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-auto">
-                        <a href="desafio_literario.html" target="_blank" class="terminal-btn mutant-btn px-10 py-4 text-xl font-black flex items-center justify-center gap-3 w-full md:w-auto tracking-wider">
-                            <i class="fas fa-hand-fist fa-fw text-2xl"></i> 
-                            INGRESAR AL DESAFÍO
-                            <i class="fas fa-bolt"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="absolute bottom-1 right-2 text-[8px] opacity-30 z-0">☢️ RADIOACTIVE CHALLENGE v.01</div>
-            </div>
-        </section>
-
-        <!-- CONTROL DE CALIFICACIONES -->
-        <section id="notas" class="mb-12">
-            <h2 class="text-xl font-bold mb-6 flex items-center gap-2 glow-text">
-                <i class="fas fa-chart-bar"></i> CONTROL DE CALIFICACIONES
-            </h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                <a href="https://docs.google.com/spreadsheets/d/1GH1G5xo69L0-hUg0Uo0sZnO_sR4q3kGRoAOSwG7B7Bk/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
-                    <i class="fas fa-calculator text-2xl mb-3"></i>
-                    <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
-                    <span class="text-lg font-bold">1101 (CONTADURÍA)</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1qH5J5Caruo1dwSQ-0DCx_-CTyzhs38yn5Fh3DWysGyI/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
-                    <i class="fas fa-briefcase text-2xl mb-3"></i>
-                    <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
-                    <span class="text-lg font-bold">1200 (ADM.)</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1IIlq2bmvyVagpqmtG9R0H6PR_Qza0w29zDqo1Ixpl_E/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
-                    <i class="fas fa-sitemap text-2xl mb-3"></i>
-                    <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
-                    <span class="text-lg font-bold">1201 (ADM.)</span>
-                </a>
-                <a href="https://docs.google.com/spreadsheets/d/1LwC_hJEUaAi0qAyNHQOwh46mrJ2fuNdAlelwtp4Ap90/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
-                    <i class="fas fa-award text-2xl mb-3"></i>
-                    <span class="text-[10px] opacity-60 uppercase mb-1">MÓDULO</span>
-                    <span class="text-lg font-bold">REGULARES</span>
-                </a>
-            </div>
-            <p class="mt-4 text-[10px] opacity-40 text-center font-bold tracking-widest">>> STATUS: ACTUALIZACIÓN CADA 72 HORAS TRAS EVALUACIÓN</p>
-        </section>
-
-        <!-- CENTRO DE MASTERCLASS & COMPENDIOS (con ID masterclass para navegación) -->
+        <!-- MASTERCLASS CENTER -->
         <section id="masterclass" class="mb-12 relative overflow-hidden">
             <div class="terminal-border p-6 md:p-8 bg-black/40 relative" style="background: #030a03;">
                 <div class="ascii-rain" id="asciiRainContainer"></div>
@@ -645,7 +510,6 @@
                             <span class="text-[11px] border border-green-600 px-3 py-1 rounded-full bg-black/50"><i class="fas fa-brain"></i> pensamiento crítico</span>
                         </div>
                     </div>
-                    
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div class="space-y-6">
                             <div class="terminal-border p-5 bg-black/40 hover:shadow-lg transition-all">
@@ -673,7 +537,6 @@
                                 </div>
                             </div>
                         </div>
-                        
                         <div>
                             <div class="border border-green-800 rounded-md p-4 bg-black/30">
                                 <h3 class="font-bold mb-3 flex items-center gap-2"><i class="fas fa-layer-group"></i> GUÍAS MASTERCLASS DISPONIBLES</h3>
@@ -682,59 +545,115 @@
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 1 – Analista Léxico y Gramatical</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
-                                            <p>📖 Estaciones: Cazador de Partes del Habla, Detective de Cognados, Morfólogo Estructural, Traductor Contextual.</p>
-                                            <p>🎯 Objetivo: Identificar categorías gramaticales, cognados y analizar morfología técnica.</p>
-                                        </div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📖 Estaciones: Cazador de Partes del Habla, Detective de Cognados, Morfólogo Estructural, Traductor Contextual.</p><p>🎯 Objetivo: Identificar categorías gramaticales, cognados y analizar morfología técnica.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 2 – Cirujano de Párrafos e Inferencias</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
-                                            <p>✂️ Estaciones: Cirujano de Párrafos (cohesión), Traductor Contextual + pronombres, Inferenciador Estructural.</p>
-                                            <p>🔍 Énfasis en reescritura, referencias pronominales y mapas causa-efecto.</p>
-                                        </div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>✂️ Estaciones: Cirujano de Párrafos (cohesión), Traductor Contextual + pronombres, Inferenciador Estructural.</p><p>🔍 Énfasis en reescritura, referencias pronominales y mapas causa-efecto.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 3 – Analista Estructural y Jerarquías</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
-                                            <p>📐 Estaciones: Organización retórica, Extractor de Ideas Jerárquicas, Traductor-Intérprete de párrafos densos.</p>
-                                            <p>🏛️ Trabajo con tesis, diagramas de flujo y análisis de términos técnicos.</p>
-                                        </div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📐 Estaciones: Organización retórica, Extractor de Ideas Jerárquicas, Traductor-Intérprete de párrafos densos.</p><p>🏛️ Trabajo con tesis, diagramas de flujo y análisis de términos técnicos.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 4 – Síntesis y Debate</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2">
-                                            <p>📱 Estaciones: Resumidor (hilo redes), Creador de Mapas Mentales, Question Master (kit de debate).</p>
-                                            <p>🎤 Desarrollo de pensamiento crítico, nube de palabras y preguntas generadoras.</p>
-                                        </div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📱 Estaciones: Resumidor (hilo redes), Creador de Mapas Mentales, Question Master (kit de debate).</p><p>🎤 Desarrollo de pensamiento crítico, nube de palabras y preguntas generadoras.</p></div>
                                     </details>
-                                </div>
-                                <div class="mt-4 text-[11px] text-center opacity-50 border-t border-green-800 pt-3">
-                                    <i class="fas fa-users"></i> Cada masterclass incluye rúbrica, pregunta integradora y roles colaborativos (coordinador, secretario, supervisor).
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="mt-6 text-center text-[10px] uppercase tracking-widest opacity-40 flex justify-center gap-4">
-                        <span><i class="fas fa-download"></i> Guías en formato descargable</span>
-                        <span><i class="fas fa-language"></i> Inglés I – Cs. Administrativas</span>
-                        <span><i class="fas fa-chalkboard"></i> Prof. Oney Clavijo</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- NUEVA SECCIÓN: CENTRO DE COPIADO OFICIAL (debajo de Masterclass) -->
+        <section id="centro-copiado" class="mb-12">
+            <div class="terminal-border p-6 bg-[#1a4d1a]/10">
+                <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-print"></i> CENTRO DE COPIADO OFICIAL</h3>
+                <div class="border border-green-900 p-5 bg-black/60">
+                    <p class="text-sm mb-4 leading-snug">
+                        <span class="bg-green-600 text-black px-1 font-bold">ATENCIÓN ESTUDIANTE:</span> Solicite la reproducción con la Prof. Carmen con 72 horas de anticipación.
+                    </p>
+                    <div class="flex flex-wrap gap-4 items-center">
+                        <a href="https://wa.me/584248622137?text=Saludos,%20Profesora%20Carmen,%20quiero%20pagar%20unas%20copias%20de%20Ingl%C3%A9s%20I%20con%20el%20Profe.%20Oney%20Clavijo." target="_blank" class="terminal-btn px-6 py-2 font-bold text-sm flex items-center gap-2">
+                            <i class="fab fa-whatsapp"></i> CONTACTAR PROF. CARMEN
+                        </a>
+                        <span class="text-[10px] uppercase tracking-widest opacity-60">UBICACIÓN: CURSOS BÁSICOS</span>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- DESAFÍO LITERARIO (FALLOUT) -->
+        <section class="mb-12">
+            <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
+                <div class="radioactive-dust"></div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl bg-black/60 animate-pulse">
+                            <i class="fas fa-hand-fist glow-text"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold glow-text uppercase flex items-center gap-2">
+                                <i class="fas fa-radiation"></i> DESAFÍO LITERARIO
+                                <i class="fas fa-skull"></i>
+                            </h2>
+                            <p class="opacity-70 text-xs md:text-sm max-w-md mt-1">Zona de resistencia léxica • Entrena tu intelecto en el yermo académico.</p>
+                        </div>
+                    </div>
+                    <div class="w-full md:w-auto">
+                        <a href="desafio_literario.html" target="_blank" class="terminal-btn mutant-btn px-10 py-4 text-xl font-black flex items-center justify-center gap-3 w-full md:w-auto tracking-wider">
+                            <i class="fas fa-hand-fist fa-fw text-2xl"></i> INGRESAR AL DESAFÍO
+                            <i class="fas fa-bolt"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <footer class="terminal-border bg-black p-8 text-center mt-10">
+    <!-- CONTROL DE CALIFICACIONES (ubicado justo arriba del footer y del control de asistencias) -->
+    <div class="container mx-auto max-w-6xl mb-8" id="notas">
+        <h2 class="text-xl font-bold mb-6 flex items-center gap-2 glow-text">
+            <i class="fas fa-chart-bar"></i> CONTROL DE CALIFICACIONES
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a href="https://docs.google.com/spreadsheets/d/1GH1G5xo69L0-hUg0Uo0sZnO_sR4q3kGRoAOSwG7B7Bk/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
+                <i class="fas fa-calculator text-2xl mb-3"></i>
+                <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
+                <span class="text-lg font-bold">1101 (CONTADURÍA)</span>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1qH5J5Caruo1dwSQ-0DCx_-CTyzhs38yn5Fh3DWysGyI/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
+                <i class="fas fa-briefcase text-2xl mb-3"></i>
+                <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
+                <span class="text-lg font-bold">1200 (ADM.)</span>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1IIlq2bmvyVagpqmtG9R0H6PR_Qza0w29zDqo1Ixpl_E/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
+                <i class="fas fa-sitemap text-2xl mb-3"></i>
+                <span class="text-[10px] opacity-60 uppercase mb-1">SECCIÓN</span>
+                <span class="text-lg font-bold">1201 (ADM.)</span>
+            </a>
+            <a href="https://docs.google.com/spreadsheets/d/1LwC_hJEUaAi0qAyNHQOwh46mrJ2fuNdAlelwtp4Ap90/edit?usp=drive_link" target="_blank" class="terminal-border p-6 hover:bg-[#1a4d1a] transition flex flex-col items-center text-center">
+                <i class="fas fa-award text-2xl mb-3"></i>
+                <span class="text-[10px] opacity-60 uppercase mb-1">MÓDULO</span>
+                <span class="text-lg font-bold">REGULARES</span>
+            </a>
+        </div>
+        <p class="mt-4 text-[10px] opacity-40 text-center font-bold tracking-widest">>> STATUS: ACTUALIZACIÓN CADA 72 HORAS TRAS EVALUACIÓN</p>
+    </div>
+
+    <!-- FOOTER (incluye CONTROL DE ASISTENCIAS) -->
+    <footer class="terminal-border bg-black p-8 text-center mt-4">
         <div class="container mx-auto">
-            <!-- NUEVA SECCIÓN: CONTROL DE ASISTENCIAS -->
+            <!-- CONTROL DE ASISTENCIAS -->
             <div class="mb-6 pb-4 border-b border-green-700">
                 <h4 class="font-bold text-lg mb-3 glow-text"><i class="fas fa-check-circle mr-2"></i> CONTROL DE ASISTENCIAS</h4>
                 <a href="https://docs.google.com/spreadsheets/d/1WRuK9WRLpAekuZhc3j-wEQ960_Od0fx-e6CFFepBlfE/edit?gid=917189855#gid=917189855" target="_blank" class="terminal-btn px-8 py-3 font-bold text-md inline-flex items-center gap-2">
@@ -745,8 +664,8 @@
             <h4 class="font-bold text-2xl mb-1 glow-text uppercase">Prof. Oney Clavijo</h4>
             <p class="opacity-60 text-sm mb-6 uppercase tracking-[0.3em]">Asignatura de Inglés I para Cs. Administrativas | Universidad de Oriente</p>
             <div class="flex justify-center gap-6">
-                <!-- Botón más grande y color azul neon -->
-                <a href="https://wa.me/584123585427?text=Saludos,%20Profesor,%20quiero%20hacerle%20una%20consulta%20sobre%20la%20materia,%20mi%20nombre,%20CI.%20y%20secc.%20son%20..." target="_blank" class="terminal-btn neon-blue-btn px-10 py-5 text-lg font-bold flex items-center gap-3">
+                <!-- Botón estilo negro con azul neón (cambio solicitado) -->
+                <a href="https://wa.me/584123585427?text=Saludos,%20Profesor,%20quiero%20hacerle%20una%20consulta%20sobre%20la%20materia,%20mi%20nombre,%20CI.%20y%20secc.%20son%20..." target="_blank" class="terminal-btn-neon-blue px-10 py-5 text-lg font-bold flex items-center gap-3">
                     <i class="fab fa-whatsapp text-2xl"></i> ENLACE DIRECTO CON EL PROFESOR
                 </a>
             </div>
@@ -765,20 +684,11 @@
             { en: "Daunting", es: "Desalentador" },{ en: "Deception", es: "Engaño" },{ en: "Deceptive trap", es: "Trampa engañosa" },{ en: "Democratic values", es: "Valores democráticos" },{ en: "Departure", es: "Partida / salida" },{ en: "Desexualized domains", es: "Dominios desexualizados" },{ en: "Digital assets", es: "Activos digitales" },{ en: "Digital landscape", es: "Paisaje digital" },{ en: "Directing", es: "Dirección" },{ en: "Discrepancies", es: "Discrepancias" },{ en: "Discriminatory policies", es: "Políticas discriminatorias" },{ en: "Double-edged sword", es: "Espada de doble filo" },{ en: "Dropshipping", es: "Dropshipping" },{ en: "Dynamic signal", es: "Señal dinámica" },
             { en: "Economic optimization", es: "Optimización económica" },{ en: "Educational trajectory", es: "Trayectoria educativa" },{ en: "Emergency fund", es: "Fondo de emergencia" },{ en: "Employer branding", es: "Marca empleadora" },{ en: "Energy management", es: "Gestión de energía" },{ en: "Entrepreneurial mindset", es: "Mentalidad emprendedora" },{ en: "Entrenched", es: "Arraigado" },{ en: "Equity", es: "Patrimonio / equidad" },{ en: "Eroded health", es: "Salud deteriorada" },{ en: "Escape the rat race", es: "Escapar de la rutina agobiante" },{ en: "ESG (Environmental, Social, and Governance)", es: "ASG (Ambiental, Social y Gobernanza)" },{ en: "ETFs (Exchange-Traded Funds)", es: "ETF (Fondos cotizados)" },{ en: "Expense reports", es: "Reportes de gastos" },{ en: "Expenses", es: "Gastos" },{ en: "Extended cohabitation", es: "Convivencia extendida" },{ en: "External audit", es: "Auditoría externa" },
             { en: "Fabricated identities", es: "Identidades fabricadas" },{ en: "Factionalism", es: "Faccionalismo" },{ en: "Faithful snapshot", es: "Instantánea fiel" },{ en: "Farming mindset", es: "Mentalidad agrícola" },{ en: "Financial health", es: "Salud financiera" },{ en: "Financial information integrity", es: "Integridad de la información financiera" },{ en: "Financial management", es: "Gestión financiera" },{ en: "Financial misreporting", es: "Información financiera errónea" },{ en: "Financial position", es: "Posición financiera" },{ en: "Financial statements", es: "Estados financieros" },{ en: "Financial transactions", es: "Transacciones financieras" },{ en: "First-time manager", es: "Gerente primerizo" },{ en: "Fluid relationships", es: "Relaciones fluidas" },
-            { en: "Giving mindset", es: "Mentalidad de dar" },
-            { en: "Harassment allegations", es: "Denuncias de acoso" },{ en: "Historical reporting", es: "Reporte histórico" },{ en: "Hostile environment", es: "Entorno hostil" },{ en: "Human capital", es: "Capital humano" },{ en: "Human intimacy", es: "Intimidad humana" },{ en: "Hunting mindset", es: "Mentalidad de cazador" },
+            { en: "Giving mindset", es: "Mentalidad de dar" },{ en: "Harassment allegations", es: "Denuncias de acoso" },{ en: "Historical reporting", es: "Reporte histórico" },{ en: "Hostile environment", es: "Entorno hostil" },{ en: "Human capital", es: "Capital humano" },{ en: "Human intimacy", es: "Intimidad humana" },{ en: "Hunting mindset", es: "Mentalidad de cazador" },
             { en: "Income Statement", es: "Estado de Resultados" },{ en: "Income streams", es: "Flujos de ingresos" },{ en: "Inflationary hedge", es: "Cobertura inflacionaria" },{ en: "Informed financial decision-making", es: "Toma de decisiones financieras informada" },{ en: "Inherent incapability", es: "Incapacidad inherente" },{ en: "Internal networking", es: "Networking interno" },{ en: "Intertwined realms", es: "Reinos entrelazados" },{ en: "Introversion", es: "Introversión" },{ en: "Inventory", es: "Inventario" },{ en: "Investment analysis", es: "Análisis de inversiones" },{ en: "Investor relations", es: "Relaciones con inversores" },
             { en: "Labor market insertion", es: "Inserción laboral" },{ en: "Legal and ethical standards", es: "Estándares legales y éticos" },{ en: "Legal recourse", es: "Recurso legal" },{ en: "Liabilities", es: "Pasivos" },{ en: "Living below your means", es: "Vivir por debajo de tus posibilidades" },{ en: "Logistical agony", es: "Agonía logística" },{ en: "Logistical chaos", es: "Caos logístico" },
             { en: "Malicious actors", es: "Actores maliciosos" },{ en: "Management style", es: "Estilo de gestión" },{ en: "Mandatory disclosure requirements", es: "Requisitos de divulgación obligatoria" },{ en: "Manipulative techniques", es: "Técnicas manipulativas" },{ en: "Memorable connections", es: "Conexiones memorables" },{ en: "Mentorship", es: "Mentoría" },{ en: "Micro-enterprise", es: "Microempresa" },{ en: "Misinformation", es: "Desinformación" },{ en: "Monetary resources", es: "Recursos monetarios" },{ en: "Monitoring", es: "Monitoreo" },{ en: "Multi-currency dynamics", es: "Dinámica multidivisa" },
-            { en: "Non-negotiable path", es: "Camino no negociable" },{ en: "Non-negotiable step", es: "Paso no negociable" },{ en: "Norms (cultural)", es: "Normas culturales" },{ en: "Norms (traditional)", es: "Normas tradicionales" },
-            { en: "Online safety", es: "Seguridad en línea" },{ en: "Open communication", es: "Comunicación abierta" },{ en: "Open-plan office", es: "Oficina de planta abierta" },{ en: "Organizational health", es: "Salud organizacional" },{ en: "Organizational indicators", es: "Indicadores organizacionales" },{ en: "Organizational transformation", es: "Transformación organizacional" },{ en: "Outsourced fulfillment", es: "Cumplimiento externalizado" },
-            { en: "Paradigm shift", es: "Cambio de paradigma" },{ en: "Partisan disengagement", es: "Desvinculación partidista" },{ en: "Passive income", es: "Ingresos pasivos" },{ en: "Personal brand", es: "Marca personal" },{ en: "Personal expression", es: "Expresión personal" },{ en: "Philosophical rebellion", es: "Rebelión filosófica" },{ en: "Planning", es: "Planificación" },{ en: "Preliminary statements", es: "Declaraciones preliminares" },{ en: "Proactive education", es: "Educación proactiva" },{ en: "Professional networking", es: "Networking profesional" },{ en: "Professional norms", es: "Normas profesionales" },{ en: "Profitable path", es: "Camino rentable" },{ en: "Psychosocial risk evaluation", es: "Evaluación de riesgo psicosocial" },{ en: "Pump-and-dump schemes", es: "Esquemas de pump and dump" },
-            { en: "Radical re-evaluation", es: "Reevaluación radical" },{ en: "Rat race", es: "Carrera de ratas" },{ en: "Rational", es: "Racional" },{ en: "Raw data", es: "Datos brutos" },{ en: "Receipts", es: "Recibos" },{ en: "Reciprocity", es: "Reciprocidad" },{ en: "Reconciliation (financial)", es: "Conciliación financiera" },{ en: "Recurring revenue", es: "Ingresos recurrentes" },{ en: "Reframe", es: "Reformular" },{ en: "Regular communication", es: "Comunicación regular" },{ en: "Relational paradigms", es: "Paradigmas relacionales" },{ en: "Relationship-building", es: "Construcción de relaciones" },{ en: "Relentless work", es: "Trabajo implacable" },{ en: "Resentment", es: "Resentimiento" },{ en: "Resilience", es: "Resiliencia" },{ en: "Resource management", es: "Gestión de recursos" },{ en: "Resourceful", es: "Ingenioso" },{ en: "Restrictive statutes", es: "Estatutos restrictivos" },{ en: "Revenue", es: "Ingresos" },{ en: "Revenue streams", es: "Flujos de ingresos" },{ en: "Rigorous thoroughness", es: "Minuciosidad rigurosa" },{ en: "Risk management", es: "Gestión de riesgos" },
-            { en: "Sales invoices", es: "Facturas de venta" },{ en: "Scalable asset", es: "Activo escalable" },{ en: "SEC (Securities and Exchange Commission)", es: "Comisión de Valores" },{ en: "Successful career", es: "Carrera exitosa" },{ en: "Self-fulfillment", es: "Autorrealización" },{ en: "Self-protection", es: "Autoprotección" },{ en: "Sex days", es: "Días de sexo" },{ en: "Sexual harassment", es: "Acoso sexual" },{ en: "Sexual health", es: "Salud sexual" },{ en: "Sexual wellness initiatives", es: "Iniciativas de bienestar sexual" },{ en: "Shame", es: "Vergüenza" },{ en: "Shipping times", es: "Plazos de envío" },{ en: "Side businesses", es: "Negocios secundarios" },{ en: "Sincere conversation", es: "Conversación sincera" },{ en: "Skeptical investor", es: "Inversor escéptico" },{ en: "Social dynamics", es: "Dinámicas sociales" },{ en: "Social license to operate", es: "Licencia social para operar" },{ en: "Social media scams", es: "Estafas en redes sociales" },{ en: "Social purpose", es: "Propósito social" },{ en: "Spectacularly awful", es: "Espantosamente terrible" },{ en: "Stablecoins", es: "Stablecoins" },{ en: "Startup culture", es: "Cultura startup" },{ en: "Stifling entrepreneurship", es: "Emprendimiento sofocante" },{ en: "Strategic analysis", es: "Análisis estratégico" },{ en: "Strategic asset", es: "Activo estratégico" },{ en: "Strategic blueprint", es: "Plano estratégico" },{ en: "Strategic decision-making", es: "Toma de decisiones estratégicas" },{ en: "Strategic imperative", es: "Imperativo estratégico" },{ en: "Strategic insights", es: "Perspectivas estratégicas" },{ en: "Strategic paradigm", es: "Paradigma estratégico" },{ en: "Strategic science", es: "Ciencia estratégica" },{ en: "Summarizing", es: "Resumiendo" },{ en: "Sustainability reports", es: "Reportes de sostenibilidad" },{ en: "Sustainable business", es: "Negocio sostenible" },{ en: "Sustainable financial performance", es: "Rendimiento financiero sostenible" },{ en: "Sustainable path", es: "Camino sostenible" },{ en: "Sustainable practice", es: "Práctica sostenible" },{ en: "Synergies", es: "Sinergias" },{ en: "Synergy", es: "Sinergia" },{ en: "Systemic barriers", es: "Barreras sistémicas" },{ en: "Systemic failure", es: "Fallo sistémico" },{ en: "Systemic gender inequality", es: "Desigualdad de género sistémica" },
-            { en: "Tax compliance", es: "Cumplimiento fiscal" },{ en: "Tax filing", es: "Declaración de impuestos" },{ en: "Team dynamics", es: "Dinámicas de equipo" },{ en: "Technical skills", es: "Habilidades técnicas" },{ en: "Third-party logistics (3PL)", es: "Logística tercerizada" },{ en: "Trade-off", es: "Compensación" },{ en: "Transactional", es: "Transaccional" },{ en: "Transparent communication", es: "Comunicación transparente" },{ en: "Trust-building", es: "Construcción de confianza" },{ en: "Turnover", es: "Rotación" },{ en: "Two-way street", es: "Calle de dos vías" },
-            { en: "Unambiguous", es: "Inequívoco" },{ en: "Unfulfilled existence", es: "Existencia insatisfecha" },{ en: "Unproductive nightmare", es: "Pesadilla improductiva" },{ en: "Unquestionable", es: "Incues tionable" },{ en: "Unreliable", es: "Poco fiable" },{ en: "Unsolicited offers", es: "Ofertas no solicitadas" },{ en: "Unwavering skepticism", es: "Escepticismo inquebrantable" },{ en: "Upskilling", es: "Mejora de habilidades" },
-            { en: "Values (corporate)", es: "Valores corporativos" },{ en: "Values (personal)", es: "Valores personales" },{ en: "Viability (financial)", es: "Viabilidad financiera" },{ en: "Visibility", es: "Visibilidad" },{ en: "Vision", es: "Visión" },{ en: "Vulnerability", es: "Vulnerabilidad" },
-            { en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
+            { en: "Non-negotiable path", es: "Camino no negociable" },{ en: "Non-negotiable step", es: "Paso no negociable" },{ en: "Norms (cultural)", es: "Normas culturales" },{ en: "Norms (traditional)", es: "Normas tradicionales" },{ en: "Online safety", es: "Seguridad en línea" },{ en: "Open communication", es: "Comunicación abierta" },{ en: "Open-plan office", es: "Oficina de planta abierta" },{ en: "Organizational health", es: "Salud organizacional" },{ en: "Organizational indicators", es: "Indicadores organizacionales" },{ en: "Organizational transformation", es: "Transformación organizacional" },{ en: "Outsourced fulfillment", es: "Cumplimiento externalizado" },{ en: "Paradigm shift", es: "Cambio de paradigma" },{ en: "Partisan disengagement", es: "Desvinculación partidista" },{ en: "Passive income", es: "Ingresos pasivos" },{ en: "Personal brand", es: "Marca personal" },{ en: "Personal expression", es: "Expresión personal" },{ en: "Philosophical rebellion", es: "Rebelión filosófica" },{ en: "Planning", es: "Planificación" },{ en: "Preliminary statements", es: "Declaraciones preliminares" },{ en: "Proactive education", es: "Educación proactiva" },{ en: "Professional networking", es: "Networking profesional" },{ en: "Professional norms", es: "Normas profesionales" },{ en: "Profitable path", es: "Camino rentable" },{ en: "Psychosocial risk evaluation", es: "Evaluación de riesgo psicosocial" },{ en: "Pump-and-dump schemes", es: "Esquemas de pump and dump" },{ en: "Radical re-evaluation", es: "Reevaluación radical" },{ en: "Rat race", es: "Carrera de ratas" },{ en: "Rational", es: "Racional" },{ en: "Raw data", es: "Datos brutos" },{ en: "Receipts", es: "Recibos" },{ en: "Reciprocity", es: "Reciprocidad" },{ en: "Reconciliation (financial)", es: "Conciliación financiera" },{ en: "Recurring revenue", es: "Ingresos recurrentes" },{ en: "Reframe", es: "Reformular" },{ en: "Regular communication", es: "Comunicación regular" },{ en: "Relational paradigms", es: "Paradigmas relacionales" },{ en: "Relationship-building", es: "Construcción de relaciones" },{ en: "Relentless work", es: "Trabajo implacable" },{ en: "Resentment", es: "Resentimiento" },{ en: "Resilience", es: "Resiliencia" },{ en: "Resource management", es: "Gestión de recursos" },{ en: "Resourceful", es: "Ingenioso" },{ en: "Restrictive statutes", es: "Estatutos restrictivos" },{ en: "Revenue", es: "Ingresos" },{ en: "Revenue streams", es: "Flujos de ingresos" },{ en: "Rigorous thoroughness", es: "Minuciosidad rigurosa" },{ en: "Risk management", es: "Gestión de riesgos" },{ en: "Sales invoices", es: "Facturas de venta" },{ en: "Scalable asset", es: "Activo escalable" },{ en: "SEC (Securities and Exchange Commission)", es: "Comisión de Valores" },{ en: "Successful career", es: "Carrera exitosa" },{ en: "Self-fulfillment", es: "Autorrealización" },{ en: "Self-protection", es: "Autoprotección" },{ en: "Sex days", es: "Días de sexo" },{ en: "Sexual harassment", es: "Acoso sexual" },{ en: "Sexual health", es: "Salud sexual" },{ en: "Sexual wellness initiatives", es: "Iniciativas de bienestar sexual" },{ en: "Shame", es: "Vergüenza" },{ en: "Shipping times", es: "Plazos de envío" },{ en: "Side businesses", es: "Negocios secundarios" },{ en: "Sincere conversation", es: "Conversación sincera" },{ en: "Skeptical investor", es: "Inversor escéptico" },{ en: "Social dynamics", es: "Dinámicas sociales" },{ en: "Social license to operate", es: "Licencia social para operar" },{ en: "Social media scams", es: "Estafas en redes sociales" },{ en: "Social purpose", es: "Propósito social" },{ en: "Spectacularly awful", es: "Espantosamente terrible" },{ en: "Stablecoins", es: "Stablecoins" },{ en: "Startup culture", es: "Cultura startup" },{ en: "Stifling entrepreneurship", es: "Emprendimiento sofocante" },{ en: "Strategic analysis", es: "Análisis estratégico" },{ en: "Strategic asset", es: "Activo estratégico" },{ en: "Strategic blueprint", es: "Plano estratégico" },{ en: "Strategic decision-making", es: "Toma de decisiones estratégicas" },{ en: "Strategic imperative", es: "Imperativo estratégico" },{ en: "Strategic insights", es: "Perspectivas estratégicas" },{ en: "Strategic paradigm", es: "Paradigma estratégico" },{ en: "Strategic science", es: "Ciencia estratégica" },{ en: "Summarizing", es: "Resumiendo" },{ en: "Sustainability reports", es: "Reportes de sostenibilidad" },{ en: "Sustainable business", es: "Negocio sostenible" },{ en: "Sustainable financial performance", es: "Rendimiento financiero sostenible" },{ en: "Sustainable path", es: "Camino sostenible" },{ en: "Sustainable practice", es: "Práctica sostenible" },{ en: "Synergies", es: "Sinergias" },{ en: "Synergy", es: "Sinergia" },{ en: "Systemic barriers", es: "Barreras sistémicas" },{ en: "Systemic failure", es: "Fallo sistémico" },{ en: "Systemic gender inequality", es: "Desigualdad de género sistémica" },{ en: "Tax compliance", es: "Cumplimiento fiscal" },{ en: "Tax filing", es: "Declaración de impuestos" },{ en: "Team dynamics", es: "Dinámicas de equipo" },{ en: "Technical skills", es: "Habilidades técnicas" },{ en: "Third-party logistics (3PL)", es: "Logística tercerizada" },{ en: "Trade-off", es: "Compensación" },{ en: "Transactional", es: "Transaccional" },{ en: "Transparent communication", es: "Comunicación transparente" },{ en: "Trust-building", es: "Construcción de confianza" },{ en: "Turnover", es: "Rotación" },{ en: "Two-way street", es: "Calle de dos vías" },{ en: "Unambiguous", es: "Inequívoco" },{ en: "Unfulfilled existence", es: "Existencia insatisfecha" },{ en: "Unproductive nightmare", es: "Pesadilla improductiva" },{ en: "Unquestionable", es: "Incues tionable" },{ en: "Unreliable", es: "Poco fiable" },{ en: "Unsolicited offers", es: "Ofertas no solicitadas" },{ en: "Unwavering skepticism", es: "Escepticismo inquebrantable" },{ en: "Upskilling", es: "Mejora de habilidades" },{ en: "Values (corporate)", es: "Valores corporativos" },{ en: "Values (personal)", es: "Valores personales" },{ en: "Viability (financial)", es: "Viabilidad financiera" },{ en: "Visibility", es: "Visibilidad" },{ en: "Vision", es: "Visión" },{ en: "Vulnerability", es: "Vulnerabilidad" },{ en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
         ];
 
         function generateCards() {
@@ -791,84 +701,25 @@
                 card.className = "relative h-36 w-full perspective-1000";
                 card.innerHTML = `
                     <div class="card-inner w-full h-full" onclick="this.classList.toggle('card-flipped')">
-                        <div class="card-front">
-                            <div class="p-2 text-center">
-                                <span class="text-[7px] font-bold text-green-500 block mb-1 uppercase tracking-widest">DATA_INPUT: TERM</span>
-                                <h3 class="text-base font-bold glow-text">${escapeHtml(item.en)}</h3>
-                            </div>
-                        </div>
-                        <div class="card-back">
-                            <div class="p-2 text-center">
-                                <p class="text-[8px] uppercase font-bold opacity-60 mb-1">OUTPUT_VALUE:</p>
-                                <h3 class="text-base font-bold">${escapeHtml(item.es)}</h3>
-                            </div>
-                        </div>
+                        <div class="card-front"><div class="p-2 text-center"><span class="text-[7px] font-bold text-green-500 block mb-1 uppercase tracking-widest">DATA_INPUT: TERM</span><h3 class="text-base font-bold glow-text">${escapeHtml(item.en)}</h3></div></div>
+                        <div class="card-back"><div class="p-2 text-center"><p class="text-[8px] uppercase font-bold opacity-60 mb-1">OUTPUT_VALUE:</p><h3 class="text-base font-bold">${escapeHtml(item.es)}</h3></div></div>
                     </div>
                 `;
                 container.appendChild(card);
             });
         }
-
-        function escapeHtml(str) {
-            return str.replace(/[&<>]/g, function(m) {
-                if (m === '&') return '&amp;';
-                if (m === '<') return '&lt;';
-                if (m === '>') return '&gt;';
-                return m;
-            }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
-                return c;
-            });
-        }
-
-        function updateClock() {
-            const now = new Date();
-            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            const formatted = now.toLocaleDateString('es-ES', options);
-            const clockElement = document.getElementById('liveClock');
-            if (clockElement) clockElement.innerHTML = `<i class="far fa-clock mr-1"></i> ${formatted}`;
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        let connectedUsersInterval;
-        function updateConnectedUsers() {
-            const randomUsers = Math.floor(Math.random() * 161)+1;
-            const usersSpan = document.getElementById('usersCount');
-            if (usersSpan) usersSpan.innerText = randomUsers;
-        }
-        updateConnectedUsers();
-        connectedUsersInterval = setInterval(updateConnectedUsers, 300000);
-
-        document.getElementById('playMusic').addEventListener('click', function() {
-            const iframe = document.getElementById('youtube-iframe');
-            iframe.src = "https://www.youtube.com/embed/XDKY1dGJxvY?autoplay=1&start=0000";
-            this.innerHTML = '<i class="fas fa-volume-up"></i> SEÑAL ACTIVA - DISFRUTE EL VIAJE';
-            this.classList.add('bg-green-600', 'text-black');
-        });
-
-        window.onload = function() {
-            generateCards();
-            iniciarLluviaAscii();
-        };
-
+        function escapeHtml(str) { return str.replace(/[&<>]/g, function(m) { if (m === '&') return '&amp;'; if (m === '<') return '&lt;'; if (m === '>') return '&gt;'; return m; }); }
+        function updateClock() { const now = new Date(); const formatted = now.toLocaleDateString('es-ES', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }); const clockElement = document.getElementById('liveClock'); if (clockElement) clockElement.innerHTML = `<i class="far fa-clock mr-1"></i> ${formatted}`; }
+        setInterval(updateClock, 1000); updateClock();
+        function updateConnectedUsers() { const randomUsers = Math.floor(Math.random() * 161)+1; const usersSpan = document.getElementById('usersCount'); if (usersSpan) usersSpan.innerText = randomUsers; }
+        updateConnectedUsers(); setInterval(updateConnectedUsers, 300000);
+        document.getElementById('playMusic').addEventListener('click', function() { const iframe = document.getElementById('youtube-iframe'); iframe.src = "https://www.youtube.com/embed/XDKY1dGJxvY?autoplay=1&start=0000"; this.innerHTML = '<i class="fas fa-volume-up"></i> SEÑAL ACTIVA - DISFRUTE EL VIAJE'; this.classList.add('bg-green-600', 'text-black'); });
+        window.onload = function() { generateCards(); iniciarLluviaAscii(); };
         function iniciarLluviaAscii() {
             const contenedor = document.getElementById('asciiRainContainer');
             if (!contenedor) return;
             const caracteres = ['<', '>', '/', '#', '~', '*', '@', '%', '&', '?', '░', '▒', '▓', '█', '␛', '⎚', '⌘', '⏎', '₿', '∑', '∏', '∫', '√', '∞', '∩', '∪', '∀', '∃', '∴', '∵', '~', '`', '|', '\\'];
-            const crearParticula = () => {
-                const span = document.createElement('span');
-                span.classList.add('ascii-char');
-                const char = caracteres[Math.floor(Math.random() * caracteres.length)];
-                span.textContent = char;
-                const size = 0.6 + Math.random() * 1.2;
-                span.style.fontSize = `${size}rem`;
-                span.style.left = `${Math.random() * 100}%`;
-                span.style.animationDuration = `${3 + Math.random() * 8}s`;
-                span.style.animationDelay = `${Math.random() * 5}s`;
-                span.style.opacity = 0.2 + Math.random() * 0.4;
-                contenedor.appendChild(span);
-                setTimeout(() => { if(span && span.remove) span.remove(); }, (parseFloat(span.style.animationDuration) + 1) * 1000);
-            };
+            const crearParticula = () => { const span = document.createElement('span'); span.classList.add('ascii-char'); const char = caracteres[Math.floor(Math.random() * caracteres.length)]; span.textContent = char; span.style.fontSize = `${0.6 + Math.random() * 1.2}rem`; span.style.left = `${Math.random() * 100}%`; span.style.animationDuration = `${3 + Math.random() * 8}s`; span.style.animationDelay = `${Math.random() * 5}s`; span.style.opacity = 0.2 + Math.random() * 0.4; contenedor.appendChild(span); setTimeout(() => { if(span && span.remove) span.remove(); }, (parseFloat(span.style.animationDuration) + 1) * 1000); };
             for(let i=0; i<80; i++) setTimeout(crearParticula, i*80);
             setInterval(crearParticula, 400);
         }
