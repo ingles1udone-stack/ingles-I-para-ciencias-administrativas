@@ -299,6 +299,36 @@
             box-shadow: 0 0 20px var(--term-green);
             transform: scale(1.02);
         }
+
+        /* Estilos nuevos para la ruta expandible */
+        .ruta-details {
+            background: rgba(0, 20, 0, 0.4);
+            border-left: 3px solid var(--term-green);
+            margin-bottom: 0.75rem;
+            border-radius: 0;
+            transition: all 0.2s;
+        }
+        .ruta-details[open] {
+            background: rgba(0, 30, 0, 0.6);
+        }
+        .ruta-details summary {
+            padding: 0.75rem 1rem;
+            font-weight: bold;
+            font-family: 'Share Tech Mono', monospace;
+            letter-spacing: 0.5px;
+        }
+        .ruta-details summary span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .ruta-details .descripcion {
+            padding: 0.5rem 1rem 1rem 2rem;
+            border-top: 1px dashed var(--term-dim);
+            font-size: 0.85rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body class="p-2 md:p-6">
@@ -428,7 +458,7 @@
             </div>
         </section>
 
-        <!-- DOCUMENTOS BASE + RUTA DE LA ASIGNATURA (se ha eliminado centro de copiado de aquí) -->
+        <!-- DOCUMENTOS BASE + RUTA DE LA ASIGNATURA (con expandibles estilo masterclass) -->
         <section id="documentos" class="mb-12">
             <div class="terminal-border p-6 bg-black/40">
                 <div class="overflow-hidden bg-black/40">
@@ -440,13 +470,43 @@
                             </a>
                         </h2>
                     </div>
-                    <div class="px-1">
-                        <ul class="proceso-lista space-y-2 text-sm md:text-base">
-                            <li><strong>PROCESO 01:</strong> Estrategias de Lectura</li>
-                            <li><strong>PROCESO 02:</strong> Estructuras Gramaticales</li>
-                            <li><strong>PROCESO 03:</strong> Vocabulario Técnico</li>
-                            <li><strong>PROCESO 04:</strong> Interpretación Final</li>
-                        </ul>
+                    <div class="px-1 space-y-2">
+                        <!-- PROCESO 01 expandible -->
+                        <details class="ruta-details">
+                            <summary class="text-sm md:text-base font-mono text-green-300">
+                                <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 01:</strong> Estrategias de Lectura</span>
+                            </summary>
+                            <div class="descripcion">
+                                <p>📖 Desarrollo de habilidades de pre-lectura, lectura activa y pos-lectura. Incluye técnicas como <strong>skimming</strong> (vistazo rápido), <strong>scanning</strong> (búsqueda de datos específicos), identificación de ideas principales y predicción de contenido. Base fundamental para abordar textos administrativos en inglés.</p>
+                            </div>
+                        </details>
+                        <!-- PROCESO 02 expandible -->
+                        <details class="ruta-details">
+                            <summary class="text-sm md:text-base font-mono text-green-300">
+                                <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 02:</strong> Estructuras Gramaticales</span>
+                            </summary>
+                            <div class="descripcion">
+                                <p>✍️ Análisis de tiempos verbales (presente simple, pasado, futuro, condicionales), voz pasiva en contextos formales, uso de conectores y referencias pronominales. Reconocimiento de patrones sintácticos típicos de documentos comerciales y contables.</p>
+                            </div>
+                        </details>
+                        <!-- PROCESO 03 expandible -->
+                        <details class="ruta-details">
+                            <summary class="text-sm md:text-base font-mono text-green-300">
+                                <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 03:</strong> Vocabulario Técnico</span>
+                            </summary>
+                            <div class="descripcion">
+                                <p>📚 Ampliación del léxico especializado en finanzas, administración, mercadeo y recursos humanos. Estudio de cognados, sufijos, prefijos y formación de palabras. Trabajo con glosarios temáticos y ejercicios de contexto para internalizar términos clave como <em>assets, liabilities, revenue, cash flow</em>.</p>
+                            </div>
+                        </details>
+                        <!-- PROCESO 04 expandible -->
+                        <details class="ruta-details">
+                            <summary class="text-sm md:text-base font-mono text-green-300">
+                                <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 04:</strong> Interpretación Final</span>
+                            </summary>
+                            <div class="descripcion">
+                                <p>🎯 Integración de las tres etapas anteriores para realizar traducción funcional y análisis crítico de textos auténticos (balances, memorias anuales, informes de sostenibilidad, correos corporativos). Producción de resúmenes ejecutivos, mapas conceptuales y debates en inglés sobre casos empresariales.</p>
+                            </div>
+                        </details>
                     </div>
                 </div>
                 <div class="mt-6">
@@ -573,7 +633,7 @@
             </div>
         </section>
 
-        <!-- NUEVA SECCIÓN: CENTRO DE COPIADO OFICIAL (debajo de Masterclass) -->
+        <!-- CENTRO DE COPIADO OFICIAL -->
         <section id="centro-copiado" class="mb-12">
             <div class="terminal-border p-6 bg-[#1a4d1a]/10">
                 <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-print"></i> CENTRO DE COPIADO OFICIAL</h3>
@@ -620,7 +680,7 @@
 
     </main>
 
-    <!-- CONTROL DE CALIFICACIONES (ubicado justo arriba del footer y del control de asistencias) -->
+    <!-- CONTROL DE CALIFICACIONES -->
     <div class="container mx-auto max-w-6xl mb-8" id="notas">
         <h2 class="text-xl font-bold mb-6 flex items-center gap-2 glow-text">
             <i class="fas fa-chart-bar"></i> CONTROL DE CALIFICACIONES
@@ -653,18 +713,15 @@
     <!-- FOOTER (incluye CONTROL DE ASISTENCIAS) -->
     <footer class="terminal-border bg-black p-8 text-center mt-4">
         <div class="container mx-auto">
-            <!-- CONTROL DE ASISTENCIAS -->
             <div class="mb-6 pb-4 border-b border-green-700">
                 <h4 class="font-bold text-lg mb-3 glow-text"><i class="fas fa-check-circle mr-2"></i> CONTROL DE ASISTENCIAS</h4>
                 <a href="https://docs.google.com/spreadsheets/d/1WRuK9WRLpAekuZhc3j-wEQ960_Od0fx-e6CFFepBlfE/edit?gid=917189855#gid=917189855" target="_blank" class="terminal-btn px-8 py-3 font-bold text-md inline-flex items-center gap-2">
                     <i class="fas fa-clipboard-list"></i> VER REGISTRO DE ASISTENCIAS
                 </a>
             </div>
-
             <h4 class="font-bold text-2xl mb-1 glow-text uppercase">Prof. Oney Clavijo</h4>
             <p class="opacity-60 text-sm mb-6 uppercase tracking-[0.3em]">Asignatura de Inglés I para Cs. Administrativas | Universidad de Oriente</p>
             <div class="flex justify-center gap-6">
-                <!-- Botón estilo negro con azul neón (cambio solicitado) -->
                 <a href="https://wa.me/584123585427?text=Saludos,%20Profesor,%20quiero%20hacerle%20una%20consulta%20sobre%20la%20materia,%20mi%20nombre,%20CI.%20y%20secc.%20son%20..." target="_blank" class="terminal-btn-neon-blue px-10 py-5 text-lg font-bold flex items-center gap-3">
                     <i class="fab fa-whatsapp text-2xl"></i> ENLACE DIRECTO CON EL PROFESOR
                 </a>
