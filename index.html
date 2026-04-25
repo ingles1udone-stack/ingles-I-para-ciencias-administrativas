@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>SISTEMA OPERATIVO DE APRENDIZAJE | UDO-NE</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -78,7 +78,6 @@
             box-shadow: 0 0 15px var(--term-green);
         }
 
-        /* Botón estilo terminal con azul neón (fondo negro, texto azul claro) */
         .terminal-btn-neon-blue {
             background-color: #000000;
             border: 1px solid var(--neon-blue);
@@ -98,7 +97,6 @@
             background: rgba(0, 40, 0, 0.2);
         }
 
-        /* Estilos del Juego de Glosario */
         .perspective-1000 { perspective: 1000px; }
         .card-inner {
             transition: transform 0.6s;
@@ -127,10 +125,6 @@
 
         .glow-text {
             text-shadow: 0 0 5px var(--term-green);
-        }
-
-        #hidden-player {
-            display: none;
         }
 
         .crt-overlay {
@@ -162,7 +156,6 @@
             border: 1px solid var(--term-green);
         }
 
-        /* FALLOUT SECTION */
         .fallout-section {
             position: relative;
             overflow: hidden;
@@ -279,9 +272,6 @@
         details summary i { transition: transform 0.2s; }
         details[open] summary i.fa-chevron-right { transform: rotate(90deg); }
         .masterclass-card { background: rgba(0,0,0,0.6); border-left: 3px solid var(--term-green); }
-        .proceso-lista { list-style-type: none; padding-left: 0; }
-        .proceso-lista li { margin-bottom: 0.75rem; padding-left: 1.5rem; position: relative; }
-        .proceso-lista li:before { content: ">"; color: var(--term-green); position: absolute; left: 0; font-weight: bold; }
         .btn-plan-clases {
             background-color: rgba(0, 30, 0, 0.7);
             border: 2px solid var(--term-green);
@@ -299,8 +289,6 @@
             box-shadow: 0 0 20px var(--term-green);
             transform: scale(1.02);
         }
-
-        /* Estilos nuevos para la ruta expandible */
         .ruta-details {
             background: rgba(0, 20, 0, 0.4);
             border-left: 3px solid var(--term-green);
@@ -471,40 +459,36 @@
                         </h2>
                     </div>
                     <div class="px-1 space-y-2">
-                        <!-- PROCESO 01 expandible -->
                         <details class="ruta-details">
                             <summary class="text-sm md:text-base font-mono text-green-300">
                                 <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 01:</strong> Estrategias de Lectura</span>
                             </summary>
                             <div class="descripcion">
-                                <p>📖 Desarrollo de habilidades de pre-lectura, lectura activa y pos-lectura. Incluye técnicas como <strong>skimming</strong> (vistazo rápido), <strong>scanning</strong> (búsqueda de datos específicos), identificación de ideas principales y predicción de contenido. Base fundamental para abordar textos administrativos en inglés.</p>
+                                <p>📖 Desarrollo de habilidades de pre-lectura, lectura activa y pos-lectura. Incluye técnicas como <strong>skimming</strong> (vistazo rápido), <strong>scanning</strong> (búsqueda de datos específicos), identificación de ideas principales y predicción de contenido.</p>
                             </div>
                         </details>
-                        <!-- PROCESO 02 expandible -->
                         <details class="ruta-details">
                             <summary class="text-sm md:text-base font-mono text-green-300">
                                 <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 02:</strong> Estructuras Gramaticales</span>
                             </summary>
                             <div class="descripcion">
-                                <p>✍️ Análisis de tiempos verbales (presente simple, pasado, futuro, condicionales), voz pasiva en contextos formales, uso de conectores y referencias pronominales. Reconocimiento de patrones sintácticos típicos de documentos comerciales y contables.</p>
+                                <p>✍️ Análisis de tiempos verbales, voz pasiva, conectores y referencias pronominales. Patrones sintácticos en documentos comerciales.</p>
                             </div>
                         </details>
-                        <!-- PROCESO 03 expandible -->
                         <details class="ruta-details">
                             <summary class="text-sm md:text-base font-mono text-green-300">
                                 <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 03:</strong> Vocabulario Técnico</span>
                             </summary>
                             <div class="descripcion">
-                                <p>📚 Ampliación del léxico especializado en finanzas, administración, mercadeo y recursos humanos. Estudio de cognados, sufijos, prefijos y formación de palabras. Trabajo con glosarios temáticos y ejercicios de contexto para internalizar términos clave como <em>assets, liabilities, revenue, cash flow</em>.</p>
+                                <p>📚 Léxico especializado en finanzas, administración, mercadeo y recursos humanos. Cognados y formación de palabras.</p>
                             </div>
                         </details>
-                        <!-- PROCESO 04 expandible -->
                         <details class="ruta-details">
                             <summary class="text-sm md:text-base font-mono text-green-300">
                                 <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> <strong>PROCESO 04:</strong> Interpretación Final</span>
                             </summary>
                             <div class="descripcion">
-                                <p>🎯 Integración de las tres etapas anteriores para realizar traducción funcional y análisis crítico de textos auténticos (balances, memorias anuales, informes de sostenibilidad, correos corporativos). Producción de resúmenes ejecutivos, mapas conceptuales y debates en inglés sobre casos empresariales.</p>
+                                <p>🎯 Integración para traducción funcional, análisis crítico y resúmenes ejecutivos de textos reales (balances, informes, correos).</p>
                             </div>
                         </details>
                     </div>
@@ -529,19 +513,22 @@
             </div>
         </section>
 
-        <!-- BITÁCORA -->
+        <!-- BITÁCORA / MICROCONFERENCIAS con botón FOTOTECA añadido -->
         <section id="bitacora" class="mb-12">
             <div class="terminal-border p-8 bg-black relative overflow-hidden">
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
                     <div>
                         <h2 class="text-3xl font-bold mb-4 glow-text">MICROCONFERENCIAS</h2>
                         <p class="mb-6 opacity-70">Registra tus avances semanales para acumular el 5% de tu nota complementaria.</p>
-                        <div class="flex flex-col sm:flex-row gap-4">
-                            <a href="bitacora.html" target="_blank" class="terminal-btn py-3 px-8 font-bold text-center flex items-center justify-center gap-2">
-                                <i class="fas fa-pen-nib"></i> REGISTRAR UNA BITÁCORA DE VIDEO
+                        <div class="flex flex-wrap gap-4">
+                            <a href="bitacora.html" target="_blank" class="terminal-btn py-3 px-6 font-bold text-center flex items-center justify-center gap-2">
+                                <i class="fas fa-pen-nib"></i> REGISTRAR BITÁCORA
                             </a>
-                            <a href="microconferencia.html" target="_blank" class="terminal-btn py-3 px-8 font-bold text-center flex items-center justify-center gap-2 bg-green-900/20">
-                                <i class="fas fa-video"></i> TÓPICOS, GRUPOS Y VIDEOS
+                            <a href="microconferencia.html" target="_blank" class="terminal-btn py-3 px-6 font-bold text-center flex items-center justify-center gap-2 bg-green-900/20">
+                                <i class="fas fa-video"></i> TÓPICOS Y GRUPOS
+                            </a>
+                            <a href="https://drive.google.com/drive/folders/1c7KOcVfEzzocbFB_zGuvzJGyTTWK3vnet0G4PBEztZvaLvBx1mrxQBD_sVdgRWi8fYyilZQW?usp=drive_link" target="_blank" class="terminal-btn py-3 px-6 font-bold text-center flex items-center justify-center gap-2">
+                                <i class="fas fa-images"></i> FOTOTECA
                             </a>
                         </div>
                     </div>
@@ -552,7 +539,7 @@
             </div>
         </section>
 
-        <!-- MASTERCLASS CENTER -->
+        <!-- CENTRO DE TALLERES & COMPENDIOS (MASTERCLASS) + DESAFÍO LITERARIO integrado + nuevos botones -->
         <section id="masterclass" class="mb-12 relative overflow-hidden">
             <div class="terminal-border p-6 md:p-8 bg-black/40 relative" style="background: #030a03;">
                 <div class="ascii-rain" id="asciiRainContainer"></div>
@@ -570,6 +557,8 @@
                             <span class="text-[11px] border border-green-600 px-3 py-1 rounded-full bg-black/50"><i class="fas fa-brain"></i> pensamiento crítico</span>
                         </div>
                     </div>
+                    
+                    <!-- Contenido original (Masterclass + Compendio) -->
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                         <div class="space-y-6">
                             <div class="terminal-border p-5 bg-black/40 hover:shadow-lg transition-all">
@@ -577,7 +566,7 @@
                                     <i class="fas fa-chalkboard-user text-4xl glow-text"></i>
                                     <div>
                                         <h3 class="text-xl font-bold uppercase flex items-center gap-2"><i class="fas fa-folder-open"></i> MASTERCLASS (Guías de Ejercicios)</h3>
-                                        <p class="text-xs opacity-60 my-2">Talleres de análisis estructural, morfología, traducción contextual, debate y síntesis. 4 guías progresivas para trabajo en estaciones.</p>
+                                        <p class="text-xs opacity-60 my-2">Talleres de análisis estructural, morfología, traducción contextual, debate y síntesis.</p>
                                         <a href="https://drive.google.com/drive/u/1/folders/1-bDWY26X-74HnNJ1ssxN2g22c4qZPHXm" target="_blank" class="terminal-btn inline-flex items-center gap-2 px-5 py-2 mt-2 text-sm font-bold">
                                             <i class="fab fa-google-drive"></i> ACCEDER A MASTERCLASS
                                         </a>
@@ -589,7 +578,7 @@
                                     <i class="fas fa-book-open text-4xl glow-text"></i>
                                     <div>
                                         <h3 class="text-xl font-bold uppercase flex items-center gap-2"><i class="fas fa-compass"></i> COMPENDIO DE LECTURAS</h3>
-                                        <p class="text-xs opacity-60 my-2">Antología de textos administrativos, económicos y contables para fortalecer la interpretación en inglés. Material complementario.</p>
+                                        <p class="text-xs opacity-60 my-2">Antología de textos administrativos, económicos y contables para interpretación en inglés.</p>
                                         <a href="https://drive.google.com/drive/u/1/folders/1VUmnlhmyuH4dYd2socA0jSimdtczkWbm" target="_blank" class="terminal-btn inline-flex items-center gap-2 px-5 py-2 mt-2 text-sm font-bold">
                                             <i class="fab fa-google-drive"></i> EXPLORAR COMPENDIO
                                         </a>
@@ -603,28 +592,74 @@
                                 <div class="space-y-3 text-sm">
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
-                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 1 – Analista Léxico y Gramatical</span>
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 1 – Analista Léxico</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📖 Estaciones: Cazador de Partes del Habla, Detective de Cognados, Morfólogo Estructural, Traductor Contextual.</p><p>🎯 Objetivo: Identificar categorías gramaticales, cognados y analizar morfología técnica.</p></div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📖 Cazador de Partes del Habla, Detective de Cognados, Morfólogo Estructural.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
-                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 2 – Cirujano de Párrafos e Inferencias</span>
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 2 – Cirujano de Párrafos</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>✂️ Estaciones: Cirujano de Párrafos (cohesión), Traductor Contextual + pronombres, Inferenciador Estructural.</p><p>🔍 Énfasis en reescritura, referencias pronominales y mapas causa-efecto.</p></div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>✂️ Cohesión, pronombres, inferencias y mapas causa-efecto.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
-                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 3 – Analista Estructural y Jerarquías</span>
+                                            <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 3 – Analista Estructural</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📐 Estaciones: Organización retórica, Extractor de Ideas Jerárquicas, Traductor-Intérprete de párrafos densos.</p><p>🏛️ Trabajo con tesis, diagramas de flujo y análisis de términos técnicos.</p></div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📐 Organización retórica, jerarquías de ideas, diagramas de flujo.</p></div>
                                     </details>
                                     <details class="masterclass-card p-2 rounded">
                                         <summary class="cursor-pointer font-mono text-green-300 flex items-center justify-between">
                                             <span><i class="fas fa-chevron-right mr-2 transition-transform"></i> MASTERCLASS 4 – Síntesis y Debate</span>
                                         </summary>
-                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📱 Estaciones: Resumidor (hilo redes), Creador de Mapas Mentales, Question Master (kit de debate).</p><p>🎤 Desarrollo de pensamiento crítico, nube de palabras y preguntas generadoras.</p></div>
+                                        <div class="pl-6 mt-2 text-xs opacity-80 space-y-1 border-l-2 border-green-700 ml-2"><p>📱 Resumidor, mapas mentales, Question Master y debate crítico.</p></div>
                                     </details>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NUEVA SECCIÓN: Better Understanding + SMART (requerimiento) -->
+                    <div class="mt-10 pt-4 border-t border-green-700">
+                        <h3 class="text-lg font-bold mb-5 glow-text flex items-center gap-2"><i class="fas fa-expand-alt"></i> RECURSOS ESTRATÉGICOS</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="terminal-border p-5 bg-black/40 flex flex-col items-start transition-all hover:shadow-md">
+                                <i class="fas fa-brain text-3xl mb-2 text-cyan-400"></i>
+                                <h4 class="font-bold text-xl">Better Understanding</h4>
+                                <p class="text-sm opacity-70 my-2">Estrategias avanzadas para comprensión profunda de textos administrativos en inglés.</p>
+                                <a href="My_Better_Understanding.html" target="_blank" class="terminal-btn mt-2 px-5 py-2 inline-flex items-center gap-2 text-sm"><i class="fas fa-external-link-alt"></i> ACCEDER A "BETTER UNDERSTANDING"</a>
+                            </div>
+                            <div class="terminal-border p-5 bg-black/40 flex flex-col items-start transition-all hover:shadow-md">
+                                <i class="fas fa-chart-line text-3xl mb-2 text-yellow-300"></i>
+                                <h4 class="font-bold text-xl">Cómo crear Objetivos S.M.A.R.T.</h4>
+                                <p class="text-sm opacity-70 my-2">Metodología para definir metas específicas, medibles, alcanzables, relevantes y con plazos definidos.</p>
+                                <a href="https://drive.google.com/file/d/1n9rloS3nCpYX0sKXQtDtugwMsk22EyNu/view?usp=drive_link" target="_blank" class="terminal-btn mt-2 px-5 py-2 inline-flex items-center gap-2 text-sm"><i class="fas fa-file-pdf"></i> VER GUÍA S.M.A.R.T.</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- DESAFÍO LITERARIO integrado completamente (movido aquí) -->
+                    <div class="mt-10">
+                        <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
+                            <div class="radioactive-dust"></div>
+                            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl bg-black/60 animate-pulse">
+                                        <i class="fas fa-hand-fist glow-text"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-2xl font-bold glow-text uppercase flex items-center gap-2">
+                                            <i class="fas fa-radiation"></i> DESAFÍO LITERARIO
+                                            <i class="fas fa-skull"></i>
+                                        </h2>
+                                        <p class="opacity-70 text-xs md:text-sm max-w-md mt-1">Zona de resistencia léxica • Entrena tu intelecto en el yermo académico.</p>
+                                    </div>
+                                </div>
+                                <div class="w-full md:w-auto">
+                                    <a href="desafio_literario.html" target="_blank" class="terminal-btn mutant-btn px-10 py-4 text-xl font-black flex items-center justify-center gap-3 w-full md:w-auto tracking-wider">
+                                        <i class="fas fa-hand-fist fa-fw text-2xl"></i> INGRESAR AL DESAFÍO
+                                        <i class="fas fa-bolt"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -646,33 +681,6 @@
                             <i class="fab fa-whatsapp"></i> CONTACTAR PROF. CARMEN
                         </a>
                         <span class="text-[10px] uppercase tracking-widest opacity-60">UBICACIÓN: CURSOS BÁSICOS</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- DESAFÍO LITERARIO (FALLOUT) -->
-        <section class="mb-12">
-            <div class="terminal-border fallout-section p-6 md:p-8 bg-black/40 relative overflow-hidden">
-                <div class="radioactive-dust"></div>
-                <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 terminal-border flex items-center justify-center text-3xl bg-black/60 animate-pulse">
-                            <i class="fas fa-hand-fist glow-text"></i>
-                        </div>
-                        <div>
-                            <h2 class="text-2xl font-bold glow-text uppercase flex items-center gap-2">
-                                <i class="fas fa-radiation"></i> DESAFÍO LITERARIO
-                                <i class="fas fa-skull"></i>
-                            </h2>
-                            <p class="opacity-70 text-xs md:text-sm max-w-md mt-1">Zona de resistencia léxica • Entrena tu intelecto en el yermo académico.</p>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-auto">
-                        <a href="desafio_literario.html" target="_blank" class="terminal-btn mutant-btn px-10 py-4 text-xl font-black flex items-center justify-center gap-3 w-full md:w-auto tracking-wider">
-                            <i class="fas fa-hand-fist fa-fw text-2xl"></i> INGRESAR AL DESAFÍO
-                            <i class="fas fa-bolt"></i>
-                        </a>
                     </div>
                 </div>
             </div>
@@ -745,7 +753,7 @@
             { en: "Income Statement", es: "Estado de Resultados" },{ en: "Income streams", es: "Flujos de ingresos" },{ en: "Inflationary hedge", es: "Cobertura inflacionaria" },{ en: "Informed financial decision-making", es: "Toma de decisiones financieras informada" },{ en: "Inherent incapability", es: "Incapacidad inherente" },{ en: "Internal networking", es: "Networking interno" },{ en: "Intertwined realms", es: "Reinos entrelazados" },{ en: "Introversion", es: "Introversión" },{ en: "Inventory", es: "Inventario" },{ en: "Investment analysis", es: "Análisis de inversiones" },{ en: "Investor relations", es: "Relaciones con inversores" },
             { en: "Labor market insertion", es: "Inserción laboral" },{ en: "Legal and ethical standards", es: "Estándares legales y éticos" },{ en: "Legal recourse", es: "Recurso legal" },{ en: "Liabilities", es: "Pasivos" },{ en: "Living below your means", es: "Vivir por debajo de tus posibilidades" },{ en: "Logistical agony", es: "Agonía logística" },{ en: "Logistical chaos", es: "Caos logístico" },
             { en: "Malicious actors", es: "Actores maliciosos" },{ en: "Management style", es: "Estilo de gestión" },{ en: "Mandatory disclosure requirements", es: "Requisitos de divulgación obligatoria" },{ en: "Manipulative techniques", es: "Técnicas manipulativas" },{ en: "Memorable connections", es: "Conexiones memorables" },{ en: "Mentorship", es: "Mentoría" },{ en: "Micro-enterprise", es: "Microempresa" },{ en: "Misinformation", es: "Desinformación" },{ en: "Monetary resources", es: "Recursos monetarios" },{ en: "Monitoring", es: "Monitoreo" },{ en: "Multi-currency dynamics", es: "Dinámica multidivisa" },
-            { en: "Non-negotiable path", es: "Camino no negociable" },{ en: "Non-negotiable step", es: "Paso no negociable" },{ en: "Norms (cultural)", es: "Normas culturales" },{ en: "Norms (traditional)", es: "Normas tradicionales" },{ en: "Online safety", es: "Seguridad en línea" },{ en: "Open communication", es: "Comunicación abierta" },{ en: "Open-plan office", es: "Oficina de planta abierta" },{ en: "Organizational health", es: "Salud organizacional" },{ en: "Organizational indicators", es: "Indicadores organizacionales" },{ en: "Organizational transformation", es: "Transformación organizacional" },{ en: "Outsourced fulfillment", es: "Cumplimiento externalizado" },{ en: "Paradigm shift", es: "Cambio de paradigma" },{ en: "Partisan disengagement", es: "Desvinculación partidista" },{ en: "Passive income", es: "Ingresos pasivos" },{ en: "Personal brand", es: "Marca personal" },{ en: "Personal expression", es: "Expresión personal" },{ en: "Philosophical rebellion", es: "Rebelión filosófica" },{ en: "Planning", es: "Planificación" },{ en: "Preliminary statements", es: "Declaraciones preliminares" },{ en: "Proactive education", es: "Educación proactiva" },{ en: "Professional networking", es: "Networking profesional" },{ en: "Professional norms", es: "Normas profesionales" },{ en: "Profitable path", es: "Camino rentable" },{ en: "Psychosocial risk evaluation", es: "Evaluación de riesgo psicosocial" },{ en: "Pump-and-dump schemes", es: "Esquemas de pump and dump" },{ en: "Radical re-evaluation", es: "Reevaluación radical" },{ en: "Rat race", es: "Carrera de ratas" },{ en: "Rational", es: "Racional" },{ en: "Raw data", es: "Datos brutos" },{ en: "Receipts", es: "Recibos" },{ en: "Reciprocity", es: "Reciprocidad" },{ en: "Reconciliation (financial)", es: "Conciliación financiera" },{ en: "Recurring revenue", es: "Ingresos recurrentes" },{ en: "Reframe", es: "Reformular" },{ en: "Regular communication", es: "Comunicación regular" },{ en: "Relational paradigms", es: "Paradigmas relacionales" },{ en: "Relationship-building", es: "Construcción de relaciones" },{ en: "Relentless work", es: "Trabajo implacable" },{ en: "Resentment", es: "Resentimiento" },{ en: "Resilience", es: "Resiliencia" },{ en: "Resource management", es: "Gestión de recursos" },{ en: "Resourceful", es: "Ingenioso" },{ en: "Restrictive statutes", es: "Estatutos restrictivos" },{ en: "Revenue", es: "Ingresos" },{ en: "Revenue streams", es: "Flujos de ingresos" },{ en: "Rigorous thoroughness", es: "Minuciosidad rigurosa" },{ en: "Risk management", es: "Gestión de riesgos" },{ en: "Sales invoices", es: "Facturas de venta" },{ en: "Scalable asset", es: "Activo escalable" },{ en: "SEC (Securities and Exchange Commission)", es: "Comisión de Valores" },{ en: "Successful career", es: "Carrera exitosa" },{ en: "Self-fulfillment", es: "Autorrealización" },{ en: "Self-protection", es: "Autoprotección" },{ en: "Sex days", es: "Días de sexo" },{ en: "Sexual harassment", es: "Acoso sexual" },{ en: "Sexual health", es: "Salud sexual" },{ en: "Sexual wellness initiatives", es: "Iniciativas de bienestar sexual" },{ en: "Shame", es: "Vergüenza" },{ en: "Shipping times", es: "Plazos de envío" },{ en: "Side businesses", es: "Negocios secundarios" },{ en: "Sincere conversation", es: "Conversación sincera" },{ en: "Skeptical investor", es: "Inversor escéptico" },{ en: "Social dynamics", es: "Dinámicas sociales" },{ en: "Social license to operate", es: "Licencia social para operar" },{ en: "Social media scams", es: "Estafas en redes sociales" },{ en: "Social purpose", es: "Propósito social" },{ en: "Spectacularly awful", es: "Espantosamente terrible" },{ en: "Stablecoins", es: "Stablecoins" },{ en: "Startup culture", es: "Cultura startup" },{ en: "Stifling entrepreneurship", es: "Emprendimiento sofocante" },{ en: "Strategic analysis", es: "Análisis estratégico" },{ en: "Strategic asset", es: "Activo estratégico" },{ en: "Strategic blueprint", es: "Plano estratégico" },{ en: "Strategic decision-making", es: "Toma de decisiones estratégicas" },{ en: "Strategic imperative", es: "Imperativo estratégico" },{ en: "Strategic insights", es: "Perspectivas estratégicas" },{ en: "Strategic paradigm", es: "Paradigma estratégico" },{ en: "Strategic science", es: "Ciencia estratégica" },{ en: "Summarizing", es: "Resumiendo" },{ en: "Sustainability reports", es: "Reportes de sostenibilidad" },{ en: "Sustainable business", es: "Negocio sostenible" },{ en: "Sustainable financial performance", es: "Rendimiento financiero sostenible" },{ en: "Sustainable path", es: "Camino sostenible" },{ en: "Sustainable practice", es: "Práctica sostenible" },{ en: "Synergies", es: "Sinergias" },{ en: "Synergy", es: "Sinergia" },{ en: "Systemic barriers", es: "Barreras sistémicas" },{ en: "Systemic failure", es: "Fallo sistémico" },{ en: "Systemic gender inequality", es: "Desigualdad de género sistémica" },{ en: "Tax compliance", es: "Cumplimiento fiscal" },{ en: "Tax filing", es: "Declaración de impuestos" },{ en: "Team dynamics", es: "Dinámicas de equipo" },{ en: "Technical skills", es: "Habilidades técnicas" },{ en: "Third-party logistics (3PL)", es: "Logística tercerizada" },{ en: "Trade-off", es: "Compensación" },{ en: "Transactional", es: "Transaccional" },{ en: "Transparent communication", es: "Comunicación transparente" },{ en: "Trust-building", es: "Construcción de confianza" },{ en: "Turnover", es: "Rotación" },{ en: "Two-way street", es: "Calle de dos vías" },{ en: "Unambiguous", es: "Inequívoco" },{ en: "Unfulfilled existence", es: "Existencia insatisfecha" },{ en: "Unproductive nightmare", es: "Pesadilla improductiva" },{ en: "Unquestionable", es: "Incues tionable" },{ en: "Unreliable", es: "Poco fiable" },{ en: "Unsolicited offers", es: "Ofertas no solicitadas" },{ en: "Unwavering skepticism", es: "Escepticismo inquebrantable" },{ en: "Upskilling", es: "Mejora de habilidades" },{ en: "Values (corporate)", es: "Valores corporativos" },{ en: "Values (personal)", es: "Valores personales" },{ en: "Viability (financial)", es: "Viabilidad financiera" },{ en: "Visibility", es: "Visibilidad" },{ en: "Vision", es: "Visión" },{ en: "Vulnerability", es: "Vulnerabilidad" },{ en: "Weak corporate culture", es: "Cultura corporativa débil" },{ en: "Weak ties", es: "Vínculos débiles" },{ en: "Well-being initiatives", es: "Iniciativas de bienestar" },{ en: "Workplace discrimination", es: "Discriminación laboral" },{ en: "Workplace equality", es: "Igualdad en el trabajo" },{ en: "Workplace equality metrics", es: "Métricas de igualdad laboral" },{ en: "Workplace romances", es: "Romances en el trabajo" }
+            { en: "Non-negotiable path", es: "Camino no negociable" },{ en: "Non-negotiable step", es: "Paso no negociable" },{ en: "Norms (cultural)", es: "Normas culturales" },{ en: "Norms (traditional)", es: "Normas tradicionales" },{ en: "Online safety", es: "Seguridad en línea" },{ en: "Open communication", es: "Comunicación abierta" },{ en: "Open-plan office", es: "Oficina de planta abierta" },{ en: "Organizational health", es: "Salud organizacional" },{ en: "Organizational indicators", es: "Indicadores organizacionales" },{ en: "Organizational transformation", es: "Transformación organizacional" },{ en: "Outsourced fulfillment", es: "Cumplimiento externalizado" },{ en: "Paradigm shift", es: "Cambio de paradigma" },{ en: "Partisan disengagement", es: "Desvinculación partidista" },{ en: "Passive income", es: "Ingresos pasivos" },{ en: "Personal brand", es: "Marca personal" },{ en: "Personal expression", es: "Expresión personal" },{ en: "Philosophical rebellion", es: "Rebelión filosófica" },{ en: "Planning", es: "Planificación" },{ en: "Preliminary statements", es: "Declaraciones preliminares" },{ en: "Proactive education", es: "Educación proactiva" },{ en: "Professional networking", es: "Networking profesional" },{ en: "Professional norms", es: "Normas profesionales" },{ en: "Profitable path", es: "Camino rentable" },{ en: "Psychosocial risk evaluation", es: "Evaluación de riesgo psicosocial" },{ en: "Pump-and-dump schemes", es: "Esquemas de pump and dump" },{ en: "Radical re-evaluation", es: "Reevaluación radical" },{ en: "Rat race", es: "Carrera de ratas" },{ en: "Rational", es: "Racional" },{ en: "Raw data", es: "Datos brutos" },{ en: "Receipts", es: "Recibos" },{ en: "Reciprocity", es: "Reciprocidad" },{ en: "Reconciliation (financial)", es: "Conciliación financiera" },{ en: "Recurring revenue", es: "Ingresos recurrentes" },{ en: "Reframe", es: "Reformular" },{ en: "Regular communication", es: "Comunicación regular" },{ en: "Relational paradigms", es: "Paradigmas relacionales" },{ en: "Relationship-building", es: "Construcción de relaciones" },{ en: "Relentless work", es: "Trabajo implacable" },{ en: "Resentment", es: "Resentimiento" },{ en: "Resilience", es: "Resiliencia" },{ en: "Resource management", es: "Gestión de recursos" },{ en: "Resourceful", es: "Ingenioso" },{ en: "Restrictive statutes", es: "Estatutos restrictivos" },{ en: "Revenue", es: "Ingresos" },{ en: "Revenue streams", es: "Flujos de ingresos" },{ en: "Rigorous thoroughness", es: "Minuciosidad rigurosa" },{ en: "Risk management", es: "Gestión de riesgos" },{ en: "Sales invoices", es: "Facturas de venta" },{ en: "Scalable asset", es: "Activo escalable" },{ en: "SEC (Securities and Exchange Commission)", es: "Comisión de Valores" },{ en: "Successful career", es: "Carrera exitosa" },{ en: "Self-fulfillment", es: "Autorrealización" },{ en: "Self-protection", es: "Autoprotección" },{ en: "Sexual harassment", es: "Acoso sexual" },{ en: "Side businesses", es: "Negocios secundarios" },{ en: "Sincere conversation", es: "Conversación sincera" },{ en: "Social dynamics", es: "Dinámicas sociales" },{ en: "Strategic analysis", es: "Análisis estratégico" },{ en: "Sustainability reports", es: "Reportes de sostenibilidad" },{ en: "Synergy", es: "Sinergia" },{ en: "Tax compliance", es: "Cumplimiento fiscal" },{ en: "Team dynamics", es: "Dinámicas de equipo" },{ en: "Turnover", es: "Rotación" },{ en: "Upskilling", es: "Mejora de habilidades" },{ en: "Workplace equality", es: "Igualdad en el trabajo" }
         ];
 
         function generateCards() {
