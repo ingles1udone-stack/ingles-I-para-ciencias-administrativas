@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Better Understanding - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 180px;
+            width: 100%;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        .image-placeholder {
+            background: #eef2e6;
+            border: 2px dashed #8b9a6e;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            font-family: 'Share Tech Mono', monospace;
+            color: #5f7a4e;
+        }
+        @media print {
+            .no-print { display: none; }
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 20px;
+                margin: 20px auto;
+                max-width: 100%;
+            }
+            .header-box {
+                margin-bottom: 16px;
+                padding-bottom: 8px;
+            }
+            .title-main {
+                font-size: 1.8rem;
+            }
+            .section-header {
+                margin: 24px 0 12px 0;
+                padding: 4px 12px;
+                font-size: 1.1rem;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .bg-paper {
+            background: #fcfaf6;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">My Better Understanding</div>
+            <div class="mono text-sm">Guía de taller y evaluación</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        </div>
+    </div>
+
+    <!-- IMAGEN (placeholder) -->
+    <div class="image-placeholder">
+        🖼️ [Imagen ilustrativa de Better Understanding]<br>
+        <span class="text-xs">(Material de apoyo para el taller)</span>
+    </div>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <div class="section-header">¿Qué son las actividades "Better Understanding" (BU)?</div>
+    <div class="bg-paper p-4 border border-gray-300 mb-6">
+        <p class="text-sm">Las guías Better Understanding (BU) son instrumentos de evaluación formativa diseñados para medir y reforzar la comprensión de los contenidos teóricos de cada unidad, aplicándolos al análisis de textos especializados en inglés del área de administración y finanzas. Cada actividad consta de un texto de referencia auténtico (extracto de artículo académico o de divulgación profesional) y una serie de doce (12) preguntas de opción múltiple (a, b, c, d) que exploran aspectos como la organización retórica, el uso de conectores, claves morfológicas y contextuales, funciones de los pronombres, identificación de ideas principales y secundarias, así como habilidades de resumen e inferencia. Los estudiantes deben basar sus respuestas exclusivamente en el contenido del texto proporcionado y en los conceptos estudiados en la guía de estudio de la unidad correspondiente, el glosario de la materia y sus apuntes de clase. Estas actividades buscan desarrollar competencias de lectura crítica en inglés técnico, preparando al estudiante para interpretar informes financieros, memorandos ejecutivos, estudios de caso y otros documentos profesionales con precisión y fluidez.</p>
+        <p class="text-sm mt-2">Nota adicional para los estudiantes:</p>
+        <p class="text-sm mt-2">Se solicita a los participantes que se dirijan al centro de copiado con una antelación mínima de veinticuatro (24) horas antes del inicio de la próxima sesión de clase. El propósito de esta visita es inscribirse en la lista de reproducción correspondiente a la guía del taller. El profesor procederá a recoger la copia de su evaluación al inicio de la clase programada. Se enfatiza la importancia de obtener los materiales de trabajo con la debida antelación, dado que la institución no asume responsabilidad por aquellos materiales que no hayan sido cancelados a tiempo.</p>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <div class="vault-footer">
+        Asignatura Inglés I para Cs. Administrativas // Prof. Oney Clavijo<br>
+        <span class="mono">MBU_INSTRUCTIONS_UDO_v1.0</span>
+    </div>
+</div>
+
+</body>
+</html>
