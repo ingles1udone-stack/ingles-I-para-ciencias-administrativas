@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vault-Tec: Terminal de Microconferencia v2.0</title>
+    <title>Vault-Tec: Terminal de Microconferencia v2.0 - UDO</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     <style>
@@ -147,7 +147,7 @@
             100% { clip: rect(40px, 9999px, 30px, 0); }
         }
 
-        /* Botón Rosa Neón Energizado (sin láser, ahora con ping) */
+        /* Botón Rosa Neón Energizado */
         .neon-btn {
             width: 130px;
             height: 130px;
@@ -192,7 +192,7 @@
 
         /* Contenedor Principal Estilo Vault-Tec */
         .vault-frame {
-            max-width: 900px;
+            max-width: 1100px;
             margin: 2rem auto;
             border: 12px solid #2c2c2c;
             border-radius: 50px;
@@ -247,6 +247,19 @@
         .question-item:hover {
             background: rgba(26, 255, 128, 0.15);
         }
+
+        .questions-scroll {
+            max-height: 500px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+        .questions-scroll::-webkit-scrollbar {
+            width: 5px;
+            background: #054424;
+        }
+        .questions-scroll::-webkit-scrollbar-thumb {
+            background: var(--fallout-green);
+        }
     </style>
 </head>
 <body class="crt">
@@ -275,12 +288,12 @@
                 </div>
 
                 <!-- Monitor de Preguntas -->
-                <div class="flex-1 w-full border-4 border-double border-green-500 p-6 bg-black/40 min-h-[350px] relative">
+                <div class="flex-1 w-full border-4 border-double border-green-500 p-6 bg-black/40 min-h-[450px] relative">
                     <div class="absolute top-2 right-4 text-xs opacity-40">DISPLAY_MEM_UDR</div>
                     <h2 class="text-3xl mb-4 text-white bg-green-900/50 inline-block px-2" id="unit-title">>> SELECCIONE NODO</h2>
-                    <div id="questions-area" class="text-xl space-y-3">
+                    <div id="questions-area" class="text-xl space-y-3 questions-scroll">
                         <p class="animate-pulse">CARGANDO MÓDULOS DE EXPOSICIÓN...</p>
-                        <p class="text-sm opacity-50 mt-4">Nota: Cada unidad contiene 6 preguntas clave para el éxito de su misión académica.</p>
+                        <p class="text-sm opacity-50 mt-4">Nota: Cada unidad contiene 10 preguntas para pensamiento crítico en administración y contaduría.</p>
                     </div>
                 </div>
             </div>
@@ -302,7 +315,6 @@
             <!-- Botones y Enlaces -->
             <div class="mt-12 flex flex-col md:flex-row items-center justify-center gap-12">
                 <div class="text-center">
-                    <!-- BOTÓN ROSADO MODIFICADO: Ya no tiene láser, ahora reproduce un ping común al hacer clic -->
                     <button class="neon-btn" id="rosadoBtn">
                         <div class="energy-charge"></div>
                         <svg viewBox="0 0 24 24" width="60" height="60" fill="currentColor">
@@ -314,7 +326,6 @@
                 </div>
 
                 <div class="flex flex-col gap-4">
-                    <!-- NUEVO BOTÓN: VER GRUPOS (justo arriba de REINICIAR TERMINAL) -->
                     <button class="border-2 border-green-500 px-10 py-2 text-xl hover:bg-green-900 transition-colors flex items-center justify-center gap-2 group-btn"
                             onclick="window.open('https://docs.google.com/spreadsheets/d/1o4zZyIqcgwTAanrzcFyCgwKU7cyZPFntbCnKnSNitLE/edit?usp=drive_link', '_blank')">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -339,19 +350,108 @@
     </div>
 
     <script>
-        // --- DATOS DE TÓPICOS (1-8) ---
+        // ======================== NUEVOS TÓPICOS (10 PREGUNTAS POR UNIDAD) ========================
+        // Cada palabra en inglés está dentro de <i> </i> para cursiva visual
         const microData = {
-            1: ["¿Qué es la lectura global (Skimming) y cuál es su propósito?", "¿Cómo se diferencia la lectura selectiva (Scanning) de la lectura global?", "Identifique tres tipos de títulos y su función en la anticipación del contenido.", "Explique la importancia de los elementos paratextuales (imágenes, negritas, índices).", "¿Cómo ayudan los cognados (palabras similares) en la comprensión inicial?", "¿Qué papel juega el conocimiento previo del lector en esta fase?"],
-            2: ["¿Qué es el contexto de situación y cómo influye en la interpretación?", "¿Cómo ayudan las pistas tipográficas a jerarquizar la información?", "Defina 'Palabras Clave' y explique cómo seleccionarlas correctamente.", "¿Cuál es la función de los conectores lógicos en la estructura de un párrafo?", "Explique la técnica de ignorar palabras no esenciales para mantener la fluidez.", "¿Cómo se identifican las categorías gramaticales básicas para entender la oración?"],
-            3: ["¿Qué es la Idea Principal y cómo se diferencia de las ideas secundarias?", "Explique la técnica para encontrar la idea principal cuando no es explícita.", "¿Cómo afectan los prefijos y sufijos al significado de las raíces de las palabras?", "Defina 'Referencia Textual' (Anáfora y Catáfora) con un ejemplo.", "¿Para qué sirve el análisis de la estructura de la oración (Sujeto + Verbo + Complemento)?", "¿Cómo se distingue un hecho de una opinión dentro del texto?"],
-            4: ["¿Qué son los marcadores de secuencia y por qué son vitales en procesos?", "Explique el uso de diccionarios técnicos versus diccionarios generales.", "¿Cómo se interpreta el vocabulario técnico a partir del contexto inmediato?", "Describa la función de los gráficos y tablas como apoyo a la lectura.", "¿Qué importancia tiene identificar la intención del autor (informar, persuadir, etc.)?", "¿Cómo se realiza un mapa conceptual básico a partir de un texto leído?"],
-            5: ["¿Qué es la Idea Principal y cómo se diferencia de las ideas secundarias?", "¿Cómo se identifica la ubicación de la idea principal en párrafos deductivos e inductivos?", "Defina 'Palabras Clave' y explique su importancia para la recuperación de información.", "¿Qué técnicas permiten distinguir entre información esencial y decorativa?", "¿Cómo influyen los detalles de apoyo en la validez de la idea principal?", "Explique el proceso de síntesis para extraer la esencia de un texto largo."],
-            6: ["¿Qué son los Afijos (prefijos y sufijos) y cómo cambian la categoría gramatical?", "Explique la importancia de identificar la 'Raíz' de una palabra técnica.", "Defina 'Cognados falsos' (false friends) y proporcione tres ejemplos comunes.", "¿Cómo ayuda el análisis morfológico a deducir el significado de palabras desconocidas?", "¿Cuál es la diferencia entre un sufijo flexivo y uno derivativo?", "Mencione tres prefijos negativos y su impacto en el sentido de la oración."],
-            7: ["¿Qué es la 'Referencia Textual' y cuál es su función en la cohesión?", "Explique la diferencia entre Referencia Anafórica y Catafórica.", "Identifique tres pronombres comunes que actúan como elementos de referencia.", "¿Cómo se resuelven las ambigüedades cuando un pronombre tiene varios antecedentes?", "Explique el concepto de Elipsis y cómo afecta la velocidad de lectura.", "¿Por qué el seguimiento de referencias es crítico para no perder el hilo del texto?"],
-            8: ["¿Qué es la Paráfrasis y cómo demuestra la comprensión real del lector?", "Explique la diferencia crítica entre realizar una síntesis y una paráfrasis.", "Defina el concepto de 'Inferencia Lógica' y dé un ejemplo.", "¿Cómo se diferencia una evidencia textual de una conclusión basada en inferencia?", "Describa la estrategia de 'Post-lectura' para verificar inferencias.", "¿Cómo contribuye la capacidad de síntesis a la eficiencia organizacional?"]
+            1: [
+                '¿Cómo permite el <i>skimming</i> que un administrador identifique la viabilidad de un proyecto sin leer las 50 páginas del informe?',
+                'En una auditoría con miles de datos, ¿qué criterios usarías para que el <i>scanning</i> sea efectivo y no pierdas tiempo en información irrelevante?',
+                'Si un informe financiero carece de gráficos o negritas, ¿de qué manera se ve afectada la velocidad de toma de decisiones del gerente?',
+                '¿Cómo influye un título "sugestivo" en la predisposición del lector antes de analizar un balance de pérdidas y ganancias?',
+                '¿En qué medida el uso de <i>cognados verdaderos</i> facilita la internacionalización de un contador venezolano?',
+                '¿Por qué un experto en finanzas puede comprender un texto técnico en inglés mejor que un traductor que no conoce el área administrativa?',
+                'Al describir un "activo" (<i>asset</i>), ¿cómo cambia el impacto financiero si usamos el adjetivo <i>liquid</i> frente a <i>fixed</i>?',
+                'En un manual de procedimientos, ¿cuál es el riesgo de confundir un verbo transitivo con uno intransitivo al asignar responsabilidades?',
+                '¿Qué consecuencias legales tendría en un contrato confundir la preposición <i>at</i> con <i>on</i> en una fecha de entrega de divisas?',
+                '¿Cómo altera el sentido de una deuda contable el uso de <i>some</i> en lugar de <i>all</i> al referirse a los pasivos de la empresa?'
+            ],
+            2: [
+                '¿Cómo ayuda el desglosar la palabra <i>depreciation</i> a entender el concepto contable de pérdida de valor sin usar un diccionario?',
+                'Si traduces <i>actual profit</i> como "Ganancia actual", ¿qué error estratégico estarías cometiendo frente a una junta directiva?',
+                '¿Por qué es útil para un negociador conocer que <i>revenue</i> e <i>income</i> son similares al redactar una propuesta de inversión?',
+                '¿Cómo ayuda la identificación de opuestos como <i>assets</i> y <i>liabilities</i> a estructurar mentalmente un estado de situación financiera?',
+                'Ante un <i>unrealized profit</i>, ¿qué acciones debería tomar un administrador para que esa ganancia pase a ser efectiva?',
+                '¿De qué manera el prefijo <i>pre-</i> en <i>prepaid expenses</i> altera la ubicación de esa cuenta en el balance general?',
+                '¿Cómo identificas si un término se refiere a un proceso o a un resultado analizando sufijos como <i>-tion</i> o <i>-ment</i>?',
+                'Si una cuenta es descrita como <i>taxable</i>, ¿qué implicaciones fiscales directas tiene para la planificación de la empresa?',
+                'Al resumir un reporte de mercado, ¿qué criterios determinan que una palabra es "clave" y no meramente decorativa?',
+                '¿Cómo cambia la interpretación del término <i>stock</i> si el contexto es una bodega de inventario frente a la Bolsa de Valores?'
+            ],
+            3: [
+                '¿De qué forma el uso de pronombres de objeto (<i>them, it</i>) agiliza la lectura de informes de auditoría densos?',
+                'En una disputa legal corporativa, ¿cómo define el pronombre <i>ours</i> vs <i>theirs</i> la propiedad de los activos tangibles?',
+                '¿Por qué un auditor enfatizaría que la empresa <i>itself</i> realizó la corrección de errores contables?',
+                'Si pierdes el antecedente de un pronombre al leer un contrato, ¿qué riesgos de interpretación legal enfrentas?',
+                '¿Cómo utiliza un autor la referencia anticipada para generar interés o tensión en el análisis de una crisis financiera?',
+                'Si el pronombre <i>they</i> puede referirse a "socios" o a "acreedores", ¿qué pistas contextuales usarías para decidir?',
+                'Al presentar estadísticas, ¿cómo ayuda <i>this</i> o <i>those</i> a dirigir la atención precisa de los inversionistas?',
+                '¿De qué manera los pronombres relativos <i>who</i> o <i>which</i> permiten conectar departamentos y funciones sin repetir nombres innecesariamente?',
+                '¿Cómo afecta la credibilidad de un reporte administrativo un error de concordancia sujeto-verbo en inglés técnico?',
+                '¿En qué situaciones es más "seguro" para un gerente usar un pronombre indefinido (<i>some</i>) en lugar de una cifra exacta?'
+            ],
+            4: [
+                '¿Por qué un error en el orden de los conectores (<i>first, then</i>) invalidaría un manual de cierre fiscal?',
+                '¿Cómo refuerzan palabras como <i>furthermore</i> la solidez de una propuesta de expansión de negocios?',
+                'Si un balance dice <i>Revenue increased; however, net profit fell</i>, ¿qué pregunta crítica debería hacerse el gerente?',
+                '¿Cómo ayuda el conector <i>as a result</i> a explicar la caída de acciones debido a factores externos del mercado?',
+                '¿Qué peso argumentativo aporta el uso de <i>for instance</i> cuando se propone un cambio en la política de gastos?',
+                '¿Cómo una coma mal colocada después de un conector lógico puede alterar la interpretación de una norma contable?',
+                '¿Por qué sería inapropiado usar el conector <i>so</i> en lugar de <i>consequently</i> en un reporte enviado a un ente regulador?',
+                'Al leer un editorial económico, ¿cómo revelan los conectores si el autor busca informar o manipular la opinión pública?',
+                '¿En qué caso un diccionario general podría darte una definición errónea de un término administrativo clave?',
+                '¿Qué pasos lógicos sigues para entender una palabra técnica desconocida sin interrumpir el flujo de lectura?'
+            ],
+            5: [
+                '¿Cómo diferencias un informe financiero profesional de un borrador analizando su estructura textual?',
+                '¿Cómo ayuda un estudio de caso narrativo a que un equipo aprenda de los errores de una quiebra empresarial previa?',
+                'En un reporte anual, ¿qué elementos lingüísticos garantizan que la descripción de los activos sea objetiva?',
+                'Al leer un texto argumentativo sobre impuestos, ¿cómo separas la opinión del autor de los hechos estadísticos?',
+                '¿Qué características hacen que un manual de usuario de software contable sea efectivo o ineficiente?',
+                'Si un párrafo mezcla introducción con conclusión, ¿cómo afecta esto la claridad del mensaje administrativo?',
+                '¿Por qué un administrador debería preferir oraciones simples y directas al redactar memorandos de urgencia?',
+                'Para un lector con poco tiempo, ¿cuál de estos dos tipos de párrafos (deductivo/inductivo) es más eficiente y por qué?',
+                '¿Qué técnica aplicarías para filtrar el "ruido" o datos decorativos en un reporte de 20 páginas?',
+                '¿De qué manera la estructura "Oración-Párrafo-Texto" refleja la organización de una empresa exitosa?'
+            ],
+            6: [
+                '¿Cómo confirmas que la idea principal identificada es realmente el núcleo del texto y no un detalle de apoyo?',
+                'Si el autor no declara su intención, ¿qué pistas en los detalles de apoyo te permiten descubrir el mensaje oculto?',
+                '¿En qué se diferencia el uso de una "estadística" del uso de un "ejemplo" para validar una decisión gerencial?',
+                '¿Cómo visualiza una <i>red semántica</i> la interconexión entre ingresos, gastos e impuestos de forma más clara que un texto?',
+                'Al enfrentar un problema de oficina, ¿cómo ayuda un <i>mapa mental</i> a organizar una lluvia de ideas sin perder el enfoque?',
+                '¿Por qué es el <i>mapa conceptual</i> la herramienta ideal para jerarquizar las Normas Internacionales de Información Financiera (NIIF)?',
+                'Si comparas las normativas contables de Venezuela frente a las de EE.UU., ¿qué te revela la zona de superposición del <i>diagrama de Venn</i>?',
+                'Ante una caída en las ventas, ¿cómo ayuda el <i>diagrama de Ishikawa</i> a encontrar la "causa raíz" en lugar de solo atacar los síntomas?',
+                '¿Cómo garantiza un <i>diagrama de Gantt</i> que un proceso de auditoría externa se cumpla en los tiempos legales establecidos?',
+                '¿Cómo evita la <i>técnica de los 5 Porqués</i> que un administrador tome decisiones superficiales ante un error en el libro diario?'
+            ],
+            7: [
+                '¿De qué manera la disposición de las ideas (<i>retórica</i>) determina si un cliente aprueba o rechaza una propuesta?',
+                '¿Por qué un reporte científico de economía combina descripción fáctica con argumentación lógica?',
+                '¿Qué elemento de la estructura argumentativa es el más crítico para convencer a un inversionista escéptico?',
+                '¿Cuándo un "<i>argumento de autoridad</i>" es válido y cuándo se convierte en una presión injustificada en una reunión?',
+                '¿Por qué un gerente nunca debería basar una estrategia solo en ejemplos anecdóticos sin el respaldo de hechos estadísticos?',
+                '¿Qué riesgos corres al comparar tu empresa con otra de un sector diferente para justificar una inversión (<i>analogía</i>)?',
+                '¿Cómo ayuda la estructura estándar de un artículo de economía (<i>IMRAD</i>) a que un investigador localice datos rápidamente?',
+                '¿Qué preguntas le harías a un informe de gestión para verificar que sus conclusiones no son falaces?',
+                '¿Cómo afecta la omisión de palabras obvias (<i>elipsis</i>) la fluidez de un lector avanzado frente a uno principiante?',
+                '¿Por qué perder el hilo de a quién se refiere el texto puede causar una interpretación financiera desastrosa?'
+            ],
+            8: [
+                '¿Cómo condensarías un informe de 100 páginas en un párrafo sin perder la esencia de los hallazgos críticos? (<i>Resumen ejecutivo</i>)',
+                '¿En qué momento la <i>paráfrasis</i> deja de ser una herramienta de comprensión y se convierte en una distorsión de la idea original?',
+                'Si tienes tres reportes de mercado opuestos, ¿cómo logras una <i>síntesis</i> que guíe la decisión final de la empresa?',
+                '¿Es seguro inferir que el próximo año será rentable basándose solo en los datos de los últimos tres meses? (<i>generalización inductiva</i>)',
+                'Si sabes que la ley exige transparencia, ¿qué infieres sobre una empresa que oculta sus estados financieros? (<i>deducción</i>)',
+                '¿Cómo detectas "opiniones disfrazadas de hechos" analizando el uso de verbos como <i>believe</i> o <i>seems</i>?',
+                '¿Cómo el "<i>sesgo de confirmación</i>" puede llevar a un auditor a ignorar pruebas críticas de un fraude?',
+                'Si un competidor usa el "<i>falso dilema</i>" (O invierten conmigo o perderán todo), ¿cómo desarmas ese argumento lógicamente?',
+                '¿Por qué es peligroso asumir que una subida en las ventas se debe solo a una campaña publicitaria reciente? (<i>falacia post hoc</i>)',
+                '¿Qué pasos de la estrategia de <i>post-lectura</i> garantizan que tu conclusión no es solo una suposición personal?'
+            ]
         };
 
-        // --- DATOS GUÍA YOUTUBE ---
+        // --- DATOS GUÍA YOUTUBE (sin cambios) ---
         const youtubeSteps = [
             "PASO 1: Accede a YouTube Studio con tu cuenta UDO/Personal.",
             "PASO 2: Pulsa 'Crear' y sube tu archivo al canal de Inglés I (MP4 recomendado).",
@@ -395,34 +495,30 @@
             rotation = -angle;
             wheel.style.transform = `rotate(${rotation}deg)`;
             
-            // Compensar rotación del texto de los nodos
             const nodes = document.querySelectorAll('.unit-node');
             nodes.forEach(n => n.style.transform = `translate(-50%, -50%) rotate(${-rotation}deg)`);
 
-            // Actualizar monitor
             const area = document.getElementById('questions-area');
             const title = document.getElementById('unit-title');
-            title.innerText = `>> UNIDAD 0${num}: CARGADA`;
+            title.innerText = `>> UNIDAD 0${num}: CARGADA (10 PREGUNTAS)`;
             
             area.innerHTML = '';
             microData[num].forEach((q, idx) => {
                 const div = document.createElement('div');
                 div.className = 'question-item';
+                // Mostrar el texto con las etiquetas <i> ya incluidas (se renderizan como HTML)
                 div.innerHTML = `<span class="font-bold text-white mr-2">P${idx+1}:</span> ${q}`;
                 area.appendChild(div);
             });
-
-            playSfx(400, 0.05); // Sonido de terminal
+            playSfx(400, 0.05);
         }
 
-        // --- LÓGICA GUÍA YOUTUBE (CORREGIDA: primer clic muestra PASO 1) ---
-        let currentStep = -1;          // empezamos antes del primer paso
+        // --- LÓGICA GUÍA YOUTUBE ---
+        let currentStep = -1;
         const guideDisplay = document.getElementById('guide-display');
 
         function nextStep() {
-            // Incrementamos y ciclamos (ahora la primera llamada pasa de -1 a 0)
             currentStep = (currentStep + 1) % youtubeSteps.length;
-            // Animación de fade para efecto glitch
             guideDisplay.style.opacity = 0;
             setTimeout(() => {
                 guideDisplay.innerText = youtubeSteps[currentStep];
@@ -436,7 +532,6 @@
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
         function playSfx(f, d) {
-            // Evita errores si el contexto está suspendido, se reanuda en el primer clic global
             if (audioCtx.state === 'suspended') return;
             const osc = audioCtx.createOscillator();
             const g = audioCtx.createGain();
@@ -450,13 +545,9 @@
             osc.stop(audioCtx.currentTime + d);
         }
 
-        // --- NUEVO: PING COMÚN PARA EL BOTÓN ROSADO ---
         function playPing() {
             if (audioCtx.state === 'suspended') {
-                // Si está suspendido, lo reanudamos y luego reproducimos el ping
-                audioCtx.resume().then(() => {
-                    generatePing();
-                }).catch(e => console.log("Audio resume error", e));
+                audioCtx.resume().then(() => generatePing()).catch(e => console.log("Audio resume error", e));
             } else {
                 generatePing();
             }
@@ -467,9 +558,8 @@
                 const now = audioCtx.currentTime;
                 const osc = audioCtx.createOscillator();
                 const gain = audioCtx.createGain();
-                // Frecuencia agradable tipo ping: 880 Hz (A5) + un pequeño armónico?
                 osc.frequency.value = 880;
-                osc.type = 'sine';  // sonido más limpio y "común"
+                osc.type = 'sine';
                 gain.gain.setValueAtTime(0.12, now);
                 gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.35);
                 osc.connect(gain);
@@ -479,29 +569,22 @@
             } catch(e) { console.warn("ping error", e); }
         }
 
-        // --- MANEJADOR DEL BOTÓN ROSADO: reproduce ping y luego abre el enlace ---
         const rosadoBtn = document.getElementById('rosadoBtn');
         if (rosadoBtn) {
             rosadoBtn.addEventListener('click', (e) => {
-                e.preventDefault();  // Evita cualquier comportamiento extraño
-                playPing();          // Sonido de ping común
-                // Pequeña pausa para que el sonido se escuche bien antes de redirigir (opcional pero mejora experiencia)
+                e.preventDefault();
+                playPing();
                 setTimeout(() => {
                     window.open('https://www.youtube.com/playlist?list=PLS8Cs1ADO2Dc932uGrkl1T_4xtJhx_Klm', '_self');
                 }, 50);
             });
         }
 
-        // Inicializar audio context con la interacción del usuario (evita bloqueo autoplay)
-        // Al primer clic en cualquier lugar se reanuda el contexto si está suspendido.
         document.body.addEventListener('click', function initAudio() {
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
         }, { once: true });
-        
-        // También nos aseguramos de que si se hace clic directamente en el botón rosado antes de cualquier otro,
-        // se reanude el contexto. El evento de body ya lo maneja, pero el playPing también lo intenta.
     </script>
 </body>
 </html>
