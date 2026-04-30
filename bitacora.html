@@ -93,6 +93,12 @@
             outline: none;
         }
 
+        .bitacora-btn:disabled {
+            cursor: not-allowed;
+            filter: grayscale(0.2);
+            opacity: 0.85;
+        }
+
         .bitacora-btn::before {
             content: "";
             position: absolute;
@@ -302,7 +308,6 @@
                 if (!audioCtx) {
                     audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 }
-                // Reanudar contexto si está suspendido (necesario en navegadores modernos)
                 if (audioCtx.state === 'suspended') {
                     await audioCtx.resume();
                 }
@@ -366,22 +371,34 @@
             }
         }
 
-        // ------------------- EVENTO DEL BOTÓN ROJO -------------------
+        // ------------------- EVENTO DEL BOTÓN ROJO (NUEVA VENTANA) -------------------
+        // URL del formulario de Google (idéntica a la original)
+        const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
+
         bitacoraBtn.addEventListener('click', function(e) {
-            e.stopPropagation(); // evitar que el click avance el texto si aún está visible
-            // Añadir efecto visual de energía
+            e.stopPropagation();          // Evitar que el click avance el texto si aún está visible
+
+            // Prevenir múltiples aperturas rápidas (deshabilitar temporalmente)
+            if (bitacoraBtn.disabled) return;
+            bitacoraBtn.disabled = true;
+
+            // Efecto visual de energía
             bitacoraBtn.classList.add('energy-burst');
             setTimeout(() => {
                 bitacoraBtn.classList.remove('energy-burst');
             }, 300);
 
-            // Reproducir sonido láser/energía
+            // Reproducir sonido láser / descarga
             playLaserChargeSound();
 
-            // Redirigir al formulario después de un pequeño delay para que el sonido y animación se sientan
+            // ABRIR EL FORMULARIO EN UNA NUEVA VENTANA / PESTAÑA (requerimiento principal)
+            // Se usa '_blank' y 'noopener,noreferrer' por seguridad y mejor soporte en navegadores
+            window.open(FORM_URL, '_blank', 'noopener,noreferrer');
+
+            // Re-habilitar el botón después de un breve tiempo para evitar spam
             setTimeout(() => {
-                window.location.href = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
-            }, 150);
+                if (bitacoraBtn) bitacoraBtn.disabled = false;
+            }, 800);
         });
 
         // Iniciar escritura automática
