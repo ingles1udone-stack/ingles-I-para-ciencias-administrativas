@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Glossary - Inglés I</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #e6e9ef;
+            font-family: 'Rajdhani', sans-serif;
+            color: #1a1a1a;
+            margin: 0;
+            padding: 20px;
+        }
+        .mono {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .vault-container {
+            width: 100%;
+            background: #ffffff;
+            border: 4px solid #2c3e2f;
+            padding: 40px;
+            position: relative;
+            box-shadow: 12px 12px 0 rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .header-box {
+            border-bottom: 4px double #2c3e2f;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+        }
+        .title-main {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            line-height: 1;
+            color: #1e2a1f;
+        }
+        .section-header {
+            background: #dadce0;
+            border-left: 8px solid #2c3e2f;
+            padding: 6px 18px;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 1.3rem;
+            margin: 32px 0 20px 0;
+            page-break-after: avoid;
+        }
+        .letter-block {
+            margin-bottom: 28px;
+            page-break-inside: avoid;
+        }
+        .letter-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            border-bottom: 2px solid #8b9a6e;
+            margin-bottom: 12px;
+            padding-bottom: 4px;
+            color: #2c3e2f;
+        }
+        /* Estilos para términos anidados */
+        .glossary-term {
+            margin-bottom: 18px;
+            border-left: 2px solid #cbd5c0;
+            padding-left: 18px;
+        }
+        .base-word {
+            font-weight: 800;
+            font-size: 1rem;
+            color: #1f4d1c;
+            display: inline-block;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            border-bottom: 1px dashed #b3c4a3;
+            padding-right: 12px;
+        }
+        .empty-definition {
+            display: inline-block;
+            border-bottom: 1.5px dashed #a0b894;
+            min-width: 200px;
+            margin-left: 12px;
+            height: 22px;
+            vertical-align: middle;
+        }
+        .sub-term-list {
+            margin-left: 24px;
+            margin-top: 6px;
+            margin-bottom: 8px;
+            list-style: none;
+            padding-left: 0;
+        }
+        .sub-term-list li {
+            font-size: 0.9rem;
+            padding: 3px 0;
+            border-bottom: 1px dotted #e2e6df;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+        }
+        .term-name {
+            font-weight: 600;
+            min-width: 200px;
+            display: inline-block;
+            color: #2c4727;
+        }
+        /* Tabla de cognados */
+        .cognados-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.2rem 0;
+            font-size: 0.85rem;
+        }
+        .cognados-table th, .cognados-table td {
+            border: 1px solid #cbd5c0;
+            padding: 7px 12px;
+            background-color: #fefef7;
+            text-align: left;
+        }
+        .cognados-table th {
+            background: #eef2e9;
+            font-weight: 700;
+            font-family: 'Share Tech Mono', monospace;
+        }
+        .badge-count {
+            background: #2b4127;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-left: 14px;
+            vertical-align: middle;
+            font-weight: normal;
+        }
+        .note {
+            background: #ecf3e7;
+            padding: 12px 18px;
+            font-size: 0.8rem;
+            margin: 20px 0;
+        }
+        .tip-box {
+            background: #fef0cf;
+            border-left: 4px solid #e0a800;
+            padding: 8px 16px;
+            margin-top: 12px;
+            font-size: 0.85rem;
+        }
+        .instruction-box {
+            background: #fef9e6;
+            border-left: 6px solid #e0a800;
+            padding: 16px 20px;
+            margin: 20px 0;
+        }
+        .requirement-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .requirement-list li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 24px;
+        }
+        .requirement-list li::before {
+            content: "▹";
+            position: absolute;
+            left: 4px;
+            color: #5f7a4e;
+        }
+        .vault-footer {
+            margin-top: 40px;
+            border-top: 2px solid #2c3e2f;
+            padding-top: 14px;
+            font-size: 0.75rem;
+            text-align: center;
+            color: #4a5b4a;
+        }
+        @media print {
+            .no-print { display: none; }
+            body { background: white; padding: 0; margin: 0; }
+            .vault-container {
+                border: 2px solid black;
+                box-shadow: none;
+                padding: 18px;
+                margin: 0;
+            }
+            .letter-block {
+                break-inside: avoid;
+            }
+        }
+        .scanline {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.03) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        .input-line {
+            border-bottom: 1.5px solid #3c5e3a;
+            display: inline-block;
+            min-width: 120px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="vault-container">
+    <div class="scanline"></div>
+
+    <!-- CABECERA -->
+    <div class="header-box">
+        <div>
+            <div class="title-main">My Glossary</div>
+            <div class="mono text-sm">Glosario Académico Permanente</div>
+            <div class="text-md font-semibold">Inglés I para Cs. Administrativas</div>
+            <div class="text-sm">Prof. Oney Clavijo</div>
+        </div>
+        <div class="text-right mono text-sm">
+            <p>ESTUDIANTE: <span class="input-line w-32"></span></p>
+            <p>SECCIÓN: <span class="input-line w-16"></span></p>
+        </div>
+    </div>
+
+    <!-- INSTRUCCIONES PRINCIPALES -->
+    <div class="instruction-box">
+        <p class="font-bold text-lg">Guía para la Elaboración del Glosario Académico Permanente</p>
+        <p class="text-sm mt-1">Este glosario es una herramienta de construcción personal diseñada para acompañarle durante todo el periodo académico. Junto con los <strong>diccionarios</strong> y las <strong>guías de estudio</strong>, este documento será uno de los materiales de apoyo autorizados para su uso durante talleres y exámenes.</p>
+    </div>
+
+    <!-- REQUISITOS DE PRESENTACIÓN -->
+    <div class="section-header">1. Requisitos de Presentación (Estándar Profesional)</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Soporte Físico:</strong> Únicamente hojas sueltas (blancas o rayadas) <strong>tamaño Carta o A4</strong>.</li>
+            <li><strong>Restricción de Material:</strong> Se prohíben estrictamente las hojas arrancadas de cuadernos (con restos de espiral o bordes irregulares), papel arrugado, manchado o con tachaduras.</li>
+            <li><strong>Encabezado:</strong> La primera página debe incluir: Nombre completo, Asignatura/Sección y Título. Todas las páginas deben estar debidamente numeradas y unidas de manera conveniente (por ej. engrapadas o encuadernadas).</li>
+            <li><strong>Escritura:</strong> El trabajo debe ser <strong>completamente manuscrito</strong> (a mano) con letra clara y legible. Use bolígrafo para las definiciones; el uso de lápiz queda limitado a esquemas o notas marginales.</li>
+        </ul>
+    </div>
+
+    <!-- CONTENIDO Y METODOLOGÍA -->
+    <div class="section-header">2. Contenido y Metodología</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Base Obligatoria:</strong> Debe investigar y redactar el significado en español de los <strong> términos</strong> proporcionados.</li>
+            <li><strong>Orden Alfabético:</strong> Los conceptos deben presentarse en estricto orden alfabético para permitir una consulta rápida durante las evaluaciones.</li>
+            <li><strong>Naturaleza Dinámica:</strong> Este es un documento vivo. Se le insta a <strong>agregar nuevos términos</strong> que surjan en las lecturas, materiales de clase y discusiones a lo largo del curso. Un glosario más robusto le brindará una ventaja competitiva en sus exámenes.</li>
+        </ul>
+    </div>
+
+    <!-- ENTREGA Y EVALUACIÓN -->
+    <div class="section-header">3. Entrega y Evaluación</div>
+    <div>
+        <ul class="requirement-list">
+            <li><strong>Plazo Único:</strong> El glosario debe entregarse físicamente al profesor <strong>al inicio de la primera semana del semestre</strong>.</li>
+            <li><strong>Política de Recepción:</strong> No se aceptará la entrega tardía bajo ninguna circunstancia. El trabajo debe estar listo antes de cruzar el umbral de la puerta del salón.</li>
+            <li><strong>Ponderación:</strong> 5% de la calificación final.</li>
+            <li><strong>Validación de Uso:</strong> Solo los glosarios que cumplan con estos requisitos de orden y limpieza serán sellados y autorizados como material de apoyo en clase.</li>
+        </ul>
+        <div class="tip-box">
+            <span class="font-bold">⚠️ Aviso importante:</span> Debido a la extensión de numerosos términos y los estándares de limpieza exigidos, este trabajo requiere una planificación adecuada. No es posible realizarlo con calidad en los minutos previos a la sesión.
+        </div>
+    </div>
+
+    <div class="instruction-box">
+        <p class="font-bold text-xl">📘 CÓMO USAR ESTE GLOSARIO</p>
+        <ul class="list-disc pl-5 mt-2 space-y-1 text-sm">
+            <li><strong>🔤 Cognados verdaderos:</strong> En la tabla inferior están las palabras con escritura casi idéntica al español. Cópialas a mano. Busca su significado en un diccionario.</li>
+            <li><strong>📌 Organización por palabra base:</strong> Ejemplo: <em>balance sheet</em> está dentro de <strong>Balance</strong>. No busques <em>sheet</em> suelto.</li>
+            <li><strong>✍️ Formato físico:</strong> Todo el glosario debe ser manuscrito con bolígrafo, letra clara, en hojas tamaño carta.</li>
+        </ul>
+    </div>
+
+    <!-- COGNADOS VERDADEROS -->
+    <div class="section-header">🧠 COGNADOS VERDADEROS · inglés → español <span class="badge-count">62 pares</span></div>
+    <table class="cognados-table">
+        <thead><tr><th>Inglés (cognado)</th><th>Español</th></tr></thead>
+        <tbody>
+            <tr><td>Absenteeism</td><td>absentismo</td></tr>
+            <tr><td>Absolute</td><td>absoluto</td></tr>
+            <tr><td>Adaptability</td><td>adaptabilidad</td></tr>
+            <tr><td>Anonymity</td><td>anonimato</td></tr>
+            <tr><td>Automation</td><td>automatización</td></tr>
+            <tr><td>Balance</td><td>balance</td></tr>
+            <tr><td>Bond</td><td>bono</td></tr>
+            <tr><td>Bureaucratic</td><td>burocrático</td></tr>
+            <tr><td>Capital</td><td>capital</td></tr>
+            <tr><td>Collaboration</td><td>colaboración</td></tr>
+            <tr><td>Conflict</td><td>conflicto</td></tr>
+            <tr><td>Contradiction</td><td>contradicción</td></tr>
+            <tr><td>Coordination</td><td>coordinación</td></tr>
+            <tr><td>Credibility</td><td>credibilidad</td></tr>
+            <tr><td>Democratic</td><td>democrático</td></tr>
+            <tr><td>Discrepancy</td><td>discrepancia</td></tr>
+            <tr><td>Discrimination</td><td>discriminación</td></tr>
+            <tr><td>Dynamic</td><td>dinámico</td></tr>
+            <tr><td>Economic</td><td>económico</td></tr>
+            <tr><td>Efficiency</td><td>eficiencia</td></tr>
+            <tr><td>Emotional</td><td>emocional</td></tr>
+            <tr><td>Equity</td><td>equidad</td></tr>
+            <tr><td>External</td><td>externo</td></tr>
+            <tr><td>Financial</td><td>financiero</td></tr>
+            <tr><td>Human</td><td>humano</td></tr>
+            <tr><td>Inflation</td><td>inflación</td></tr>
+            <tr><td>Integrity</td><td>integridad</td></tr>
+            <tr><td>Intelligence</td><td>inteligencia</td></tr>
+            <tr><td>Intervention</td><td>intervención</td></tr>
+            <tr><td>Inventory</td><td>inventario</td></tr>
+            <tr><td>Investment</td><td>inversión</td></tr>
+            <tr><td>Legal</td><td>legal</td></tr>
+            <tr><td>Logistics</td><td>logística</td></tr>
+            <tr><td>Manipulation</td><td>manipulación</td></tr>
+            <tr><td>Mentorship</td><td>mentoría</td></tr>
+            <tr><td>Micro-enterprise</td><td>microempresa</td></tr>
+            <tr><td>Monitoring</td><td>monitoreo</td></tr>
+            <tr><td>Norm</td><td>norma</td></tr>
+            <tr><td>Organizational</td><td>organizacional</td></tr>
+            <tr><td>Paradigm</td><td>paradigma</td></tr>
+            <tr><td>Passive</td><td>pasivo</td></tr>
+            <tr><td>Personal</td><td>personal</td></tr>
+            <tr><td>Philosophical</td><td>filosófico</td></tr>
+            <tr><td>Proactive</td><td>proactivo</td></tr>
+            <tr><td>Professional</td><td>profesional</td></tr>
+            <tr><td>Psychosocial</td><td>psicosocial</td></tr>
+            <tr><td>Radical</td><td>radical</td></tr>
+            <tr><td>Re-evaluation</td><td>reevaluación</td></tr>
+            <tr><td>Reconciliation</td><td>conciliación</td></tr>
+            <tr><td>Recurring</td><td>recurrente</td></tr>
+            <tr><td>Resilience</td><td>resiliencia</td></tr>
+            <tr><td>Rigorous</td><td>riguroso</td></tr>
+            <tr><td>Strategic</td><td>estratégico</td></tr>
+            <tr><td>Synergy</td><td>sinergia</td></tr>
+            <tr><td>Transaction</td><td>transacción</td></tr>
+            <tr><td>Transformation</td><td>transformación</td></tr>
+            <tr><td>Transparency</td><td>transparencia</td></tr>
+            <tr><td>Unproductive</td><td>improductivo</td></tr>
+            <tr><td>Viability</td><td>viabilidad</td></tr>
+            <tr><td>Vulnerability</td><td>vulnerabilidad</td></tr>
+        </tbody>
+    </table>
+    <div class="note text-xs">✔ Cognados verdaderos verificados. Usa diccionario para significados adicionales según contexto.</div>
+
+    <!-- GLOSARIO PRINCIPAL COMPLETO (A - W) -->
+    <div class="section-header">📚 GLOSARIO PRINCIPAL · <span class="font-mono">A – W</span> <span class="badge-count">520+ términos</span></div>
+    <p class="text-sm -mt-2 mb-3">Escribe la definición en español al lado de cada palabra base y cada término compuesto. Los términos compuestos están anidados bajo su palabra base.</p>
+
+    <!-- A -->
+    <div class="letter-block"><div class="letter-title">A</div>
+        <div class="glossary-term"><span class="base-word">Ability</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Absenteeism</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Absolute reliability</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Account</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">compromised account</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Accounting</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">accounting standards</span><span class="empty-definition"></span></li><li><span class="term-name">compliance with accounting standards</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Active listening</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Adaptability</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Adopt a paradigm</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Advocacy</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Anchoring bias</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Anonymity</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Anticipate challenges</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Artificial intelligence (AI)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Asset</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">strategic asset</span><span class="empty-definition"></span></li><li><span class="term-name">digital assets</span><span class="empty-definition"></span></li><li><span class="term-name">scalable asset</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Audit</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">external audit</span><span class="empty-definition"></span></li><li><span class="term-name">audit risk</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Authentic</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">authentic engagement</span><span class="empty-definition"></span></li><li><span class="term-name">authentic practice</span><span class="empty-definition"></span></li><li><span class="term-name">authentic purpose</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Authoritative data</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Authority</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Automation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Autonomy</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- B -->
+    <div class="letter-block"><div class="letter-title">B</div>
+        <div class="glossary-term"><span class="base-word">Balance sheet</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Bank statements</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Barrier</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">indefensible barrier</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Bias</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">anchoring bias</span><span class="empty-definition"></span></li><li><span class="term-name">biased evaluations</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Bonds</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Bookkeeping</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Brand</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">brand building</span><span class="empty-definition"></span></li><li><span class="term-name">brand reputation</span><span class="empty-definition"></span></li><li><span class="term-name">personal brand</span><span class="empty-definition"></span></li><li><span class="term-name">employer branding</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Breakthrough opportunities</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Budget</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">budget adherence</span><span class="empty-definition"></span></li><li><span class="term-name">budgeting</span><span class="empty-definition"></span></li><li><span class="term-name">budgeting for wellness</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Burnout</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Business</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">business growth</span><span class="empty-definition"></span></li><li><span class="term-name">business intelligence</span><span class="empty-definition"></span></li><li><span class="term-name">business venture</span><span class="empty-definition"></span></li></ul>
+        </div>
+    </div>
+
+    <!-- C (completa) -->
+    <div class="letter-block"><div class="letter-title">C</div>
+        <div class="glossary-term"><span class="base-word">Capital</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">risk capital</span><span class="empty-definition"></span></li><li><span class="term-name">human capital</span><span class="empty-definition"></span></li><li><span class="term-name">capitalize on opportunities</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Career</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Cash flow statement</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Categorization phase</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Chronic stress</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Clarity</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Cog in a machine</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Coherent</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">coherent framework</span><span class="empty-definition"></span></li><li><span class="term-name">coherent narrative</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Collaboration</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Communication</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">open communication</span><span class="empty-definition"></span></li><li><span class="term-name">regular communication</span><span class="empty-definition"></span></li><li><span class="term-name">transparent communication</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Complete desexualization</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Compliance</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Conflict resolution</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Contemporary contradiction</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Controlling</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Coordinated manipulation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Core expertise</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Corporate values</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Credibility assessment</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Cross-departmental relationships</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Cultural norms</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- D -->
+    <div class="letter-block"><div class="letter-title">D</div>
+        <div class="glossary-term"><span class="base-word">Daunting</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Deception</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Deceptive trap</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Democratic values</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Departure</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Desexualized domains</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Digital assets</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Digital landscape</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Directing</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Discrepancies</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Discriminatory policies</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Double-edged sword</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Dropshipping</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Dynamic signal</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- E -->
+    <div class="letter-block"><div class="letter-title">E</div>
+        <div class="glossary-term"><span class="base-word">Economic optimization</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Educational trajectory</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Emergency fund</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Emotional intelligence</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Employer branding</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Energy management</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Entrepreneurial mindset</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Entrenched</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Equity</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Eroded health</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Escape the rat race</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">ESG</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">ETFs</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Expense reports</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Expenses</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Extended cohabitation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">External audit</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- F -->
+    <div class="letter-block"><div class="letter-title">F</div>
+        <div class="glossary-term"><span class="base-word">Fabricated identities</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Factorialism</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Faithful snapshot</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Farming mindset</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Financial</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">financial health</span><span class="empty-definition"></span></li><li><span class="term-name">financial information integrity</span><span class="empty-definition"></span></li><li><span class="term-name">financial management</span><span class="empty-definition"></span></li><li><span class="term-name">financial misreporting</span><span class="empty-definition"></span></li><li><span class="term-name">financial position</span><span class="empty-definition"></span></li><li><span class="term-name">financial statements</span><span class="empty-definition"></span></li><li><span class="term-name">financial transactions</span><span class="empty-definition"></span></li><li><span class="term-name">informed financial decision-making</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">First-time manager</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Fluid relationships</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- G -->
+    <div class="letter-block"><div class="letter-title">G</div>
+        <div class="glossary-term"><span class="base-word">Giving mindset</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- H -->
+    <div class="letter-block"><div class="letter-title">H</div>
+        <div class="glossary-term"><span class="base-word">Harassment allegations</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Historical reporting</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Hostile environment</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Human capital</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Human intimacy</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Hunting mindset</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- I -->
+    <div class="letter-block"><div class="letter-title">I</div>
+        <div class="glossary-term"><span class="base-word">Income</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">income statement</span><span class="empty-definition"></span></li><li><span class="term-name">income streams</span><span class="empty-definition"></span></li><li><span class="term-name">passive income</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Inflationary hedge</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Inherent incapability</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Internal networking</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Intertwined realms</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Intervention</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Inventory</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Investment analysis</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Investor relations</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- L -->
+    <div class="letter-block"><div class="letter-title">L</div>
+        <div class="glossary-term"><span class="base-word">Labor market insertion</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Legal and ethical standards</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Legal recourse</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Liabilities</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Living below your means</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Logistical agony</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Logistical chaos</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- M -->
+    <div class="letter-block"><div class="letter-title">M</div>
+        <div class="glossary-term"><span class="base-word">Malicious actors</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Management style</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Mandatory disclosure requirements</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Manipulative techniques</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Memorable connections</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Mental health</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Mentorship</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Micro-enterprise</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Misinformation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Monetary resources</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Monitoring</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Multi-currency dynamics</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- N -->
+    <div class="letter-block"><div class="letter-title">N</div>
+        <div class="glossary-term"><span class="base-word">Networking</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">professional networking</span><span class="empty-definition"></span></li><li><span class="term-name">internal networking</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Non-negotiable</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">non-negotiable path</span><span class="empty-definition"></span></li><li><span class="term-name">non-negotiable step</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Norms (cultural / traditional)</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- O -->
+    <div class="letter-block"><div class="letter-title">O</div>
+        <div class="glossary-term"><span class="base-word">Online safety</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Open communication</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Open-plan office</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Organizational health</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Organizational indicators</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Organizational transformation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Outsourced fulfillment</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- P -->
+    <div class="letter-block"><div class="letter-title">P</div>
+        <div class="glossary-term"><span class="base-word">Paradigm shift</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Partisan disengagement</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Passive income</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Personal brand</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Personal expression</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Philosophical rebellion</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Planning</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Preliminary statements</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Proactive education</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Professional networking</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Professional norms</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Profitable path</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Psychosocial risk evaluation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Pump-and-dump schemes</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- R -->
+    <div class="letter-block"><div class="letter-title">R</div>
+        <div class="glossary-term"><span class="base-word">Radical re-evaluation</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Rat race</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Raw data</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Receipts</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Reciprocity</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Reconciliation (financial)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Recurring revenue</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Reframe</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Relational paradigms</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Relationship-building</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Relentless work</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Resentment</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Resilience</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Resource management</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Resourceful</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Restrictive statutes</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Revenue</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">revenue streams</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Rigorous thoroughness</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Risk management</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- S -->
+    <div class="letter-block"><div class="letter-title">S</div>
+        <div class="glossary-term"><span class="base-word">Safety (online)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Skepticism (unwavering)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Statements (financial)</span><span class="empty-definition"></span>
+            <ul class="sub-term-list"><li><span class="term-name">income statement</span><span class="empty-definition"></span></li><li><span class="term-name">cash flow statement</span><span class="empty-definition"></span></li><li><span class="term-name">balance sheet</span><span class="empty-definition"></span></li></ul>
+        </div>
+        <div class="glossary-term"><span class="base-word">Stress (chronic)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Sustainability reports</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Synergy</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Systemic employment restrictions</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- T -->
+    <div class="letter-block"><div class="letter-title">T</div>
+        <div class="glossary-term"><span class="base-word">Tax compliance</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Tax filing</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Team dynamics</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Technical skills</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Third-party logistics (3PL)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Trade-off</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Transactional</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Transparent communication</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Trust-building</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Turnover</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Two-way street</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- U -->
+    <div class="letter-block"><div class="letter-title">U</div>
+        <div class="glossary-term"><span class="base-word">Unambiguous</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unfulfilled existence</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unproductive nightmare</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unquestionable</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unreliable</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unsolicited offers</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Unwavering skepticism</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Upskilling</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- V -->
+    <div class="letter-block"><div class="letter-title">V</div>
+        <div class="glossary-term"><span class="base-word">Values (corporate / personal)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Viability (financial)</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Visibility</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Vision</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Vulnerability</span><span class="empty-definition"></span></div>
+    </div>
+
+    <!-- W -->
+    <div class="letter-block"><div class="letter-title">W</div>
+        <div class="glossary-term"><span class="base-word">Weak corporate culture</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Weak ties</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Well-being initiatives</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Workplace discrimination</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Workplace equality</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Workplace equality metrics</span><span class="empty-definition"></span></div>
+        <div class="glossary-term"><span class="base-word">Workplace romances</span><span class="empty-definition"></span></div>
+    </div>
+
+    <div class="note text-center">📝 Total de términos (palabras base + compuestos) superior a 520. Revisa cada línea y escribe la definición a mano con bolígrafo.</div>
+    <div class="vault-footer">
+        Inglés I - Cs. Administrativas · Prof. Oney Clavijo · Glosario dinámico manuscrito obligatorio<br>
+        <span class="mono">GLOSSARY_520TERMS_TRUE_COGNATES_V_FINAL</span>
+    </div>
+</div>
+<div class="no-print mt-6 text-center pb-8">
+    <button onclick="window.print()" class="bg-gray-900 text-white px-8 py-3 rounded-none font-bold hover:bg-gray-700 transition-all shadow-md">🖨️ IMPRIMIR GLOSARIO (MODELO PARA MANUSCRITO)</button>
+</div>
+</body>
+</html>
