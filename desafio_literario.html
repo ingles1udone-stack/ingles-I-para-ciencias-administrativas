@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover" />
     <title>MLC: Nave Estelar - Desafío de Lectura Crítica</title>
     <!-- Three.js CDN -->
     <script type="importmap">
@@ -13,9 +13,10 @@
         }
     </script>
     <!-- Font Awesome 6 -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet" />
     <style>
+        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -30,15 +31,17 @@
             color: #1aff80;
             position: relative;
             overflow-x: hidden;
+            padding-top: 35px;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             body {
                 overflow-y: auto;
                 overflow-x: hidden;
+                padding-top: 30px;
             }
         }
 
-        /* Fondo estelar animado (Three.js canvas) */
+        /* ===== FONDO ESTELAR (Three.js) ===== */
         #stars-canvas {
             position: fixed;
             top: 0;
@@ -49,7 +52,7 @@
             display: block;
         }
 
-        /* CINTILLO SUPERIOR (ticker) */
+        /* ===== CINTILLO SUPERIOR ===== */
         .ticker {
             position: fixed;
             top: 0;
@@ -64,7 +67,7 @@
             font-size: 1rem;
             letter-spacing: 1px;
             padding: 5px 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(4px);
             pointer-events: none;
         }
@@ -79,11 +82,15 @@
             margin-right: 50px;
         }
         @keyframes scrollTicker {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-100%); }
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
         }
 
-        /* Cristal de la cabina */
+        /* ===== CRISTAL DE CABINA ===== */
         .cockpit-glass {
             position: fixed;
             top: 0;
@@ -92,7 +99,7 @@
             bottom: 0;
             border: 20px solid #2c2c2c;
             border-bottom-width: 200px;
-            box-shadow: inset 0 0 80px rgba(0,0,0,0.8), 0 0 0 2px #4a4a4a;
+            box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.8), 0 0 0 2px #4a4a4a;
             pointer-events: none;
             z-index: 1;
         }
@@ -100,7 +107,7 @@
             content: "";
             position: absolute;
             inset: 0;
-            background: linear-gradient(125deg, rgba(255,255,255,0.05) 0%, transparent 40%, rgba(255,255,255,0.05) 100%);
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.05) 0%, transparent 40%, rgba(255, 255, 255, 0.05) 100%);
             pointer-events: none;
         }
         .rivet {
@@ -110,18 +117,18 @@
             background: #1a1a1a;
             border-radius: 50%;
             border: 1px solid #5a5a5a;
-            box-shadow: inset 0 1px 1px rgba(0,0,0,0.8);
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
             z-index: 2;
             pointer-events: none;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .cockpit-glass {
                 border-width: 10px;
                 border-bottom-width: 120px;
             }
         }
 
-        /* Panel de mandos */
+        /* ===== PANEL DE MANDOS ===== */
         #dashboard {
             position: relative;
             bottom: 0;
@@ -136,10 +143,10 @@
             padding: 20px;
             z-index: 15;
             flex-wrap: wrap;
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.6);
             margin-top: auto;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             #dashboard {
                 flex-direction: column;
                 padding: 15px;
@@ -147,12 +154,12 @@
             }
         }
 
-        /* Monitores */
+        /* ===== MONITORES ===== */
         .monitor {
             background: #071a07;
             border: 6px solid #2d2d2d;
             border-radius: 12px;
-            box-shadow: inset 0 0 20px rgba(0,255,100,0.3), 0 5px 10px black;
+            box-shadow: inset 0 0 20px rgba(0, 255, 100, 0.3), 0 5px 10px black;
         }
         .main-monitor {
             width: 540px;
@@ -184,7 +191,7 @@
             background: #1aff80;
             border-radius: 4px;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .main-monitor {
                 width: 95vw;
                 height: 200px;
@@ -195,7 +202,7 @@
             }
         }
 
-        /* Cubo 3D inicial */
+        /* ===== CUBO INICIAL ===== */
         .cube-btn {
             width: 130px;
             height: 130px;
@@ -203,12 +210,17 @@
             cursor: pointer;
             transition: filter 0.2s;
         }
-        .cube-btn:hover { filter: drop-shadow(0 0 12px #1aff80); }
-        @media (max-width: 768px) {
-            .cube-btn { width: 100px; height: 100px; }
+        .cube-btn:hover {
+            filter: drop-shadow(0 0 12px #1aff80);
+        }
+        @media (max-width:768px) {
+            .cube-btn {
+                width: 100px;
+                height: 100px;
+            }
         }
 
-        /* Mapa mental SVG */
+        /* ===== MAPA MENTAL SVG ===== */
         #mindmap-svg {
             width: 100%;
             height: 100%;
@@ -224,8 +236,8 @@
             filter: drop-shadow(0 0 6px #ffcc44);
         }
 
-        /* Overlay SMART */
-        .smart-overlay {
+        /* ===== OVERLAY (INTEGRADORA) ===== */
+        .integradora-overlay {
             position: absolute;
             top: 0;
             left: 0;
@@ -242,8 +254,23 @@
             color: #f0f0a0;
             display: none;
         }
+        .integradora-overlay h3 {
+            color: #ffcc66;
+            margin-top: 0;
+        }
+        .integradora-overlay ul {
+            padding-left: 20px;
+            margin: 8px 0;
+        }
+        .integradora-overlay li {
+            margin-bottom: 6px;
+        }
+        .regla {
+            color: #88ffaa;
+            font-weight: bold;
+        }
 
-        /* Palanca */
+        /* ===== PALANCA ===== */
         .lever-control {
             display: flex;
             flex-direction: column;
@@ -282,16 +309,21 @@
             opacity: 0;
             transition: 0.2s;
         }
-        .lever-active .lever-handle { top: 45px; }
-        .lever-active .lever-handle::after { opacity: 1; box-shadow: 0 0 12px #1aff80; }
+        .lever-active .lever-handle {
+            top: 45px;
+        }
+        .lever-active .lever-handle::after {
+            opacity: 1;
+            box-shadow: 0 0 12px #1aff80;
+        }
 
-        /* NUEVO BOTÓN BACK ESTILO NEÓN (inspirado en microconferencia) */
+        /* ===== BOTÓN BACK (neón) ===== */
         .neon-btn {
             width: 100px;
             height: 100px;
             border-radius: 50%;
             background: transparent;
-            border: 4px solid #ff6600;    /* naranja neón */
+            border: 4px solid #ff6600;
             color: #ffaa44;
             display: flex;
             flex-direction: column;
@@ -311,7 +343,10 @@
         }
         .energy-charge {
             position: absolute;
-            top: -5px; left: -5px; right: -5px; bottom: -5px;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
             border: 2px solid #ffaa44;
             border-radius: 50%;
             opacity: 0;
@@ -322,8 +357,14 @@
             opacity: 1;
         }
         @keyframes charge-expand {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.4); opacity: 0; }
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1.4);
+                opacity: 0;
+            }
         }
         .neon-btn i {
             font-size: 2.2rem;
@@ -334,16 +375,20 @@
             font-size: 1rem;
             letter-spacing: 1px;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             .neon-btn {
                 width: 80px;
                 height: 80px;
             }
-            .neon-btn i { font-size: 1.8rem; }
-            .neon-btn span { font-size: 0.85rem; }
+            .neon-btn i {
+                font-size: 1.8rem;
+            }
+            .neon-btn span {
+                font-size: 0.85rem;
+            }
         }
 
-        /* Contenedor del cubo final con etiqueta */
+        /* ===== CUBO FINAL (descarga) ===== */
         #final-cube-wrapper {
             position: fixed;
             top: 45%;
@@ -370,7 +415,7 @@
         .download-label {
             font-family: 'VT323', monospace;
             font-size: 1.2rem;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0, 0, 0, 0.7);
             color: #00ffaa;
             padding: 5px 15px;
             border-radius: 40px;
@@ -381,7 +426,7 @@
             backdrop-filter: blur(4px);
             pointer-events: none;
         }
-        @media (max-width: 768px) {
+        @media (max-width:768px) {
             #final-cube-container {
                 width: 150px;
                 height: 150px;
@@ -395,7 +440,7 @@
             }
         }
 
-        /* Hiperespacio */
+        /* ===== HIPERESPACIO ===== */
         .hyperspace-effect {
             position: fixed;
             top: 0;
@@ -416,31 +461,31 @@
             animation: streakMove 0.8s linear infinite;
         }
         @keyframes streakMove {
-            0% { transform: translateX(-100%) translateY(0); opacity: 0.8; }
-            100% { transform: translateX(400%) translateY(200px); opacity: 0; }
-        }
-
-        /* Ajuste para que el contenido no quede oculto detrás del ticker */
-        body {
-            padding-top: 35px;
-        }
-        @media (max-width: 768px) {
-            body {
-                padding-top: 30px;
+            0% {
+                transform: translateX(-100%) translateY(0);
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateX(400%) translateY(200px);
+                opacity: 0;
             }
         }
 
-        /* Espaciado para que el panel inferior no se superponga en móvil */
+        /* ===== UTIL ===== */
         .main-content {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             justify-content: space-between;
         }
+        .flex-spacer {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
-    <!-- CINTILLO SUPERIOR -->
+
+    <!-- ===== CINTILLO ===== -->
     <div class="ticker">
         <div class="ticker-content">
             <span>🔔 RECUERDA QUE EL MLC ES PARA RESPONDER EN CLASE CON EL TEXTO QUE TE DARÁ EL PROFESOR, SIN ESO NO SE PUEDE RESPONDER. 🔔</span>
@@ -449,44 +494,57 @@
         </div>
     </div>
 
+    <!-- ===== FONDO ESTELAR ===== -->
     <canvas id="stars-canvas"></canvas>
+
+    <!-- ===== CRISTAL Y REMACHES ===== -->
     <div class="cockpit-glass"></div>
-    <div class="rivet" style="top: 20px; left: 15%;"></div>
-    <div class="rivet" style="top: 20px; right: 15%;"></div>
-    <div class="rivet" style="bottom: 25px; left: 30%;"></div>
-    <div class="rivet" style="bottom: 25px; right: 30%;"></div>
+    <div class="rivet" style="top:20px;left:15%;"></div>
+    <div class="rivet" style="top:20px;right:15%;"></div>
+    <div class="rivet" style="bottom:25px;left:30%;"></div>
+    <div class="rivet" style="bottom:25px;right:30%;"></div>
     <div id="hyperspaceLayer" class="hyperspace-effect"></div>
-    
-    <!-- Contenedor del cubo final con etiqueta -->
+
+    <!-- ===== CUBO FINAL ===== -->
     <div id="final-cube-wrapper">
         <div id="final-cube-container"></div>
         <div class="download-label">⬇️ DESCARGAR MLC</div>
     </div>
 
+    <!-- ===== CONTENIDO PRINCIPAL ===== -->
     <div class="main-content">
-        <div style="flex:1"></div> <!-- espacio flexible -->
+        <div class="flex-spacer"></div>
+
         <div id="dashboard">
+            <!-- Monitor lateral: recomendación -->
             <div class="side-monitor monitor">
-                <div style="border-bottom: 1px solid #ffaa66; margin-bottom: 8px;">📡 RECOMENDACIÓN MLC</div>
+                <div style="border-bottom:1px solid #ffaa66; margin-bottom:8px;">📡 RECOMENDACIÓN MLC</div>
                 <div id="recomendacion-text">⚡ Inicia el desafío tocando el cubo central.</div>
             </div>
+
+            <!-- Monitor principal: cubo / mapa / overlay -->
             <div class="main-monitor monitor" id="mainMonitor">
-                <div id="cube-area" style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                <div id="cube-area" style="display:flex; justify-content:center; align-items:center; height:100%;">
                     <div id="cubeBtn" class="cube-btn"></div>
                 </div>
                 <svg id="mindmap-svg" viewBox="0 0 580 260"></svg>
-                <div id="smartOverlay" class="smart-overlay">
-                    <h3 style="color:#ffcc66;">🎯 OBJETIVOS SMART (Ejemplos oficiales)</h3>
-                    <div id="smartText"></div>
-                    <button id="closeSmart" style="margin-top:12px; background:#1a5f1a; border:none; color:white; padding:5px;">CERRAR</button>
+                <div id="integradoraOverlay" class="integradora-overlay">
+                    <h3>🎯 PREGUNTA INTEGRADORA</h3>
+                    <div id="integradoraText"></div>
+                    <button id="closeIntegradora" style="margin-top:12px; background:#1a5f1a; border:none; color:white; padding:5px 12px; border-radius:4px; cursor:pointer;">CERRAR</button>
                 </div>
             </div>
+
+            <!-- Palanca INTEGRADORA -->
             <div class="lever-control">
-                <span style="font-size: 10px;">📊 SMART</span>
-                <div id="smartLever" class="lever-base"><div class="lever-handle"></div></div>
-                <span style="font-size: 9px;">EJEMPLOS</span>
+                <span style="font-size:10px;">🔍 INTEGRADORA</span>
+                <div id="integradoraLever" class="lever-base">
+                    <div class="lever-handle"></div>
+                </div>
+                <span style="font-size:9px;">INFO</span>
             </div>
-            <!-- BOTÓN BACK NUEVO: estilo neón con efecto láser (inspirado en microconferencia) -->
+
+            <!-- Botón BACK (neón) -->
             <div id="backButton" class="neon-btn">
                 <div class="energy-charge"></div>
                 <i class="fas fa-ghost"></i>
@@ -495,47 +553,50 @@
         </div>
     </div>
 
+    <!-- ============================================================ -->
+    <!-- ===== SCRIPTS ===== -->
     <script type="module">
         import * as THREE from 'three';
 
-        // ========== 1. FONDO ESTELAR CON MOVIMIENTO ==========
+        // ========== 1. FONDO ESTELAR ==========
         const starCanvas = document.getElementById('stars-canvas');
         const starRenderer = new THREE.WebGLRenderer({ canvas: starCanvas, alpha: true });
         starRenderer.setSize(window.innerWidth, window.innerHeight);
         const starScene = new THREE.Scene();
         const starCamera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         starCamera.position.z = 5;
-        
+
         const starCount = 800;
         const starGeometry = new THREE.BufferGeometry();
         const starPositions = new Float32Array(starCount * 3);
         for (let i = 0; i < starCount; i++) {
-            starPositions[i*3] = (Math.random() - 0.5) * 200;
-            starPositions[i*3+1] = (Math.random() - 0.5) * 200;
-            starPositions[i*3+2] = (Math.random() - 0.5) * 100;
+            starPositions[i * 3] = (Math.random() - 0.5) * 200;
+            starPositions[i * 3 + 1] = (Math.random() - 0.5) * 200;
+            starPositions[i * 3 + 2] = (Math.random() - 0.5) * 100;
         }
         starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
         const starMaterial = new THREE.PointsMaterial({ color: 0x88ffaa, size: 0.3, transparent: true });
         const starsPoints = new THREE.Points(starGeometry, starMaterial);
         starScene.add(starsPoints);
-        
+
         let starSpeed = 0.5;
+
         function animateStars() {
             requestAnimationFrame(animateStars);
             const positions = starsPoints.geometry.attributes.position.array;
             for (let i = 0; i < starCount; i++) {
-                positions[i*3+2] += starSpeed;
-                if (positions[i*3+2] > 50) {
-                    positions[i*3+2] = -50;
-                    positions[i*3] = (Math.random() - 0.5) * 200;
-                    positions[i*3+1] = (Math.random() - 0.5) * 200;
+                positions[i * 3 + 2] += starSpeed;
+                if (positions[i * 3 + 2] > 50) {
+                    positions[i * 3 + 2] = -50;
+                    positions[i * 3] = (Math.random() - 0.5) * 200;
+                    positions[i * 3 + 1] = (Math.random() - 0.5) * 200;
                 }
             }
             starsPoints.geometry.attributes.position.needsUpdate = true;
             starRenderer.render(starScene, starCamera);
         }
         animateStars();
-        
+
         window.addEventListener('resize', () => {
             starCamera.aspect = window.innerWidth / window.innerHeight;
             starCamera.updateProjectionMatrix();
@@ -543,6 +604,7 @@
         });
 
         // ========== 2. CUBOS 3D ==========
+        // Cubo inicial
         const cubeContainer = document.getElementById('cubeBtn');
         const cubeScene = new THREE.Scene();
         const cubeCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
@@ -558,6 +620,7 @@
         cubeScene.add(ambientLight, pointLight);
         cubeCamera.position.z = 2.3;
 
+        // Cubo final (descarga)
         const finalContainer = document.getElementById('final-cube-container');
         const finalScene = new THREE.Scene();
         const finalCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
@@ -577,7 +640,7 @@
             mainCube.rotation.x += 0.02;
             mainCube.rotation.y += 0.025;
             cubeRenderer.render(cubeScene, cubeCamera);
-            
+
             const hue = (Date.now() * 0.003) % 1;
             rainbowMat.color.setHSL(hue, 1.0, 0.55);
             finalCube.rotation.x += 0.02;
@@ -593,40 +656,78 @@
         window.addEventListener('resize', resizeFinalCube);
         resizeFinalCube();
 
-        // ========== 3. DATOS DEL DESAFÍO ==========
-        const mapNodes = [
-            { id: 0, text: "FASE 0: EQUIPO", x: 80, y: 80,
-              info: "📋 Asignen roles: Coordinador (tiempos), Secretario (registro), Supervisor (calidad). Establezcan tiempos: Pre (10'), Durante (25'), Post (40')." },
-            { id: 1, text: "FASE 1: PRE-LECTURA", x: 220, y: 40,
-              info: "🎯 1. Compromiso SMART: definan S-M-T. 2. Brainstorming: 5 palabras clave, expliquen 1 relevante para Contaduría/Administración. 3. Preguntas previas: 3 preguntas basadas en título, justifiquen 1." },
-            { id: 2, text: "FASE 2: DURANTE", x: 360, y: 80,
-              info: "🔍 1. Conectores: localicen 3, clasifiquen y reescriban una oración cambiando conector. 2. Estructura: oración introductoria, desarrollo, conclusión (primeras palabras). 3. Tipo textual: narrativo/descriptivo/expositivo/argumentativo, justifiquen. 4. Análisis de argumentos: tesis, tipo de argumento, evaluación." },
-            { id: 3, text: "FASE 3: POST-LECTURA", x: 220, y: 170,
-              info: "✍️ 1. Síntesis creativa: título creativo + 3 ideas principales (bullet points). 2. Pedagogía: explicar concepto central para niño de 12 años. 3. Intención del autor: frase clave. 4. Preguntas nivel experto: 2 preguntas profundas con respuestas." },
-            { id: 4, text: "ORGANIZADOR GRÁFICO", x: 480, y: 160,
-              info: "📊 Elijan UNO: mapa conceptual, diagrama de Ishikawa, línea de tiempo, o tabla comparativa. Autoevalúen (1-5); si <4, corrijan. Este será su entregable final." }
-        ];
+        // ========== 3. DATOS DEL DESAFÍO (NUEVO MAPA) ==========
+        const mapNodes = [{
+            id: 0,
+            text: "FASE 0: EQUIPO",
+            x: 80,
+            y: 80,
+            info: "📋 Asignen roles: Coordinador (gestiona tiempo y organización), Secretario (registra decisiones y consolida respuestas), Supervisor (revisa calidad y verifica comprensión de todos)."
+        }, {
+            id: 1,
+            text: "FASE 1: PRE-LECTURA",
+            x: 220,
+            y: 40,
+            info: "📝 1. Escribe el título del texto en español. 2. Brainstorming: 5 palabras clave con su significado. Explica la relevancia profesional de UNA de ellas para Contaduría/Administración."
+        }, {
+            id: 2,
+            text: "FASE 2: DURANTE",
+            x: 360,
+            y: 80,
+            info: "🔍 1. Identifica 3 oraciones (introductoria, desarrollo, conclusión) y clasifícalas. 2. Análisis estructural: tipo de texto (narrativo/descriptivo/expositivo/argumentativo) justificado con una frase. 3. Si es argumentativo: tesis, tipo de argumento y evaluación personal."
+        }, {
+            id: 3,
+            text: "FASE 3: POST-LECTURA",
+            x: 220,
+            y: 170,
+            info: "✍️ 1. Título creativo para el texto. 2. Explica el concepto central a un niño de 12 años. 3. Intención del autor (frase clave). 4. Formula 2 preguntas 'nivel experto' y respóndelas."
+        }, {
+            id: 4,
+            text: "ORGANIZADORES GRÁFICOS",
+            x: 480,
+            y: 160,
+            info: "📊 Representa el texto con Diagrama de Ishikawa (espina de pescado) y Mapa Conceptual. Autoevalúa claridad (1-5) y relación entre causas (1-5); si <4, corrige."
+        }];
 
-        const smartExamples = [
-            "🔹 Ejemplo A (Calidad técnica): \"Lograr una calificación alta asegurando que el Mapa Conceptual refleje correctamente las ideas principal y secundarias expresadas por el autor, terminando toda la guía 10 minutos antes de que acabe la clase para repasar la Pregunta Integradora.\"",
-            "🔸 Ejemplo B (Eficiencia): \"Completar la fase de Durante la Lectura en 20 minutos, identificando con precisión los conectores de contraste y causa-efecto para que todos los miembros del grupo puedan explicar la tesis principal del autor si el docente nos pregunta.\"",
-            "🔹 Ejemplo C (Aplicación profesional): \"Desarrollar un Diagrama de Ishikawa que proponga una solución real a un problema contable, usando al menos 5 términos técnicos en inglés aprendidos en el texto, dedicando máximo 15 minutos a esta sección.\""
-        ];
+        // ========== 4. CONTENIDO DE LA PALANCA INTEGRADORA ==========
+        const integradoraInfo = `
+          <p style="margin-top:0;"><strong>¿Qué es la Pregunta Integradora?</strong></p>
+          <p>Es una pregunta oral que el docente hará a <strong>un miembro aleatorio del grupo</strong> al final del taller. 
+          Su respuesta impacta <strong style="color:#ffaa66;">40%</strong> de la calificación del grupo.</p>
+          <p style="margin-top:10px;"><strong>📌 ¿Cómo aprobarla?</strong></p>
+          <p>Debes buscar en el texto la <strong>oración más importante</strong> y escribirla completa en español, cumpliendo estas <strong>4 Reglas de Oro</strong>:</p>
+          <ul>
+            <li><span class="regla">🔹 Regla de la "Jefa":</span> la oración debe ser la que explica de qué trata todo el mensaje.</li>
+            <li><span class="regla">🔹 Regla del "No es Título":</span> NO puedes copiar el título ni subtítulos (si lo haces, nota 0.0).</li>
+            <li><span class="regla">🔹 Regla del Punto:</span> debe terminar con punto (.) para ser oración completa.</li>
+            <li><span class="regla">🔹 Regla de la Longitud:</span> mínimo 5 palabras (frases de 2-3 palabras no valen).</li>
+          </ul>
+          <p style="margin-top:10px;"><strong>🧠 Truco de Maestro:</strong></p>
+          <p>Al final de la guía hay un recuadro de autoevaluación obligatoria. Debes marcar <strong>SÍ</strong> en las tres preguntas para que tu respuesta sea válida:</p>
+          <ul>
+            <li>¿Mi oración es la más importante y NO es el título? (SÍ / NO)</li>
+            <li>¿Si borro esta oración, el texto se queda sin sentido? (SÍ / NO)</li>
+            <li>¿Mi oración tiene un punto al final y más de 5 palabras? (SÍ / NO)</li>
+          </ul>
+          <p style="margin-top:10px; color:#88ddff;">💡 <em>Ten esta información a la mano durante el interrogatorio. Practica identificar la oración clave en el texto que uses.</em></p>
+        `;
 
+        // ========== 5. VARIABLES DE ESTADO ==========
         let challengeStarted = false;
         let nodesClicked = new Set();
-        let smartUsed = false;
+        let integradoraUsed = false;
         let hyperspaceTriggered = false;
 
         const mindmapSvg = document.getElementById('mindmap-svg');
         const recomendacionDiv = document.getElementById('recomendacion-text');
-        const smartLever = document.getElementById('smartLever');
-        const smartOverlay = document.getElementById('smartOverlay');
-        const smartTextDiv = document.getElementById('smartText');
-        const closeSmartBtn = document.getElementById('closeSmart');
+        const integradoraLever = document.getElementById('integradoraLever');
+        const integradoraOverlay = document.getElementById('integradoraOverlay');
+        const integradoraTextDiv = document.getElementById('integradoraText');
+        const closeIntegradoraBtn = document.getElementById('closeIntegradora');
         const finalWrapper = document.getElementById('final-cube-wrapper');
         const backBtn = document.getElementById('backButton');
 
+        // ========== 6. DIBUJAR MAPA MENTAL ==========
         function drawMindMapSequential() {
             mindmapSvg.style.display = "block";
             const svgNS = "http://www.w3.org/2000/svg";
@@ -650,7 +751,7 @@
                     circle.setAttribute("stroke-width", "2");
                     const text = document.createElementNS(svgNS, "text");
                     text.setAttribute("x", node.x);
-                    text.setAttribute("y", node.y+5);
+                    text.setAttribute("y", node.y + 5);
                     text.setAttribute("text-anchor", "middle");
                     text.setAttribute("fill", "#ccffaa");
                     text.setAttribute("font-size", "8");
@@ -660,7 +761,7 @@
 
                     g.addEventListener("click", (e) => {
                         e.stopPropagation();
-                        if(!nodesClicked.has(node.id)) {
+                        if (!nodesClicked.has(node.id)) {
                             nodesClicked.add(node.id);
                             recomendacionDiv.innerHTML = `📖 ${node.info}`;
                             circle.setAttribute("fill", "#1aff8044");
@@ -672,8 +773,8 @@
                     });
                     nodesGroup.appendChild(g);
 
-                    if(idx > 0) {
-                        const prev = mapNodes[idx-1];
+                    if (idx > 0) {
+                        const prev = mapNodes[idx - 1];
                         const line = document.createElementNS(svgNS, "line");
                         line.setAttribute("x1", prev.x);
                         line.setAttribute("y1", prev.y);
@@ -689,51 +790,53 @@
         }
 
         function iniciarDesafio() {
-            if(challengeStarted) return;
+            if (challengeStarted) return;
             challengeStarted = true;
             document.getElementById('cube-area').style.display = 'none';
             drawMindMapSequential();
             recomendacionDiv.innerHTML = "✅ Mapa de fases activado. Toca cada nodo para ver los pasos detallados de la Guía MLC.";
         }
 
-        let smartOpen = false;
-        smartLever.addEventListener('click', () => {
-            if(!challengeStarted) {
+        // ========== 7. PALANCA INTEGRADORA ==========
+        let integradoraOpen = false;
+        integradoraLever.addEventListener('click', () => {
+            if (!challengeStarted) {
                 recomendacionDiv.innerHTML = "⚠️ Primero activa el cubo central para iniciar el desafío.";
                 return;
             }
-            smartOpen = !smartOpen;
-            if(smartOpen) {
-                smartLever.classList.add('lever-active');
-                smartOverlay.style.display = "block";
-                smartTextDiv.innerHTML = smartExamples.map(ex => `<div style="margin-bottom: 16px;">${ex}</div>`).join('');
-                smartUsed = true;
+            integradoraOpen = !integradoraOpen;
+            if (integradoraOpen) {
+                integradoraLever.classList.add('lever-active');
+                integradoraOverlay.style.display = "block";
+                integradoraTextDiv.innerHTML = integradoraInfo;
+                integradoraUsed = true;
                 verificarCompletado();
             } else {
-                smartLever.classList.remove('lever-active');
-                smartOverlay.style.display = "none";
+                integradoraLever.classList.remove('lever-active');
+                integradoraOverlay.style.display = "none";
             }
         });
-        closeSmartBtn.addEventListener('click', () => {
-            smartOverlay.style.display = "none";
-            smartLever.classList.remove('lever-active');
-            smartOpen = false;
+        closeIntegradoraBtn.addEventListener('click', () => {
+            integradoraOverlay.style.display = "none";
+            integradoraLever.classList.remove('lever-active');
+            integradoraOpen = false;
         });
 
+        // ========== 8. VERIFICAR COMPLETADO ==========
         function verificarCompletado() {
-            if(hyperspaceTriggered) return;
+            if (hyperspaceTriggered) return;
             const allNodesClicked = nodesClicked.size === mapNodes.length;
-            if(allNodesClicked && smartUsed) {
+            if (allNodesClicked && integradoraUsed) {
                 iniciarHiperespacio();
             }
         }
 
         function iniciarHiperespacio() {
-            if(hyperspaceTriggered) return;
+            if (hyperspaceTriggered) return;
             hyperspaceTriggered = true;
             const layer = document.getElementById('hyperspaceLayer');
             layer.style.display = "block";
-            for(let i=0; i<70; i++) {
+            for (let i = 0; i < 70; i++) {
                 const streak = document.createElement('div');
                 streak.classList.add('streak');
                 streak.style.left = Math.random() * 100 + '%';
@@ -749,20 +852,19 @@
             }, 2200);
         }
 
-        // ========== SISTEMA DE AUDIO (láser + efectos) ==========
+        // ========== 9. AUDIO (láser + clic) ==========
         let audioCtx = null;
         let laserOsc = null;
 
         function initAudio() {
             if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                audioCtx = new(window.AudioContext || window.webkitAudioContext)();
             }
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
             }
         }
 
-        // Sonido láser ascendente (hover)
         function laserCharge() {
             if (!audioCtx) return;
             if (laserOsc) return;
@@ -786,7 +888,6 @@
             }
         }
 
-        // Sonido corto de clic (opcional)
         function playClickSound() {
             if (!audioCtx) return;
             initAudio();
@@ -802,29 +903,26 @@
             osc.stop(audioCtx.currentTime + 0.12);
         }
 
-        // EVENTOS DEL BOTÓN BACK (neón)
+        // ========== 10. EVENTOS ==========
+        // Botón BACK
         backBtn.addEventListener('mouseenter', () => {
             initAudio();
             laserCharge();
         });
-        backBtn.addEventListener('mouseleave', () => {
-            laserStop();
-        });
+        backBtn.addEventListener('mouseleave', laserStop);
         backBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             initAudio();
             playClickSound();
-            // Pequeño retardo para oír el sonido antes de redirigir
             setTimeout(() => {
                 window.location.href = 'index.html';
             }, 100);
         });
 
-        // Eventos del cubo final (descarga)
+        // Cubo final (descarga)
         finalWrapper.addEventListener('click', (e) => {
             e.stopPropagation();
             initAudio();
-            // Sonido de éxito (opcional)
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
             osc.type = 'sine';
@@ -840,13 +938,20 @@
             }, 120);
         });
 
+        // Cubo inicial
         document.getElementById('cubeBtn').addEventListener('click', iniciarDesafio);
 
         // Scroll suave en monitores
         const mainMon = document.querySelector('.main-monitor');
-        mainMon?.addEventListener('wheel', (e) => { e.stopPropagation(); mainMon.scrollTop += e.deltaY * 0.8; }, { passive: false });
+        mainMon?.addEventListener('wheel', (e) => {
+            e.stopPropagation();
+            mainMon.scrollTop += e.deltaY * 0.8;
+        }, { passive: false });
         const sideMon = document.querySelector('.side-monitor');
-        sideMon?.addEventListener('wheel', (e) => { e.stopPropagation(); sideMon.scrollTop += e.deltaY; }, { passive: false });
+        sideMon?.addEventListener('wheel', (e) => {
+            e.stopPropagation();
+            sideMon.scrollTop += e.deltaY;
+        }, { passive: false });
     </script>
 </body>
 </html>
