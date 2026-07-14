@@ -22,7 +22,6 @@
             text-transform: uppercase;
         }
 
-        /* Efecto CRT Scanlines y Parpadeo */
         .crt::before {
             content: " ";
             display: block;
@@ -53,7 +52,6 @@
             100% { opacity: 0.1; }
         }
 
-        /* Ruleta de 8 Unidades */
         .wheel-container {
             position: relative;
             width: 340px;
@@ -108,7 +106,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Marquesina Glitch */
         .marquee-box {
             border: 2px solid var(--fallout-green);
             background: var(--fallout-bg);
@@ -147,7 +144,6 @@
             100% { clip: rect(40px, 9999px, 30px, 0); }
         }
 
-        /* Botón Rosa Neón Energizado */
         .neon-btn {
             width: 130px;
             height: 130px;
@@ -190,7 +186,6 @@
             100% { transform: scale(1.4); opacity: 0; }
         }
 
-        /* Contenedor Principal Estilo Vault-Tec */
         .vault-frame {
             max-width: 1100px;
             margin: 2rem auto;
@@ -350,108 +345,107 @@
     </div>
 
     <script>
-        // ======================== NUEVOS TÓPICOS (10 PREGUNTAS POR UNIDAD) ========================
-        // Cada palabra en inglés está dentro de <i> </i> para cursiva visual
+        // ======================== PREGUNTAS OFICIALES DEL PDF (10 POR UNIDAD) ========================
         const microData = {
             1: [
-                '¿Cómo permite el <i>skimming</i> que un administrador identifique la viabilidad de un proyecto sin leer las 50 páginas del informe?',
-                'En una auditoría con miles de datos, ¿qué criterios usarías para que el <i>scanning</i> sea efectivo y no pierdas tiempo en información irrelevante?',
-                'Si un informe financiero carece de gráficos o negritas, ¿de qué manera se ve afectada la velocidad de toma de decisiones del gerente?',
-                '¿Cómo influye un título "sugestivo" en la predisposición del lector antes de analizar un balance de pérdidas y ganancias?',
-                '¿En qué medida el uso de <i>cognados verdaderos</i> facilita la internacionalización de un contador venezolano?',
-                '¿Por qué un experto en finanzas puede comprender un texto técnico en inglés mejor que un traductor que no conoce el área administrativa?',
-                'Al describir un "activo" (<i>asset</i>), ¿cómo cambia el impacto financiero si usamos el adjetivo <i>liquid</i> frente a <i>fixed</i>?',
-                'En un manual de procedimientos, ¿cuál es el riesgo de confundir un verbo transitivo con uno intransitivo al asignar responsabilidades?',
-                '¿Qué consecuencias legales tendría en un contrato confundir la preposición <i>at</i> con <i>on</i> en una fecha de entrega de divisas?',
-                '¿Cómo altera el sentido de una deuda contable el uso de <i>some</i> en lugar de <i>all</i> al referirse a los pasivos de la empresa?'
+                "¿Qué son las estrategias de lectura y para qué sirven en el ámbito contable/administrativo?",
+                "¿En qué consiste la estrategia de previsualización (<i>preview</i>) y qué elementos se examinan?",
+                "¿Qué es la lluvia de ideas (<i>brainstorming</i>) y cómo ayuda antes de leer un texto?",
+                "¿Qué son las preguntas previas (<i>pre-questions</i>) y cuándo se formulan?",
+                "¿Qué función cumple identificar las partes de la oración durante la lectura de un texto técnico?",
+                "¿Qué son las claves morfológicas y contextuales y cómo facilitan la comprensión lectora?",
+                "¿Qué es un sustantivo (<i>noun</i>) y proporciona un ejemplo utilizado en contabilidad.",
+                "¿Qué es un verbo (<i>verb</i>) y proporciona un ejemplo en el contexto financiero.",
+                "¿Cuál es la diferencia entre un verbo transitivo y una intransitiva?",
+                "¿Por qué son importantes las partes de la oración para interpretar textos contables y administrativos?"
             ],
             2: [
-                '¿Cómo ayuda el desglosar la palabra <i>depreciation</i> a entender el concepto contable de pérdida de valor sin usar un diccionario?',
-                'Si traduces <i>actual profit</i> como "Ganancia actual", ¿qué error estratégico estarías cometiendo frente a una junta directiva?',
-                '¿Por qué es útil para un negociador conocer que <i>revenue</i> e <i>income</i> son similares al redactar una propuesta de inversión?',
-                '¿Cómo ayuda la identificación de opuestos como <i>assets</i> y <i>liabilities</i> a estructurar mentalmente un estado de situación financiera?',
-                'Ante un <i>unrealized profit</i>, ¿qué acciones debería tomar un administrador para que esa ganancia pase a ser efectiva?',
-                '¿De qué manera el prefijo <i>pre-</i> en <i>prepaid expenses</i> altera la ubicación de esa cuenta en el balance general?',
-                '¿Cómo identificas si un término se refiere a un proceso o a un resultado analizando sufijos como <i>-tion</i> o <i>-ment</i>?',
-                'Si una cuenta es descrita como <i>taxable</i>, ¿qué implicaciones fiscales directas tiene para la planificación de la empresa?',
-                'Al resumir un reporte de mercado, ¿qué criterios determinan que una palabra es "clave" y no meramente decorativa?',
-                '¿Cómo cambia la interpretación del término <i>stock</i> si el contexto es una bodega de inventario frente a la Bolsa de Valores?'
+                "¿Qué es la morfología y cuál es su objeto de estudio?",
+                "¿Por qué es importante la morfología en el campo de la contabilidad y la administración?",
+                "¿Qué son las cognadas (<i>cognates</i>) y proporciona un ejemplo concreta.",
+                "¿Qué son las falsas cognadas (<i>false cognates</i>) y proporciona un ejemplo.",
+                "¿Por qué es fundamental conocer los falsos cognados en entornos multilingües?",
+                "¿Qué son las sinónimos y cómo son útiles al leer textos financieros?",
+                "¿Qué son las antónimos y qué utilidad tienen en el análisis financiero?",
+                "¿Qué es un prefijo (<i>prefix</i>) y cómo modifica el significado de una palabra?",
+                "¿Qué es un sufijo (<i>suffix</i>) y cómo cambia la categoría gramatical o el significado?",
+                "Menciona dos sufijos utilizados en terminología contable y ejemplifica con palabras reales."
             ],
             3: [
-                '¿De qué forma el uso de pronombres de objeto (<i>them, it</i>) agiliza la lectura de informes de auditoría densos?',
-                'En una disputa legal corporativa, ¿cómo define el pronombre <i>ours</i> vs <i>theirs</i> la propiedad de los activos tangibles?',
-                '¿Por qué un auditor enfatizaría que la empresa <i>itself</i> realizó la corrección de errores contables?',
-                'Si pierdes el antecedente de un pronombre al leer un contrato, ¿qué riesgos de interpretación legal enfrentas?',
-                '¿Cómo utiliza un autor la referencia anticipada para generar interés o tensión en el análisis de una crisis financiera?',
-                'Si el pronombre <i>they</i> puede referirse a "socios" o a "acreedores", ¿qué pistas contextuales usarías para decidir?',
-                'Al presentar estadísticas, ¿cómo ayuda <i>this</i> o <i>those</i> a dirigir la atención precisa de los inversionistas?',
-                '¿De qué manera los pronombres relativos <i>who</i> o <i>which</i> permiten conectar departamentos y funciones sin repetir nombres innecesariamente?',
-                '¿Cómo afecta la credibilidad de un reporte administrativo un error de concordancia sujeto-verbo en inglés técnico?',
-                '¿En qué situaciones es más "seguro" para un gerente usar un pronombre indefinido (<i>some</i>) en lugar de una cifra exacta?'
+                "¿Qué es un pronombre y cuál es su función principal en la oración?",
+                "¿Por qué son importantes los pronombres en los textos de contabilidad y administración?",
+                "¿Qué son los pronombres de sujeto (<i>subject pronouns</i>) y proporciona un ejemplo contable.",
+                "¿Qué son los pronombres de objeto (<i>object pronouns</i>) y proporciona un ejemplo.",
+                "¿Qué son los pronombres posesivos (<i>possessive pronouns</i>) y cómo se usan en propiedad?",
+                "¿Qué son los pronombres reflexivos (<i>reflexive pronouns</i>) y qué enfatizan?",
+                "¿Qué son los pronombres demostrativos (<i>demonstrative pronouns</i>) y para qué se usan?",
+                "¿Qué son los pronombres indefinidos (<i>indefinite pronouns</i>) y cómo se diferencian de los numerales?",
+                "¿Qué son los pronombres interrogativos (<i>interrogative pronouns</i>) y dónde se emplean?",
+                "¿Qué establece la regla de concordancia sujeto-verba en contextos contables?"
             ],
             4: [
-                '¿Por qué un error en el orden de los conectores (<i>first, then</i>) invalidaría un manual de cierre fiscal?',
-                '¿Cómo refuerzan palabras como <i>furthermore</i> la solidez de una propuesta de expansión de negocios?',
-                'Si un balance dice <i>Revenue increased; however, net profit fell</i>, ¿qué pregunta crítica debería hacerse el gerente?',
-                '¿Cómo ayuda el conector <i>as a result</i> a explicar la caída de acciones debido a factores externos del mercado?',
-                '¿Qué peso argumentativo aporta el uso de <i>for instance</i> cuando se propone un cambio en la política de gastos?',
-                '¿Cómo una coma mal colocada después de un conector lógico puede alterar la interpretación de una norma contable?',
-                '¿Por qué sería inapropiado usar el conector <i>so</i> en lugar de <i>consequently</i> en un reporte enviado a un ente regulador?',
-                'Al leer un editorial económico, ¿cómo revelan los conectores si el autor busca informar o manipular la opinión pública?',
-                '¿En qué caso un diccionario general podría darte una definición errónea de un término administrativo clave?',
-                '¿Qué pasos lógicos sigues para entender una palabra técnica desconocida sin interrumpir el flujo de lectura?'
+                "¿Qué son las conectores o palabras de enlace y para qué sirven?",
+                "¿Cuál es la función de los conectores de adición (<i>addition</i>) y proporciona un ejemplo.",
+                "¿Cuál es la función de los conectores de contraste (<i>contrast</i>) y proporciona un ejemplo.",
+                "¿Cuál es la función de los conectores de causa y efecto (<i>cause and effect</i>)?",
+                "¿Cuál es la función de los conectores de ejemplo / ilustración (<i>example / illustration</i>)?",
+                "¿Cuál es la función de los conectores de secuencia / orden (<i>sequence / order</i>)?",
+                "¿Cuál es la diferencia entre conjunciones y adverbios conectivos?",
+                "¿Cuál es la diferencia entre conectores formales e informales y cuándo se usan?",
+                "¿Por qué es importante la puntuación al utilizar conectores en un texto?",
+                "¿Por qué son esenciales los conectores en la interpretación de textos contables/administrativos?"
             ],
             5: [
-                '¿Cómo diferencias un informe financiero profesional de un borrador analizando su estructura textual?',
-                '¿Cómo ayuda un estudio de caso narrativo a que un equipo aprenda de los errores de una quiebra empresarial previa?',
-                'En un reporte anual, ¿qué elementos lingüísticos garantizan que la descripción de los activos sea objetiva?',
-                'Al leer un texto argumentativo sobre impuestos, ¿cómo separas la opinión del autor de los hechos estadísticos?',
-                '¿Qué características hacen que un manual de usuario de software contable sea efectivo o ineficiente?',
-                'Si un párrafo mezcla introducción con conclusión, ¿cómo afecta esto la claridad del mensaje administrativo?',
-                '¿Por qué un administrador debería preferir oraciones simples y directas al redactar memorandos de urgencia?',
-                'Para un lector con poco tiempo, ¿cuál de estos dos tipos de párrafos (deductivo/inductivo) es más eficiente y por qué?',
-                '¿Qué técnica aplicarías para filtrar el "ruido" o datos decorativos en un reporte de 20 páginas?',
-                '¿De qué manera la estructura "Oración-Párrafo-Texto" refleja la organización de una empresa exitosa?'
+                "¿Qué es un texto según la definición de la guía?",
+                "Menciona dos características de un texto en el ámbito contable/administrativa.",
+                "¿Qué son las textos narrativos y proporciona un ejemplo del área.",
+                "¿Qué son los textos descriptivos y proporciona un ejemplo contable.",
+                "¿Qué son las textos expositivos y proporciona un ejemplo.",
+                "¿Qué son las textos argumentativos y proporciona un ejemplo.",
+                "¿Qué son las textos instruccionales y proporciona un ejemplo.",
+                "¿Cuál es el propósito comunicativo de los estados financieros?",
+                "¿Cuál es la diferencia entre coherencia y cohesión en un texto?",
+                "¿Por qué es importante el contexto al interpretar un informe financiero?"
             ],
             6: [
-                '¿Cómo confirmas que la idea principal identificada es realmente el núcleo del texto y no un detalle de apoyo?',
-                'Si el autor no declara su intención, ¿qué pistas en los detalles de apoyo te permiten descubrir el mensaje oculto?',
-                '¿En qué se diferencia el uso de una "estadística" del uso de un "ejemplo" para validar una decisión gerencial?',
-                '¿Cómo visualiza una <i>red semántica</i> la interconexión entre ingresos, gastos e impuestos de forma más clara que un texto?',
-                'Al enfrentar un problema de oficina, ¿cómo ayuda un <i>mapa mental</i> a organizar una lluvia de ideas sin perder el enfoque?',
-                '¿Por qué es el <i>mapa conceptual</i> la herramienta ideal para jerarquizar las Normas Internacionales de Información Financiera (NIIF)?',
-                'Si comparas las normativas contables de Venezuela frente a las de EE.UU., ¿qué te revela la zona de superposición del <i>diagrama de Venn</i>?',
-                'Ante una caída en las ventas, ¿cómo ayuda el <i>diagrama de Ishikawa</i> a encontrar la "causa raíz" en lugar de solo atacar los síntomas?',
-                '¿Cómo garantiza un <i>diagrama de Gantt</i> que un proceso de auditoría externa se cumpla en los tiempos legales establecidos?',
-                '¿Cómo evita la <i>técnica de los 5 Porqués</i> que un administrador tome decisiones superficiales ante un error en el libro diario?'
+                "¿Qué es la idea principal de un texto y cómo se identifica?",
+                "¿Qué son las ideas de apoyo a secundarias y qué función cumplen?",
+                "¿Cuál es la diferencia entre una idea principal explicita y una implícita?",
+                "¿Qué es una red semántica y qué componentes la integran?",
+                "¿Qué es un mapa mental (<i>mind map</i>) y para qué se utiliza en administración?",
+                "¿Qué es un mapa conceptual (<i>concept map</i>) y cuáles son sus características?",
+                "¿Qué es un diagrama de Venn y cómo se aplica en contabilidad?",
+                "¿Qué es un diagrama de espina de pescado (<i>Ishikawa</i>) y para qué sirve?",
+                "¿Qué es un gráfico de Gantt y cómo se utiliza en la planificación contable?",
+                "¿En qué consiste la técnica de las 5 Parques y cuál es su objetivo?"
             ],
             7: [
-                '¿De qué manera la disposición de las ideas (<i>retórica</i>) determina si un cliente aprueba o rechaza una propuesta?',
-                '¿Por qué un reporte científico de economía combina descripción fáctica con argumentación lógica?',
-                '¿Qué elemento de la estructura argumentativa es el más crítico para convencer a un inversionista escéptico?',
-                '¿Cuándo un "<i>argumento de autoridad</i>" es válido y cuándo se convierte en una presión injustificada en una reunión?',
-                '¿Por qué un gerente nunca debería basar una estrategia solo en ejemplos anecdóticos sin el respaldo de hechos estadísticos?',
-                '¿Qué riesgos corres al comparar tu empresa con otra de un sector diferente para justificar una inversión (<i>analogía</i>)?',
-                '¿Cómo ayuda la estructura estándar de un artículo de economía (<i>IMRAD</i>) a que un investigador localice datos rápidamente?',
-                '¿Qué preguntas le harías a un informe de gestión para verificar que sus conclusiones no son falaces?',
-                '¿Cómo afecta la omisión de palabras obvias (<i>elipsis</i>) la fluidez de un lector avanzado frente a uno principiante?',
-                '¿Por qué perder el hilo de a quién se refiere el texto puede causar una interpretación financiera desastrosa?'
+                "¿Qué es la organización retórica y por qué es relevante?",
+                "¿En qué consiste la organización retórica narrativa y qué elementos la caracterizan?",
+                "¿En qué consiste la organización retórica descriptiva y cómo se reconoce?",
+                "¿En qué consiste la organización retórica expositiva y cuál es su propósito?",
+                "¿En qué consiste la organización retórica argumentativa y qué busca lograr?",
+                "¿Cuáles son las características principales de los textos argumentativos?",
+                "Menciona tres tipos de argumentos utilizados en textos argumentativos.",
+                "¿Cuál es la estructura típica de un texto argumentativo?",
+                "¿Qué son los artículos científicos y cuál es su estructura estándar (<i>IMRAD</i>)?",
+                "¿Cómo se identifica la organización retórica de un texto al analizarlo?"
             ],
             8: [
-                '¿Cómo condensarías un informe de 100 páginas en un párrafo sin perder la esencia de los hallazgos críticos? (<i>Resumen ejecutivo</i>)',
-                '¿En qué momento la <i>paráfrasis</i> deja de ser una herramienta de comprensión y se convierte en una distorsión de la idea original?',
-                'Si tienes tres reportes de mercado opuestos, ¿cómo logras una <i>síntesis</i> que guíe la decisión final de la empresa?',
-                '¿Es seguro inferir que el próximo año será rentable basándose solo en los datos de los últimos tres meses? (<i>generalización inductiva</i>)',
-                'Si sabes que la ley exige transparencia, ¿qué infieres sobre una empresa que oculta sus estados financieros? (<i>deducción</i>)',
-                '¿Cómo detectas "opiniones disfrazadas de hechos" analizando el uso de verbos como <i>believe</i> o <i>seems</i>?',
-                '¿Cómo el "<i>sesgo de confirmación</i>" puede llevar a un auditor a ignorar pruebas críticas de un fraude?',
-                'Si un competidor usa el "<i>falso dilema</i>" (O invierten conmigo o perderán todo), ¿cómo desarmas ese argumento lógicamente?',
-                '¿Por qué es peligroso asumir que una subida en las ventas se debe solo a una campaña publicitaria reciente? (<i>falacia post hoc</i>)',
-                '¿Qué pasos de la estrategia de <i>post-lectura</i> garantizan que tu conclusión no es solo una suposición personal?'
+                "¿Qué es un resumen y cuál es su propósito principal?",
+                "¿Cuál es la diferencia entre un resumen y una paráfrasis?",
+                "¿Cuál es la diferencia entre un resumen y una síntesis?",
+                "Menciona tres características de un buen resumen.",
+                "¿Cuáles son las pasos del proceso de resumir según la guía?",
+                "¿Qué es la inferencia en el contexto de la lectura de textos contables?",
+                "¿Cuál es la diferencia entre la inferencia inductiva y la deductiva?",
+                "¿Qué son las claves contextuales y cómo ayudan a inferir significado?",
+                "¿Qué es una falacia y por qué es importante reconocerla en el ámbito financiero?",
+                "¿Qué es el sesgo de confirmación y cómo puede afectar el análisis financiero?"
             ]
         };
 
-        // --- DATOS GUÍA YOUTUBE (sin cambios) ---
+        // --- DATOS GUÍA YOUTUBE ---
         const youtubeSteps = [
             "PASO 1: Accede a YouTube Studio con tu cuenta UDO/Personal.",
             "PASO 2: Pulsa 'Crear' y sube tu archivo al canal de Inglés I (MP4 recomendado).",
@@ -482,7 +476,6 @@
             node.onclick = () => loadUnit(i, angle);
             wheel.appendChild(node);
 
-            // Luces parpadeantes en órbita
             const dot = document.createElement('div');
             dot.className = 'light-dot';
             dot.style.left = `${170 + 160 * Math.cos(rad)}px`;
@@ -506,7 +499,6 @@
             microData[num].forEach((q, idx) => {
                 const div = document.createElement('div');
                 div.className = 'question-item';
-                // Mostrar el texto con las etiquetas <i> ya incluidas (se renderizan como HTML)
                 div.innerHTML = `<span class="font-bold text-white mr-2">P${idx+1}:</span> ${q}`;
                 area.appendChild(div);
             });
