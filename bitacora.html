@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Terminal de Aprendizaje - Bitácora</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
 
@@ -29,9 +30,12 @@
             content: " ";
             display: block;
             position: fixed;
-            top: 0; left: 0; bottom: 0; right: 0;
-            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), 
-                        linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
             z-index: 100;
             background-size: 100% 2px, 3px 100%;
             pointer-events: none;
@@ -56,8 +60,14 @@
         }
 
         @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
+            0%,
+            49% {
+                opacity: 1;
+            }
+            50%,
+            100% {
+                opacity: 0;
+            }
         }
 
         /* Botón de Hardware "Bitácora" - inicialmente invisible e inactivo */
@@ -81,10 +91,10 @@
             background: #222;
             border-radius: 50%;
             border: 8px solid #333;
-            box-shadow: 
+            box-shadow:
                 0 0 0 4px #111,
-                0 15px 30px rgba(0,0,0,0.8),
-                inset 0 2px 5px rgba(255,255,255,0.1);
+                0 15px 30px rgba(0, 0, 0, 0.8),
+                inset 0 2px 5px rgba(255, 255, 255, 0.1);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -107,7 +117,7 @@
             background: radial-gradient(circle, #ff3333 0%, #880000 100%);
             border-radius: 50%;
             border: 4px solid #400;
-            box-shadow: inset 0 5px 10px rgba(255,255,255,0.3);
+            box-shadow: inset 0 5px 10px rgba(255, 255, 255, 0.3);
             transition: transform 0.1s cubic-bezier(0.2, 1.2, 0.8, 1);
         }
 
@@ -119,7 +129,7 @@
 
         .bitacora-btn:active {
             transform: scale(0.97);
-            box-shadow: 0 0 0 4px #111, 0 5px 15px rgba(0,0,0,0.8), inset 0 2px 5px rgba(255,255,255,0.2);
+            box-shadow: 0 0 0 4px #111, 0 5px 15px rgba(0, 0, 0, 0.8), inset 0 2px 5px rgba(255, 255, 255, 0.2);
         }
 
         /* Efecto de energía al hacer clic (clase temporal) */
@@ -129,14 +139,14 @@
 
         @keyframes energyPulse {
             0% {
-                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0,0,0,0.8), inset 0 0 0 rgba(255,200,100,0);
+                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0, 0, 0, 0.8), inset 0 0 0 rgba(255, 200, 100, 0);
             }
             50% {
-                box-shadow: 0 0 0 4px #ffaa33, 0 0 30px 15px #ff5500, inset 0 0 20px 5px rgba(255,200,0,0.8);
+                box-shadow: 0 0 0 4px #ffaa33, 0 0 30px 15px #ff5500, inset 0 0 20px 5px rgba(255, 200, 0, 0.8);
                 border-color: #ffaa33;
             }
             100% {
-                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0,0,0,0.8), inset 0 0 0 rgba(255,200,100,0);
+                box-shadow: 0 0 0 4px #111, 0 15px 30px rgba(0, 0, 0, 0.8), inset 0 0 0 rgba(255, 200, 100, 0);
             }
         }
 
@@ -146,7 +156,7 @@
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
             pointer-events: none;
             font-size: 1.2rem;
             z-index: 2;
@@ -157,7 +167,7 @@
             margin-top: 15px;
             font-weight: bold;
             color: #ff3333;
-            text-shadow: 0 0 10px rgba(255,51,51,0.5);
+            text-shadow: 0 0 10px rgba(255, 51, 51, 0.5);
         }
 
         /* Botón Regresar */
@@ -195,8 +205,13 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.8; }
+            0%,
+            100% {
+                opacity: 0.3;
+            }
+            50% {
+                opacity: 0.8;
+            }
         }
     </style>
 </head>
@@ -241,11 +256,12 @@
             "• URL: Pega el enlace directo de YouTube.\n\n",
             "[ PASO 3: EL CUESTIONARIO (CRÍTICO) ]\n",
             "• MINUTO EXACTO: Indica tiempo y utilidad.\n",
-            "• MÉTODO FEYNMAN: Explica el tema como si fuera para un amigo. Sube un archivo de audio.\n",
-            "• MAPA DEL CONCEPTO: Dibuja A MANO en una hoja en blanco un mapa de la "Información de alto valor".Sube una imagen de calidad.\n",
+            "• MÉTODO FEYNMAN: Explica el tema como si fuera para un amigo.\n",
+            "• EJEMPLO REAL: Copia una oración del compendio, tradúcela y aplica conocimiento con ella.\n",
             "• ESFUERZO (1-10): Sé honesto sobre el uso del traductor.\n",
             "• MUDDIEST POINT: ¿Qué fue lo más confuso?\n",
             "• USO DE IA: Declara si usaste ChatGPT o similar.\n",
+            "• FOTO DE APUNTES: Sube una imagen clara (Máx 1MB).\n\n",
             "> RECUERDA: Solo un envío por unidad.\n",
             "> EL PROFESOR PUEDE VALIDAR TUS RESPUESTAS EN CLASE.\n\n",
             "> SISTEMA LISTO PARA ENVIAR..."
@@ -290,6 +306,7 @@
 
         function finishTerminal() {
             finished = true;
+            // MOSTRAMOS EL BOTÓN Y EL ENLACE
             actionArea.classList.add('visible');
             backBtn.style.display = 'inline-block';
             tapHint.style.display = 'none';
@@ -304,7 +321,7 @@
         async function playLaserChargeSound() {
             try {
                 if (!audioCtx) {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                    audioCtx = new(window.AudioContext || window.webkitAudioContext)();
                 }
                 if (audioCtx.state === 'suspended') {
                     await audioCtx.resume();
@@ -362,7 +379,7 @@
                     try {
                         noiseNode.disconnect();
                         gainNoise.disconnect();
-                    } catch(e) {}
+                    } catch (e) {}
                 }, 500);
             } catch (err) {
                 console.warn("Audio no disponible:", err);
@@ -370,30 +387,24 @@
         }
 
         // ------------------- EVENTO DEL BOTÓN ROJO (NUEVA VENTANA) -------------------
-        // URL del formulario de Google (idéntica a la original)
         const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLSdMkzsoOS8IlvhYo8_E7MbzhQhDAaqBnlHFmDnIsnCsV1AOPA/viewform?usp=sharing&ouid=100540302350153422715';
 
         bitacoraBtn.addEventListener('click', function(e) {
-            e.stopPropagation();          // Evitar que el click avance el texto si aún está visible
+            e.stopPropagation();
 
-            // Prevenir múltiples aperturas rápidas (deshabilitar temporalmente)
             if (bitacoraBtn.disabled) return;
             bitacoraBtn.disabled = true;
 
-            // Efecto visual de energía
             bitacoraBtn.classList.add('energy-burst');
             setTimeout(() => {
                 bitacoraBtn.classList.remove('energy-burst');
             }, 300);
 
-            // Reproducir sonido láser / descarga
             playLaserChargeSound();
 
-            // ABRIR EL FORMULARIO EN UNA NUEVA VENTANA / PESTAÑA (requerimiento principal)
-            // Se usa '_blank' y 'noopener,noreferrer' por seguridad y mejor soporte en navegadores
+            // ABRIR EL FORMULARIO EN UNA NUEVA VENTANA
             window.open(FORM_URL, '_blank', 'noopener,noreferrer');
 
-            // Re-habilitar el botón después de un breve tiempo para evitar spam
             setTimeout(() => {
                 if (bitacoraBtn) bitacoraBtn.disabled = false;
             }, 800);
