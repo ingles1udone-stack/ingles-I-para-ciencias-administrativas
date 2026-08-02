@@ -236,38 +236,34 @@
             filter: drop-shadow(0 0 6px #ffcc44);
         }
 
-        /* ===== OVERLAY (INTEGRADORA) ===== */
-        .integradora-overlay {
+        /* ===== OJO QUE TODO LO VE ===== */
+        #eye-container {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: #032003ee;
-            backdrop-filter: blur(2px);
-            padding: 18px;
-            overflow-y: auto;
-            z-index: 20;
-            border-radius: 8px;
-            font-family: 'VT323', monospace;
-            font-size: 1rem;
-            color: #f0f0a0;
             display: none;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 10, 0, 0.85);
+            border-radius: 8px;
+            z-index: 25;
+            backdrop-filter: blur(3px);
         }
-        .integradora-overlay h3 {
-            color: #ffcc66;
-            margin-top: 0;
+        #eye-svg {
+            width: 160px;
+            height: 120px;
+            filter: drop-shadow(0 0 20px #ffcc44);
         }
-        .integradora-overlay ul {
-            padding-left: 20px;
-            margin: 8px 0;
+        .pupil {
+            transition: all 0.15s ease-out;
         }
-        .integradora-overlay li {
-            margin-bottom: 6px;
-        }
-        .regla {
-            color: #88ffaa;
-            font-weight: bold;
+        @media (max-width:768px) {
+            #eye-svg {
+                width: 120px;
+                height: 90px;
+            }
         }
 
         /* ===== PALANCA ===== */
@@ -522,26 +518,42 @@
                 <div id="recomendacion-text">⚡ Inicia el desafío tocando el cubo central.</div>
             </div>
 
-            <!-- Monitor principal: cubo / mapa / overlay -->
+            <!-- Monitor principal: cubo / mapa / eye -->
             <div class="main-monitor monitor" id="mainMonitor">
                 <div id="cube-area" style="display:flex; justify-content:center; align-items:center; height:100%;">
                     <div id="cubeBtn" class="cube-btn"></div>
                 </div>
                 <svg id="mindmap-svg" viewBox="0 0 580 260"></svg>
-                <div id="integradoraOverlay" class="integradora-overlay">
-                    <h3>🎯 PREGUNTA INTEGRADORA</h3>
-                    <div id="integradoraText"></div>
-                    <button id="closeIntegradora" style="margin-top:12px; background:#1a5f1a; border:none; color:white; padding:5px 12px; border-radius:4px; cursor:pointer;">CERRAR</button>
+
+                <!-- OJO QUE TODO LO VE -->
+                <div id="eye-container">
+                    <svg id="eye-svg" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Fondo del ojo (blanco) -->
+                        <ellipse cx="100" cy="75" rx="85" ry="55" fill="#f5f0e0" stroke="#8a7a5a" stroke-width="2"/>
+                        <!-- Iris -->
+                        <circle cx="100" cy="75" r="35" fill="#4a7a3a" stroke="#2a4a1a" stroke-width="1.5"/>
+                        <!-- Pupila (se mueve con el mouse) -->
+                        <circle id="pupila" cx="100" cy="75" r="18" fill="#0a0a0a"/>
+                        <!-- Brillo del ojo -->
+                        <circle cx="88" cy="65" r="6" fill="rgba(255,255,255,0.7)"/>
+                        <circle cx="115" cy="60" r="3" fill="rgba(255,255,255,0.3)"/>
+                        <!-- Párpados -->
+                        <ellipse cx="100" cy="25" rx="90" ry="30" fill="#d4c4a0" stroke="#8a7a5a" stroke-width="1.5"/>
+                        <ellipse cx="100" cy="125" rx="90" ry="30" fill="#d4c4a0" stroke="#8a7a5a" stroke-width="1.5"/>
+                        <!-- Triángulo / pirámide (como el billete de $1) -->
+                        <polygon points="100,10 70,48 130,48" fill="none" stroke="#8a7a5a" stroke-width="1.5" opacity="0.4"/>
+                        <circle cx="100" cy="35" r="4" fill="#b8a070" opacity="0.5"/>
+                    </svg>
                 </div>
             </div>
 
-            <!-- Palanca INTEGRADORA -->
+            <!-- Palanca (ahora activa el OJO) -->
             <div class="lever-control">
-                <span style="font-size:10px;">🔍 INTEGRADORA</span>
-                <div id="integradoraLever" class="lever-base">
+                <span style="font-size:10px;">👁️ OJO</span>
+                <div id="eyeLever" class="lever-base">
                     <div class="lever-handle"></div>
                 </div>
-                <span style="font-size:9px;">INFO</span>
+                <span style="font-size:9px;">REVELAR</span>
             </div>
 
             <!-- Botón BACK (neón) -->
@@ -656,78 +668,55 @@
         window.addEventListener('resize', resizeFinalCube);
         resizeFinalCube();
 
-        // ========== 3. DATOS DEL DESAFÍO (NUEVO MAPA) ==========
+        // ========== 3. DATOS DEL DESAFÍO (NUEVAS FASES MLC) ==========
         const mapNodes = [{
             id: 0,
-            text: "FASE 0: EQUIPO",
+            text: "FASE 1: PRE-LECTURA",
             x: 80,
             y: 80,
-            info: "📋 Asignen roles: Coordinador (gestiona tiempo y organización), Secretario (registra decisiones y consolida respuestas), Supervisor (revisa calidad y verifica comprensión de todos)."
+            info: "📝 1. Escribe el título del texto en español. 2. Brainstorming: 5 palabras clave con su significado en español. Explica la relevancia profesional de UNA de ellas para Contaduría/Administración."
         }, {
             id: 1,
-            text: "FASE 1: PRE-LECTURA",
+            text: "FASE 2: DURANTE (1)",
             x: 220,
             y: 40,
-            info: "📝 1. Escribe el título del texto en español. 2. Brainstorming: 5 palabras clave con su significado. Explica la relevancia profesional de UNA de ellas para Contaduría/Administración."
+            info: "🔍 3. Identifica la oración más importante y explica su significado con tus propias palabras. 4. Análisis estructural: tipo de texto (Problema-Solución, Causa-Efecto, Comparación-Contraste, Secuencia procesal, Exposición de ideas, Argumentación) justificado con una frase del texto."
         }, {
             id: 2,
-            text: "FASE 2: DURANTE",
+            text: "FASE 2: DURANTE (2)",
             x: 360,
             y: 80,
-            info: "🔍 1. Identifica 3 oraciones (introductoria, desarrollo, conclusión) y clasifícalas. 2. Análisis estructural: tipo de texto (narrativo/descriptivo/expositivo/argumentativo) justificado con una frase. 3. Si es argumentativo: tesis, tipo de argumento y evaluación personal."
+            info: "🔍 5. Identifica el tipo de argumento usado (Autoridad, Datos, Ejemplos, Analogías) si el texto es argumentativo. Da un ejemplo breve en tus palabras."
         }, {
             id: 3,
             text: "FASE 3: POST-LECTURA",
             x: 220,
             y: 170,
-            info: "✍️ 1. Título creativo para el texto. 2. Explica el concepto central a un niño de 12 años. 3. Intención del autor (frase clave). 4. Formula 2 preguntas 'nivel experto' y respóndelas."
+            info: "✍️ 6. Título creativo para el texto. 7. Explica el concepto central a un niño de 12 años. 8. Intención del autor (Convencer / Presentar Datos / Explicar). Diagrama analítico con Nodo Central y 3 Pilares Principales."
         }, {
             id: 4,
-            text: "ORGANIZADORES GRÁFICOS",
+            text: "FASE 4: APLICACIÓN",
             x: 480,
             y: 160,
-            info: "📊 Representa el texto con Diagrama de Ishikawa (espina de pescado) y Mapa Conceptual. Autoevalúa claridad (1-5) y relación entre causas (1-5); si <4, corrige."
+            info: "💼 9. Traduce el conocimiento a un consejo claro para no expertos. Inventa un problema concreto en tu área profesional y da una solución en formato 'Consejo Ejecutivo' (máximo 2 líneas)."
         }];
 
-        // ========== 4. CONTENIDO DE LA PALANCA INTEGRADORA ==========
-        const integradoraInfo = `
-          <p style="margin-top:0;"><strong>¿Qué es la Pregunta Integradora?</strong></p>
-          <p>Es una pregunta oral que el docente hará a <strong>un miembro aleatorio del grupo</strong> al final del taller. 
-          Su respuesta impacta <strong style="color:#ffaa66;">40%</strong> de la calificación del grupo.</p>
-          <p style="margin-top:10px;"><strong>📌 ¿Cómo aprobarla?</strong></p>
-          <p>Debes buscar en el texto la <strong>oración más importante</strong> y escribirla completa en español, cumpliendo estas <strong>4 Reglas de Oro</strong>:</p>
-          <ul>
-            <li><span class="regla">🔹 Regla de la "Jefa":</span> la oración debe ser la que explica de qué trata todo el mensaje.</li>
-            <li><span class="regla">🔹 Regla del "No es Título":</span> NO puedes copiar el título ni subtítulos (si lo haces, nota 0.0).</li>
-            <li><span class="regla">🔹 Regla del Punto:</span> debe terminar con punto (.) para ser oración completa.</li>
-            <li><span class="regla">🔹 Regla de la Longitud:</span> mínimo 5 palabras (frases de 2-3 palabras no valen).</li>
-          </ul>
-          <p style="margin-top:10px;"><strong>🧠 Truco de Maestro:</strong></p>
-          <p>Al final de la guía hay un recuadro de autoevaluación obligatoria. Debes marcar <strong>SÍ</strong> en las tres preguntas para que tu respuesta sea válida:</p>
-          <ul>
-            <li>¿Mi oración es la más importante y NO es el título? (SÍ / NO)</li>
-            <li>¿Si borro esta oración, el texto se queda sin sentido? (SÍ / NO)</li>
-            <li>¿Mi oración tiene un punto al final y más de 5 palabras? (SÍ / NO)</li>
-          </ul>
-          <p style="margin-top:10px; color:#88ddff;">💡 <em>Ten esta información a la mano durante el interrogatorio. Practica identificar la oración clave en el texto que uses.</em></p>
-        `;
-
-        // ========== 5. VARIABLES DE ESTADO ==========
+        // ========== 4. VARIABLES DE ESTADO ==========
         let challengeStarted = false;
         let nodesClicked = new Set();
-        let integradoraUsed = false;
+        let eyeActivated = false;
         let hyperspaceTriggered = false;
+        let eyeLeverActive = false;
 
         const mindmapSvg = document.getElementById('mindmap-svg');
         const recomendacionDiv = document.getElementById('recomendacion-text');
-        const integradoraLever = document.getElementById('integradoraLever');
-        const integradoraOverlay = document.getElementById('integradoraOverlay');
-        const integradoraTextDiv = document.getElementById('integradoraText');
-        const closeIntegradoraBtn = document.getElementById('closeIntegradora');
+        const eyeLever = document.getElementById('eyeLever');
+        const eyeContainer = document.getElementById('eye-container');
+        const pupila = document.getElementById('pupila');
         const finalWrapper = document.getElementById('final-cube-wrapper');
         const backBtn = document.getElementById('backButton');
 
-        // ========== 6. DIBUJAR MAPA MENTAL ==========
+        // ========== 5. DIBUJAR MAPA MENTAL ==========
         function drawMindMapSequential() {
             mindmapSvg.style.display = "block";
             const svgNS = "http://www.w3.org/2000/svg";
@@ -754,7 +743,7 @@
                     text.setAttribute("y", node.y + 5);
                     text.setAttribute("text-anchor", "middle");
                     text.setAttribute("fill", "#ccffaa");
-                    text.setAttribute("font-size", "8");
+                    text.setAttribute("font-size", "7.5");
                     text.textContent = node.text;
                     g.appendChild(circle);
                     g.appendChild(text);
@@ -797,43 +786,63 @@
             recomendacionDiv.innerHTML = "✅ Mapa de fases activado. Toca cada nodo para ver los pasos detallados de la Guía MLC.";
         }
 
-        // ========== 7. PALANCA INTEGRADORA ==========
-        let integradoraOpen = false;
-        integradoraLever.addEventListener('click', () => {
+        // ========== 6. PALANCA DEL OJO ==========
+        // Movimiento de la pupila con el mouse
+        document.addEventListener('mousemove', (e) => {
+            if (!eyeActivated) return;
+            const eyeRect = eyeContainer.getBoundingClientRect();
+            const centerX = eyeRect.left + eyeRect.width / 2;
+            const centerY = eyeRect.top + eyeRect.height / 2;
+            const dx = e.clientX - centerX;
+            const dy = e.clientY - centerY;
+            const angle = Math.atan2(dy, dx);
+            const distance = Math.min(12, Math.sqrt(dx * dx + dy * dy) / 12);
+            const moveX = Math.cos(angle) * distance;
+            const moveY = Math.sin(angle) * distance;
+            pupila.setAttribute('cx', 100 + moveX);
+            pupila.setAttribute('cy', 75 + moveY);
+        });
+
+        // Click en la palanca
+        eyeLever.addEventListener('click', () => {
             if (!challengeStarted) {
                 recomendacionDiv.innerHTML = "⚠️ Primero activa el cubo central para iniciar el desafío.";
                 return;
             }
-            integradoraOpen = !integradoraOpen;
-            if (integradoraOpen) {
-                integradoraLever.classList.add('lever-active');
-                integradoraOverlay.style.display = "block";
-                integradoraTextDiv.innerHTML = integradoraInfo;
-                integradoraUsed = true;
-                verificarCompletado();
+            if (hyperspaceTriggered) return;
+
+            eyeLeverActive = !eyeLeverActive;
+            if (eyeLeverActive) {
+                eyeLever.classList.add('lever-active');
+                // Mostrar el ojo
+                eyeContainer.style.display = 'flex';
+                eyeActivated = true;
+                recomendacionDiv.innerHTML = "👁️ El Ojo que Todo lo Ve ha sido revelado. Mueve el mouse para que te observe.";
+                // Después de 3 segundos, activar hiperespacio
+                setTimeout(() => {
+                    if (!hyperspaceTriggered) {
+                        iniciarHiperespacio();
+                    }
+                }, 3000);
             } else {
-                integradoraLever.classList.remove('lever-active');
-                integradoraOverlay.style.display = "none";
+                eyeLever.classList.remove('lever-active');
+                eyeContainer.style.display = 'none';
+                eyeActivated = false;
+                recomendacionDiv.innerHTML = "👁️ Ojo oculto. Activa la palanca para revelarlo.";
             }
-        });
-        closeIntegradoraBtn.addEventListener('click', () => {
-            integradoraOverlay.style.display = "none";
-            integradoraLever.classList.remove('lever-active');
-            integradoraOpen = false;
         });
 
-        // ========== 8. VERIFICAR COMPLETADO ==========
+        // ========== 7. VERIFICAR COMPLETADO ==========
         function verificarCompletado() {
-            if (hyperspaceTriggered) return;
-            const allNodesClicked = nodesClicked.size === mapNodes.length;
-            if (allNodesClicked && integradoraUsed) {
-                iniciarHiperespacio();
-            }
+            // Ya no necesitamos verificar la palanca para el hiperespacio,
+            // ahora se activa con la palanca del ojo.
         }
 
         function iniciarHiperespacio() {
             if (hyperspaceTriggered) return;
             hyperspaceTriggered = true;
+            recomendacionDiv.innerHTML = "🚀 ACTIVANDO HIPERESPACIO...";
+
             const layer = document.getElementById('hyperspaceLayer');
             layer.style.display = "block";
             for (let i = 0; i < 70; i++) {
@@ -849,10 +858,11 @@
             }
             setTimeout(() => {
                 finalWrapper.style.display = "block";
+                recomendacionDiv.innerHTML = "🎯 ¡Cubo de descarga disponible! Tócalo para obtener tu MLC.";
             }, 2200);
         }
 
-        // ========== 9. AUDIO (láser + clic) ==========
+        // ========== 8. AUDIO (láser + clic) ==========
         let audioCtx = null;
         let laserOsc = null;
 
@@ -903,7 +913,7 @@
             osc.stop(audioCtx.currentTime + 0.12);
         }
 
-        // ========== 10. EVENTOS ==========
+        // ========== 9. EVENTOS ==========
         // Botón BACK
         backBtn.addEventListener('mouseenter', () => {
             initAudio();
